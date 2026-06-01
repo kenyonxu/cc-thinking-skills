@@ -1,6 +1,6 @@
 ---
 name: thinking-reversibility
-description: Classify decisions by reversibility and match decision process to decision type. Use for technology choices, architecture decisions, process changes, and hiring decisions.
+description: Before deliberating over a decision, ask if it's a one-way door (costly to undo) or two-way (cheap to undo) — decide two-way doors fast, and look for moves that make one-way doors reversible.
 ---
 
 # Reversibility Thinking
@@ -30,6 +30,12 @@ Decision to make?
   → Unsure of reversibility? → ANALYZE REVERSIBILITY FIRST
 ```
 
+## When NOT to Use
+- You've already classified the door — don't re-run the analysis; just decide at the matched depth.
+- Trivial, clearly two-way calls (variable names, which test to write first) — deciding is faster than classifying.
+- The decision is being forced by a hard external constraint (deadline, contract, regulation) with no real optionality — reversibility doesn't change the available move.
+- An irreversible action is genuinely required and the upside justifies it — name it, accept it, and proceed deliberately rather than stalling.
+
 ## Type 1 vs Type 2 Decisions
 
 ### Type 1: One-Way Doors
@@ -48,11 +54,10 @@ Decision to make?
 - Public commitments or promises
 
 **Process:**
-- Extensive analysis
-- Multiple stakeholder input
-- Devil's advocate review
-- Documentation of reasoning
-- Senior decision maker
+- Extensive analysis before acting
+- Explicitly argue the opposing choice (steel-man the alternative)
+- Document the reasoning and the assumptions it rests on
+- Escalate / surface to the human owner before committing
 
 ### Type 2: Two-Way Doors
 
@@ -72,7 +77,7 @@ Decision to make?
 
 **Process:**
 - Decide quickly
-- Empower individuals/small teams
+- Pick the most reasonable option now
 - Monitor results
 - Adjust as needed
 - Don't over-analyze
@@ -102,12 +107,12 @@ Reversibility Score:
 
 ### Step 3: Match Process to Type
 
-| Decision Type | Process | Time | Decision Maker |
-|---------------|---------|------|----------------|
-| Type 1 | Full analysis, stakeholder review | Days-weeks | Senior leadership |
-| Type 1.5 | Structured analysis, peer review | Days | Team lead + stakeholders |
-| Type 2+ | Quick analysis, document rationale | Hours | Individual/small team |
-| Type 2 | Just decide | Minutes | Individual |
+| Decision Type | Process | Effort | Who decides |
+|---------------|---------|--------|-------------|
+| Type 1 | Full analysis, argue the alternative, document | High | Surface to human owner before committing |
+| Type 1.5 | Structured analysis, document rationale | Moderate | Flag to owner if stakes are high |
+| Type 2+ | Quick analysis, note rationale | Low | Decide and proceed |
+| Type 2 | Just decide | Minimal | Decide and proceed |
 
 ## Common Reversibility Misclassifications
 
@@ -209,37 +214,33 @@ With flags: "Launch to 5% of users, flag-controlled"
 
 ## Decision Speed Guidance
 
-### Decisions to Make in Minutes
+### Decide Immediately (Type 2)
 
 - Which test to write first
 - Variable naming
-- Comment wording
 - Which task to pick up next
-- Slack message tone
+- Local refactors within a single module
 
-### Decisions to Make in Hours
+### Quick Analysis (Type 2+)
 
 - Library choices (within approved options)
 - Implementation approach for a feature
-- Meeting agenda
 - Code organization within a module
 - Bug fix approach
 
-### Decisions to Make in Days
+### Structured Analysis (Type 1.5)
 
 - Design patterns for new components
-- API contract changes
-- Team process changes
+- API contract changes (if unversioned)
 - Tool adoption
 - Architectural changes to non-critical services
 
-### Decisions to Make in Weeks
+### Full Deliberation, Surface to Owner (Type 1)
 
 - Core architecture decisions
 - Platform/infrastructure choices
-- Significant hiring decisions
-- Large feature scope
-- Strategic priorities
+- Irreversible data migrations / deletions
+- Public API contracts with external consumers
 
 ## Reversibility Template
 
@@ -269,8 +270,7 @@ Average: [X]
 
 ## Appropriate Process
 - Analysis depth: [Minimal / Moderate / Extensive]
-- Decision maker: [Individual / Team / Leadership]
-- Time to decide: [Minutes / Hours / Days / Weeks]
+- Surface to human owner before committing? [No / Yes if high-stakes / Yes]
 - Documentation: [None / Brief / Full]
 
 ## Can We Increase Reversibility?

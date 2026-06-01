@@ -1,15 +1,17 @@
 ---
 name: thinking-regret-minimization
-description: Project to your future self and ask what you would regret not doing. Use for career decisions, strategic pivots, risk-taking choices, and life-changing decisions.
+description: When advising a human on a high-stakes, hard-to-undo life/career choice, weigh the asymmetry between a recoverable downside and a permanent missed opportunity, not just the short-term cost.
 ---
 
 # Regret Minimization Framework
 
+> Scope note: This is a **human-facing advisory** lens. An autonomous agent has no "future self" to regret, so do not apply it to your own tool/architecture choices — for those use thinking-reversibility (one-way vs two-way door) and thinking-opportunity-cost. Use this skill only when helping a *person* reason through a personal/career decision. The reusable core for engineering work is the asymmetry below: a recoverable downside vs. a permanently foregone upside.
+
 ## Overview
 
-Jeff Bezos developed the Regret Minimization Framework to make the decision to leave his Wall Street job and start Amazon. By projecting to age 80 and asking what you'd regret, you cut through short-term fears and focus on what truly matters long-term.
+Jeff Bezos's Regret Minimization Framework reframes a hard, irreversible personal choice around long-term regret rather than short-term fear: imagine looking back from the far future and ask which path you'd regret *not* taking. The transferable insight is an **asymmetry** — a failed attempt is usually recoverable, while a never-taken opportunity is permanently gone.
 
-**Core Principle:** When you're 80, looking back on your life, what will you regret not trying? Minimize that regret.
+**Core Principle:** Weigh a recoverable downside against a permanent foregone upside. When the downside is reversible and the missed upside is not, the asymmetry favors trying.
 
 ## When to Use
 
@@ -24,23 +26,31 @@ Jeff Bezos developed the Regret Minimization Framework to make the decision to l
 Decision flow:
 
 ```
-Facing a significant life/career decision?
-  → Afraid of failure or short-term costs? → yes → APPLY REGRET MINIMIZATION
-  → Unclear if risk is worth it? → yes → PROJECT TO 80-YEAR-OLD SELF
-  → Need long-term perspective? → yes → ASK "WHAT WOULD I REGRET?"
+Advising a human on a significant life/career decision?
+  → Is the downside recoverable but the missed upside permanent? → yes → APPLY THE ASYMMETRY
+  → Is short-term fear obscuring long-term value? → yes → WEIGH LONG-TERM REGRET
+  → It's an agent/engineering decision? → use thinking-reversibility + thinking-opportunity-cost instead
 ```
+
+## When NOT to Use
+- The decision is yours-as-an-agent (tooling, architecture, refactor) — there's no future self; use thinking-reversibility and thinking-opportunity-cost.
+- The choice is easily reversible — regret framing is overkill; just pick and adjust.
+- The downside is *not* recoverable (catastrophic, ruinous, or harms others) — the asymmetry flips; "just try it" is wrong advice. Weigh the irreversible downside directly.
+- Others bear the consequences — one person's regret isn't the whole calculus; bring in affected stakeholders.
 
 ## The Framework
 
-### Step 1: Project to Age 80
+### Step 1: Take the Long-Horizon View
 
-Imagine yourself at age 80, looking back on your life:
+When advising a person, have them picture looking back from far in the future — the point is to demote short-term fear (a lost bonus, temporary discomfort) and surface what lasts:
 
 ```
-I am 80 years old.
-I am reflecting on my life and the decisions I made.
-I want to minimize the number of regrets I have.
+Looking back years from now:
+- Which short-term costs will have faded to nothing?
+- Which path, if not taken, would leave a permanent "what if?"
 ```
+
+The mechanism that matters is the **asymmetry**, not the specific age: short-term costs fade; permanently foregone opportunities don't.
 
 ### Step 2: Frame the Decision
 
@@ -215,7 +225,7 @@ Avoiding these → Minimizing regret
 ### With Pre-Mortem
 
 ```
-Pre-mortem: "It's age 80 and I deeply regret this choice. Why?"
+Pre-mortem: "It's years later and I deeply regret this choice. Why?"
 
 This is essentially regret minimization through narrative.
 Write the story of future regret to clarify present choices.
@@ -243,14 +253,14 @@ Full cost often favors action.
 ## Option A: [Safe/Conservative Path]
 Short-term: [Benefits and costs]
 Long-term: [Likely trajectory]
-At 80, regret for choosing A: [Assessment]
-At 80, regret for NOT choosing A: [Assessment]
+Is the downside recoverable? [Yes/No]
+Long-horizon regret for NOT choosing A: [Assessment]
 
 ## Option B: [Risky/Bold Path]
 Short-term: [Benefits and costs]
 Long-term: [Likely trajectory]
-At 80, regret for choosing B: [Assessment]
-At 80, regret for NOT choosing B: [Assessment]
+Is the downside recoverable? [Yes/No]
+Long-horizon regret for NOT choosing B: [Assessment]
 
 ## Regret Comparison
 | Scenario | Regret Level | Duration | Type |
@@ -289,22 +299,20 @@ At 80, regret for NOT choosing B: [Assessment]
 
 ## Verification Checklist
 
-- [ ] Projected to age 80 perspective
-- [ ] Identified regrets for each option
+- [ ] Confirmed this is human-facing advice, not an agent decision
+- [ ] Took the long-horizon view (short-term costs demoted)
+- [ ] Checked the downside is recoverable (if not, the asymmetry flips — flag it)
 - [ ] Distinguished action vs. inaction regrets
-- [ ] Considered whether regrets would grow or fade
-- [ ] Checked if decision is significant enough for this framework
-- [ ] Considered impact on others (not just self)
-- [ ] Made decision aligned with long-term perspective
+- [ ] Considered impact on others, not just the individual
+- [ ] Recommendation follows the recoverable-vs-permanent asymmetry
 
 ## Key Questions
 
-- "When I'm 80, will I regret not trying this?"
-- "Is this fear of failure or wisdom about risk?"
-- "Will this regret grow or fade over time?"
-- "What would my 80-year-old self tell me to do?"
-- "Am I optimizing for short-term comfort or long-term meaning?"
-- "Would I regret playing it safe?"
+- "Is this downside recoverable, or permanent?"
+- "Which short-term costs will have faded years from now?"
+- "Is this fear of failure, or genuine wisdom about an unrecoverable risk?"
+- "Which path, if untaken, leaves a permanent 'what if?'"
+- "Are others harmed in a way that overrides the individual's regret?"
 
 ## Bezos's Story
 

@@ -1,9 +1,15 @@
 ---
 name: thinking-opportunity-cost
-description: Evaluate decisions by what you give up, not just what you gain. Use for resource allocation, prioritization, build vs. buy choices, and technical debt evaluation.
+description: Before committing scarce time/people/money to one thing, ask "what's the next-best use of these resources, and what does doing nothing cost?" — the real cost is the best option you skip.
 ---
 
 # Opportunity Cost Thinking
+
+## Two operative prompts (use these first)
+1. **Next-best alternative:** "If we didn't do this, what is the single best thing we'd do with the same resources instead?" That foregone option *is* the cost.
+2. **Explicit do-nothing:** "What happens if we change nothing?" Always put status quo on the list — it's often undervalued and sometimes wins.
+
+If both answers are cheap/obvious, you don't need the full framework below — just decide.
 
 ## Overview
 
@@ -29,6 +35,12 @@ Making a commitment?
   → Is the foregone value significant? → yes → Factor into decision
                                        ↘ no → Proceed
 ```
+
+## When NOT to Use
+- The choice is trivial or reversible and consumes negligible resources — deciding costs less than analyzing.
+- There is no real alternative use for the resource (it's idle or earmarked) — no opportunity is being given up.
+- The work is mandatory (compliance, security fix, hard dependency) — there's no optional alternative to weigh.
+- You'd be inventing speculative alternatives to look rigorous — if the next-best option is clearly worse, just proceed.
 
 ## The Opportunity Cost Framework
 

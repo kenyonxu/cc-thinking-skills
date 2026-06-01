@@ -1,9 +1,11 @@
 ---
 name: thinking-kepner-tregoe
-description: Systematic rational process for complex problem analysis, decision making, and risk assessment. Use for high-stakes engineering decisions, root cause analysis beyond 5 Whys, and multi-factor evaluations requiring structured criteria.
+description: When a defect appears in only some places/times/cases and the cause is unclear, map what IS vs IS-NOT affected — the boundary contrast points straight at the root cause.
 ---
 
 # Kepner-Tregoe Rational Process
+
+> Focus note: the high-value process here for an autonomous agent is **Problem Analysis (PA)** — the IS/IS-NOT boundary contrast for root-causing a deviation. Reach for it when a bug is *selective* (some endpoints/regions/users/times, not all). Decision Analysis (DA) overlaps thinking-opportunity-cost; Potential Problem Analysis (PPA) overlaps thinking-pre-mortem — prefer those for pure decision or risk-anticipation tasks, and use the sections below mainly to feed PA's output into them.
 
 ## Overview
 
@@ -30,6 +32,12 @@ Complex problem? → yes → Multiple concerns/unclear priority? → yes → Sta
                                                                                                                  ↘ no → Implementation risk? → yes → PPA
                ↘ no → Simpler frameworks may suffice
 ```
+
+## When NOT to Use
+- The cause is already obvious from a stack trace, error message, or a single recent change — just fix it; IS/IS-NOT is overhead here.
+- The failure is *uniform* (affects 100% of requests/everything) — there's no IS-vs-IS-NOT boundary to contrast, so PA gives no signal; use thinking-systems or direct debugging.
+- A quick hypothesis is cheaply testable — test it (occams-razor) before building a full specification matrix.
+- Pure decision-making or risk-listing with no deviation to diagnose — use thinking-opportunity-cost (choices) or thinking-pre-mortem (risks) instead of the DA/PPA sections.
 
 ## The Four Processes
 

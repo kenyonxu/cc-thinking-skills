@@ -1,6 +1,6 @@
 ---
 name: thinking-thought-experiment
-description: Test ideas through hypothetical scenarios when empirical testing is impractical. Use for architecture evaluation, edge case analysis, ethics considerations, and strategy development.
+description: You need to trace how a system would fail or behave at a scale you can't cheaply test or measure. Use to imagine the scenario and walk the consequence chain step by step.
 ---
 
 # Thought Experiments
@@ -11,25 +11,29 @@ Thought experiments use imagination to test ideas when direct experimentation is
 
 **Core Principle:** Structured imagination is a tool. When you can't test in reality, test in your mind with discipline.
 
+## The Core Reframe
+
+When you can't run the real experiment — the failure is too rare, the scale too large, the decision too one-way — you can still run it in your head with discipline: fix the conditions, then trace the consequence chain one step at a time until something breaks. The value is in the *step-by-step trace*, not in the verdict you jumped to.
+
 ## When to Use
 
-- Evaluating architecture before building
-- Exploring edge cases and failure modes
-- Stress-testing strategies and plans
-- Ethical considerations
-- Competitive scenario analysis
-- Understanding complex systems
-- When empirical testing is costly or impossible
+- Tracing a failure mode you can't easily trigger (primary DB down at peak, region outage)
+- Reasoning about behavior at a scale you can't currently reach (10x/100x traffic)
+- Evaluating a one-way architectural decision before committing
+- Exploring edge cases that are expensive or impossible to reproduce
 
 Decision flow:
 
 ```
-Need to evaluate an idea?
-  → Can you test empirically? → yes → Test
-  → Is empirical test too costly/slow? → yes → THOUGHT EXPERIMENT FIRST
-  → Are you evaluating edge cases? → yes → THOUGHT EXPERIMENT
-  → Is this a one-way decision? → yes → THOUGHT EXPERIMENT
+Need to understand how something behaves?
+  → Can you cheaply test or measure it? → yes → DO THAT (stop here)
+  → Is the real test too rare/large/irreversible? → yes → THOUGHT EXPERIMENT
 ```
+
+## When NOT to Use
+
+- **If you can cheaply test or measure it, test it.** A thought experiment is a substitute for empiricism, not a replacement — a load test, a feature flag, a query against real data, or a quick spike beats imagined consequences every time. Reach for this skill only when the real experiment is genuinely out of reach.
+- **For adversarial "how would an attacker break this" analysis, use thinking-red-team** — it has the structured attack-surface and findings format. Don't reinvent it here.
 
 ## Types of Thought Experiments
 
@@ -194,6 +198,8 @@ Template for each:
 ```
 
 ### The Adversarial Analysis
+
+> For real security work, prefer **thinking-red-team** (structured attack surface + reproducible-attack-path findings). Use the sketch below only as a quick lens, not a substitute.
 
 ```markdown
 ## Thought Experiment: Attacker Perspective

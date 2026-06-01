@@ -1,6 +1,6 @@
 ---
 name: thinking-socratic
-description: Systematic questioning framework to deepen understanding, challenge assumptions, and uncover hidden beliefs. Use for requirements gathering, debugging, coaching, and critical analysis.
+description: Use before building when a request is vague, assumption-laden, or "obvious." Ask the clarifying questions that surface hidden requirements and false premises instead of guessing.
 ---
 
 # Socratic Questioning
@@ -8,23 +8,29 @@ description: Systematic questioning framework to deepen understanding, challenge
 ## Overview
 The Socratic Method, developed by the ancient Greek philosopher Socrates, uses systematic questioning to stimulate critical thinking and illuminate ideas. Rather than providing answers, it draws out knowledge by challenging assumptions and exploring implications.
 
-**Core Principle:** Questions are more powerful than answers. The right question reveals what we don't know we don't know.
+**Core Principle:** A vague or assumption-laden request is cheaper to clarify than to misbuild. The right question up front surfaces the hidden requirement or false premise that would otherwise be discovered only after the work is done.
+
+Use this as a **pre-build clarification tool**: when a task is underspecified, ambiguous, or rests on an unstated assumption, ask the targeted question before writing code or committing to an approach — don't fill the gap with a guess.
 
 ## When to Use
-- Requirements gathering (understanding what stakeholders really need)
-- Debugging (tracing assumptions to find root causes)
-- Code review (understanding design decisions)
-- Coaching and mentoring (helping others reach insights)
-- Self-reflection (examining your own beliefs)
-- Evaluating proposals or designs
-- When someone says "obvious" or "everyone knows"
+- A request is vague ("make it fast", "add a dashboard", "fix the bug") and you'd otherwise guess the spec
+- The request rests on an unstated assumption that might be the actual problem
+- Someone asserts something is "obvious" or "everyone knows" — exactly when premises go unchecked
+- A proposal jumps to a solution before the problem is defined
+- Debugging, to trace a claim ("the system is slow") back to a checkable specific
 
 Decision flow:
 ```
-Understanding seems shallow? → yes → APPLY SOCRATIC QUESTIONING
-Assumptions unexamined?     → yes → APPLY SOCRATIC QUESTIONING
-Root cause unclear?         → yes → APPLY SOCRATIC QUESTIONING
+About to build/commit on an underspecified request? → yes → ASK CLARIFYING QUESTIONS FIRST
+Request rests on an unexamined assumption?           → yes → PROBE THE ASSUMPTION
+Stated problem is a vague symptom?                   → yes → QUESTION DOWN TO A SPECIFIC
 ```
+
+## When NOT to Use
+- **The request is already clear and specified.** Don't interrogate a well-defined task — just do it. Question-asking theater wastes the user's time.
+- **You can answer the question yourself by checking.** If the ambiguity is resolvable by reading the code, running a command, or consulting the docs, do that instead of asking the user.
+- **During execution of an agreed plan.** Clarify before building; once the spec is settled, stopping to re-question every step is friction, not rigor.
+- **A genuine emergency / time-pressured incident** where acting on 70% understanding beats a round of questions — clarify the one thing that's load-bearing, then act.
 
 ## The Six Types of Socratic Questions
 
@@ -164,13 +170,12 @@ Implications: "What are the consequences for debugging? Storage?"
 Meta: "Is the real question about event sourcing or auditability?"
 ```
 
-## Facilitation Tips
-- **Genuine curiosity**: Ask because you want to understand, not to trap
-- **Follow the thread**: Let answers guide next questions
-- **Comfortable silence**: Allow time for reflection
-- **Non-judgmental tone**: Questions should feel safe
-- **Build on answers**: "That's interesting. Can you say more about..."
-- **Admit ignorance**: "I don't understand. Help me see..."
+## How to Ask Well
+- **Ask the load-bearing question first**: lead with the one whose answer most changes what you'll build.
+- **One or two questions, not an interrogation**: batch the few that actually gate the work; don't run all six categories for show.
+- **Follow the thread**: let each answer narrow the next question instead of working from a fixed script.
+- **Resolve what you can yourself**: only ask the user what you can't determine by reading the code, running a command, or checking the docs.
+- **Make the assumption explicit**: "This assumes X — is that right?" beats silently guessing X.
 
 ## Verification Checklist
 - [ ] Used questions from at least 3 of the 6 categories

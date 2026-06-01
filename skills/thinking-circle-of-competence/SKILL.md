@@ -1,273 +1,216 @@
 ---
 name: thinking-circle-of-competence
-description: Know the boundaries of your expertise and operate within them. Use when evaluating opportunities, making decisions outside your domain, or assessing when to defer to experts.
+description: Use when you're unsure whether you actually know the answer. If you lack the evidence or context to answer reliably, abstain, ask, or fetch it — don't confabulate a confident reply.
 ---
 
 # Circle of Competence
 
 ## Overview
-The Circle of Competence, articulated by Warren Buffett and Charlie Munger, emphasizes knowing the boundaries of your genuine expertise. The key insight isn't about having a large circle—it's about knowing precisely where your circle ends. Operating within your circle leads to better decisions; operating outside it without recognizing it leads to costly mistakes.
+The Circle of Competence, articulated by Warren Buffett and Charlie Munger, is about knowing precisely where reliable knowledge ends. For an autonomous agent the operative version is **abstention**: the failure mode isn't being wrong about a hard problem — it's producing a fluent, confident answer when the grounding for it isn't there. The most damaging output a model can give is a plausible fabrication: an invented API, a hallucinated file path, a made-up statistic, a guessed config value, delivered with the same tone as a verified fact.
 
-**Core Principle:** "Know what you don't know. The boundaries of your circle are more important than its size." — Warren Buffett
+**Core Principle:** Knowing what you can't reliably answer is more valuable than the answer. When the evidence or context to answer correctly is missing, the right move is to abstain, ask, or go fetch it — not to confabulate. "I don't know, let me check" beats a confident guess.
 
 ## When to Use
-- Evaluating new opportunities or projects
-- Making decisions in unfamiliar domains
-- Assessing whether to delegate or learn
-- Investment or resource allocation decisions
-- Taking on new responsibilities
-- Advising others on topics
-- Hiring or team composition decisions
+- A question demands a specific fact you're not certain of (an exact API signature, a config value, a version behavior, a number)
+- You're about to assert something about *this* codebase/system without having read it
+- The request is in an unfamiliar domain and your answer would be reconstructed from vague pattern rather than grounded knowledge
+- You notice you're filling a gap with the most plausible-sounding value rather than a checked one
+- A confident answer would be expensive to be wrong about
 
 Decision flow:
 ```
-Decision to make? → yes → Inside your circle? → yes → Proceed with confidence
-                                              ↘ no → Delegate, learn, or pass
-                ↘ no → Not applicable
+About to give a specific/high-stakes answer?
+  → Is it grounded in something I've read/run/can cite? → yes → answer
+                                                        ↘ no → CAN I cheaply fetch/check it? → yes → FETCH, then answer
+                                                                                              ↘ no → ABSTAIN or ASK; flag the uncertainty
 ```
 
-## The Three Zones
+## When NOT to Use
+- **The answer is grounded and verifiable** — you've read the file, run the command, or it's stable common knowledge. Don't perform false humility on things you actually know; needless hedging is its own failure.
+- **The cost of being wrong is trivial and reversible** — a quick reversible attempt with a caveat can beat stalling, as long as you flag it as unverified.
+- **You can just look it up right now** — then the move is *fetch*, not abstain. Abstention is the fallback when grounding is genuinely unavailable, not an excuse to skip a cheap check.
+- **Brainstorming / clearly-hypothetical framing** — when the user has signalled they want options or speculation, labeled informed guesses are appropriate.
 
-### Zone 1: Inside Your Circle
-**True competence through deep experience**
+## The Three Zones (by grounding, not by ego)
 
-Characteristics:
-- You've made decisions here repeatedly
-- You've seen failure modes firsthand
-- You can predict second-order effects
-- You know what you don't know within this area
-- You can teach others the nuances
+### Zone 1: Grounded — answer
+**The answer is anchored in something checkable**
 
-```
-Example: Senior backend engineer
-Inside circle:
-- API design patterns that scale
-- Database optimization strategies
-- When to use caching vs. not
-- Common failure modes in distributed systems
-- Debugging production issues
-```
-
-### Zone 2: Edge of Your Circle
-**Familiar but not expert**
-
-Characteristics:
-- You know the basics
-- You can have informed conversations
-- You might miss edge cases
-- You need to verify your assumptions
-- You should seek review from experts
+- You read it in the actual code/file/doc this session, or ran it
+- It's stable, common knowledge unlikely to be version- or context-specific
+- You could cite *where* the answer comes from
 
 ```
-Example: Same backend engineer
-Edge of circle:
-- Frontend performance optimization
-- Basic security practices
-- Cloud cost optimization
-- Team management fundamentals
+Examples (grounded):
+- "This function returns null on miss" — after reading the function
+- HTTP 404 means not found — stable, universal
+- "The config sets timeout to 30s" — after opening the config
+→ Answer directly.
 ```
 
-### Zone 3: Outside Your Circle
-**Dangerous territory**
+### Zone 2: Partial — verify before asserting
+**Plausible but reconstructed, not confirmed**
 
-Characteristics:
-- Knowledge is superficial or outdated
-- You don't know what you don't know
-- Decisions feel confident but are often wrong
-- High risk of Dunning-Kruger effect
-- Should delegate or deeply learn before deciding
+- You have the general shape but not the specific
+- It's version-, environment-, or repo-specific and you haven't checked this one
+- You'd be inferring from a pattern, which is usually right but sometimes wrong
 
 ```
-Example: Same backend engineer
-Outside circle:
-- Mobile app development
-- Machine learning model tuning
-- Legal/compliance decisions
-- Financial forecasting
+Examples (partial):
+- "The library probably has a `retry` option" — likely, unchecked
+- "This API usually returns ISO timestamps" — depends on the version here
+→ Fetch/read to confirm, OR answer with an explicit "I believe X, verify with Y."
 ```
 
-## Mapping Your Circle
+### Zone 3: Ungrounded — abstain or ask
+**A confident answer here would be a fabrication**
 
-### Step 1: List Your Domains
-What areas do you have experience in?
-- Professional skills
-- Industry knowledge
-- Technical domains
-- Business functions
+- You'd be inventing a specific value (signature, path, number, flag)
+- The domain is unfamiliar and the answer reconstructed from vague pattern
+- You can't point to any source for it
 
-### Step 2: Assess Depth Honestly
-For each domain, ask:
+```
+Examples (ungrounded):
+- Exact signature of an API you haven't seen in this codebase
+- A precise statistic with no source
+- "What does our internal service X do?" with no access to it
+→ Say so, ask, or fetch — do NOT confabulate.
+```
 
-| Question | Inside | Edge | Outside |
+## Telling the Zones Apart
+
+The honest test before a specific or high-stakes claim:
+
+| Question | Grounded | Partial | Ungrounded |
 |----------|--------|------|---------|
-| Could I teach this to an expert? | ✓ | | |
-| Have I made real decisions here? | ✓ | ✓ | |
-| Do I know the failure modes? | ✓ | | |
-| Can I predict second-order effects? | ✓ | | |
-| Do I know what I don't know here? | ✓ | ✓ | |
-| Is my knowledge current? | ✓ | | |
+| Can I point to where this answer comes from? | ✓ | sort of | ✗ |
+| Have I read/run the relevant thing this session? | ✓ | | ✗ |
+| Is it version-/repo-/config-specific and unconfirmed? | | ✓ | ✓ |
+| Am I filling a gap with the *most plausible-sounding* value? | | ✓ | ✓ |
 
-### Step 3: Be Brutally Honest
-Common self-deceptions:
-- "I read a lot about it" ≠ competence
-- "I understand the concepts" ≠ can execute
-- "I did it once years ago" ≠ current competence
-- "I'm smart, I can figure it out" ≠ expertise
+Watch for the confabulation tells:
+- An exact name, number, or path arrives with no memory of *where* it came from
+- The answer is suspiciously convenient and complete for something you never looked at
+- You're hedging the framing ("typically", "should be") around a claim the user will treat as fact
+- "I'm capable in general, so I can answer this specific" — capability is not grounding
 
-### Step 4: Verify with Track Record
-Look at past decisions:
-- In areas you consider "inside," were you right?
-- In areas you consider "edge," did you make mistakes?
-- This calibrates your self-assessment
+## What to Do in Each Zone
 
-## Operating Within Your Circle
-
-### When Inside: Act with Confidence
+### Grounded: answer directly
 ```
-✓ Make decisions directly
-✓ Move quickly
-✓ Trust your intuition (it's trained)
-✓ Teach and mentor others
-✓ Push back on outside opinions if warranted
+✓ Give the answer
+✓ Cite the source if it helps the user trust it
+✓ Don't hedge a verified fact into mush
 ```
 
-### When at Edge: Proceed with Caution
+### Partial: confirm, then answer
 ```
-→ Seek input from those with deeper expertise
-→ Validate assumptions before acting
-→ Build in more margin for error
-→ Document reasoning for review
-→ Use this as learning opportunity
+→ Cheap to check? FETCH first — read the file, run the command, grep the symbol
+→ Can't check right now? Answer with the uncertainty marked:
+  "I believe X — confirm against Y before relying on it."
+→ Never round a "probably" up to a flat assertion
 ```
 
-### When Outside: Delegate or Learn
+### Ungrounded: abstain, ask, or fetch — never confabulate
 ```
-Option A: Delegate
-- Find someone with this in their circle
-- Trust their judgment
-- Don't override without strong reason
+Option A: Fetch
+- Get the grounding (read the code, search the docs, call the tool), then answer
 
-Option B: Learn First
-- Invest significant time (months/years)
-- Get hands-on experience
-- Make small decisions first, learn from mistakes
-- Gradually expand circle
+Option B: Ask
+- "I don't have access to X — can you share it / point me to it?"
+- A precise question beats a confident guess
 
-Option C: Pass
-- Some opportunities aren't for you
-- "I don't know enough" is valid
-- Opportunity cost of learning may be too high
+Option C: Abstain explicitly
+- "I don't know this reliably and can't verify it here."
+- State what *would* let you answer
 ```
 
 ## Common Traps
 
-### Trap 1: Circle Creep
-Your circle in one area doesn't extend to adjacent areas:
+### Trap 1: Competence creep
+Being grounded in one area doesn't transfer to the adjacent one:
 ```
-Inside: iOS development
-Doesn't mean inside: Android development
-Doesn't mean inside: iOS design
-Doesn't mean inside: iOS project management
-```
-
-### Trap 2: Stale Expertise
-Circles shrink if not maintained:
-```
-2015: Expert in jQuery
-2024: jQuery knowledge is inside, but modern frontend is edge/outside
+Read service A's code → grounded on service A
+Does NOT mean grounded on service B, the infra, or the client
+Check the thing you're actually being asked about.
 ```
 
-### Trap 3: Confidence Misread as Competence
-Feeling confident ≠ being competent:
+### Trap 2: Stale or version-specific recall
+General knowledge of a tool ≠ knowledge of *this* version/config:
 ```
-Dunning-Kruger peak: Know just enough to feel expert
-Actually expert: Know enough to know how much you don't know
+"I know how this library usually works" — but the repo pins an old major version
+with a different API. Recall is partial here; verify against the installed version.
 ```
 
-### Trap 4: Smart Person Syndrome
-General intelligence doesn't expand circles:
+### Trap 3: Fluency misread as grounding
+A smooth, complete answer *feels* authoritative regardless of whether it's checked:
 ```
-Being smart at X doesn't make you competent at Y
-Many smart people fail at investments, businesses, etc.
-because they operate outside their circle confidently
+The trap: the more confidently a specific value comes out, the less it gets questioned
+The fix: before a specific claim, ask "where did this come from?" — if there's no source, it's ungrounded
+```
+
+### Trap 4: Capability-implies-knowledge
+Being a strong general reasoner does not mean you know this specific fact:
+```
+"I can reason about anything" → still can't know an unread file's contents,
+a private API's signature, or a number with no source. Capability is not grounding.
 ```
 
 ## Application Examples
 
-### Technical Decisions
+### Reporting an API or library detail
 ```
-Question: Should we adopt GraphQL?
+Question: "What are the arguments to this client's `query` method?"
 
 Self-assessment:
-- Have I built and maintained GraphQL at scale? No → Outside
-- Do I know the failure modes? No → Outside
-- Have I seen it succeed/fail in similar contexts? Partially → Edge
+- Have I read this client's source in the repo? No → Partial/Ungrounded
+- Am I about to reconstruct a plausible signature? Yes → confabulation risk
 
-Decision: Consult with team members who have deep GraphQL experience,
-         or run small pilot before committing
+Action: grep/read the actual definition, THEN answer. If unavailable,
+        say "I haven't seen this client's source — let me read it" rather than inventing args.
 ```
 
-### Career Decisions
+### Answering about this specific system
 ```
-Question: Should I become a manager?
+Question: "What does our internal billing service do on a failed charge?"
 
 Self-assessment:
-- Have I led teams before? A little → Edge
-- Do I know management failure modes? Not really → Outside
-- Can I predict what makes a good manager? Vaguely → Edge
+- Do I have access to that service's code/docs? No → Ungrounded
+- Can I infer a "typical" behavior? Yes, but it'd be a guess about a specific system
 
-Decision: Don't assume IC success transfers; seek mentorship,
-         start with small team, treat as learning opportunity
+Action: Abstain or ask: "I don't have that service's code here — can you point me to it,
+        or should I search the repo?" Do not describe behavior you haven't seen.
 ```
 
-### Business Decisions
+### Adopting an unfamiliar technology
 ```
-Question: Should I invest in this startup?
+Question: "Should we use GraphQL here?"
 
 Self-assessment:
-- Do I understand this market? Superficially → Edge
-- Can I evaluate the technology? No → Outside
-- Do I know startup failure modes? Generally → Edge
-- Have I made successful startup investments? No → Outside
+- Do I have grounded knowledge of GraphQL's general tradeoffs? Yes → can speak to them
+- Do I know THIS system's query patterns and constraints? Only what I've read → check
 
-Decision: This is outside my circle; either pass or find
-         co-investors who have this in their circle
+Action: Give the well-grounded general tradeoffs; for the fit to *this* system,
+        verify the actual access patterns before recommending.
 ```
-
-## Expanding Your Circle
-
-### The Right Way
-1. Start at the edge, not outside
-2. Make small, reversible decisions
-3. Get feedback on those decisions
-4. Learn from mistakes in low-stakes situations
-5. Build pattern recognition over time
-6. Graduate to larger decisions as track record develops
-
-### The Wrong Way
-- Jump straight to big decisions in new domain
-- Assume competence transfers
-- Learn only theory without practice
-- Avoid feedback on decisions
-- Never acknowledge mistakes
 
 ## Verification Checklist
-- [ ] Identified which zone this decision falls in
-- [ ] If edge/outside: acknowledged uncertainty explicitly
-- [ ] If outside: identified who has this in their circle
-- [ ] If proceeding outside circle: limited downside exposure
-- [ ] Honest about track record in this domain
-- [ ] Not conflating confidence with competence
+- [ ] Identified which zone the answer falls in (grounded / partial / ungrounded)
+- [ ] For specific claims: can point to where the answer comes from
+- [ ] If partial/ungrounded and cheap to check: fetched/read before asserting
+- [ ] If ungrounded and uncheckable: abstained or asked, did not confabulate
+- [ ] Marked any unverified claim as unverified, not as fact
+- [ ] Did not hedge a genuinely-grounded answer into needless mush
 
 ## Key Questions
-- "Would I bet significant money on my judgment here?"
-- "Have I made similar decisions successfully before?"
-- "What don't I know that an expert would know?"
-- "If I'm wrong, how would I know?"
-- "Who has this in their circle that I could consult?"
-- "Is my knowledge here current or stale?"
+- "Where does this specific answer come from — can I cite it?"
+- "Have I actually read/run the thing I'm about to describe?"
+- "Am I filling this gap with a checked value or the most plausible-sounding one?"
+- "Could I cheaply fetch the grounding instead of guessing?"
+- "If I'm wrong here, how would anyone find out — and how costly is it?"
+- "Is this version-/repo-/config-specific in a way I haven't confirmed?"
 
 ## Buffett's Reminder
-"What counts for most people in investing is not how much they know, but rather how realistically they define what they don't know."
+"What counts is not how much they know, but rather how realistically they define what they don't know."
 
-The advantage comes not from having the biggest circle, but from staying inside whatever circle you have—and knowing exactly where the boundary is.
+The advantage isn't a bigger circle — it's refusing to answer outside it as if you were inside it. For an agent, the highest-value words are often "I don't know that reliably; let me check" — because a confident fabrication costs far more than an honest gap.

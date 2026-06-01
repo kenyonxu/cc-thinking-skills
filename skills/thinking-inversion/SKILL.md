@@ -1,9 +1,11 @@
 ---
 name: thinking-inversion
-description: Approach problems backward by identifying paths to failure, then systematically avoiding them. Use for risk identification, planning, and avoiding obvious mistakes.
+description: When planning work where optimism may be hiding risks, ask "how would I guarantee this fails?" — enumerate failure paths, then turn the top ones into explicit requirements to avoid.
 ---
 
 # Inversion Thinking
+
+> Note: overlaps thinking-pre-mortem. Use inversion as a quick failure-mode *checklist* on a feature/design; use thinking-pre-mortem for a narrative prospective-hindsight pass on a full plan or launch.
 
 ## Overview
 Inversion thinking, championed by Charlie Munger and rooted in mathematician Carl Jacobi's principle "Invert, always invert," approaches problems by considering their opposite. Instead of asking "How do I succeed?", ask "How would I guarantee failure?" then avoid those paths.
@@ -24,6 +26,12 @@ Have a goal? → yes → Can you list ways to achieve it? → maybe → INVERT F
                                                       ↘ no → Definitely invert
            ↘ no → Define goal, then invert
 ```
+
+## When NOT to Use
+- The task is small/reversible and failure is cheap — just do it and fix forward.
+- You'd only produce generic boilerplate failure modes ("no tests", "poor naming") that don't apply here; skip if nothing specific surfaces.
+- A full plan or launch is in scope — use thinking-pre-mortem instead for a narrative failure pass.
+- The failure modes are already well-covered by existing checks (CI, lint, type system); don't re-enumerate what's enforced.
 
 ## The Process
 
@@ -159,7 +167,7 @@ Inversion + Pre-Mortem creates powerful risk identification:
 - [ ] Categorized failures by type and severity
 - [ ] Converted top failures to explicit requirements
 - [ ] Verified plan addresses the most critical inversions
-- [ ] Shared inversions with team for blind spot check
+- [ ] Re-checked the top inversions against the actual design for blind spots
 
 ## Key Questions
 - "What would guarantee failure here?"

@@ -1,30 +1,111 @@
 ---
 name: thinking-systems
-description: Analyze problems as interconnected systems with feedback loops, emergent behavior, and non-linear effects. Use for debugging complex systems, architecture decisions, and understanding unexpected behavior.
+description: Use when debugging across services/an incident where a fix in one place breaks another, or behavior is emergent and no single component explains it. Maps the system and traces causes.
 ---
 
 # Systems Thinking
 
 ## Overview
-Systems thinking views problems as part of interconnected wholes rather than isolated components. It focuses on relationships, feedback loops, and emergent properties—behaviors that arise from interactions and can't be predicted from parts alone. Essential for debugging complex distributed systems and understanding why "obvious" fixes often fail.
+Systems thinking views a problem as part of an interconnected whole rather than isolated components. It focuses on relationships, feedback loops, delays, and emergent properties—behaviors that arise from interactions and can't be predicted from parts alone. Its proven payoff is cross-service/incident debugging, where "obvious" single-component fixes fail.
 
 **Core Principle:** The behavior of a system cannot be understood by analyzing components in isolation. Look at connections, feedback, and emergence.
 
 ## When to Use
 - Debugging issues that span multiple services/components
-- Understanding unexpected emergent behavior
-- Designing resilient architectures
-- Analyzing incidents and outages
-- When fixing one thing breaks another
-- Performance issues with non-obvious causes
-- Organizational/process problems
+- A fix in one place breaks something in another
+- Behavior is emergent—no single component is at fault, but the whole misbehaves
+- Analyzing incidents and outages with non-obvious causes
+- Performance issues where the slow part isn't the actual cause
 
-Decision flow:
 ```
-Problem spans multiple components?     → yes → APPLY SYSTEMS THINKING
+Problem spans multiple components?        → yes → APPLY SYSTEMS THINKING
 Fix in one place caused issue in another? → yes → APPLY SYSTEMS THINKING
 Behavior seems "emergent" or unexpected?  → yes → APPLY SYSTEMS THINKING
 ```
+
+## When NOT to Use
+- A single-component, linear bug (one service, clear stack trace) → just trace and fix it; the systems overhead buys nothing.
+- The cause is already obvious from the recent diff or one log line → fix directly.
+- The work is a contained refactor or feature with no cross-component interactions → skip.
+
+## Systems Debugging Process
+This is the core of the skill—apply it first.
+
+### Step 1: Map the System
+Draw components, connections, and data/control flows:
+```
+┌─────────┐     ┌─────────┐     ┌─────────┐
+│ Client  │────▶│   API   │────▶│   DB    │
+└─────────┘     └────┬────┘     └─────────┘
+                     │
+                     ▼
+               ┌─────────┐
+               │  Cache  │
+               └─────────┘
+```
+
+### Step 2: Identify Feedback Loops
+For each loop, determine:
+- Is it reinforcing (amplifies change) or balancing (counteracts change)?
+- What's the delay in the loop?
+- What could make it unstable?
+
+```
+Retry Storm Loop (Reinforcing - Dangerous):
+Service slow → Clients retry → More load → Service slower → More retries
+```
+
+### Step 3: Trace Upstream
+Follow the symptom backward to find originating cause:
+```
+Symptom: High latency in Service C
+→ Service C waiting on Service B
+  → Service B waiting on Service A
+    → Service A doing full table scan (ROOT CAUSE)
+```
+
+### Step 4: Look for Interactions
+What happens when components interact under stress?
+- Circuit breakers tripping
+- Cascading timeouts
+- Resource contention
+- Thundering herd
+
+### Step 5: Consider Time Dynamics
+- When did this start?
+- What changed recently (deploys, config, traffic)?
+- Is it periodic? (Cron jobs, cache expiration, batch processes)
+- Is it growing or stabilizing?
+
+## Common System Patterns
+
+### Cascading Failure
+```
+One component fails → Dependent components overload → They fail
+                                                    ↓
+                              ← More traffic to remaining ←
+```
+**Mitigation:** Circuit breakers, bulkheads, graceful degradation
+
+### Thundering Herd
+```
+Cache expires → All requests hit backend simultaneously → Overload
+```
+**Mitigation:** Jittered expiration, cache warming, request coalescing
+
+### Queue Backup
+```
+Processing rate < Arrival rate → Queue grows → Memory pressure → OOM
+```
+**Mitigation:** Backpressure, rate limiting, queue bounds
+
+### Resource Contention
+```
+Multiple processes → Same resource → Lock contention → Serialization
+                                                     ↓
+                    Throughput collapses despite available CPU
+```
+**Mitigation:** Sharding, optimistic locking, resource isolation
 
 ## Key Concepts
 
@@ -93,84 +174,6 @@ Behaviors that arise from interactions, not individual components:
 - **Team dynamics:** No individual is toxic, but collaboration is toxic (incentive interactions)
 - **Market behavior:** No actor intends a bubble, but bubble emerges
 
-## Systems Debugging Process
-
-### Step 1: Map the System
-Draw components, connections, and data/control flows:
-```
-┌─────────┐     ┌─────────┐     ┌─────────┐
-│ Client  │────▶│   API   │────▶│   DB    │
-└─────────┘     └────┬────┘     └─────────┘
-                     │
-                     ▼
-               ┌─────────┐
-               │  Cache  │
-               └─────────┘
-```
-
-### Step 2: Identify Feedback Loops
-For each loop, determine:
-- Is it reinforcing or balancing?
-- What's the delay in the loop?
-- What could make it unstable?
-
-```
-Retry Storm Loop (Reinforcing - Dangerous):
-Service slow → Clients retry → More load → Service slower → More retries
-```
-
-### Step 3: Trace Upstream
-Follow the symptom backward to find originating cause:
-```
-Symptom: High latency in Service C
-→ Service C waiting on Service B
-  → Service B waiting on Service A
-    → Service A doing full table scan (ROOT CAUSE)
-```
-
-### Step 4: Look for Interactions
-What happens when components interact under stress?
-- Circuit breakers tripping
-- Cascading timeouts
-- Resource contention
-- Thundering herd
-
-### Step 5: Consider Time Dynamics
-- When did this start?
-- What changed recently (deploys, config, traffic)?
-- Is it periodic? (Cron jobs, cache expiration, batch processes)
-- Is it growing or stabilizing?
-
-## Common System Patterns
-
-### Cascading Failure
-```
-One component fails → Dependent components overload → They fail
-                                                    ↓
-                              ← More traffic to remaining ←
-```
-**Mitigation:** Circuit breakers, bulkheads, graceful degradation
-
-### Thundering Herd
-```
-Cache expires → All requests hit backend simultaneously → Overload
-```
-**Mitigation:** Jittered expiration, cache warming, request coalescing
-
-### Queue Backup
-```
-Processing rate < Arrival rate → Queue grows → Memory pressure → OOM
-```
-**Mitigation:** Backpressure, rate limiting, queue bounds
-
-### Resource Contention
-```
-Multiple processes → Same resource → Lock contention → Serialization
-                                                     ↓
-                    Throughput collapses despite available CPU
-```
-**Mitigation:** Sharding, optimistic locking, resource isolation
-
 ## Causal Loop Diagram Template
 
 ```
@@ -197,17 +200,7 @@ Multiple processes → Same resource → Lock contention → Serialization
 ```
 
 ## Leverage Points
-Where small changes have large effects (Donella Meadows):
-
-| Leverage | Example | Impact |
-|----------|---------|--------|
-| Parameters | Timeout values | Low |
-| Buffer sizes | Queue limits | Low-Medium |
-| Feedback loops | Add monitoring | Medium |
-| Information flows | Make metrics visible | Medium-High |
-| Rules | Change retry policy | High |
-| Goals | Redefine SLOs | Very High |
-| Paradigm | Rethink architecture | Transformational |
+Once you've located where to intervene, pick the highest-leverage point you can actually move (timeout tweaks are low leverage; rules and architecture are high). See `thinking-leverage-points` for Meadows' full 12-level hierarchy—don't re-derive it here.
 
 ## Verification Checklist
 - [ ] Mapped system components and connections

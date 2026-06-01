@@ -1,6 +1,6 @@
 ---
 name: thinking-margin-of-safety
-description: Build in buffers for unknown unknowns and don't optimize to the edge. Use for capacity planning, deadline estimation, architecture design, and risk management.
+description: Use when provisioning capacity, setting a timeout/limit, or committing to an estimate under uncertainty. Size a buffer to the cost of being wrong instead of optimizing to the edge.
 ---
 
 # Margin of Safety
@@ -25,11 +25,18 @@ Margin of Safety, borrowed from Benjamin Graham's investment philosophy and stru
 Decision flow:
 
 ```
-Making a commitment or design?
-  → Is there uncertainty? → yes → BUILD IN MARGIN
-  → Are you optimizing tightly? → yes → ADD SLACK
-  → What if your estimates are wrong? → Consider margin
+Provisioning, setting a limit, or committing an estimate?
+  → Is there real uncertainty AND a cost to under-provisioning? → yes → SIZE A BUFFER TO THE FAILURE COST
+  → Are you optimizing to the edge to save a little? → yes → ADD SLACK unless the breach is cheap
+  → Estimate could be 2x off? → factor that into the buffer
 ```
+
+## When NOT to Use
+
+- **Cheap, instant, and reversible to adjust.** If under-provisioning is detected immediately and fixed at near-zero cost (auto-scaling that reacts in seconds, a limit you can bump live), a fat static buffer just wastes resources — let the system absorb it.
+- **The buffer's cost exceeds the expected breach cost.** Margin isn't free; when `cost(buffer) > probability(breach) × cost(breach)`, the buffer is the wrong call. Right-size, don't max out.
+- **You can eliminate the uncertainty instead of padding it.** If the real number is measurable or lookup-able, get it — a measured value beats a padded guess. (Margin covers *residual* uncertainty, not laziness about checking.)
+- **This is a stopping-criterion problem, not a buffer problem.** If the question is "how long do I keep searching/optimizing?", that's `thinking-bounded-rationality` (set a good-enough threshold), not margin. *Margin sizes the buffer on a number; bounded-rationality decides when to stop looking for the number.*
 
 ## The Margin of Safety Framework
 

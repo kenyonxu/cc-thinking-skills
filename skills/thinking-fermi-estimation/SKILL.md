@@ -1,6 +1,6 @@
 ---
 name: thinking-fermi-estimation
-description: Make order-of-magnitude estimates for unknown quantities by decomposing into known or estimable factors. Use for capacity planning, cost estimation, market sizing, and technical feasibility assessment.
+description: Use when you need a number you can't measure and can't look up. Decompose the unknown into estimable factors and multiply for an order-of-magnitude answer. Don't Fermi a lookup-able value.
 ---
 
 # Fermi Estimation
@@ -24,10 +24,17 @@ Fermi estimation, named after physicist Enrico Fermi, is the art of making reaso
 Decision flow:
 
 ```
-Need a number you don't have? → yes → Can you measure it directly? → no → FERMI ESTIMATE
-                                                                   ↘ yes → Measure
-                              ↘ no → You might not need it
+Need a number you don't have? → Can you measure OR look it up cheaply? → yes → DO THAT (don't Fermi it)
+                                                                       ↘ no → Will an order-of-magnitude answer suffice? → yes → FERMI ESTIMATE
+                                                                                                                          ↘ no → you need real data, go get it
 ```
+
+## When NOT to Use
+
+- **The number is cheaply lookup-able or measurable.** Don't Fermi the size of a table you can `COUNT(*)`, the latency you can profile, the file size you can `ls`, the price on a pricing page, or any fact one query/search away. A made-up estimate where a real value is available is strictly worse — it adds error and false confidence. Look it up.
+- **You need precision, not order of magnitude.** Fermi gives you "~4 TB, within 3-5x." If the decision turns on 3.8 vs 4.2, estimation can't carry it — get the real number.
+- **The factors are correlated or you'd be inventing the base rates.** If the decomposition is just stacked guesses with no anchor, the result is theater. Either find one real anchor or flag the whole thing as a rough guess.
+- **The decision is identical across the plausible range.** If "somewhere between 1 GB and 1 TB" doesn't change what you do, skip the estimate and act.
 
 ## The Fermi Process
 
@@ -97,6 +104,7 @@ Verify reasonableness:
 - Is it physically possible?
 - Does it match any known data points?
 - Would a 10x error change the decision?
+- **Is any factor actually lookup-able?** If so, replace the estimate with the real value — every measured factor you substitute shrinks the error bars.
 
 ### Step 6: State Confidence and Implications
 

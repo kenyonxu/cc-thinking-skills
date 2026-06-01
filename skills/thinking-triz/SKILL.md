@@ -1,6 +1,6 @@
 ---
 name: thinking-triz
-description: Apply TRIZ (Theory of Inventive Problem Solving) methodology to resolve technical contradictions and find innovative solutions. Use for engineering design, breaking through impossible constraints, and systematic innovation.
+description: Stuck between two requirements that seem mutually exclusive (fast vs accurate, stable vs evolving). Use to name the contradiction and separate it in time, space, or condition.
 ---
 
 # TRIZ Thinking
@@ -11,24 +11,28 @@ TRIZ (Teoriya Resheniya Izobretatelskikh Zadatch) is a systematic innovation met
 
 **Core Principle:** Behind every difficult problem lies a contradiction. Resolve the contradiction, solve the problem. Great innovations don't compromise—they transcend.
 
+## The Core Reframe
+
+When two requirements collide, the instinct is to compromise (pick a point on the trade-off curve). TRIZ says: name the contradiction precisely, then try to **separate** the conflicting states in time, space, or condition so you get both — no compromise. That separation move is the whole skill; everything below is scaffolding for it.
+
 ## When to Use
 
-- Facing "impossible" trade-offs (fast vs. accurate, secure vs. convenient)
-- Stuck choosing between two conflicting requirements
-- Need innovation beyond incremental improvement
-- Design has hit fundamental constraints
-- Competitors all accept the same trade-off you're facing
-- Requirements seem mutually exclusive
-- Breaking through performance plateaus
+- An architecture/API/design decision is stuck between two requirements that seem mutually exclusive (fast vs. accurate, stable vs. evolving, large cache vs. fast invalidation)
+- You're about to accept a trade-off because "you can't have both"
+- The same weakness shows up in every solution you've considered
 
 Decision flow:
 
 ```
-Stuck between trade-offs?           → yes → APPLY TRIZ
-Requirements seem contradictory?    → yes → APPLY TRIZ
-Need breakthrough, not compromise?  → yes → APPLY TRIZ
-All solutions have same weakness?   → yes → APPLY TRIZ
+Two requirements seem mutually exclusive?  → yes → NAME THE CONTRADICTION, TRY SEPARATION
+About to compromise on a trade-off curve?   → yes → APPLY TRIZ FIRST
 ```
+
+## When NOT to Use
+
+- **Not for ordinary trade-offs that have a correct answer.** If one option is simply better given your constraints (cheaper, simpler, well-understood), just pick it — don't manufacture a contradiction. TRIZ is for genuine "I need both opposite states" tension, not for routine prioritization.
+- **Not when the "contradiction" dissolves under measurement.** If you can cheaply test which side actually matters, do that instead of inventing a separation.
+- **Not for non-technical/people problems** — separation principles target system parameters, not org dynamics.
 
 ## The Ideal Final Result (IFR)
 

@@ -1,6 +1,6 @@
 ---
 name: thinking-red-team
-description: Deliberately attack your own plans, systems, and assumptions to find weaknesses before adversaries or reality does. Use for security review, architecture validation, plan stress-testing, and pre-launch preparation.
+description: Security review or pre-launch hardening of a system you control. Adopt an attacker mindset, enumerate the attack surface, and report only vulnerabilities with a concrete reproducible attack path.
 ---
 
 # Red Team Thinking
@@ -13,22 +13,25 @@ Red teaming, borrowed from military and security practice, involves deliberately
 
 ## When to Use
 
-- Security architecture review
-- Pre-launch preparation
-- Validating critical decisions
-- Stress-testing plans and assumptions
-- Disaster preparedness
-- Competitive strategy
-- Code and system review
+**Default domain: security.** Use this when you're attacking a system you control to find security weaknesses before an attacker does:
+
+- Security architecture / auth / API review
+- Pre-launch security hardening
+- Code and system review for exploitable flaws
 
 Decision flow:
 
 ```
-Building or planning something important?
-  → Have you tried to break it? → no → RED TEAM IT
-  → Are you confident in your defenses? → yes → RED TEAM YOUR CONFIDENCE
-  → Has an adversary tested you? → no → BE YOUR OWN ADVERSARY
+About to ship a system that handles auth, data, or money?
+  → Have you tried to break it as an attacker would? → no → RED TEAM IT
+  → Confident in your defenses without testing them?  → yes → RED TEAM YOUR CONFIDENCE
 ```
+
+## When NOT to Use
+
+- **Anti-fabrication gate (the most important rule): report only vulnerabilities with a concrete, reproducible attack path.** For each finding state the entry point, the exact steps an attacker takes, and the realized impact. If you cannot describe how the attack actually executes against *this* code/config, it is not a finding — drop it. Do not pad the report with theoretical, "best-practice," or hypothetical weaknesses to look thorough. A short report of real, demonstrable vulns beats a long list of speculation.
+- **Not for plan/strategy/decision stress-testing** — for "how could this plan fail," use **thinking-pre-mortem**; for "what's the strongest case against this," use **thinking-steel-manning**. Keep red-team scoped to adversarial security.
+- **Not a substitute for running the tools** — where you can actually run a scanner, fuzzer, or PoC, do that; this skill structures the thinking, it doesn't replace verification.
 
 ## The Red Team Process
 
@@ -211,6 +214,8 @@ Timeline: 2 weeks
 
 ## Red Team Patterns
 
+> The security pattern below is the primary use. The Plan / Architecture / Decision patterns that follow are kept for reference, but for non-security work prefer **thinking-pre-mortem** (plan failure modes) or **thinking-steel-manning** (decision challenge) — and the anti-fabrication gate still applies everywhere: only report a weakness you can show is real.
+
 ### Security Red Team
 
 ```markdown
@@ -374,6 +379,7 @@ Motivation: [Why they'd attack]
 - [ ] Enumerated attack surfaces
 - [ ] Executed multiple attack scenarios
 - [ ] Attempted to bypass defenses
+- [ ] **Every reported finding has a concrete, reproducible attack path (entry point → steps → realized impact); dropped everything that was only theoretical**
 - [ ] Documented findings with severity
 - [ ] Provided actionable remediation
 - [ ] Updated defenses based on findings

@@ -1,6 +1,6 @@
 ---
 name: thinking-occams-razor
-description: Apply parsimony principle to prefer simpler explanations with fewer assumptions. Use for hypothesis selection in debugging, architecture decisions, and choosing between competing approaches.
+description: When several causes could explain a bug or failure, count the assumptions each requires and test the fewest-assumption one first — escalate to complex explanations only when evidence forces it.
 ---
 
 # Occam's Razor (Parsimony Principle)
@@ -29,6 +29,12 @@ Multiple explanations exist? → yes → Do they explain the evidence equally? �
                                                                           ↘ no → Prefer better explanation
                            ↘ no → Use available explanation
 ```
+
+## When NOT to Use
+- Evidence already points to a specific cause — follow the evidence; don't downgrade to the "simpler" hypothesis it contradicts.
+- The domain is irreducibly complex (distributed consensus, concurrency, security threat models) — the simplest model is wrong; don't oversimplify ("but no simpler").
+- Only one plausible explanation exists — there's nothing to compare, just test it.
+- "Simple" would mean ignoring a known interaction or skipping a load-bearing safeguard — local simplicity that creates systemic risk isn't parsimony.
 
 ## The Process
 

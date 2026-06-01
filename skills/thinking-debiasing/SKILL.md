@@ -1,34 +1,29 @@
 ---
 name: thinking-debiasing
-description: Systematic checklist to identify and counteract cognitive biases in decision-making. Use before major decisions, when evaluating recommendations, or when stakes are high.
+description: In a long trajectory where you're defending a path you committed to early, run a quick self-check for sunk-cost and confirmation bias before continuing — only when evidence is being explained away.
 ---
 
 # Cognitive Debiasing
 
+> Usually unnecessary. Current models already avoid the textbook cognitive biases on standard framings, so do not run this checklist by default — it adds friction without lift. It earns its keep in one narrow case: a **long trajectory** where you've committed to an approach early and are now rationalizing past it (sunk-cost) or only collecting evidence that confirms it (confirmation). For everything else, skip it.
+
+## When NOT to Use
+- Standard, single-step reasoning — the bias risk is already low; don't pad the answer with a bias audit.
+- Short tasks with no prior commitment to defend — sunk-cost/confirmation can't apply yet.
+- As decoration to look rigorous — naming biases without changing the decision is theater.
+- When a concrete framework already fits (thinking-pre-mortem for risks, thinking-opportunity-cost for trade-offs, thinking-reversibility for decision speed) — use it instead.
+
+## The narrow case it's for
+You are several steps into a plan and notice one of these patterns. Run the matching self-check:
+
+| Pattern you notice | Self-check |
+|---|---|
+| "We've already built/spent a lot, so we should continue" | **Sunk cost:** Would I choose this path *starting fresh today*, ignoring work already done? If no, change course. |
+| You keep finding support for your current hypothesis and discounting counter-evidence | **Confirmation:** What single piece of evidence would prove me wrong? Have I actively looked for it? |
+| Unusually high confidence with thin evidence | **Overconfidence:** Widen the estimate; state what I'd expect to see if I'm wrong, and when I'd know. |
+
 ## Overview
-Based on Daniel Kahneman, Dan Lovallo, and Olivier Sibony's research, this skill provides a systematic checklist to identify cognitive biases that distort decisions. Awareness of biases alone doesn't prevent them—structured checklists and processes do.
-
-**Core Principle:** Your brain is systematically wrong in predictable ways. Use checklists to catch errors your intuition will miss.
-
-## When to Use
-- Before making or approving major decisions
-- Evaluating recommendations from others
-- When stakes are high and errors costly
-- When you feel very confident (overconfidence is a bias)
-- During investment, hiring, or strategic decisions
-- When a decision "feels right" but you can't articulate why
-
-## System 1 vs System 2
-
-| System 1 (Fast) | System 2 (Slow) |
-|-----------------|-----------------|
-| Automatic, effortless | Deliberate, effortful |
-| Emotional, intuitive | Analytical, logical |
-| Pattern-matching | Rule-following |
-| Prone to biases | Can catch biases |
-| Default mode | Requires activation |
-
-**Goal:** Activate System 2 for important decisions using structured processes.
+Based on Daniel Kahneman, Dan Lovallo, and Olivier Sibony's research on cognitive biases. The sections below are a fuller checklist; for an autonomous agent, treat them as a *reference for the narrow case above*, applied as self-checks (not as roles assigned to a team).
 
 ## The 12-Point Decision Quality Checklist
 
@@ -45,16 +40,15 @@ Before approving any significant recommendation, evaluate:
 - Are they dismissing concerns too quickly?
 - Is criticism being taken personally?
 
-### Group Dynamics
-**3. Has dissenting opinion been suppressed (groupthink)?**
-- Were alternative views genuinely explored?
-- Is there pressure to conform?
-- Has a devil's advocate been assigned?
+### Single-Path Lock-In
+**3. Did I genuinely explore alternatives, or anchor on the first one?**
+- Were competing approaches evaluated, or strawmanned?
+- Did I argue the opposing position in good faith before dismissing it?
+- Is there pressure (deadline, prior statement) pushing me to one answer?
 
-**4. Is there appropriate diversity of opinion?**
-- Did independent thinkers contribute?
-- Were estimates made independently before discussion?
-- Has anyone with a different perspective reviewed this?
+**4. Did I anchor on the first framing of the problem?**
+- Would a different starting framing change the conclusion?
+- Did I re-derive the estimate independently, or just adjust the first number I saw?
 
 ### Pattern Recognition Errors
 **5. Are we over-relying on a single analogy (saliency bias)?**
@@ -108,9 +102,9 @@ Before approving any significant recommendation, evaluate:
 - Use multiple independent estimators
 
 ### For Confirmation Bias
-- Assign someone to argue the opposite position
-- Ask: "What would make us wrong?"
-- Seek out critics, not supporters
+- Argue the opposite position yourself, in good faith
+- Ask: "What would make this wrong?" and go look for it
+- Weight disconfirming evidence at least as heavily as confirming
 
 ### For Overconfidence
 - Widen confidence intervals (usually too narrow)
@@ -122,10 +116,10 @@ Before approving any significant recommendation, evaluate:
 - Ignore past investment when evaluating future returns
 - Consider opportunity cost of continuing
 
-### For Groupthink
-- Collect independent opinions before discussion
-- Assign devil's advocate role
-- Make it safe to dissent
+### For Single-Path Lock-In
+- Generate the strongest case for an alternative before settling
+- Steel-man the option you're rejecting
+- Separate "what the evidence says" from "what I already concluded"
 
 ## Decision Quality Audit Template
 
@@ -141,9 +135,9 @@ Before approving any significant recommendation, evaluate:
 - [ ] Self-interest checked: [Notes]
 - [ ] Emotional attachment assessed: [Notes]
 
-### Group Dynamics  
-- [ ] Dissent encouraged: [Notes]
-- [ ] Independent input gathered: [Notes]
+### Single-Path Lock-In
+- [ ] Opposing position argued in good faith: [Notes]
+- [ ] First framing/anchor questioned: [Notes]
 
 ### Pattern Recognition
 - [ ] Multiple analogies considered: [Notes]
@@ -175,12 +169,11 @@ Before approving any significant recommendation, evaluate:
 ```
 
 ## Verification Checklist
-- [ ] Systematically evaluated all 12 bias categories
-- [ ] Identified at least 2 potential biases affecting this decision
-- [ ] Applied specific debiasing technique to each identified bias
-- [ ] Sought independent/outside perspective
-- [ ] Documented reasoning for future reference
-- [ ] Comfortable defending decision process (not just outcome)
+- [ ] Confirmed this is the narrow case (long trajectory + a path being defended) — otherwise skip the skill
+- [ ] Ran the matching self-check (sunk-cost / confirmation / overconfidence)
+- [ ] Identified a concrete piece of evidence that would prove the current path wrong
+- [ ] Re-decided as if starting fresh today, ignoring prior investment
+- [ ] The check actually changed (or affirmed for a stated reason) the decision — not just named a bias
 
 ## Key Questions
 - "What would have to be true for this to be wrong?"

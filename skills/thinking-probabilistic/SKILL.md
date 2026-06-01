@@ -1,33 +1,41 @@
 ---
 name: thinking-probabilistic
-description: Express confidence in ranges, update predictions with new information, and track calibration over time. Use for project estimation, risk assessment, and decision making under uncertainty.
+description: Use when stating a forecast, estimate, or risk. Anchor on the base rate, give a confidence range instead of a point, and update the number when new evidence arrives.
 ---
 
 # Probabilistic Thinking
 
 ## Overview
 
-Probabilistic thinking, informed by the research of Philip Tetlock's "Superforecasting," treats beliefs as probabilities rather than certainties. Good probabilistic thinkers express confidence in ranges, update beliefs when evidence changes, and track their accuracy to improve calibration over time.
+Probabilistic thinking, informed by Philip Tetlock's "Superforecasting," treats a forecast as a probability and a range rather than a single confident number. Three moves do almost all the work: **anchor on the base rate**, **express the estimate as a range** (not a point), and **update the number** when new evidence arrives.
 
-**Core Principle:** Express beliefs as probabilities. Track predictions. Update when wrong. Calibrate over time.
+**Core Principle:** Start from how often similar things happen, state your estimate as a range with a confidence level, and move the number — explicitly — when the evidence moves.
+
+> **Stateless-agent note.** Across a single task you have no persistent prediction log, so there is no "track my calibration over months" step here. The leverage is in the *act* of estimating: base rate, range, update. Apply the calibration *attitude* (assume you're overconfident; widen the range) without pretending to keep a cross-session scorecard you don't have.
 
 ## When to Use
 
-- Project timeline estimation
-- Risk assessment
-- Predicting outcomes (launches, decisions, events)
-- Evaluating uncertain technical choices
-- Making decisions without complete information
-- Any forecast or prediction
+- Stating a timeline or effort estimate
+- Assessing the risk of an action (migration, deploy, change)
+- Predicting an outcome (will this fix work? will this launch hit the target?)
+- Evaluating an uncertain technical choice
+- Any time you're about to give a confident single number you can't actually be sure of
 
 Decision flow:
 
 ```
-Making a prediction?
-  → Is outcome uncertain? → yes → EXPRESS AS PROBABILITY
-  → Can you track the outcome? → yes → RECORD AND CALIBRATE
-  → New information available? → yes → UPDATE PROBABILITY
+About to state a forecast/estimate/risk?
+  → Outcome genuinely uncertain? → yes → BASE RATE, then a RANGE (not a point)
+  → New evidence since last estimate? → yes → UPDATE THE NUMBER
+  → Can you just look it up / measure it? → yes → DO THAT INSTEAD
 ```
+
+## When NOT to Use
+
+- **The quantity is knowable.** If you can measure it, query it, or look it up, do that — don't dress a checkable fact as a probability.
+- **A single piece of evidence updates a single prior.** That's the narrower mechanics of `thinking-bayesian`; use it for the explicit prior × likelihood-ratio update.
+- **The decision doesn't depend on the number.** If you'd act the same across the plausible range, skip the estimate and act.
+- **You'd be inventing the base rate.** If there's no real reference class, say the estimate is a guess rather than manufacturing false precision.
 
 ## Core Concepts
 
@@ -129,36 +137,18 @@ Impact: +10% (was -20% if aggressive)
 Updated estimate: 60%
 ```
 
-### Step 5: Record and Track
+### Step 5: State the Estimate So It Can Be Checked
 
-Keep a prediction log:
-
-```markdown
-## Prediction Log
-
-| Date | Prediction | Probability | Actual | Brier Score |
-|------|------------|-------------|--------|-------------|
-| 2024-01-01 | Q1 launch | 70% | Yes | 0.09 |
-| 2024-01-15 | Deal closes | 60% | No | 0.36 |
-| 2024-02-01 | Bug resolved in 1 week | 80% | Yes | 0.04 |
-```
-
-### Step 6: Calibrate Over Time
-
-Review your accuracy:
+Make the forecast falsifiable within the task itself: a clear claim, a timeframe, and the range. This lets the *user or a later observation* verify it — you don't carry a personal scorecard across sessions, but a sharply-stated prediction can still be proven right or wrong.
 
 ```markdown
-## Calibration Review
-
-For predictions I rated 70%:
-- Total predictions: 20
-- Actual outcomes "Yes": 12 (60%)
-- I'm overconfident by 10% at this level
-
-Adjustment: When I feel "70%", actual is closer to 60%
+Prediction: "80% confident the migration completes with <5 min downtime,
+            range 1-15 min downtime." (Checkable against the actual run.)
 ```
 
 ## Calibration Techniques
+
+> These are sanity checks you apply *now*, within the task — not a longitudinal tracking exercise.
 
 ### The Equivalent Bet Test
 
@@ -262,25 +252,6 @@ OR weighted average: 70% (if partial success acceptable)
 Decision: High uncertainty suggests pilot first
 ```
 
-## Brier Score for Calibration
-
-Track prediction accuracy with Brier Score:
-
-```
-Brier Score = (probability - outcome)²
-
-Where outcome = 1 if happened, 0 if not
-
-Example:
-Predicted 70% (0.70), it happened (1)
-Brier = (0.70 - 1)² = 0.09
-
-Predicted 70% (0.70), it didn't happen (0)
-Brier = (0.70 - 0)² = 0.49
-
-Lower is better. Perfect = 0, Random = 0.25
-```
-
 ## Probabilistic Thinking Template
 
 ```markdown
@@ -305,16 +276,13 @@ Adjustment rationale: [Why different from base rate]
 | [Factor 1] | +X% | -Y% |
 | [Factor 2] | +X% | -Y% |
 
-## Update Log
-| Date | New Information | Old P | New P |
-|------|-----------------|-------|-------|
-| | | | |
+## Updates (within this task)
+| New information | Old P | New P |
+|-----------------|-------|-------|
+| | | |
 
-## Resolution
-Date: [When known]
-Outcome: [What happened]
-Brier Score: [Calculation]
-Lessons: [What to learn]
+## Checkable Outcome
+[The specific observation that will prove this forecast right or wrong]
 ```
 
 ## Verification Checklist
@@ -323,27 +291,27 @@ Lessons: [What to learn]
 - [ ] Checked base rate for similar events
 - [ ] Created appropriate confidence intervals
 - [ ] Identified key uncertainties and their impacts
-- [ ] Recorded prediction for future calibration
+- [ ] Stated the prediction so it's checkable (claim + timeframe + range)
 - [ ] Applied equivalent bet test for sanity check
-- [ ] Willing to update when new information arrives
+- [ ] Willing to update the number when new information arrives
 
 ## Key Questions
 
 - "What probability would I assign to this?"
 - "What's the base rate for similar things?"
 - "What would change my estimate up or down?"
-- "Am I being overconfident? (Usually yes)"
-- "What's my track record at this confidence level?"
+- "Am I being overconfident? (Usually yes — widen the range)"
+- "Have I given a range, or am I hiding uncertainty behind a single number?"
 - "Would I bet at these odds?"
 
 ## Tetlock's Superforecaster Traits
 
-1. **Update often:** Change predictions when evidence changes
+1. **Update often:** Change the number when evidence changes
 2. **Granular probabilities:** Use 65% not "likely"
 3. **Outside view:** Start with base rates
 4. **Seek disconfirming evidence:** Look for reasons you're wrong
-5. **Track record:** Keep score, learn from errors
-6. **Intellectual humility:** Know you're often wrong
+5. **Ranges, not points:** Express confidence as an interval, and widen it
+6. **Intellectual humility:** Assume you're often wrong
 
 ## Tetlock's Wisdom
 

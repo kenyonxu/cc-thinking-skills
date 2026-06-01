@@ -1,6 +1,6 @@
 ---
 name: thinking-via-negativa
-description: Improve by removal rather than addition. Focus on what to stop doing, eliminate the negative, and subtract complexity. Use for system simplification, process improvement, and feature prioritization.
+description: About to add a feature/layer/process to fix a problem. First ask what to remove instead — subtraction is often more robust than addition. Use for simplification and complexity reduction.
 ---
 
 # Via Negativa
@@ -30,6 +30,12 @@ Trying to improve something?
   → Can you achieve the goal by removing instead? → yes → REMOVE FIRST
   → Is current complexity necessary? → no → SIMPLIFY VIA NEGATIVA
 ```
+
+## When NOT to Use
+
+- **Never subtract a load-bearing control, test, validation, guard, or safety check** just because it's "extra complexity." Removal is only low-risk when the thing is genuinely unused or redundant. A test you don't understand, an error handler, a rate limiter, an auth check, or a retry are presumed load-bearing — prove they're dead before deleting. The whole "subtraction is safe" claim holds only for things that provide no benefit.
+- **Not when the addition is genuinely required** to meet a real, demonstrated need. Via negativa fights the *reflex* to add; it doesn't forbid all addition.
+- **Don't delete to hit an aesthetic "less is more" target** without checking what each element does — confirm non-use with evidence (usage data, dead-code analysis, removing it in a branch and watching), not assumption.
 
 ## The Via Negativa Process
 

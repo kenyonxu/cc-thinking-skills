@@ -1,338 +1,272 @@
 ---
 name: thinking-dual-process
-description: Apply Kahneman's Dual-Process Theory to recognize when to trust intuition vs engage deliberate analysis. Use for high-stakes decisions, error-prone contexts, or when balancing speed vs accuracy.
+description: Use when an answer arrives too fast on a high-stakes or unfamiliar task. Force one explicit verification pass before committing instead of shipping the first plausible answer.
 ---
 
 # Dual-Process Thinking
 
 ## Overview
-Based on Daniel Kahneman's research (popularized in "Thinking, Fast and Slow"), Dual-Process Theory describes two distinct modes of thought: System 1 (fast, intuitive, automatic) and System 2 (slow, deliberate, analytical). Understanding when each system is active—and when each is appropriate—helps you avoid cognitive errors and make better decisions.
+A language model produces a first answer by fast pattern-completion: the most statistically likely continuation given the prompt. That fast path is excellent for routine, well-trodden tasks and dangerous for high-stakes or unfamiliar ones, where the most *plausible-sounding* answer and the *correct* answer diverge. This skill is the deliberate counterweight: when an answer arrives too easily on a task that matters, force one explicit verification pass before committing.
 
-**Core Principle:** Know which system is driving your thinking. Engage System 2 for high-stakes decisions; trust System 1 for routine tasks and expert domains.
+The framing comes from Kahneman's fast/slow distinction, but the operative idea here is mechanical, not psychological: **fast generation** (the immediate completion) vs. a **deliberate check** (re-deriving, testing, or sourcing the answer).
+
+**Core Principle:** Fluency is not correctness. When the answer came easily *and* the cost of being wrong is high, that combination is the trigger to slow down and verify — not a signal you're done.
 
 ## When to Use
-- Making decisions with significant consequences
-- Recognizing when intuition may mislead
-- Balancing speed vs accuracy tradeoffs
-- Reviewing work for cognitive errors
-- Teaching or coaching decision-making
-- When "something feels off" but you can't articulate why
-- Before trusting a gut feeling on important matters
+- The task is high-stakes or irreversible (data migration, security, deletion, public commitment) and the answer felt obvious.
+- The domain is unfamiliar or the task is novel — no well-worn pattern to rely on.
+- The answer requires statistical or quantitative reasoning (where fast completion is reliably miscalibrated).
+- You're reviewing work and it "looks fine" on a quick pass.
+- A claim is plausible and convenient but you haven't actually checked it against the code/docs/data.
 
 Decision flow:
 ```
-Making a decision? → High stakes? → yes → Unfamiliar domain? → yes → ENGAGE SYSTEM 2
-                                   ↘ no → System 1 may suffice
-                  ↘ no → Time pressure? → yes → System 1 appropriate
-                                        ↘ no → Choose based on complexity
+Answer arrived fast? → High stakes OR unfamiliar? → yes → RUN A VERIFICATION PASS
+                                                  ↘ no → fast answer is fine, ship it
+                     ↘ no (had to work for it) → you already deliberated
 ```
 
-## The Two Systems
+## When NOT to Use
+- **Routine, reversible, low-stakes tasks.** Renaming a variable, a trivial edit, an obvious lookup — re-verifying everything is wasted budget and invites analysis paralysis.
+- **You already worked through it deliberately.** If the answer was hard-won, a second pass is redundant; the trigger is *easy answer + high stakes*, not every answer.
+- **The verification pass would cost more than the error it prevents.** Match the depth of the check to the cost of being wrong.
+- **You can just run it.** If a test or a quick execution would settle it, do that instead of more reasoning.
 
-### System 1: Fast Thinking
+## The Two Modes
+
+### Fast generation (the default)
 | Characteristic | Description |
 |----------------|-------------|
-| **Speed** | Instant, automatic |
-| **Effort** | Effortless, no strain |
-| **Control** | Involuntary, always on |
-| **Mode** | Intuitive, associative |
-| **Emotion** | Emotionally charged |
-| **Basis** | Pattern recognition, heuristics |
+| **Speed** | Immediate — the answer is just the first plausible completion |
+| **Basis** | Pattern-matching to similar prompts seen in training |
+| **Confidence** | Often high *regardless* of correctness — fluency masquerades as certainty |
 
-System 1 excels at:
-- Recognizing faces and emotions
-- Detecting hostility in a voice
-- Reading text effortlessly
-- Driving on an empty road
-- Finding 2 + 2
-- Expert pattern recognition (chess masters, experienced doctors)
+Fast generation is reliable for:
+- Well-trodden, conventional tasks with a clear standard answer
+- Reformatting, summarizing, and other low-ambiguity transforms
+- Recall of common, stable facts
+- Routine code in a familiar language/framework
 
-System 1 fails at:
-- Complex calculations (17 × 24)
-- Logical analysis of arguments
-- Statistical reasoning
-- Resisting cognitive biases
-- Novel, unfamiliar problems
+Fast generation is unreliable for:
+- Arithmetic and multi-step quantitative reasoning
+- Statistical reasoning and base-rate problems
+- Novel or unfamiliar problems with no template to match
+- Anything where a plausible-sounding answer can be subtly wrong (APIs, version-specific behavior, edge cases)
 
-### System 2: Slow Thinking
+### Deliberate verification (the override)
 | Characteristic | Description |
 |----------------|-------------|
-| **Speed** | Slow, sequential |
-| **Effort** | Effortful, depleting |
-| **Control** | Deliberate, voluntary |
-| **Mode** | Analytical, rule-following |
-| **Emotion** | Can override emotions |
-| **Basis** | Logic, computation, rules |
+| **Speed** | Slower — re-derive, test, or source the answer |
+| **Basis** | Explicit steps, checks against ground truth |
+| **Confidence** | Earned — tied to what was actually verified |
 
-System 2 excels at:
-- Complex computations
-- Logical reasoning
-- Comparing options systematically
-- Following explicit rules
-- Self-monitoring and correction
-- Novel problem-solving
+Deliberate verification is worth its cost when:
+- Re-deriving a result a second, independent way
+- Running or tracing the code instead of predicting its output
+- Checking a claim against the actual file/doc/data rather than memory
+- Enumerating edge cases the fast answer glossed over
 
-System 2 fails at:
-- Sustaining attention (gets tired)
-- Operating under time pressure
-- Processing when cognitively depleted
-- Noticing when it should activate
+Its only failure mode is over-use: applying it to trivial, reversible work where the check costs more than the error.
 
 ## The Process
 
-### Step 1: Identify Active System
-Which system is currently driving your thinking?
+### Step 1: Notice the fast answer
+A fast answer announces itself: it's the response forming immediately, before any explicit work. That's normal and usually fine. The thing to notice is *how* you got it.
 
-System 1 indicators:
-- Answer came immediately
-- Feels obvious or intuitive
-- High confidence without analysis
-- Emotional reaction present
-- "I just know"
-
-System 2 indicators:
-- Had to concentrate
-- Worked through steps explicitly
-- Mental effort required
-- Considered alternatives
-- "Let me think about this"
+- Answer formed immediately, no intermediate steps
+- It "obviously" follows from the prompt
+- Confidence is high but nothing was actually checked
 
 ```
-Example: "Should we approve this vendor contract?"
-Gut says "yes" immediately → System 1 active
-Pause: Is this appropriate for this decision?
+Example: "Does this regex match leading zeros?"
+A confident yes/no forms instantly → fast generation.
+Before answering: is this high-stakes or am I sure? If either is shaky, test the regex.
 ```
 
-### Step 2: Assess Appropriateness
-Is the active system appropriate for this context?
+### Step 2: Check the two trigger conditions
+A verification pass is warranted only when BOTH are true enough:
 
-**Trust System 1 when:**
-- Domain is familiar with clear feedback loops
-- You have extensive relevant experience
-- Patterns are valid and stable
-- Decision is reversible
-- Speed matters more than precision
-- Cost of error is low
+**The answer came easily** (Step 1), AND **the cost of being wrong is real:**
+- Stakes are high or the action is irreversible
+- The domain is unfamiliar or the problem novel
+- It requires arithmetic / statistical reasoning
+- A wrong-but-plausible answer would slip through review
 
-**Engage System 2 when:**
-- Domain is unfamiliar or complex
-- Stakes are high
-- Statistical reasoning required
-- System 1 biases likely apply
-- Decision is irreversible
-- You feel very confident (check for overconfidence)
-- "Obvious" answer benefits you (check for motivated reasoning)
+If the answer was hard-won, you already deliberated — stop. If stakes are trivial and reversible, the fast answer is fine — stop.
 
-### Step 3: Override if Needed
-If System 1 is active but System 2 is appropriate:
+### Step 3: Run the verification pass
+When both conditions hold, do exactly one disciplined check:
 
 ```
-1. PAUSE - Interrupt automatic response
-2. ARTICULATE - State the decision explicitly
-3. ANALYZE - Apply structured thinking
-4. CHECK - Look for bias indicators
-5. DECIDE - Make deliberate choice
+1. RE-STATE  - Write the claim/answer explicitly
+2. RE-DERIVE - Reach it a second, independent way (or test/run it)
+3. CHECK     - Against ground truth: the code, the docs, the data, the math
+4. RECONCILE - If the two paths disagree, the fast answer was wrong — find out why
+5. COMMIT    - Ship the verified answer
 ```
 
-Override triggers (red flags):
-- High emotional charge
-- Time pressure being used tactically
-- "Everyone agrees" (groupthink)
-- Round numbers without analysis
-- First option presented
-- Confirmation of existing beliefs
+Watch for these fast-answer red flags specifically:
+- It's the most common/canonical answer but the prompt has an unusual twist
+- It depends on a version, config, or edge case you didn't actually confirm
+- It's the convenient answer that lets you stop early
+- It restates the user's assumption back to them without testing it
 
-### Step 4: Execute Appropriately
-Match your process to the system:
+### Step 4: Match effort to stakes
 
-| System | Process |
+| Situation | Process |
 |--------|---------|
-| System 1 (validated) | Trust intuition, act quickly, monitor outcomes |
-| System 2 (engaged) | Use checklists, seek outside view, document reasoning |
+| Fast answer + low stakes | Ship it; don't manufacture doubt |
+| Fast answer + high stakes | Run the verification pass above |
+| Already deliberated | Done — no second pass needed |
 
-## System 1 Failure Modes
+## Fast-Generation Failure Modes
 
-### Substitution
-System 1 replaces hard questions with easier ones:
+### Question substitution
+Fast generation answers an easier nearby question instead of the one asked:
 ```
-Hard: "How much should I pay for this stock?"
-Substituted: "How much do I like this company?"
+Asked: "Is this O(n) or O(n log n)?"
+Answered: "Does this look like efficient code?"  (vibe, not analysis)
 
-Hard: "Is this candidate qualified?"  
-Substituted: "Does this candidate seem likeable?"
+Asked: "Does this migration preserve all rows?"
+Answered: "Does this migration look correct?"  (plausibility, not verification)
 ```
+The fix is to re-state the *exact* question (Step 3) so the substitution becomes visible.
 
-### Heuristic Errors
+### Pattern-matched errors
 
-| Heuristic | What It Does | When It Fails |
+| Pattern | What it does | When it fails |
 |-----------|--------------|---------------|
-| Availability | Judges by ease of recall | Vivid events seem more common |
-| Representativeness | Matches to stereotypes | Ignores base rates |
-| Anchoring | Starts from given number | Arbitrary anchors still influence |
-| Affect | Decides by feeling | Emotions override data |
-| Confirmation | Seeks supporting evidence | Misses contradicting evidence |
+| Canonical-answer pull | Returns the textbook answer | The prompt has a non-standard twist |
+| Base-rate neglect | Reasons from the salient detail | Ignores how common the outcome actually is |
+| Anchoring | Builds on a number in the prompt | The anchor was arbitrary or wrong |
+| Confirmation | Surfaces support for the framing given | Misses evidence the framing is wrong |
+| Sycophantic agreement | Echoes the user's stated assumption | The assumption was the bug |
 
 ### WYSIATI (What You See Is All There Is)
-System 1 builds the best story from available information:
+Fast generation builds the most coherent answer from *only* what's in the prompt, and does not flag what's missing:
 ```
-Given: "John is tall and muscular"
-System 1 concludes: "John is probably athletic"
-Missing: John's actual athletic ability, base rates, context
+Given: "the function returns the user"
+Concludes: "so the happy path works"
+Missing: the 404 path, the timeout, the null case — none mentioned, so none considered
 ```
+Coherence of the answer is not coverage of the territory. Explicitly ask "what would I need to look at that isn't in front of me?"
 
-System 1 doesn't flag missing information—it works with what's available.
+## Fluency Is Not Correctness
 
-## Cognitive Ease vs Strain
+A smooth, confident, well-formatted answer *feels* more trustworthy — to the reader and in the generation itself. That fluency signal is independent of whether the answer is right.
 
-### Cognitive Ease (System 1 Active)
-Feels: Familiar, true, good, effortless
-Risks: 
-- Reduced vigilance
-- Accepting false statements
-- Overconfidence
-- Missing errors
+| Fluent answer | Verified answer |
+|---|---|
+| Reads cleanly, high apparent confidence | Confidence tied to a specific check that passed |
+| Risk: accepted without scrutiny | Risk: only over-use on trivial tasks |
 
-Induced by:
-- Repeated exposure
-- Clear display
-- Primed ideas
-- Good mood
-
-### Cognitive Strain (System 2 Engaged)
-Feels: Unfamiliar, requiring effort, suspicious
-Benefits:
-- Increased vigilance
-- More analytical processing
-- Reduced biases
-- Better accuracy
-
-Induced by:
-- Poor print quality
-- Complex language
-- Novel situations
-- Bad mood
-
-**Tactical tip:** For important decisions, deliberately induce mild cognitive strain (different format, pause before answering) to engage System 2.
+**The trap:** the more polished the fast answer, the *less* it gets challenged — exactly backwards from what stakes should dictate. On a high-stakes task, treat a too-clean answer as a reason to run the verification pass, not a reason to ship.
 
 ## Application Examples
 
 ### Code Review
 ```
-System 1 mode: "This looks fine" (pattern matches familiar code)
-Engage System 2: 
-- Is this a high-risk change?
-- Am I the right reviewer for this domain?
-- Have I actually traced the logic?
-- What edge cases might I miss?
+Fast answer: "This looks fine" (matches familiar-looking code)
+Verification pass (high-stakes change):
+- Trace the actual logic line by line, don't pattern-match the shape
+- Enumerate the edge/error paths the diff doesn't mention
+- Check the change against the contract it must uphold (callers, tests)
 ```
 
-### Hiring Decisions
+### Reporting a Fact or API Behavior
 ```
-System 1 mode: "Great interview, strong hire" (likeability heuristic)
-Engage System 2:
-- Structured scorecard vs overall impression
-- Compare to job requirements, not to other candidates
-- Check for halo effect from one strong answer
-- Seek disconfirming information
+Fast answer: "Use method X, it takes these args" (canonical recall)
+Verification pass (unfamiliar/version-sensitive):
+- Confirm the method exists in the version in this repo
+- Check the signature in the actual source/docs, not from memory
+- If unsure, say so or look it up rather than assert
 ```
 
-### Architecture Decisions
+### Architecture / Tech Choice
 ```
-System 1 mode: "Let's use [familiar technology]" (availability)
-Engage System 2:
-- Explicit requirements analysis
-- Evaluate alternatives against criteria
-- Consider long-term implications
-- Document reasoning
+Fast answer: "Use [the obvious default]" (most-common completion)
+Verification pass (high-stakes):
+- State the actual requirements, then check the default against them
+- Name one alternative and why it loses, so the choice is reasoned not reflexive
 ```
 
 ### Debugging
 ```
-System 1 mode: "It's probably X" (first hypothesis feels right)
-Engage System 2:
-- List all possible causes
-- Assign probabilities (Bayesian)
-- Test systematically, not just hunches
-- Consider unlikely explanations
+Fast answer: "It's probably X" (first plausible hypothesis)
+Verification pass:
+- List the candidate causes, not just the first
+- Find the evidence that would distinguish them, and look at it
+- Resist committing to X until the logs/repro actually point there
 ```
 
 ## Integration with Other Thinking Skills
 
 ### With Debiasing
-System 1 is the source of most cognitive biases. The debiasing checklist is essentially a System 2 override protocol:
-```
-Automatic response → Pause → Apply debiasing checklist → Override if needed
-```
+Fast generation is where most bias-shaped errors enter; the verification pass is where you catch them. Run the debiasing checklist as the content of Step 3 on high-stakes calls.
 
 ### With Bayesian Reasoning
-System 1 ignores base rates; System 2 applies them:
+Fast answers neglect base rates; the verification pass restores them:
 ```
-System 1: "Positive test result = probably have condition"
-System 2: Apply Bayes' Theorem with actual base rates
+Fast: "Positive test result = probably has the condition"
+Verified: state the base rate first, then update (see thinking-bayesian)
 ```
 
 ### With First Principles
-System 1 reasons by analogy; System 2 enables first principles:
+The fast answer reasons by analogy ("everyone does X"); the verification pass asks whether the constraint is real:
 ```
-System 1: "Competitors do X, so we should too"
-System 2: "What are the fundamental requirements? Build from there"
+Fast: "Competitors do X, so we should too"
+Verified: "What's the fundamental requirement? Does X actually meet it?"
 ```
 
 ### With Pre-Mortem
-System 1 is optimistic; pre-mortem forces System 2 pessimism:
+The fast answer is optimistic by default; the verification pass adds the failure view:
 ```
-System 1: "This plan will work" (overconfidence)
-System 2: "Imagine it failed. Why?" (deliberate analysis)
+Fast: "This plan will work"
+Verified: "Assume it failed — what's the most likely reason?"
 ```
 
 ### With OODA Loop
-Balance speed (System 1) with accuracy (System 2) based on context:
-```
-Incident response: System 1 pattern matching for speed
-Post-incident: System 2 analysis for root cause
-```
+Under genuine time pressure (an incident), act on the fast answer at ~70% confidence and re-observe — don't stall on verification. Reserve the full pass for after, or for the irreversible step within the incident.
 
-## Expert Intuition: When System 1 Is Valid
+## When the Fast Answer Is Trustworthy
 
-Not all intuition is suspect. Expert intuition can be trusted when:
+The fast path is not the enemy — it's correct most of the time, and over-verifying is its own failure. Lean on the fast answer when:
 
-1. **High-validity environment**: Clear patterns exist
-2. **Extensive practice**: Thousands of hours of deliberate practice  
-3. **Rapid feedback**: Immediate correction signals
-4. **Stable patterns**: Domain rules don't change frequently
+1. **The task is conventional** — a standard transform or a common, stable fact
+2. **The pattern fits cleanly** — no unusual twist in the prompt
+3. **It's cheaply reversible** — a wrong answer is caught and fixed at near-zero cost
+4. **You can confirm it trivially if challenged** — the check is one step away
 
 ```
-Valid expert intuition:
-- Chess grandmasters recognizing positions
-- Firefighters sensing danger
-- Experienced nurses detecting deterioration
+Fine to ship fast:
+- "Convert this JSON to YAML"
+- "What HTTP status means 'not found'?"
+- A rename or a comment fix
 
-Suspect expert intuition:
-- Stock pickers predicting markets
-- Political pundits forecasting elections
-- Interviewers predicting job performance
+Verify first:
+- "Will this SQL touch every shard?"
+- "Is this auth check actually enforced on the server?"
+- Anything version-, edge-case-, or money-sensitive
 ```
 
-Ask: "Has this person had opportunities to learn the valid patterns through repeated, well-calibrated feedback?"
+Ask: "If this is wrong, how and when do I find out — and how much does it cost?"
 
 ## Verification Checklist
-- [ ] Identified which system is currently active
-- [ ] Assessed if active system is appropriate for stakes/context
-- [ ] Checked for cognitive ease that might mask errors
-- [ ] Applied System 2 override if high-stakes or unfamiliar
-- [ ] Used structured process for System 2 decisions
-- [ ] Documented reasoning for important decisions
-- [ ] Considered base rates and statistics, not just intuition
+- [ ] Noticed whether the answer arrived fast or was worked through
+- [ ] Checked BOTH triggers: easy answer AND real cost of error
+- [ ] If both true, ran one disciplined verification pass against ground truth
+- [ ] Re-derived or tested the result a second, independent way
+- [ ] Did NOT over-verify a trivial, reversible task
+- [ ] Confirmed version/edge-case-sensitive claims rather than asserting from memory
+- [ ] Matched the depth of the check to the cost of being wrong
 
 ## Key Questions
-- "Did this answer come too easily?"
-- "Am I in a domain where my intuition is calibrated?"
-- "What would System 2 analysis reveal?"
-- "Is my confidence justified by analysis or just feeling?"
-- "What information am I not seeing (WYSIATI)?"
-- "Would I decide the same way if I had to defend the reasoning?"
+- "Did this answer come too easily — and does that matter here?"
+- "Is this a conventional task or one with an unusual twist?"
+- "What would a second, independent derivation show?"
+- "Is my confidence tied to an actual check, or just to how clean the answer reads?"
+- "What's missing that isn't in front of me (WYSIATI)?"
+- "If this is wrong, how and when do I find out?"
 
-## Kahneman's Warning
-"The confidence people have in their beliefs is not a measure of the quality of evidence but of the coherence of the story the mind has managed to construct."
-
-System 1 builds compelling stories from limited information and feels very confident doing so. That confidence is often unwarranted. Engage System 2 when the stakes matter.
+## The Core Warning
+A fluent, confident answer reflects the coherence of the completion, not the quality of the evidence behind it. The most polished answers get challenged the least — which is exactly backwards when the stakes are high. When an answer comes easily on something that matters, that ease is the trigger to verify, not the signal you're done.

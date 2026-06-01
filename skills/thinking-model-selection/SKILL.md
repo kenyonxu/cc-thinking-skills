@@ -5,6 +5,8 @@ description: Choose the right mental model for the problem at hand. Use when fac
 
 # Model Selection
 
+> **Overlaps thinking-model-router.** If you already know which model fits, skip routing entirely and just invoke that model. If you don't, **thinking-model-router** is the single entry point — start there. This skill goes deeper on *how* to classify a problem and *when to abandon* a model once chosen. (Audit recommends merging this into thinking-model-router; for now, prefer the router as the front door.)
+
 ## Overview
 
 Every mental model has a domain where it excels and domains where it fails. Model selection is the meta-skill of recognizing which model fits which problem. The expert doesn't just know many models—they know when to apply each one. Using the wrong model is often worse than using no model at all.

@@ -30,6 +30,12 @@ Facing uncertainty about outcomes?
   → Do you have available means but uncertain goals? → yes → USE EFFECTUATION
 ```
 
+## When NOT to Use
+
+- **Use effectuation only under genuine (Knightian) uncertainty** — where outcomes can't be assigned meaningful probabilities because the market/technology/problem is novel. That's where "create the future through action" beats prediction.
+- **For predictable markets with a known model, use causal planning instead.** If the market exists, the unit economics are knowable, and the path is a known sequence of steps, set the goal and plan to it — effectuation's "let goals emerge" wastes time you don't need to spend exploring.
+- **Not when the cost of a wrong action exceeds affordable loss.** Effectuation assumes you can afford to act-and-learn; if a single misstep is ruinous, plan and de-risk first.
+
 ## Causal vs Effectual Reasoning
 
 ### Causal (Traditional)

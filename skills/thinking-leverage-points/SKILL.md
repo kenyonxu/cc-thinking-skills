@@ -1,34 +1,33 @@
 ---
 name: thinking-leverage-points
-description: Identify where small changes can have large effects using Donella Meadows' hierarchy of system intervention points. Use for strategic decisions, system optimization, and choosing where to focus engineering effort.
+description: Use when picking where to intervene in a system and tuning parameters keeps not sticking—rank candidate interventions by Meadows' hierarchy and choose the highest-leverage point you can move.
 ---
 
 # Leverage Points
 
 ## Overview
 
-Donella Meadows' "Places to Intervene in a System" provides a hierarchy of intervention points ranked by their power to change system behavior. Most effort goes into low-leverage interventions (parameters, buffers) when high-leverage points (goals, paradigms) offer transformational change with less force.
+Donella Meadows' "Places to Intervene in a System" ranks intervention points by their power to change behavior. Most effort goes into low-leverage moves (parameters, buffers) when higher-leverage points (rules, goals, structure) change behavior with less force. This is the canonical home of the 12-level hierarchy—other skills (`thinking-systems`, `thinking-feedback-loops`) reference it instead of duplicating it.
 
-**Core Principle:** The higher in the hierarchy, the more leverage—but also the more resistance. Find the highest leverage point you can actually move.
+**Core Principle:** Higher in the hierarchy = more leverage, but more resistance. Find the highest leverage point you can actually move.
 
 ## When to Use
 
-- Choosing where to focus engineering effort
-- Prioritizing system improvements
-- Organizational change initiatives
-- Architecture evolution decisions
-- Process optimization
-- Resource allocation
-- When incremental changes aren't working
-
-Decision flow:
+- Choosing where to focus engineering effort on a system you can already see
+- Incremental tweaks (timeouts, buffer sizes, more instances) keep not solving the problem
+- Deciding between a quick parameter change and a structural fix
 
 ```
 Want to change system behavior?
-  → Have you tried high-leverage interventions? → no → START HIGHER
-  → Are you stuck at low leverage? → yes → MOVE UP THE HIERARCHY
-  → Is change not sticking? → yes → LOOK FOR BALANCING LOOPS
+  → Stuck tuning parameters with no lasting effect? → MOVE UP THE HIERARCHY
+  → Found the lever but the change won't stick?     → look for a balancing loop resisting it
 ```
+
+## When NOT to Use
+
+- You haven't yet located the cause or mapped the system → use `thinking-systems` first; you can't rank interventions on a system you don't understand.
+- A single low-level parameter genuinely is the fix (e.g., a wrong timeout value) → just change it; don't manufacture a paradigm shift.
+- The decision is a one-off with no system behind it → this hierarchy adds nothing.
 
 ## The 12 Leverage Points (Low to High)
 
@@ -142,38 +141,36 @@ Leverage: High—self-sustaining improvement
 
 ### Level 6: Information Flows
 
-**What:** Who has access to what information
+**What:** What signal is surfaced, and where
 
 **Examples:**
-- Metrics dashboards
-- Error visibility
-- Cost attribution
-- Performance feedback to developers
+- Surfacing a previously-hidden metric (queue depth, error budget, p99)
+- Logging the value that was silently defaulting
+- Making a failure mode observable instead of swallowed
 
-**Why high leverage:** Adding information where it was missing changes behavior dramatically. People respond to what they can see.
+**Why high leverage:** A component can only respond to what it can see. Adding a feedback signal where one was missing changes behavior without changing any logic.
 
 ```
-Intervention: Show cloud costs per team in real-time dashboard
-Result: Teams optimize without mandates
+Intervention: Emit and alert on cache hit-rate that was previously invisible
+Result: Regression caught immediately instead of after an outage
 Leverage: High—behavior change through visibility
 ```
 
 ### Level 5: System Rules
 
-**What:** Incentives, constraints, permissions
+**What:** Constraints the system enforces—what's allowed, required, or rejected
 
 **Examples:**
-- Code review requirements
-- Definition of done
-- SLA agreements
-- Approval processes
-- Deployment policies
+- A required CI gate / merge check
+- A schema or contract that rejects invalid input at the boundary
+- A deployment policy (canary, required rollback path)
+- A rate limit or quota
 
-**Why high leverage:** Rules define what's allowed and rewarded. Change rules, change behavior.
+**Why high leverage:** Rules define what's even possible. Change the rule and a whole class of behavior changes or becomes impossible.
 
 ```
-Intervention: Require automated tests for all production code
-Result: Test coverage increases, bug rate decreases
+Intervention: Make the type checker / schema validation a hard CI gate
+Result: An entire class of bug can no longer reach production
 Leverage: High—changes what's acceptable
 ```
 
@@ -182,51 +179,50 @@ Leverage: High—changes what's acceptable
 **What:** Ability of the system to change its own structure
 
 **Examples:**
-- Team autonomy to change processes
-- Ability to add/remove services
-- Permission to experiment
-- Organizational learning capacity
+- Plugin/extension points instead of hardcoded behavior
+- Services that can register/discover each other dynamically
+- Auto-scaling and self-healing instead of fixed topology
+- Schema/config that the system can evolve safely
 
-**Why very high leverage:** Systems that can evolve survive; rigid systems eventually fail.
+**Why very high leverage:** Systems that can adapt their own structure survive change; rigid systems eventually break.
 
 ```
-Intervention: Give teams authority to choose their own tools/practices
-Result: Innovation increases, best practices emerge and spread
+Intervention: Replace a hardcoded dispatch table with a plugin registry
+Result: New behavior added without touching the core; the system evolves
 Leverage: Very high—enables adaptation
 ```
 
 ### Level 3: System Goals
 
-**What:** The purpose or function of the system
+**What:** What the system is actually optimizing for
 
 **Examples:**
-- Success metrics
-- OKRs and KPIs
-- Definition of "winning"
-- What's optimized for
+- The objective a scheduler/optimizer maximizes
+- The SLO the system is built to hold
+- The success metric a pipeline is tuned against
 
-**Why very high leverage:** Everything else serves the goal. Change the goal, change everything downstream.
+**Why very high leverage:** Everything downstream serves the goal. Optimizing for the wrong target reliably produces the wrong behavior, no matter how good the parts are.
 
 ```
-Intervention: Change metric from "features shipped" to "user outcomes achieved"
-Result: Teams focus on impact, not output
+Intervention: Change a cache eviction goal from "max hit rate" to "bound tail latency"
+Result: Different eviction policy, different downstream behavior entirely
 Leverage: Very high—redirects all effort
 ```
 
 ### Level 2: Paradigm (Mindset)
 
-**What:** The shared assumptions from which goals arise
+**What:** The shared assumptions from which goals and architecture arise
 
 **Examples:**
-- "Move fast and break things" vs "Boring technology"
-- "Monolith is bad" vs "Right tool for context"
-- "Engineering is a cost center" vs "Engineering creates value"
+- "Cache everything" vs "Cache only what's measured hot"
+- "Microservices always" vs "Right tool for context"
+- "Avoid failure" vs "Design for graceful degradation"
 
 **Why transformational:** Paradigms are upstream of goals, rules, and structure. Shift the paradigm, transform the system.
 
 ```
-Intervention: Shift from "avoid failure" to "learn from failure"
-Result: Experimentation increases, innovation accelerates
+Intervention: Shift from "retry until success" to "fail fast + shed load"
+Result: Retry storms become impossible; the whole failure mode changes
 Leverage: Transformational—changes what's thinkable
 ```
 
@@ -283,57 +279,55 @@ For each low-leverage intervention, ask: "What's the higher-leverage version?"
 
 | Low Leverage | Ask | Higher Leverage |
 |--------------|-----|-----------------|
-| More servers | Why do we need more capacity? | Fix inefficient algorithm (structure) |
-| Longer timeouts | Why are things slow? | Reduce delays in pipeline |
-| More QA staff | Why so many bugs? | Change quality rules (Level 5) |
+| More instances | Why do we need more capacity? | Fix the inefficient algorithm/query (structure) |
+| Longer timeouts | Why are things slow? | Reduce a delay in the pipeline (Level 9) |
+| Patch each bug instance | Why does this class recur? | Make it unrepresentable / add a CI gate (10, 5) |
 
 ### Step 4: Assess Feasibility
 
-Higher leverage often means more resistance. Evaluate:
+Higher leverage usually means more cost or more resistance. Evaluate before committing:
 
 ```markdown
-Intervention: Change success metric from velocity to outcomes
-Leverage: Level 3 (Goals) - Very High
-Resistance: High - threatens existing measurement systems
-Feasibility: Medium - needs executive buy-in
-Strategy: Pilot with one team, demonstrate results, expand
+Intervention: Make schema validation a hard gate (Level 5)
+Leverage: High—blocks a whole bug class
+Cost/resistance: Touches every caller; needs migration of existing data
+Strategy: Validate in warn-only mode first, then flip to enforce
 ```
 
 ### Step 5: Choose Highest Feasible Leverage
 
-Select the highest-leverage intervention you can actually execute.
+Select the highest-leverage intervention you can actually execute now.
 
 ## Common Patterns
 
 ### The Parameter Trap
 
-Teams endlessly tune parameters when the real issue is structural:
+Endlessly tuning parameters when the real issue is structural:
 
 ```
 Symptom: Constantly adjusting cache TTLs, retry counts, timeouts
 Reality: Architecture doesn't match access patterns
-Solution: Redesign data flow (Level 10) instead of tuning parameters
+Solution: Redesign the data flow (Level 10) instead of tuning parameters
 ```
 
 ### The Information Unlock
 
-Missing information often explains dysfunction:
+A component behaves badly because a signal is invisible to it:
 
 ```
-Symptom: Teams make poor resource decisions
-Reality: They can't see the cost of their decisions
-Solution: Make costs visible (Level 6)
-Result: Behavior changes without mandates
+Symptom: A regression ships repeatedly and is only caught downstream
+Reality: The relevant metric is never surfaced
+Solution: Emit + alert on it (Level 6)—behavior corrects without new logic
 ```
 
 ### The Goal Inversion
 
-Metrics become goals, then become gamed:
+The system optimizes a proxy that diverges from the real objective:
 
 ```
-Symptom: High velocity, low impact
-Reality: Measuring output, not outcomes
-Solution: Change the goal to user value delivered (Level 3)
+Symptom: Cache maximizes hit-rate but tail latency is terrible
+Reality: The optimization target is wrong
+Solution: Change the goal to "bound p99" (Level 3)
 ```
 
 ### The Paradigm Shift
@@ -341,21 +335,21 @@ Solution: Change the goal to user value delivered (Level 3)
 Sometimes the whole frame is wrong:
 
 ```
-Symptom: Constant firefighting despite process improvements
-Reality: "Heroism" paradigm rewards firefighting over prevention
-Solution: Shift to "boring is good" paradigm (Level 2)
+Symptom: Recurring retry storms despite tuning retry counts
+Reality: "Retry until success" is the wrong paradigm under load
+Solution: Shift to "fail fast + shed load" (Level 2)
 ```
 
 ## Leverage Points for Common Problems
 
 | Problem | Low-Leverage Response | High-Leverage Alternative |
 |---------|----------------------|---------------------------|
-| System too slow | Add caching (11) | Fix algorithm, add feedback on perf (6, 10) |
-| Too many bugs | More testing (12) | Quality in definition of done (5) |
-| Team conflicts | More meetings (12) | Clear goals and incentives (3, 5) |
-| Innovation stalled | Hackathons (12) | Permission to experiment (4) |
-| Costs too high | Cut budgets (12) | Visibility + ownership (6, 5) |
-| Knowledge silos | Documentation (11) | Information flow changes (6) |
+| System too slow | Add caching (11) | Fix algorithm; surface latency in feedback (6, 10) |
+| Too many bugs slip through | More manual testing (12) | Make the check a required gate / CI rule (5) |
+| Repeated cascading failures | Bigger timeouts (12) | Add circuit breaker / backpressure loop (8) |
+| Retry storms under load | Lower retry count (12) | Change the retry paradigm: fail fast + shed (2) |
+| Same bug class recurs | Patch each instance (12) | Make it unrepresentable via type/schema (10, 4) |
+| Hidden, wrong defaults | Tune the value (12) | Make the config visible/validated (6, 5) |
 
 ## Verification Checklist
 

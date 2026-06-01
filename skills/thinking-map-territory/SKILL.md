@@ -1,6 +1,6 @@
 ---
 name: thinking-map-territory
-description: Recognize limits of mental models and diagrams. Use when models diverge from reality, debugging expectation mismatches, or questioning abstraction accuracy.
+description: Use when behavior contradicts the docs, tests, diagram, or your assumption. Trust the running code over the description of it; go verify the territory before theorizing.
 ---
 
 # Map-Territory Thinking
@@ -9,25 +9,32 @@ description: Recognize limits of mental models and diagrams. Use when models div
 
 Map-Territory thinking, originated by Alfred Korzybski and popularized in general semantics, reminds us that **"the map is not the territory."** Every representation—mental model, diagram, metric, specification, or abstraction—is a simplified view that necessarily loses information. Confusing the map with the territory leads to flawed decisions, debugging dead-ends, and misaligned expectations.
 
-**Core Principle:** All models are wrong; some are useful. The question is: how wrong, and useful for what?
+**Core Principle:** The README, the test, the diagram, the comment, and your mental model are all *maps*. The running code and the actual data are the *territory*. When the two disagree, the territory wins — go look at it before building a theory on top of the map.
+
+The highest-leverage use is in debugging: a bug *is* a map–territory mismatch. The fastest way out is almost always to stop reasoning from the description and verify what the code actually does.
 
 ## When to Use
 
-- Debugging when behavior doesn't match expectations
-- Evaluating whether documentation/specs match implementation
-- Questioning metrics that seem to tell the "full story"
-- Architecture decisions based on diagrams or models
-- When a "perfect plan" meets messy reality
-- Resolving disagreements where parties hold different mental models
-- Analyzing why estimates consistently miss reality
+- **Debugging:** behavior contradicts the docs, the test, the comment, the diagram, or "it should work" — go read/trace the real code path.
+- A claim about the system comes from a doc, a comment, or recall rather than from the current code or data.
+- Tests pass but the behavior is wrong (the test is a map of *expected* behavior, not all behavior).
+- A metric "tells the whole story" and you're about to act on it without checking what it omits.
+- You're about to theorize about why something happens instead of looking at what happens.
 
 Decision flow:
 
 ```
-Expectation ≠ Reality? → yes → Are you trusting a model/abstraction? → yes → CHECK MAP-TERRITORY FIT
-                                                                    ↘ no → Model exists but isn't explicit
-                    ↘ no → Model may be accurate (verify anyway)
+Behavior ≠ what the doc/test/diagram/assumption says? → yes → GO VERIFY THE REAL CODE/DATA, then theorize
+                                                       ↘ no → fine, but confirm before high-stakes action
+Building on a description rather than the thing itself? → yes → CHECK THE TERRITORY FIRST
 ```
+
+## When NOT to Use
+
+- **The map is the artifact you're being asked to change.** When editing the docs, the spec, or the diagram itself, that *is* the territory for that task — don't spiral into verifying everything.
+- **You've already verified against the territory this session.** Re-checking the same code path repeatedly is wasted budget; trust the verification you just did.
+- **The map is authoritative and current** (e.g. a generated type, a schema the code is derived from). Don't second-guess a source of truth.
+- **The mismatch doesn't affect the decision.** If the abstraction leaks in a way that can't change your action, note it and move on.
 
 ## Key Concepts
 
@@ -91,69 +98,47 @@ Abstraction: "The database is ACID"
 Leak: Connection pool exhaustion, replication lag
 ```
 
-## The Map-Territory Alignment Process
+## The Verify-the-Territory Process
 
-### Step 1: Identify Your Maps
+### Step 1: Name the map you're trusting
 
-List all representations you're relying on:
-
-```
-Decision: Scaling the payment service
-Maps in use:
-- Architecture diagram (last updated 6 months ago)
-- Performance benchmarks (from staging, not prod)
-- Capacity planning spreadsheet (based on assumptions)
-- Team's mental model (from building v1)
-```
-
-### Step 2: Assess Map Freshness
-
-For each map, determine:
-
-| Map | Last Updated | Created From | Drift Risk |
-|-----|--------------|--------------|------------|
-| Arch diagram | 6 months | Original design | High |
-| Benchmarks | 2 months | Staging env | Medium |
-| Capacity sheet | 1 month | Extrapolation | High |
-| Mental model | 2 years | Building v1 | Very High |
-
-### Step 3: Check Correspondence
-
-For critical maps, verify against territory:
+When something is surprising, identify the *representation* the surprise is measured against:
 
 ```
-Test: Does the architecture diagram match the code?
-Method: Trace a request through actual code, compare to diagram
-
-Test: Do benchmarks reflect production?
-Method: Run production traffic sample through benchmark setup
-
-Test: Do metrics capture what matters?
-Method: Interview users, compare their experience to metric story
+Surprise: "This function should return the user, but the page is blank."
+The map: the function name + a comment saying it returns the user.
+The territory: what the function body actually does on this input.
 ```
 
-### Step 4: Identify Missing Maps
+### Step 2: Go to the territory directly
 
-What aspects of the territory have no map?
-
-```
-Existing maps: Sequence diagrams, API specs, test coverage
-Missing maps:
-- Failure modes and recovery paths
-- Implicit dependencies
-- Performance under contention
-- Operational runbooks
-```
-
-### Step 5: Calibrate Confidence
-
-Adjust trust in maps based on verification:
+Don't reason about what the code *probably* does — look:
 
 ```
-Map: Test suite
-Verification: Tests pass, but manual testing found 3 bugs
-Calibration: Tests cover happy path, not edge cases
-Action: Add edge case tests, reduce confidence in "green = good"
+- Read the actual function body and the path that runs, not the summary of it
+- Run it / add a log / inspect the value, instead of predicting the output
+- Query the real data, instead of trusting the schema's intent
+- Reproduce the behavior, instead of reasoning from the bug report's wording
+```
+
+### Step 3: Let the territory overrule the map
+
+If the code does X and the doc says Y, the code is what ships and what breaks. Update your theory to match the territory — never the reverse.
+
+```
+Map: "The cache makes reads fast"
+Territory (measured): 30% hit rate; most reads hit the DB
+Conclusion: the mental model was wrong — fix the model, then the caching
+```
+
+### Step 4: Note what the map can't show
+
+Once verified, name the aspects no map in front of you covers — that's where the next bug hides:
+
+```
+Have: the happy-path code, the passing tests
+Don't have a map of: the error/timeout paths, contention behavior, the null case
+Action: look at those before declaring it correct
 ```
 
 ## Map-Territory Mismatches by Domain
@@ -248,13 +233,12 @@ Combined approach:
 
 ## Verification Checklist
 
-- [ ] Listed all maps/models being relied upon
-- [ ] Assessed freshness of each map
-- [ ] Identified highest-risk map-territory gaps
-- [ ] Verified at least one critical map against reality
-- [ ] Acknowledged what the maps don't capture
-- [ ] Calibrated confidence based on verification results
-- [ ] Documented map limitations for others
+- [ ] Named the map (doc/test/comment/assumption) the surprise was measured against
+- [ ] Went to the territory directly — read/ran/inspected the actual code or data
+- [ ] Let the territory overrule the map, not the reverse
+- [ ] Updated the theory/model to match what was observed
+- [ ] Noted the aspects no available map covers (likely next bug site)
+- [ ] Did not over-verify something already confirmed this session
 
 ## Key Questions
 

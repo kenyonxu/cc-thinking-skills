@@ -1,6 +1,6 @@
 ---
 name: thinking-second-order
-description: Think beyond immediate consequences to second and third-order effects. Use for strategic decisions, policy changes, and avoiding unintended consequences.
+description: When a change has effects past the immediate fix (incentives, scale, feedback loops), ask "and then what?" across horizons before committing — the obvious fix often backfires downstream.
 ---
 
 # Second-Order Thinking
@@ -23,6 +23,12 @@ Decision flow:
 Decision with consequences beyond immediate? → yes → APPLY SECOND-ORDER THINKING
                                             ↘ no → First-order may suffice
 ```
+
+## When NOT to Use
+- The change is local and reversible (a two-way door) with no downstream coupling — just make it and observe.
+- The first-order fix is also the correct one and the chain is obvious; don't manufacture speculative cascades.
+- You'd be inventing implausible third- and fourth-order effects to seem thorough — stop at the first effect that actually changes the decision.
+- Pure mechanical edits (rename, format, dependency bump) with no behavioral or incentive change.
 
 ## First vs Second-Order Thinking
 
@@ -50,14 +56,14 @@ Feature flags → More flags created → Flag debt accumulates
              → Flags become permanent → Codebase complexity explodes
 ```
 
-### Step 3: Apply the 10/10/10 Framework
-Evaluate impact across time horizons:
+### Step 3: Evaluate Across Engineering Horizons
+Trace the effect at three concrete horizons (not emotional ones):
 
-| Timeframe | Question | Analysis |
-|-----------|----------|----------|
-| 10 minutes | How will I feel right after? | Relief—problem solved |
-| 10 months | How will this affect things in 10 months? | Flag sprawl emerging |
-| 10 years | What's the long-term trajectory? | Technical debt crisis |
+| Horizon | Question | Analysis |
+|---------|----------|----------|
+| Immediate | What happens on the next request/run? | Problem solved—flag ships the feature |
+| Next deploy / weeks | What does the team do because of this? | Flag sprawl, more flags created |
+| At scale / months+ | Where does the trajectory lead at 10x usage or adoption? | Combinatorial flag debt, fragile codebase |
 
 ### Step 4: Consider Systemic Effects
 Ask: "What if everyone did this?"
@@ -166,7 +172,7 @@ For any significant decision, fill out:
 ## Verification Checklist
 - [ ] Identified first-order effect clearly
 - [ ] Asked "and then what?" at least 3 times
-- [ ] Applied 10/10/10 framework
+- [ ] Traced effects across immediate / next-deploy / at-scale horizons
 - [ ] Considered systemic/scaled effects
 - [ ] Identified potential feedback loops
 - [ ] Revised decision based on full consequence chain

@@ -1,6 +1,6 @@
 ---
 name: thinking-jobs-to-be-done
-description: Understand what "job" users hire your product to do, focusing on progress users seek rather than features. Use for product development, feature prioritization, user research, and market positioning.
+description: Deciding what to build or why a feature isn't adopted. Reframe from features to the "job" users hire the product for — the progress they seek — to prioritize and position.
 ---
 
 # Jobs to Be Done
@@ -29,6 +29,12 @@ Building/improving a product?
   → Are features not being adopted? → yes → CHECK JOB ALIGNMENT
   → Surprising competitors winning? → yes → IDENTIFY THEIR JOB
 ```
+
+## When NOT to Use
+
+- **Skip for execution and infrastructure problems.** If the task is "fix this bug," "make this query faster," "design this schema," "wire up CI" — the job is already known and the work is technical. JTBD adds nothing; route to debugging, theory-of-constraints, or architecture skills instead.
+- **Skip when the job is already well-established** and the open question is purely *how* to build it, not *whether/why*.
+- **Don't use it to retro-justify** a feature decision already made — that's framework theater. Use it before prioritization, to change the decision.
 
 ## Understanding Jobs
 
@@ -97,29 +103,38 @@ Secondary: Individual engineers
 - Stakes: personal productivity and recognition
 ```
 
-### Step 2: Discover Jobs Through Interviews
+### Step 2: Derive the Job From Available Artifacts
 
-Ask about behavior, not hypotheticals:
+You usually can't run live user interviews. Instead, **reconstruct the job from the evidence already in front of you** — the PRD, tickets, support transcripts, analytics, and the code itself. Read these and answer the interview questions *from the artifacts*:
 
 ```markdown
-## JTBD Interview Questions
+## JTBD Evidence Sources (in priority order)
 
-About recent usage:
-- "Walk me through the last time you used [product]"
-- "What triggered you to open it?"
-- "What were you trying to accomplish?"
-- "How did you know when you were done?"
+1. PRD / spec / design doc
+   - What problem statement and "success" definition does it state?
+   - What user motivation is asserted (and is it backed by evidence)?
 
-About the switch:
-- "What were you using before?"
-- "What wasn't working about the old solution?"
-- "What finally made you switch?"
-- "What did you give up by switching?"
+2. Tickets / issues / support threads / sales notes
+   - What trigger made the user reach for this? ("When I…")
+   - What did they try before / complain about? (the switch + the pain)
+   - Recurring phrasings = the real job, in the user's words
 
-About progress:
-- "What does success look like for this task?"
-- "How do you know when things are going well?"
-- "What frustrates you most about this process?"
+3. Usage / analytics / logs
+   - Where do users actually go, and where do they drop off?
+   - Which flows get repeated (real job) vs. abandoned (stated but not real)?
+
+4. The code / config itself
+   - What does the feature actually let a user accomplish today?
+
+Then answer, from that evidence — NOT from a hypothetical interview:
+- Trigger: what situation makes them reach for this?
+- Progress sought: what better state are they after?
+- Switch: what were they using before, and what was wrong with it?
+- Done signal: how do they know the job is finished?
+
+If the artifacts genuinely don't answer these, name the gap explicitly and
+flag that user research is needed — do NOT invent quotes or fabricate a
+persona to fill it.
 ```
 
 ### Step 3: Analyze Competing Solutions

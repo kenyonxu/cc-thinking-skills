@@ -1,33 +1,35 @@
 ---
 name: thinking-five-whys-plus
-description: Enhanced root cause analysis with explicit bias guards and stopping criteria. Use for incident post-mortems, bug investigations, and process failures where standard 5 Whys might mislead.
+description: Use after an incident or recurring bug when the proximate cause is known but you must reach the systemic root—chains "why" with evidence and bias guards so you stop at a real, actionable cause.
 ---
 
 # Five Whys Plus
 
 ## Overview
 
-The Five Whys technique from Toyota Production System is powerful but often misapplied. This enhanced version adds explicit guards against common failures: premature stopping, single-cause bias, blame-oriented thinking, and confirmation bias. It transforms a simple technique into a rigorous root cause methodology.
+The Five Whys technique from the Toyota Production System is powerful but often misapplied. This enhanced version adds explicit guards against its known failures: premature stopping, single-cause bias, blame-oriented thinking, and confirmation bias. Each "why" carries an evidence requirement, so the chain stays falsifiable rather than speculative.
 
-**Core Principle:** Keep asking "why" until you reach actionable root causes, but guard against the technique's known failure modes.
+**Core Principle:** Keep asking "why" until you reach an actionable, evidenced root cause—and guard against the technique's known failure modes at every step.
 
 ## When to Use
 
 - Incident post-mortems
-- Bug investigations
-- Process failures
-- Customer complaints
-- Recurring problems
-- Any situation where you need root cause, not just proximate cause
-
-Decision flow:
+- Bug investigations where the proximate cause is known but the systemic cause isn't
+- A problem that keeps recurring despite previous fixes
+- Any case where you need the root cause, not just the proximate one
 
 ```
 Problem occurred?
-  → Is the cause obvious and verified? → yes → Fix directly
-  → Need to find root cause? → yes → APPLY FIVE WHYS PLUS
-  → Is this a complex multi-factor problem? → yes → Consider Kepner-Tregoe PA
+  → Is the root cause already obvious and verified? → yes → Fix directly
+  → Could the symptom have several distinct causes?  → yes → first localize with thinking-scientific-method-v2 (hypothesis differential), then Five Whys the confirmed cause
+  → Proximate cause known, systemic cause unclear?   → yes → APPLY FIVE WHYS PLUS
 ```
+
+## When NOT to Use
+
+- The root cause is already obvious and verified → just fix it; the chain adds nothing.
+- You don't yet know *which* component is at fault (multiple candidate causes) → that's a localization problem; use a hypothesis differential first (`thinking-scientific-method-v2`), then run Five Whys on the cause it confirms.
+- The chain would be pure speculation with no evidence for the next "why" → stop and gather evidence; don't speculate deeper (see the Speculation Dive guard).
 
 ## Standard Five Whys Failure Modes
 
