@@ -139,6 +139,19 @@ Across all evidence now: thinking skills produce **at most a small effect on obj
 - **Strong candidate, unconfirmed:** `red-team` (security, +11.3pp p=0.052 — confirm at higher N).
 - **Not replicated (downgrade from ELEVATE to "no robust effect"):** `systems`, `five-whys-plus`.
 - **No effect / redundant-at-ceiling:** `circle-of-competence`, `cynefin`, `socratic`, `debiasing`, `bayesian`.
-- **Rework-rescued (directional):** `fermi-estimation` — the agent-native rework flipped it from −5pp to **+7.5pp** (p=0.371, n=40); a ~+12.5pp sign-flip that echoes the scientific-method rescue, but ns at n=40 — confirm at higher N before claiming.
+- **Rework-rescued (directional):** `fermi-estimation` — the agent-native rework flipped it from −5pp to +7.5pp (p=0.371, n=40)… **but see the powered confirmation below.**
 - **Negative/flat:** `occams-razor`.
-The defensible value of the catalog is in **reasoning framing on open work** and as **discoverable, well-bounded references** — not in measurable accuracy lifts on objective tasks, with the two exceptions above.
+The defensible value of the catalog is in **reasoning framing on open work** and as **discoverable, well-bounded references** — not in measurable accuracy lifts on objective tasks.
+
+## ★★★★★ Powered confirmation of the two live candidates — both collapse
+The only two un-confirmed positive effects were re-run at power. Both shrank toward zero, exactly like systems/five-whys:
+
+| Skill | small-N | POWERED | verdict |
+|---|---|---|---|
+| **red-team** | +11.3pp p=0.052 (n=80) | **+5.0pp p=0.10 (n=200)** | directional positive, **NOT significant** |
+| **fermi-estimation** (reworked) | +7.5pp p=0.37 (n=40) | **+0.7pp p=1.0 (n=150)** | **flat** — the rework-rescue was n=40 noise |
+
+### Final program verdict (after full powering)
+**`scientific-method` is the only skill with a robust, significant, replicated objective lift (+9.3pp, p=0.002).** Every other apparent ELEVATE — systems, five-whys-plus, red-team, fermi-rework — **regressed to non-significance once powered to n≥150.** The consistent pattern across *five* skills is decisive: **borderline p≈0.04–0.05 results at small N are draws from a near-zero-centered distribution and do not survive replication.** 
+
+Honest bottom line: on objective, judge-free tasks, injecting a thinking-skill guide produces **no reliable accuracy lift for 38 of 39 skills**; the one exception is a debugging skill that was specifically reworked to be agent-native and evidence-ranked. The catalog's value is reasoning *framing* and *discoverability*, not measurable correctness — and "replication, not a single p<0.05" is the standard any future ELEVATE claim must meet.

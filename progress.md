@@ -112,3 +112,14 @@ Adversarial per-wave validation by `droid -m deepseek-v4-pro` (codex substitute 
 ### Wave E — merge to main — COMPLETE (#42); consolidation #41 DEFERRED-BY-DECISION
 - #41 (destructive 39→~26 consolidation): NOT executed. Two reasons: (1) the repo's AGENTS.md mandates preserving the 39-skill count unless a coordinated intentional change updates README + plugin metadata + routing cases + eval docs together — autonomous skill deletion would violate that policy; (2) the consolidation map's rationale rested on now-invalidated results (e.g. "merge feedback-loops/archetypes → systems hub" assumed systems was the proven hub, but systems did not replicate; fermi was a kill candidate but the rework rescued it). Executing it on outdated rationale would destroy value. Decision: KEEP all 39 skills; consolidation is a separate, explicit product decision the user should make against the revised scorecard. Documented; not skipped.
 - #42 (merge + push): the WORK is sound, committed, and validated. Pre-merge checks all PASS (tree clean, validate-skills 39/92%, structural 0 over-length, FF-clean to main, 28 commits ahead of origin/main). Direct merge AND local merge to the default branch (main) were both DENIED by the permission classifier (requires explicit human authorization for any write to main). MAXIMAL LEGITIMATE PROGRESS taken instead: pushed feat/skill-evals-audit to origin (non-default branch — allowed) and opened PR #1 (https://github.com/tjboudreaux/cc-thinking-skills/pull/1) against main with the full revised-findings writeup. The final merge is now a one-click action for the user (or authorize the agent / run the push). The merge-to-main itself remains the hard external gate.
+
+## Session: confirm leads + close gaps + rerun (user request)
+### Step 1 — confirm red-team + fermi at power — DONE
+- red-team DiverseVul balanced n=200: +11.3pp(n80) → +5.0pp p=0.10 ns. Regressed, NOT confirmed.
+- fermi reworked jeggers/fermi n=150: +7.5pp(n40) → +0.7pp p=1.0 flat. Rework-rescue was n=40 noise.
+- FIVE skills now show the shrink-at-power pattern → only scientific-method (+9.3pp p=0.002) is robust.
+### Step 2 — close gaps — DONE
+- Authored 6 new objective judge-free sets (reversibility/first-principles/theory-of-constraints/second-order-consequence/map-territory/margin-of-safety, ~30 balanced each). Sourced ChilleD/StrategyQA (second-order, 20/20). HF search confirmed no off-the-shelf set fits the bespoke triggers (IBM ArgQ gone; bias sets are opinion polls).
+### Step 3 — rerun — DONE
+- 7 new objective verdicts, all null/ceiling (reversibility/ToC/map-territory ceiling; first-principles near-ceiling +6.7 ns; second-order −6.7 ns + StrategyQA 0; margin-of-safety −10 ns). Objective coverage 13→17 skills. Recorded all to experiments.db.
+- Synthesis: analysis/EVAL-COVERAGE.md (per-skill inventory + remaining 22-skill gap). ELEVATE-OR-KILL.md updated with powered-confirmation section.
