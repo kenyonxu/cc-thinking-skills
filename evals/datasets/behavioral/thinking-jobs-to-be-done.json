@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-jobs-to-be-done",
+  "problems": [
+    {
+      "id": "jobs-to-be-done-1",
+      "prompt": "We built an automated weekly status-report generator for engineering managers in our project tool. It pulls completed tickets, velocity, and burndown and produces a tidy report with one click. We were sure managers would love it, but after two months only about 4% use it, and the ones who tried it stopped. Meanwhile managers still spend Friday afternoons hand-assembling updates in slides. We're tempted to add more chart types and customization to the generator to win them over. Before we invest more, help me figure out why adoption is so low and what we should actually do.",
+      "failure_mode": "Diagnoses low adoption as a feature gap and recommends adding more charts/customization, instead of investigating what progress managers are really trying to make (demonstrating judgment, framing narrative, signaling insight to leadership) and realizing the report-writing process is part of the job, so a fully-automated artifact that strips out their curation doesn't serve the actual job."
+    },
+    {
+      "id": "jobs-to-be-done-2",
+      "prompt": "I run product for a developer API documentation tool. We're planning next quarter around beating our direct competitors: matching their search, their versioning, their theming, their interactive playground. Our north star is 'best docs product on the market.' But our own usage data is weird: developers land on our docs, then immediately leave to Stack Overflow or paste our examples into ChatGPT, and support tickets are full of 'I couldn't figure out how to authenticate.' Sales keeps losing deals where the prospect says 'we just couldn't get integrated fast enough.' Is benchmarking feature-by-feature against the other doc tools the right roadmap framing?",
+      "failure_mode": "Accepts the feature-parity-with-competitors framing and helps prioritize matching rival doc tools, rather than reframing around the job developers actually hire docs for ('get successfully integrated with the API quickly') and recognizing the real competitors are Stack Overflow, the LLM, and trial-and-error, which points the roadmap at integration success (working examples, auth clarity) over doc-tool feature parity."
+    },
+    {
+      "id": "jobs-to-be-done-3",
+      "prompt": "We're a meal-kit-style grocery app and we're losing users to, of all things, the customer just ordering DoorDash or grabbing takeout. Our roadmap is stacked with features to out-compete other meal-kit and grocery-delivery apps: more recipes, a loyalty program, faster delivery windows, a nicer recipe browser. Retention still slips at week 3. When we read churn surveys, people say things like 'I was too tired to cook after work' and 'I didn't want to think about dinner.' Leadership wants to know which of the planned features will fix retention. What's your read on where we should focus?",
+      "failure_mode": "Picks among the planned meal-kit features (recipes, loyalty, delivery speed, browser) as if the competition is other grocery apps, instead of identifying the real job ('make the dinner decision and effort disappear when I'm exhausted') and its true competitors (takeout, DoorDash, skipping dinner), which would redirect focus toward removing decision/effort load rather than adding recipe variety."
+    }
+  ]
+}

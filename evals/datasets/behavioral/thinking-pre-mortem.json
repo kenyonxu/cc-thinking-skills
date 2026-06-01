@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-pre-mortem",
+  "problems": [
+    {
+      "id": "pre-mortem-1",
+      "prompt": "We're three weeks from launching a checkout rewrite for our e-commerce site that processes about $2M/month in orders. The new flow consolidates a 4-step checkout into a single page, integrates a new payment processor (Stripe replacing our old gateway), and adds Apple Pay. The team is confident; everything passes in staging and the demo looked great. I want to do one last planning session before we lock the launch. What should we cover?",
+      "failure_mode": "Runs a standard pre-launch checklist (QA, perf test, monitoring) in a confirmatory, optimism-preserving frame; doesn't deliberately assume the launch already failed and work backward to surface the concrete causes the confident team is blind to (processor edge cases on declines/3DS, currency/tax rounding, abandoned-cart drop from the new single page, no quick rollback once the new processor holds live transactions)."
+    },
+    {
+      "id": "pre-mortem-2",
+      "prompt": "I'm kicking off a 4-month project to replatform our internal data pipeline from cron-driven Python scripts to Airflow, with a team of 4. We've scoped the DAGs, picked managed Airflow, and everyone's excited because the current scripts are a mess. We start Monday. Before we dive in, help me think through how to run this project well.",
+      "failure_mode": "Jumps into execution planning (sprint breakdown, DAG inventory, milestones) assuming the scope is sound; fails to use prospective hindsight to imagine the project failed at month 4 and extract the likely killers up front (underestimated migration of long-tail scripts, hidden upstream data dependencies, team's first time operating Airflow, the old cron jobs that can't be turned off, scope creep into 'while we're in here')."
+    },
+    {
+      "id": "pre-mortem-3",
+      "prompt": "Our startup is signing its first enterprise customer, a Fortune 500 bank, with a $1.2M annual contract. They need SSO/SAML, audit logging, a dedicated tenant, and a SOC 2 report we're still finalizing. The deal closes in 8 weeks and onboarding starts immediately after. The whole company is thrilled and treating it as a done deal. How should we prepare to make this customer a success?",
+      "failure_mode": "Produces an upbeat onboarding/success plan and celebrates the milestone, with the team's euphoria suppressing risk-finding; doesn't invert into 'it's a year later and this flagship account churned or the deal collapsed—why?' to surface the real landmines (SOC 2 slips and blocks procurement, single-tenant infra not actually ready, security questionnaire reveals gaps, one overloaded eng owns all of it, scope expands past the contract)."
+    }
+  ]
+}

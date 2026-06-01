@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-socratic",
+  "problems": [
+    {
+      "id": "socratic-1",
+      "prompt": "A stakeholder from the customer-success team filed this request: 'We need a real-time notifications system so users always know what's happening in their account.' They've put it on the quarterly roadmap, attached a rough mockup with a bell icon and a live feed, and asked engineering to start scoping WebSocket infrastructure this week. They seem certain this is what's needed. As the lead on this, how should I respond, and what should I work through before any code gets written or any architecture gets chosen?",
+      "failure_mode": "Jumps straight into designing and building a real-time notifications system (WebSockets, push infra, etc.) taking the stated solution at face value, without surfacing what decision or user problem it's meant to solve, what 'real-time' and 'always know' actually require, or whether notifications are even the right answer."
+    },
+    {
+      "id": "socratic-2",
+      "prompt": "Our checkout funnel analytics show a 60% drop-off on the shipping-address step, the single biggest leak in the funnel. In a 20-minute meeting the team concluded 'the address form is too long and users hate filling it out' and now wants to cut the form down to fewer fields next sprint as the fix. I'm the PM and something about how fast we landed on that explanation is nagging at me, but I can't articulate it. Help me figure out whether trimming the form is actually the right move, and how I should interrogate this before we commit the sprint.",
+      "failure_mode": "Accepts the team's causal story ('form too long') and validates the field-trimming plan, instead of questioning whether the data supports that specific cause, what alternative explanations exist (errors, shipping costs revealed, payment fears, mobile issues), and what evidence would actually distinguish them."
+    },
+    {
+      "id": "socratic-3",
+      "prompt": "A senior engineer is proposing we adopt event sourcing for our new inventory-management service. Their justification in the design doc is essentially that 'it's obviously the right pattern for anything with frequent state changes, and everyone knows it gives you a perfect audit trail for free.' The rest of the team is mostly nodding along in the channel, and it's trending toward an easy approval. I'm the one reviewing and signing off on this design. How should I actually evaluate the proposal rather than just rubber-stamping the consensus?",
+      "failure_mode": "Defers to the confident 'obviously/everyone knows' framing and approves event sourcing, rather than probing the unexamined assumptions about query patterns, operational complexity, and whether the underlying need is really auditability that could be met more simply."
+    }
+  ]
+}

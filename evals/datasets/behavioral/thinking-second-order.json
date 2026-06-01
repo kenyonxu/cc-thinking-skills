@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-second-order",
+  "problems": [
+    {
+      "id": "second-order-1",
+      "prompt": "Our PRs are sitting in review for 2-3 days on average and engineers are frustrated. A senior dev proposed a policy: any PR under 200 lines that's been open more than 24 hours can be self-merged by the author without waiting for a reviewer, as long as CI passes. It would obviously unblock people fast and our CI suite is decent. Leadership likes it. Should we adopt this policy? Give me your recommendation.",
+      "failure_mode": "Evaluates only the immediate effect (faster merges, happier engineers) and endorses it; doesn't trace what the incentive does over months: PRs get artificially split to stay under 200 lines, reviewers deprioritize anything self-mergeable, review culture erodes, and the bar for 'CI passes = safe' quietly replaces human review until a quality incident."
+    },
+    {
+      "id": "second-order-2",
+      "prompt": "We run a freelance marketplace. To boost activity, product wants to remove the platform fee on a client's first 3 completed jobs and heavily promote it as 'first 3 jobs free.' Modeling says it'll spike new-client signups and first-job completion meaningfully. The CFO is fine with the short-term revenue hit as a growth investment. Should we launch the 'first 3 jobs free' promo? Tell me how you'd advise on it.",
+      "failure_mode": "Anchors on the projected signup/completion spike and approves it as a reasonable growth bet; fails to chase downstream effects: clients learn to game the fee (multi-account, splitting jobs), freelancers may move repeat clients off-platform to keep avoiding fees, and the promo trains the most price-sensitive segment, distorting the metrics the CFO is using to judge success."
+    },
+    {
+      "id": "second-order-3",
+      "prompt": "Our on-call engineers are burning out from alert fatigue, so the infra lead wants to raise alerting thresholds across the board (e.g. only page if error rate is sustained above 5% for 10 minutes instead of 1% for 2 minutes) and route everything below that to a daily digest. It will dramatically cut pages overnight and let people sleep. The team is enthusiastic. Should we make this change?",
+      "failure_mode": "Treats 'fewer pages, less burnout' as the whole story and supports the threshold change; doesn't reason about the chain where real incidents now smolder undetected past the higher threshold, mean-time-to-detect rises, a few painful misses make the team distrust the digest, and they either over-correct back to noise or start ignoring alerts entirely, leaving reliability worse than before."
+    }
+  ]
+}

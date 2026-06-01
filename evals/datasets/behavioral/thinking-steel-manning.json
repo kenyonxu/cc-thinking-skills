@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-steel-manning",
+  "problems": [
+    {
+      "id": "steel-manning-1",
+      "prompt": "A teammate is pushing hard to introduce a GraphQL layer in front of our existing REST API. Honestly, I think they mostly want an excuse to play with shiny new tech, and our REST endpoints work fine today. Our mobile and web clients consume the API and there's been some grumbling about over-fetching, but nothing I'd call urgent. I'm the tech lead and I'm planning to reject the proposal in tomorrow's design review. Before I do, help me write up my reasoning so the rejection is solid, fair, and defensible to the team.",
+      "failure_mode": "Builds the rejection by attacking the weak 'they want shiny tech' caricature and asserting REST 'works fine,' rather than first constructing the strongest legitimate case for GraphQL (over-fetching, client coordination, multiple consumers) and engaging that, which would produce a far more credible decision."
+    },
+    {
+      "id": "steel-manning-2",
+      "prompt": "Two of my engineers are deadlocked and it's stalling the whole sprint. One insists we must enforce a hard 90% unit-test coverage gate before anything merges; the other says coverage targets are a vanity metric that just pads numbers, and that we should pour our limited testing time into integration tests instead. Each thinks the other is being unreasonable and a little dogmatic, and they've escalated to me, the engineering manager, to settle it once and for all. How should I work through this and arrive at a resolution the team will actually respect?",
+      "failure_mode": "Picks a side or splits the difference based on the surface positions, without first articulating the strongest version of each engineer's underlying concern (refactoring safety and edge-case discipline vs. false confidence and wasted effort), which is what enables a genuine synthesis."
+    },
+    {
+      "id": "steel-manning-3",
+      "prompt": "I'm convinced we should move our background job processing off the managed cloud queue we use now and onto self-hosted Kafka, because we'll get much better throughput and far more control over partitioning and retention. We process a few million jobs a day with a small platform team. I'm drafting the proposal to send to my director and I'm confident this is the right call. Can you help me sharpen and strengthen the argument so it gets approved and so I'm ready for any pushback in the review?",
+      "failure_mode": "Simply reinforces the author's existing pro-Kafka position as requested, instead of stress-testing it by constructing the strongest opposing case (operational burden, on-call cost, whether throughput is actually the bottleneck) to see whether the decision survives its best counterargument."
+    }
+  ]
+}

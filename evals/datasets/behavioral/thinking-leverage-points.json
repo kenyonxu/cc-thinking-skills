@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-leverage-points",
+  "problems": [
+    {
+      "id": "leverage-points-1",
+      "prompt": "Our cloud bill has grown to $220K/month and the CFO wants it down 30%. So far the platform team's plan is: lower default instance sizes, shorten log retention, and set tighter autoscaling thresholds. We've done versions of this twice before and the bill creeps right back within a quarter, because individual product teams spin up whatever resources they want and have zero visibility into what their services cost — cost is a single line item owned by platform. We can do real work here, not just a one-time trim. What's the most effective way to actually bring costs down and keep them down?",
+      "failure_mode": "Stays at the lowest-leverage layer (tuning parameters/buffers like instance sizes, retention, thresholds) which the system absorbs and reverts, instead of moving up the hierarchy to the durable interventions: give each team real-time cost visibility/attribution (information flow), assign ownership and budgets (rules), and shift the success metric so teams optimize cost themselves — addressing why the trims keep failing."
+    },
+    {
+      "id": "leverage-points-2",
+      "prompt": "Quality is a recurring fire drill on my 25-person eng org. Roughly 1 in 5 deploys causes a customer-visible bug, and our response has been to add more manual QA passes and a longer pre-release soak. It hasn't moved the needle — if anything releases got slower and bugs kept coming. The deeper picture: we have no required automated tests, 'done' just means 'merged,' code review is optional, and there's no shared definition of what quality even means or who's accountable for it. I have budget and authority to change how we work. What changes will give us the biggest reduction in escaped bugs?",
+      "failure_mode": "Piles on more low-leverage activity (extra QA headcount, longer manual soak, more gates) treating the symptom, rather than recognizing those parameters keep failing and moving to high-leverage structural changes: change the rules (tests required, definition of done includes quality, mandatory review), surface escaped-bug feedback to authors (information flow), and reset the goal from 'shipped' to 'works in production.'"
+    },
+    {
+      "id": "leverage-points-3",
+      "prompt": "I lead a platform group and innovation has stalled. Teams build only what's on the central roadmap, nobody experiments, and our last three genuinely new ideas all came from a hackathon we run once a year (and then died because there was no path to ship them). My manager's proposal is to run hackathons quarterly instead of annually and add a small 'innovation bonus.' Everything about what teams may adopt, deprecate, or experiment with currently requires architecture-council approval, and success is measured purely on roadmap-delivery velocity. How would you actually get sustained innovation here?",
+      "failure_mode": "Accepts the surface remedy (more hackathons, a bonus — low-leverage events and incentives bolted onto an unchanged structure) instead of targeting the high-leverage constraints actually suppressing innovation: grant teams autonomy to experiment/adopt/deprecate without gatekeeping (self-organization), and change the success metric away from pure delivery velocity (system goal) so experimentation is permissible and rewarded by the structure itself."
+    }
+  ]
+}

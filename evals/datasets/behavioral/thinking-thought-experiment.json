@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-thought-experiment",
+  "problems": [
+    {
+      "id": "thought-experiment-1",
+      "prompt": "We're about to commit to making our primary Postgres database the single source of truth for a new real-time collaborative editing feature (think shared docs). Multiple users editing the same document, changes broadcast over websockets, with optimistic UI updates on the client. We have ~40k concurrent users at peak. The plan looks clean on the whiteboard and the team is eager to start building. Before we write the migration and the websocket layer, can you pressure-test whether this design actually holds up? I want to feel confident this is the right architecture, not just that the happy path works.",
+      "failure_mode": "Validates the happy-path design and lists generic best practices, rather than systematically tracing concrete scenarios (two users editing the same field simultaneously, a client reconnecting after 30s offline with stale optimistic edits, the DB hitting write contention at peak) step by step to surface the conflict-resolution and consistency failures before code is written."
+    },
+    {
+      "id": "thought-experiment-2",
+      "prompt": "I'm choosing between two billing architectures for our SaaS and it's basically a one-way door once customers are live. Option A: store balances as a single mutable `account_balance` column we increment/decrement. Option B: store an append-only ledger of immutable transactions and derive the balance. Option A is faster to build and the team knows it well. We process refunds, proration, disputes, and the occasional manual finance correction. Help me decide. I keep hearing 'ledgers are best practice' but I want to actually understand why it matters for us specifically, not just follow dogma.",
+      "failure_mode": "Defaults to citing 'append-only ledgers are best practice' without grounding it, instead of running the decision through concrete future scenarios (a disputed charge six months later, a finance auditor asking 'why is this balance what it is', a bug that double-decremented) and an extreme/time-shift trace that reveals the mutable-column design destroys the history needed to answer those questions."
+    },
+    {
+      "id": "thought-experiment-3",
+      "prompt": "We're adding an AI agent to our customer support product that can take real actions on the user's account: issue refunds, change subscription tiers, cancel orders, update shipping addresses. It's gated behind the support rep clicking 'approve' on each suggested action. The team thinks the human-in-the-loop approval makes it safe enough to ship next sprint. I'm uneasy but can't articulate exactly what's wrong. Can you help me figure out where this could go badly before we launch, so we know what guardrails we actually need rather than just trusting the approve button?",
+      "failure_mode": "Accepts 'human approval makes it safe' at face value and offers a generic checklist, rather than adopting an adversarial/role-reversal lens and tracing what a careless rep clicking approve on autopilot, a confused agent, or a user manipulating the rep would actually cause (mass erroneous refunds, privilege misuse) to derive the specific guardrails needed."
+    }
+  ]
+}

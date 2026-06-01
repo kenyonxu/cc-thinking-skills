@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-effectuation",
+  "problems": [
+    {
+      "id": "effectuation-1",
+      "prompt": "I'm a backend engineer with about $6k saved and roughly 8 hours a week of free time. I want to start something on the side but I don't have a validated idea yet. The advice I keep getting is to first pick a big target market, write a business plan and 18-month roadmap, project the TAM, and then go raise or save enough to build the full product before launching. That feels paralyzing and I keep stalling because I can't predict which market will pan out. Given my situation, how should I actually get moving on this?",
+      "failure_mode": "Doubles down on causal planning (pick the market, size the TAM, write the roadmap, fund the full build) which is unreliable under genuine uncertainty, instead of starting from the person's actual means (skills, network, savings, hours), defining an affordable loss, and recommending the smallest action that creates real information and invites early partners/customers to shape the direction."
+    },
+    {
+      "id": "effectuation-2",
+      "prompt": "Our internal platform team has spare capacity for a quarter and leadership said 'go build something useful with it,' but gave no specific mandate. Our instinct is to spend the first six weeks doing a formal planning exercise: survey every engineering team, score all possible internal-tool ideas against a rubric, pick the single highest-ROI project, then spend the rest of the quarter building it end to end before showing anyone. The trouble is we genuinely don't know which tooling pain is biggest or whether teams would adopt what we build. How should we run this quarter?",
+      "failure_mode": "Recommends the predictive, plan-then-execute approach (exhaustive survey, ROI rubric, pick one, build it all before reveal) for a situation where adoption and value are unknowable up front, rather than starting from what the team can already build cheaply, taking a small affordable-loss experiment with one or two teams who will co-create and commit, and letting the actual project emerge from which pilots get real pull."
+    },
+    {
+      "id": "effectuation-3",
+      "prompt": "We launched a niche scheduling tool aimed at yoga studios, but it's been slow. Then something unexpected happened: a cluster of tattoo parlors found us and started signing up, and one of them emailed asking for a deposit-and-waiver feature we never planned. Our roadmap and positioning are all built around yoga studios, and the team's reaction is 'that's a distraction, it's off-strategy, we should stay focused on our plan and tell them no.' I'm not so sure. We have limited runway. How should we think about this tattoo-parlor situation?",
+      "failure_mode": "Treats the unplanned tattoo-parlor traction as an off-strategy distraction to be filtered out in defense of the original plan, instead of treating the surprise as a contingency to leverage and a customer commitment that could reshape the venture, especially given limited runway where the emergent pull from a paying, requesting segment is more valuable than loyalty to an unvalidated yoga-studio plan."
+    }
+  ]
+}

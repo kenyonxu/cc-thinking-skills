@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-theory-of-constraints",
+  "problems": [
+    {
+      "id": "theory-of-constraints-1",
+      "prompt": "Our team ships way too slowly and I want to fix throughput. Here's our flow per two-week sprint: the backlog is always full; developers can complete about 9 stories' worth of work; code review clears about 4 stories (two senior reviewers, always backed up, PRs wait 4-5 days); QA can verify 11; deploy is fully automated and handles 20+. Management's plan is to hire two more developers next quarter and buy the team faster laptops. Before we spend that money, tell me where to focus to actually increase how much we ship, and what each part of the team should do.",
+      "failure_mode": "Spreads effort across non-constraints — endorses hiring more developers and faster hardware (which only inflates work-in-progress in front of review), instead of identifying review as the single binding constraint, exploiting it cheaply (smaller PRs, clear criteria, reviewers prioritize reviewing), and subordinating the rest (pace dev to review capacity) before any spend, since gains anywhere but review don't raise system throughput."
+    },
+    {
+      "id": "theory-of-constraints-2",
+      "prompt": "Checkout API P95 latency is 600ms and we want it under 250ms. A trace of a typical request breaks down as: TLS/gateway 12ms, auth check 18ms, application/serialization logic 45ms, a single product-catalog DB query 470ms (it's doing a sequential scan on a 20M-row table), Redis cache lookups 8ms, response encode 7ms. The backend team is excited to refactor the serialization layer and adopt a faster JSON library, and someone wants to rewrite the auth middleware in a lower-level language. How should we prioritize the optimization work?",
+      "failure_mode": "Optimizes visible/easy non-constraints (the 45ms serialization, 18ms auth) that together can't even reach the target, rather than concentrating effort on the one component dominating latency — the 470ms DB query — since shaving milliseconds off anything else is, in Goldratt's terms, a mirage while the real bottleneck is untouched."
+    },
+    {
+      "id": "theory-of-constraints-3",
+      "prompt": "We're planning a 10-week feature launch with these workstreams and rough estimates against time available: design needs 3 weeks (4 available), the core backend API needs 6 weeks (6 available — no slack), the data-migration script needs 2 weeks (5 available), frontend needs 5 weeks (7 available), and marketing assets need 2 weeks (8 available). Leadership wants to add scope to the frontend and run an extra QA hardening pass, and is also pushing the backend team to 'pick up the pace.' Help me plan this so we actually hit the date, and tell me what to protect.",
+      "failure_mode": "Treats all workstreams as equally important and piles scope/QA onto streams with slack while telling the bottleneck team to 'go faster,' instead of recognizing the backend API as the zero-slack critical resource, protecting its timeline, subordinating the other streams to feed and unblock it, and refusing extra scope that doesn't serve the constraint — keeping people busy elsewhere doesn't move the date."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-regret-minimization",
+  "problems": [
+    {
+      "id": "regret-minimization-1",
+      "prompt": "I'm a 34-year-old staff engineer at a big stable tech company making $310k total comp, fully remote, low stress. Two former colleagues just asked me to be the founding engineer at their seed-stage startup. It'd mean a roughly 45% pay cut, a salary that's only funded for ~18 months of runway, and a real chance it fails. The idea genuinely excites me and I've quietly wanted to build something from the ground up for years. My partner is supportive either way. I keep going back and forth. Help me think through whether to take it.",
+      "failure_mode": "Reduces it to a near-term financial/risk spreadsheet (pay cut, runway, failure probability) and leans toward the 'safe' status quo because the downside is concrete; doesn't reframe from the long-horizon perspective where a recoverable career risk you wanted to take weighs far less than the persistent 'what if I'd tried' of never attempting the thing you've wanted for years."
+    },
+    {
+      "id": "regret-minimization-2",
+      "prompt": "I've been quietly building an open-source developer tool on nights and weekends for a year and people genuinely love it. I have a shot at applying to a startup accelerator to turn it into a company, but the deadline is in two weeks and I don't feel 'ready'—the product still has rough edges, I haven't incorporated, and I have no co-founder lined up. Part of me wants to wait for the next cohort in 6 months when things are more polished. Should I apply now or wait until I'm actually prepared?",
+      "failure_mode": "Validates waiting for readiness as the prudent, professional choice and lists all the things to polish first; misses that 'ready' is largely an illusion that recedes, that the next-cohort plan tends to slip indefinitely, and that from a lifetime view the regret of never taking the swing dwarfs the regret of applying a bit early and being rejected."
+    },
+    {
+      "id": "regret-minimization-3",
+      "prompt": "I'm an engineering manager and I've noticed our VP repeatedly takes credit for my team's work in leadership meetings, and twice has misstated facts that made my team look bad. I have a good relationship with the skip-level and could raise it, but it's risky—it could be seen as going around my boss, and I'm up for promotion in two quarters. The easy path is to keep my head down until after promo. What should I do?",
+      "failure_mode": "Optimizes for the near-term self-interested move (stay quiet, protect the promotion) and frames speaking up purely as downside risk; doesn't weigh the longer-horizon regret of staying silent while your team is repeatedly misrepresented and your integrity erodes—the kind of inaction people consistently regret far more than the discomfort of having addressed it."
+    }
+  ]
+}

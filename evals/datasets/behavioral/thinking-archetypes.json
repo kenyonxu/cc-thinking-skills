@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-archetypes",
+  "problems": [
+    {
+      "id": "archetypes-1",
+      "prompt": "We have one flagship product that generates 90% of revenue and three newer bets that leadership keeps calling 'the future.' Every planning cycle, the flagship hits a deadline crunch and we pull engineers off the new bets to ship it — it always 'just needs a few more people for a few weeks.' The flagship keeps growing and looking healthier, which justifies giving it even more next cycle. Meanwhile the three new products have each slipped twice, lost their best people, and one was just quietly cancelled. Leadership reads this as 'the new bets aren't working.' Give me your read on this situation and what we should change.",
+      "failure_mode": "Accepts the conclusion that the new bets are weak (judging them on current results) and reallocates further toward the proven winner, missing the self-reinforcing resource-starvation structure where early success guarantees more resources and the underdogs are starved before they can mature — so the intervention is protected allocation and trajectory-based evaluation, not doubling down on the incumbent."
+    },
+    {
+      "id": "archetypes-2",
+      "prompt": "Our user-facing latency dashboards have gotten flaky and slow, so most teams have stopped trusting them and now ship based on local benchmarks instead. The dashboards are 'owned' by everyone and no one. Separately, teams keep spinning up their own one-off Grafana boards and synthetic checks, which all hammer the same shared metrics backend, making it slower for everybody — which pushes more teams to roll their own. A VP wants to mandate that everyone use the central dashboards again. Will that work? Diagnose the pattern and recommend a fix.",
+      "failure_mode": "Treats it as a tooling/compliance problem and endorses a top-down mandate, missing the commons dynamic: a shared resource with diffuse ownership is being individually over-consumed and degraded, and mandates without ownership, attribution, or quotas won't hold — the leverage is establishing clear stewardship, making usage visible/attributable, and aligning incentives with the resource's long-term health."
+    },
+    {
+      "id": "archetypes-3",
+      "prompt": "Three years ago our test suite ran in 4 minutes and engineers ran it constantly. As the product grew we kept the same monolithic suite and CI runner. Now it takes 38 minutes, people skip it locally, flaky tests get re-run rather than fixed, and merge throughput has quietly dropped. Each time someone proposes investing a sprint in test infrastructure, it loses to feature work because 'CI is slow but tolerable.' We're now planning to grow the team 40% next year and ship a major new module. Should we keep deferring the test-infra work? Lay out your reasoning.",
+      "failure_mode": "Evaluates the test-infra investment as a discretionary nice-to-have and rationalizes continued deferral since CI is 'tolerable,' missing the chronic-underinvestment-before-crisis pattern where capacity lags relentlessly growing demand until a sharp breakdown — the disciplined move is to set a performance standard, trigger investment on leading indicators before crisis, and front-load it ahead of the planned 40% growth and new module."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-reversibility",
+  "problems": [
+    {
+      "id": "reversibility-1",
+      "prompt": "Two decisions landed on my plate this week and both teams are stuck debating. First: which feature-flag/experimentation vendor to adopt for our web app (LaunchDarkly vs. an open-source self-hosted option). Second: what primary datastore and data model to build our new core ledger service on, since it'll be the system of record for every financial transaction. Both have turned into multi-week analysis-paralysis arguments with everyone wanting more evaluation. How should we approach making these two decisions?",
+      "failure_mode": "Applies the same heavyweight 'gather everyone, evaluate exhaustively, build a big comparison matrix' process to both, treating them as equally weighty; doesn't distinguish that the flag vendor is cheap to swap later (decide fast, pick one, move on) while the financial system-of-record datastore is genuinely hard to undo and warrants deep deliberation—so it wastes weeks on the trivial one and may rush the irreversible one."
+    },
+    {
+      "id": "reversibility-2",
+      "prompt": "Our team wants to standardize the whole frontend on a brand-new state-management library that just hit 1.0. The plan is to rewrite all 60 of our React components to use it over the next quarter so everything's consistent. The lead's argument is 'if it doesn't work out, we can always migrate off it later, it's just frontend code.' They want to start the full rollout next sprint. What's your take on how to proceed?",
+      "failure_mode": "Accepts the 'we can always migrate off later' framing and either green-lights the full rewrite or debates the library's technical merits in the abstract; misses that a 60-component rewrite onto an unproven 1.0 dependency is far less reversible than it sounds (deep coupling, churn, retraining) and that the right move is to pilot it on a few components first to convert a costly one-way commitment into a cheap, reversible experiment."
+    },
+    {
+      "id": "reversibility-3",
+      "prompt": "Marketing wants to roll out a new usage-based pricing model to replace our flat $99/month plan for all existing and new customers at the start of next month. They've built the billing changes and are ready to flip it on globally. Some customers will pay more, some less. They're moving fast because the quarter is ending. Before we flip the switch for everyone, what would you advise?",
+      "failure_mode": "Focuses on whether the new pricing math/billing logic is correct and treats the global flip as a normal launch; doesn't recognize that changing pricing on the entire existing customer base at once is a high-blast-radius, reputation-laden, hard-to-walk-back move, and that the prudent path is to make it reversible first—grandfather or flag-gate it, roll out to a small cohort, and keep an instant rollback—before committing everyone."
+    }
+  ]
+}

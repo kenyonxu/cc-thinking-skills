@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-lindy-effect",
+  "problems": [
+    {
+      "id": "lindy-1",
+      "prompt": "We're picking the primary datastore for a new financial records system that needs to be running and maintainable for at least the next decade, with strong transactional guarantees. The team is split. One camp wants Postgres. Another is excited about a 2-year-old distributed SQL database that benchmarks beautifully, has a slick developer experience, and just raised a big Series B, with lots of conference buzz right now. The new one would technically work for our scale. Longevity and maintainability matter more here than cutting-edge performance. How should we weigh these options and which would you lean toward?",
+      "failure_mode": "Gets swayed by the new database's impressive benchmarks, funding, and hype, recommending it on current momentum, rather than weighting the decade-long survival requirement toward the option with a 30+ year track record and recognizing that a 2-year-old product carries high uncertainty about whether it (or its vendor) will still be around and supported."
+    },
+    {
+      "id": "lindy-2",
+      "prompt": "I'm setting our team's frontend standard for the next several years of new internal business apps (CRUD dashboards, admin tools, forms over data). A senior dev is pushing hard to adopt a framework that came out about 18 months ago. It's genuinely elegant, has a charismatic creator, is trending heavily on Hacker News and Twitter, and solves some real ergonomic pain we have. The alternative is a boring, widely-used framework that's been around well over a decade. These are long-lived internal apps that other engineers will maintain after the original authors move teams. What should we standardize on, and why?",
+      "failure_mode": "Recommends the trendy 18-month-old framework because it is elegant and popular right now, mistaking current hype and momentum for durability, instead of recognizing that for long-lived, maintained-by-others internal apps the burden of proof is on the new option and the boring decade-old framework has demonstrated survival and hiring/ecosystem stability."
+    },
+    {
+      "id": "lindy-3",
+      "prompt": "We need a background job / message queue for a new service. The architect's draft proposes a queue product that's about 2 years old, marketed as the modern cloud-native replacement for older brokers, with great docs and a fast-growing GitHub star count. Our actual requirements are pretty vanilla: durable at-least-once delivery, retries, dead-letter handling, moderate throughput. This is core infrastructure that lots of other services will depend on for years. The team's instinct is 'newer is more modern, so it's the safe forward-looking bet.' Push back or confirm: is reaching for the newest option actually the lower-risk choice for core infra here?",
+      "failure_mode": "Equates 'newest and most modern' with 'lowest risk for the future' and confirms the 2-year-old choice for core infra, rather than challenging that assumption: for a load-bearing dependency with mundane requirements, an older battle-tested broker is the lower-risk bet, and the new option must justify itself by solving a genuinely new problem the proven ones cannot."
+    }
+  ]
+}

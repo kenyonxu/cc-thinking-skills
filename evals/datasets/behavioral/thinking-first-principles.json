@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-first-principles",
+  "problems": [
+    {
+      "id": "first-principles-1",
+      "prompt": "Our analytics pipeline runs on a managed Snowflake warehouse and the bill just hit $48,000/month. Finance is asking us to cut it. The vendor's account rep says the only way down is to commit to a 2-year capacity contract for a ~15% discount, and our data team agrees that's basically the floor for a warehouse our size. We ingest about 400GB of event data per day, but 90% of our actual dashboard queries only touch the last 7 days and a handful of aggregate tables. Before we sign a 2-year commit, write up how you'd approach getting this cost down and what you'd recommend.",
+      "failure_mode": "Accepts the vendor framing that the contract discount is 'the floor' and reasons by analogy ('warehouses this size cost this much'); recommends negotiating the commit instead of questioning whether the workload fundamentally requires that warehouse at all, and never decomposes the actual compute/storage the query pattern needs (could be 80%+ cheaper via pre-aggregation, tiered storage, or a small read-optimized store)."
+    },
+    {
+      "id": "first-principles-2",
+      "prompt": "We're a 12-person startup building a B2B scheduling tool. Every competitor in our space (Calendly, Cal.com, etc.) offers a native mobile app, and our biggest prospect just asked 'do you have an iOS app?' on a sales call. Leadership wants us to greenlight building native iOS and Android apps next quarter, which is roughly 2 of our 5 engineers for a full quarter. Walk me through whether we should build the mobile apps and how you'd think about it.",
+      "failure_mode": "Treats 'competitors have apps and a prospect asked for one' as proof the apps are needed and jumps to scoping the build; never strips back to the underlying job the prospect is hiring the product for (likely 'book/manage meetings on my phone'), which a responsive web app or PWA might already satisfy at a fraction of the cost."
+    },
+    {
+      "id": "first-principles-3",
+      "prompt": "We need to add full-text search across about 8 million product documents. The team's instinct is to stand up an Elasticsearch cluster because 'that's what you use for search' and we've all seen it at previous companies. It'd be 3 nodes, plus we'd own the ops, reindexing pipeline, and an extra failure domain. Our primary datastore is already Postgres, queries are mostly keyword + filter on category/price, and we get maybe 20 searches/second at peak. What search approach should we go with?",
+      "failure_mode": "Defaults to Elasticsearch by analogy ('that's the standard search tool') without examining what the actual requirements demand; fails to recognize that at 20 qps over 8M docs with keyword+filter queries, Postgres full-text search or pg_trgm likely satisfies the real needs with zero new infrastructure, treating Elasticsearch's existence as justification for its necessity."
+    }
+  ]
+}

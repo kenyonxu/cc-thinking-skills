@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-opportunity-cost",
+  "problems": [
+    {
+      "id": "opportunity-cost-1",
+      "prompt": "A vendor wants $24k/year for a feature-flag and experimentation platform. One of our engineers pushed back: 'That's expensive, I could build us a basic version in two weeks and we'd own it.' Building it ourselves means no license fee, full control, and it's not that complicated. We're a 6-engineer team with a packed product roadmap and a big customer launch this quarter. Should we build our own flag system or buy the platform?",
+      "failure_mode": "Compares the $24k license against $0 for building and concludes building is cheaper because it's 'free' and 'not that complicated'; ignores that the two engineer-weeks (plus ongoing maintenance and a new failure domain) are pulled from a packed roadmap during a launch quarter, so the real cost is the launch features not shipped—an opportunity cost that almost certainly dwarfs $24k."
+    },
+    {
+      "id": "opportunity-cost-2",
+      "prompt": "Our codebase has accumulated real technical debt and the team is excited to spend the next 3 months on a big refactor of the core service—10 engineers, basically all feature work paused. The pitch is that afterward we'll move faster and engineers will be happier. Everyone agrees the code is messy. Leadership is inclined to approve it since 'paying down debt is responsible.' Should we greenlight the 3-month refactor?",
+      "failure_mode": "Endorses the refactor on the virtue that 'paying down tech debt is responsible' and that the code is messy, evaluating it in isolation; never asks what those 30 engineer-months could otherwise produce (revenue features, the next two roadmap bets), nor whether the future velocity gain actually outweighs the best foregone alternative—treating the cleanup's benefit as self-justifying rather than weighed against what's given up."
+    },
+    {
+      "id": "opportunity-cost-3",
+      "prompt": "A major prospect says they'll sign a $180k/year contract if we build a custom SSO integration with their in-house identity provider. It's roughly 6 weeks of work for two engineers. $180k is real money and the sales team is pushing hard to commit. We have other prospects in the pipeline and a roadmap of features that benefit all customers. Should we agree to build the custom integration to land this deal?",
+      "failure_mode": "Anchors on the concrete $180k and says yes because the revenue clearly exceeds the visible build cost; fails to price the alternative use of those two engineers for six weeks (broadly-valuable roadmap work, other pipeline deals) and the ongoing maintenance of a one-off integration, so it never tests whether this is genuinely the highest-value thing those engineers could be doing."
+    }
+  ]
+}

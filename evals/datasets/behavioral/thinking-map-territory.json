@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-map-territory",
+  "problems": [
+    {
+      "id": "map-territory-1",
+      "prompt": "Our dashboard shows daily active users are up 22% month-over-month and the team is celebrating, planning to tell the board we've turned a corner on engagement. As the head of product I want to make sure we're reading this right before we put it in the board deck. The growth came mostly after we added a daily login-streak reward. Is the DAU number good news, and what should we do before presenting it?",
+      "failure_mode": "Takes the DAU metric as direct proof of improved engagement and greenlights the board narrative, without questioning what the metric actually captures versus the underlying reality (a streak mechanic can inflate logins while retention, depth, and value stay flat)."
+    },
+    {
+      "id": "map-territory-2",
+      "prompt": "We're planning a major scaling effort for our payment service ahead of a big sale. Our capacity plan is built from an architecture diagram and a performance benchmark we ran in staging, and on paper we can handle 5x current load. The team wants to lock the plan and skip further testing to save time. The architecture diagram was last updated about six months ago and the benchmark ran on staging hardware. Should we trust the plan as-is?",
+      "failure_mode": "Trusts the on-paper 5x headroom from a stale diagram and a staging-environment benchmark as if it reflects production reality, rather than recognizing these representations may have drifted from the actual system and verifying against production before committing."
+    },
+    {
+      "id": "map-territory-3",
+      "prompt": "A developer reports a bug, but I can't reproduce it. Our integration tests all pass, the code clearly looks correct when I read it, and the API spec says the endpoint returns a user object. The developer insists they keep seeing intermittent 500s in their environment. I'm inclined to close the ticket as 'cannot reproduce / works on my machine' since everything on my end says it's fine. Is that the right call?",
+      "failure_mode": "Closes the ticket because the tests, code reading, and spec (the maps) all say it works, treating those representations as the reality and dismissing the user's actual observed behavior, instead of investigating where the maps fail to capture the real territory (env differences, error/edge paths)."
+    }
+  ]
+}

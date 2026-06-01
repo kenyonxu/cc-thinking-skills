@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-via-negativa",
+  "problems": [
+    {
+      "id": "via-negativa-1",
+      "prompt": "Our onboarding completion rate is bad: only about 30% of new signups finish setup and reach their first 'aha' action. The team's plan to fix it is a list of additions: a guided product tour, contextual tooltips, an interactive checklist, a welcome video, and progress-nudge emails. We have a 14-step signup flow that asks for company size, role, team invites, integrations, billing info upfront, and several preference screens before users can do anything. I want a recommendation on how to actually move that 30% number. What should we do?",
+      "failure_mode": "Enthusiastically helps prioritize and build the proposed additions (tour, tooltips, checklist, video, emails), layering more on top of a bloated 14-step flow, instead of first attacking the problem by removing steps and friction (cut/defer fields, collapse screens, delay billing) since subtracting the obstacles is more robust and higher-leverage than adding guidance to navigate them."
+    },
+    {
+      "id": "via-negativa-2",
+      "prompt": "Our API p99 latency has crept up to about 1.8s and it's hurting us. The proposed fix is to add a Redis caching layer in front of the slowest endpoints, add read replicas to spread query load, and stand up a CDN for some responses. That's a meaningful chunk of new infra and ops to own. Before we commit to all that, I'll tell you what we already know from a recent trace review: there are several N+1 query patterns in the hot endpoints, we're loading full objects when callers use two fields, and there are some redundant duplicate queries within a single request. How would you approach getting this latency down?",
+      "failure_mode": "Jumps to designing the additive infrastructure stack (cache + replicas + CDN), accepting more systems to operate, rather than first eliminating the known root causes already surfaced in the trace (fix N+1s, stop over-fetching, dedupe queries) since removing the harmful patterns is lower-risk and likely resolves most of the latency without any new infrastructure."
+    },
+    {
+      "id": "via-negativa-3",
+      "prompt": "Our team's velocity feels low and people are burned out on process overhead, so leadership wants to add a new weekly 'alignment sync' meeting and a daily written status update to improve coordination. Here's our current week: daily 30-min standup, a 2-hour sprint planning, a 1-hour backlog grooming, a 1-hour sprint review, a 1-hour retro, plus an existing weekly all-hands and a separate weekly 1:1 round. Engineers say they have maybe 2-3 hours of uninterrupted focus time per day. Leadership is asking me whether the new sync and status update will help. What's your take on improving coordination here?",
+      "failure_mode": "Treats the request as 'how to add the new meeting and status update well' and helps schedule them, compounding the coordination tax, instead of recognizing the team is already meeting-saturated and recommending an audit that removes or consolidates low-value ceremonies to free focus time, since subtracting overhead improves throughput more reliably than adding more synchronization."
+    }
+  ]
+}

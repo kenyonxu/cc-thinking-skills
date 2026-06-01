@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-triz",
+  "problems": [
+    {
+      "id": "triz-1",
+      "prompt": "Our autocomplete endpoint is stuck. Product wants suggestions to feel instant (under 50ms), but they also want each suggestion ranked by a heavyweight relevance model that takes 200-400ms per query against our 8M-document index. Right now we're arguing about it: the backend team says we have to relax the latency target, the search team says we have to use a cheaper model and accept worse ranking. Every option on the table sacrifices one to get the other. We're on Postgres + a Go service, ~3k queries/sec at peak. How should we approach this so we don't have to pick between fast and well-ranked?",
+      "failure_mode": "Accepts the trade-off as fundamental and just helps pick a compromise (lower the latency bar OR downgrade the model), rather than separating the conflicting requirements in time/space (e.g. fast approximate prefix match served instantly, expensive ranking precomputed at write-time or applied async) so both goals are met."
+    },
+    {
+      "id": "triz-2",
+      "prompt": "Design question for our mobile sync layer. Users demand a tiny on-device cache so the app stays lightweight and installs fast on cheap Android phones, and they also complain constantly about cache misses when they go offline on the subway, which means they want a huge cache that holds everything. Same cache, opposite size requirements. Our PM keeps asking 'so how big should the cache be?' as if there's one right number. We sync ~2GB of records per active user. What's the right way to think about this instead of just picking a middle-of-the-road cache size that satisfies nobody?",
+      "failure_mode": "Tries to tune a single cache-size parameter to a compromise value, instead of recognizing the cache must be both small and large and resolving it by separation on condition (predictive prefetch of likely-needed records, tiered/eviction by access pattern) so the same element holds opposite properties for different contexts."
+    },
+    {
+      "id": "triz-3",
+      "prompt": "We need to ship a public webhook system for our API. Customers want delivery guarantees and ordering, which pushes us toward a stateful, heavy retry-and-sequencing service. But we also want zero new operational burden on our 3-person platform team, who are already drowning. The vendor quotes for a managed event bus are out of budget. Leadership keeps framing it as 'either we build a robust delivery service and eat the ops cost, or we ship best-effort and disappoint enterprise customers.' Before we resign ourselves to that, is there a way to get reliable ordered delivery without standing up a whole new system to babysit?",
+      "failure_mode": "Treats 'robust delivery vs. low ops burden' as an unavoidable choice and recommends one side, rather than doing a resource analysis of what already exists (the existing DB transaction log, an outbox table, the API gateway, customers' own retry behavior) to achieve reliability by reusing infrastructure already running instead of adding a new component."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-kepner-tregoe",
+  "problems": [
+    {
+      "id": "kepner-tregoe-1",
+      "prompt": "Since Tuesday around 2pm, roughly 15% of image uploads to our app are failing with a generic 502. It's not all uploads, and downloads work fine. The team has theories flying around: someone says it's the new image-resize Lambda we deployed Tuesday morning, someone blames the CDN, someone thinks S3 is throttling us, and someone says it's a memory leak in the API. People want to start rolling things back. How should we figure out what's actually causing this?",
+      "failure_mode": "Latches onto the most salient suspect (the Tuesday Lambda deploy) and proposes rolling it back as the fix, or starts shotgun-changing things; doesn't systematically specify what IS vs IS-NOT failing (only uploads not downloads, only ~15%, only since Tuesday 2pm not the morning deploy time) to narrow distinctions and test each candidate cause against all the evidence before acting."
+    },
+    {
+      "id": "kepner-tregoe-2",
+      "prompt": "We need to choose a database for a new high-write telemetry service: it must sustain 50k writes/sec, retain 90 days of data, stay under $8k/month all-in, and integrate with our existing Grafana/Prometheus stack. Beyond that we'd like good operational simplicity, strong community support, and flexible querying. The candidates on the table are TimescaleDB, InfluxDB, ClickHouse, and Cassandra. The team is leaning ClickHouse because two engineers used it before and liked it. What should we pick?",
+      "failure_mode": "Picks ClickHouse based on team familiarity and vibes, or compares the options on a flat pros/cons list; doesn't separate the hard pass/fail requirements (throughput, retention cost, stack integration) from the weighted nice-to-haves, screen candidates against the musts first, then score the survivors on weighted wants—so it may advance an option that silently fails a non-negotiable or let one strong dimension mask a dealbreaker."
+    },
+    {
+      "id": "kepner-tregoe-3",
+      "prompt": "We have a pile of issues hitting us at once and I'm overwhelmed: prod API latency is up about 2x, a key engineer just gave notice, the Q3 roadmap is still undefined, a customer is escalating about checkout errors, our staging environment has been broken for a week, and we're over budget on cloud spend. Leadership wants 'a plan' by tomorrow. Help me get a handle on all of this.",
+      "failure_mode": "Either tries to solve everything at once in a flat to-do list or grabs whichever item feels loudest, with no structured triage; doesn't first inventory and separate the tangled concerns, then prioritize each by urgency, impact, and trend, and route each to the right kind of follow-up (root-cause investigation vs. decision vs. risk planning) before producing the plan."
+    }
+  ]
+}

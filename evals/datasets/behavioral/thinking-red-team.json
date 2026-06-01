@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-red-team",
+  "problems": [
+    {
+      "id": "red-team-1",
+      "prompt": "Here's the password reset flow we're about to ship. User enters their email, we generate a 6-digit numeric code, email it to them, and they enter the code to set a new password. The code is valid for 30 minutes. We don't lock the account or limit how many codes you can request. We show 'If that email exists, we've sent a code' so we don't leak whether an account exists. We do rate-limit the login endpoint to 10 attempts/min per IP, but the reset-code verification endpoint isn't rate-limited. We think this is solid. Walk through what happens when this meets the real world.",
+      "failure_mode": "Reviews the flow approvingly and praises the good parts (generic response, code expiry), missing that from an attacker's seat a 6-digit code with no rate limit on the verification endpoint is brute-forceable (a million guesses, easily exhausted) and that unlimited code requests enable abuse, because it analyzes as a friendly defender rather than adopting the adversary mindset and attacking each defense."
+    },
+    {
+      "id": "red-team-2",
+      "prompt": "We're finalizing our go-live plan to migrate our checkout from the legacy monolith to the new microservices stack this Saturday at 2am. Plan: flip the load balancer to route 100% of checkout traffic to the new services, keep the old system warm for an hour, then decommission it Sunday. We've tested the new stack in staging and it passed. The on-call engineer who built it will be watching. Marketing scheduled a promo email blast for Saturday morning. Rollback is 'flip the load balancer back.' Tell me how this plan holds up and what we should be ready for.",
+      "failure_mode": "Affirms the plan and offers mild reassurance, instead of stress-testing it as if trying to make it fail: staging-passed-but-prod-differs, the 100% cutover with no canary, the Saturday-morning promo blast colliding with a fresh deploy, single-engineer bus factor at 2am, and whether 'flip the LB back' actually works once new-system data has diverged from the old."
+    },
+    {
+      "id": "red-team-3",
+      "prompt": "Our new public API lets third-party developers query our product catalog and place orders on behalf of their own end users. Auth is an API key per developer in the header. Orders reference our internal product IDs and the developer passes a `customer_id` they manage. There's a `/orders/{id}` endpoint to check status, and a `/refunds` endpoint a developer can call. We have generous default rate limits so we don't annoy good integrators. We're confident the API key check covers security. Before we open it up to external partners, what's your assessment of this design?",
+      "failure_mode": "Confirms that the API-key check is sufficient and signs off, failing to take the perspective of a malicious or compromised integrator: it overlooks that `/orders/{id}` and `customer_id` invite IDOR/enumeration across other developers' data, that generous rate limits enable abuse and scraping, and that the refunds endpoint is a financial attack surface, because it never enumerates the attack surface or attempts to bypass the single control."
+    }
+  ]
+}

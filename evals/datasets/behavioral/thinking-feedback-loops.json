@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-feedback-loops",
+  "problems": [
+    {
+      "id": "feedback-loops-1",
+      "prompt": "I run growth for a recipe app. We have 80K monthly actives and growth has been flat for five months despite spending more on paid acquisition each month (CAC has crept from $4 to $9). The product lets users save recipes and follow other home cooks; cooks who get followers post more, and good posts pull in new signups via shared links. Right now sharing is buried behind two taps and we don't notify a cook when someone follows them. I have one quarter of eng time and a fixed budget. Where should I invest to actually restart growth, and why not just keep scaling paid?",
+      "failure_mode": "Defaults to optimizing the paid-acquisition parameter (raise budget, tweak CAC/creative) — a leaky-bucket additive channel with rising cost — instead of recognizing and strengthening the dormant compounding loop (post → followers → notification → more posting → more shared links → signups), which offers far higher long-run leverage; also ignores that flat growth signals a balancing constraint capping the current loop."
+    },
+    {
+      "id": "feedback-loops-2",
+      "prompt": "Our 30-person engineering org keeps swinging between extremes. When incidents pile up, leadership declares a 'stability quarter,' we freeze features and over-staff reliability work; once things are quiet, they declare a 'velocity quarter,' pull everyone onto features, and reliability work stops entirely. Then incidents creep back up a couple months later and we swing again. We've done this four times in two years. Each swing feels justified in the moment. How would you break this cycle, and what's actually driving it?",
+      "failure_mode": "Frames each swing as an isolated prioritization judgment call (and may just recommend 'better balance') rather than seeing a delayed balancing loop: corrective action is taken based on the current incident count, but reliability investment pays off only after a multi-month lag, so the org overcorrects in both directions and oscillates — the fix is to shorten/lead the feedback (leading indicators, steady reliability allocation) and damp the swing, not to argue which mode is right."
+    },
+    {
+      "id": "feedback-loops-3",
+      "prompt": "Our internal developer platform team is drowning. Every product squad files support tickets when our CI/CD or service templates break or confuse them, and we've made it a point of pride to respond fast and fix things for them directly. Ticket volume has grown ~15% month over month for a year; we've added two engineers and response times still got worse, not better. Leadership's proposed solution is to hire two more platform engineers to 'catch up.' Before we do that, tell us whether more headcount will fix this and what else to consider.",
+      "failure_mode": "Accepts the linear 'more demand → more capacity' framing and endorses hiring, missing that heroically fixing tickets directly is a symptomatic fix that suppresses the pressure to address fundamentals (docs, self-service, root-cause defects), letting demand keep compounding; added capacity briefly relieves the symptom and reinforces dependency, so the high-leverage move is to invest in the fundamental solution and add balancing feedback, not staff up."
+    }
+  ]
+}
