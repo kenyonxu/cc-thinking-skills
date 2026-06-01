@@ -85,7 +85,7 @@ async function runItem(item) {
 async function main() {
   const tags = process.argv.slice(2).length ? process.argv.slice(2) : ['medical', 'legal'];
   const items = loadItems(tags);
-  console.log(`Correctness eval: ${items.length} items from [${tags.join(', ')}], solver=${SOLVER}(${SOLVER_EFFORT}), conc=${CONC}`);
+  console.log(`Correctness eval: ${items.length} items from [${tags.join(', ')}], solver=${SOLVER}(${SOLVER_EFFORT}), conc=${CONC}, isolation ${process.env.EVAL_NO_ISOLATE === '1' ? 'OFF' : 'ON'}`);
   if (!items.length) { console.log('  no correctness candidates found — run the bulk ingest first.'); return; }
 
   let done = 0;

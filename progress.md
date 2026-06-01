@@ -101,5 +101,13 @@ Adversarial per-wave validation by `droid -m deepseek-v4-pro` (codex substitute 
 - ★ HEADLINE CORRECTION: the two "firm ELEVATE" debugging skills DID NOT REPLICATE on fresh n=150 — systems +5.3pp(p=0.043)→−1.3pp(p=0.683); five-whys +4.0pp(p=0.041)→+1.3pp(p=0.752). Restoring systems' leverage table did NOT recover it. So the "trimming regression" lesson was WRONG — both the +5/+3 were draws from a ~zero-centered distribution; p≈0.04 borderline results don't survive replication.
 - REVISED conclusion: only scientific-method (+9.3pp p=0.002) is a robust ELEVATE; red-team is the strong unconfirmed candidate; systems/five-whys downgraded to "no robust effect." ELEVATE-OR-KILL.md updated with the full Wave C table + revised scorecard. LESSON: replication, not a single p<0.05, is the bar.
 
-### Wave D — rework flat/negative skills — EDITS ALREADY DONE (#40)
-- fermi-estimation + dual-process were ALREADY reworked agent-native in the audit commit: dual-process 62→0 System-1/2/gut/intuition references (now mechanical fast-generation vs deliberate-verification); fermi gained When-NOT-to-Use + "don't Fermi a lookup-able value". Remaining: RE-MEASURE reworked fermi on jeggers/fermi (queued after Wave C); dual-process objective eval deferred (no clean dataset — behavioral pairwise would be judge-biased).
+### Wave D — rework flat/negative skills — COMPLETE (#40)
+- fermi-estimation + dual-process were ALREADY reworked agent-native in the audit commit: dual-process 62→0 System-1/2/gut/intuition references (now mechanical fast-generation vs deliberate-verification); fermi gained When-NOT-to-Use + "don't Fermi a lookup-able value".
+- fermi RE-MEASURE (jeggers/fermi, numeric OOM, n=40): placebo 40% → skill 47.5%, **Δ+7.5pp, p=0.371 (ns, 5 discordant)**. The rework FLIPPED the sign (old fermi −5pp → +7.5pp, a ~+12.5pp swing) — directionally echoes the scientific-method rescue. Recorded exp-eval-numeric-fermi-reworked. KILL downgraded to REWORK-RESCUED (confirm at n=150).
+- dual-process objective eval deferred — no clean dataset (behavioral pairwise would be judge-biased); the rework edit itself is validated by the 62→0 anthropomorphizing-reference removal.
+
+### Wave C adversarial validation (gemini-3.1-pro-preview)
+- Claims 1,2,3,5 VERIFIED TRUE: 6 results exist; numbers match JSONs+DB; replications genuinely fail (systems −1.3, five-whys +1.3 — independently confirmed); n matches dataset sizes (no fabrication). Lone "FAIL" was cosmetic: run-correctness.js didn't print "isolation ON" (the run IS isolated via droidExecAsync default; added the log line). deepseek runs returned the "Plan is up-to-date" stub intermittently → switched this validation to gemini.
+
+### Wave E — merge to main — HELD for user (#42)
+- Waves A–D complete + adversarially validated. Holding the merge/push (irreversible, outward) because the central finding INVERTED mid-run (debugging ELEVATEs don't replicate) — surfacing to the user before it lands on main rather than mechanically merging.

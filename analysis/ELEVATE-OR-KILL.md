@@ -139,5 +139,6 @@ Across all evidence now: thinking skills produce **at most a small effect on obj
 - **Strong candidate, unconfirmed:** `red-team` (security, +11.3pp p=0.052 — confirm at higher N).
 - **Not replicated (downgrade from ELEVATE to "no robust effect"):** `systems`, `five-whys-plus`.
 - **No effect / redundant-at-ceiling:** `circle-of-competence`, `cynefin`, `socratic`, `debiasing`, `bayesian`.
-- **Negative/flat:** `fermi-estimation` (rework re-measure pending), `occams-razor`.
+- **Rework-rescued (directional):** `fermi-estimation` — the agent-native rework flipped it from −5pp to **+7.5pp** (p=0.371, n=40); a ~+12.5pp sign-flip that echoes the scientific-method rescue, but ns at n=40 — confirm at higher N before claiming.
+- **Negative/flat:** `occams-razor`.
 The defensible value of the catalog is in **reasoning framing on open work** and as **discoverable, well-bounded references** — not in measurable accuracy lifts on objective tasks, with the two exceptions above.
