@@ -200,7 +200,19 @@ Behaviors that arise from interactions, not individual components:
 ```
 
 ## Leverage Points
-Once you've located where to intervene, pick the highest-leverage point you can actually move (timeout tweaks are low leverage; rules and architecture are high). See `thinking-leverage-points` for Meadows' full 12-level hierarchy—don't re-derive it here.
+Once you've located where to intervene, pick the highest-leverage point you can actually move:
+
+| Leverage | Example | Impact |
+|----------|---------|--------|
+| Parameters | Timeout values | Low |
+| Buffer sizes | Queue limits | Low-Medium |
+| Feedback loops | Add monitoring | Medium |
+| Information flows | Make metrics visible | Medium-High |
+| Rules | Change retry policy | High |
+| Goals | Redefine SLOs | Very High |
+| Paradigm | Rethink architecture | Transformational |
+
+(See `thinking-leverage-points` for Meadows' full 12-level hierarchy.)
 
 ## Verification Checklist
 - [ ] Mapped system components and connections
