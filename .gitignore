@@ -1,26 +1,22 @@
-# OS generated files
+# OS / editor
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Editor directories and files
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
-
-# Node modules (if we add any tooling later)
-node_modules/
-
-# Logs
+# session / local
+.claude/
+# transient run logs
 *.log
-npm-debug.log*
-
-# Local environment
-.env
-.env.local
+# scratch eval runs (regenerable)
+evals/results/smoke/
+evals/results/pilot/
+evals/results/micro/
+# third-party / NON-COMMERCIAL datasets — do NOT redistribute in this MIT repo
+# (see evals/datasets/external/NOTICE.md). Re-download via evals/datasets/ingest-hf.js
+evals/datasets/external/diversevul.jsonl
+evals/datasets/external/fermi.jsonl
+evals/datasets/external/financial.jsonl
+evals/datasets/external/forecasting.jsonl
+evals/datasets/external/glm-distractor.jsonl
+evals/datasets/external/legal.jsonl
+evals/datasets/external/medical.jsonl
+evals/datasets/external/selfaware.jsonl
+evals/datasets/external/strategyqa.jsonl
+evals/datasets/external/swebench.jsonl
