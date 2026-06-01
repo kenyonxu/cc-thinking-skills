@@ -113,3 +113,31 @@ After applying the audit best-practices to all 39 skills, re-ran the **entire de
 3. **A cosmetic edit is not a rework.** `occams-razor` was edited (trigger-scoped) but stayed at +2pp ns — only a true agent-native rewrite moved the needle. Editing ≠ reworking.
 
 **Firm significant ELEVATEs to date (native debugging):** `scientific-method` (+9.3pp, p=0.002, current). `systems` (+5.3pp) and `five-whys-plus` (+4pp) were firm pre-trim and need their trimmed content restored to recover significance. The rework recipe is validated end-to-end (audit → agent-native rewrite → +9pp); the trimming caution is now backed by two regressions, not one.
+
+## ★★★★ Wave C — NEW objective verdicts + a REPLICATION FAILURE that revises the headline
+Powered, isolated, length-controlled sweep (`evals/run-wavec.sh`). Four previously-**unmeasured** skills got their first objective verdicts; the two "firm ELEVATE" debugging skills were **re-run on a fresh n=150** as a replication test.
+
+| Skill | mode (dataset) | placebo→skill | Δ | p | verdict |
+|---|---|---|---|---|---|
+| **red-team** | correctness (DiverseVul balanced, n=80) | 56→68% | **+11.3** | **0.052** | **STRONG ELEVATE-leaning** — largest objective effect in the program; confirm at n=150/200 |
+| circle-of-competence | abstention (SelfAware balanced, n=70) | 70→70% | +0.0 | 0.773 | **KILL/REWORK** — no calibration benefit (abstains slightly *less* on unanswerable) |
+| socratic | binary-decision (clarify, n=29) | 100→93% | −6.9 | 0.479 | no benefit; placebo at ceiling — INCONCLUSIVE |
+| cynefin | binary-decision (classify, n=30) | 97→100% | +3.3 | 1.0 | INCONCLUSIVE-ceiling |
+| **systems** (restored) | SWE localize (n=150) | 84→83% | **−1.3** | 0.683 | **DID NOT REPLICATE** (was +5.3pp p=0.043) |
+| **five-whys-plus** | SWE localize (n=150) | 83→84% | **+1.3** | 0.752 | **DID NOT REPLICATE** (was +4.0pp p=0.041) |
+
+### The headline correction (most important result of the session)
+**The two "firm ELEVATE" debugging skills do not replicate on a fresh sample.** `systems` went +5.3pp (p=0.043) → −1.3pp, and `five-whys-plus` +4.0pp (p=0.041) → +1.3pp. Restoring `systems`' trimmed leverage table did **not** recover the effect. This means:
+- The earlier "trimming regression" lesson was **wrong** — the dips weren't caused by trimming (content was barely touched). Both the original +5pp *and* the trimmed +3pp were draws from a distribution centered near **zero**; the p≈0.04 originals were **borderline-significance noise that doesn't survive replication.**
+- **Replication, not a single p<0.05, is the bar.** A lone borderline result at n=150 is not enough — these effects are small (a handful of discordant pairs out of 150) and a fresh sample easily crosses back.
+- **Only `scientific-method` (+9.3pp, p=0.002) remains a robust ELEVATE** — its effect is larger and its p an order of magnitude stronger. It should still be independently replicated, but it is in a different class than the borderline debugging skills.
+- **`red-team` (+11.3pp, p=0.052) is the new strongest candidate** — a large effect on balanced objective security data. It needs an n=150/200 confirmation run to settle significance, but it is the most promising un-confirmed skill.
+
+### Revised program conclusion
+Across all evidence now: thinking skills produce **at most a small effect on objective tasks, and most apparent "ELEVATEs" are at the edge of significance and do not robustly replicate.** The honest scorecard:
+- **Robust ELEVATE:** `scientific-method` (debugging rework, +9.3pp p=0.002).
+- **Strong candidate, unconfirmed:** `red-team` (security, +11.3pp p=0.052 — confirm at higher N).
+- **Not replicated (downgrade from ELEVATE to "no robust effect"):** `systems`, `five-whys-plus`.
+- **No effect / redundant-at-ceiling:** `circle-of-competence`, `cynefin`, `socratic`, `debiasing`, `bayesian`.
+- **Negative/flat:** `fermi-estimation` (rework re-measure pending), `occams-razor`.
+The defensible value of the catalog is in **reasoning framing on open work** and as **discoverable, well-bounded references** — not in measurable accuracy lifts on objective tasks, with the two exceptions above.
