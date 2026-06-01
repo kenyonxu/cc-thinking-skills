@@ -71,3 +71,8 @@ Needs: numeric/OOM+Brier scorer (bayesian/probabilistic/fermi), abstention/routi
 ### Phase 7b — REWORK RESULT: scientific-method-v2 = 0pp → +5.3pp (p=0.061, n=150)
 - Agent-native rewrite (evidence-ranked hypothesis differential, native debugging scope, boundaries, no human stage-directions) converted the flat original (0pp) into a near-significant +5.3pp. PROVES rework-to-best-practices can manufacture +5. Recorded EVAL-SWE-scientific-method-v2.
 - Phase 7 COMPLETE. Phase 6 (audit) COMPLETE. +5 answer: 2 firm ELEVATEs (systems, five-whys), 1 rework-engineered +5 (scientific-method-v2), occams not confirmed; ceiling/negative skills can't reach +5.
+
+### Post-improvement verification — improve→re-measure loop
+- scientific-method (in-place improved): 0pp → +9.3pp, p=0.002 SIG. Audit rework converted flat skill to strongest ELEVATE (beat v2's +5.3). Recorded EVAL-SWE-scientific-method-improved.
+- systems (improved/trimmed): +5.3pp sig → +3.3pp ns. Within-noise dip; caution: don't trim proven skills without re-validating. Recorded EVAL-SWE-systems-improved.
+- LESSON: rework fixes broken skills (big win); trimming proven skills risks regression → always re-measure after editing.

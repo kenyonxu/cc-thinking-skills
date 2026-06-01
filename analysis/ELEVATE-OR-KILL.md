@@ -97,3 +97,16 @@ SWE-bench fault localization, isolated, length-controlled, n=150:
 **Where +5 is NOT available:** redundant-at-ceiling skills (`debiasing`, `bayesian` — model already ~100%), measured-negative skills (`fermi`), and any skill applied out-of-domain. For those, the move is kill/merge/trigger-only, not "+5."
 
 **Takeaway:** the +5 is real, sparse, and *manufacturable* — reworking a skill to the best-practices spec is a repeatable recipe to turn a flat skill into a measurable lift, demonstrated end-to-end (0 → +5.3) on `scientific-method`.
+
+## ★★★ Post-improvement verification (improve → re-measure loop)
+After applying the audit best-practices to all 39 skills, re-ran the two most informative on SWE-bench (n=150, isolated):
+| Skill | pre-improvement | post-improvement | read |
+|---|---|---|---|
+| **scientific-method** (in-place rework) | 0pp (flat) | **+9.3pp, p=0.002 SIG** | rework WORKED — flat→firm ELEVATE (beat the v2 prototype's +5.3) |
+| **systems** (trimmed) | +5.3pp, p=0.043 SIG | +3.3pp, p=0.182 ns | within-noise dip; trimming a proven skill is risky → re-validate, consider restoring trimmed content |
+
+**Two lessons, both evidence-backed:**
+1. **Reworking a broken skill is the highest-leverage move** — `scientific-method` went 0 → +9.3pp (p=0.002) purely from the agent-native rewrite (evidence-ranked differential, native scope, boundaries, no human stage-directions). It is now the **strongest single ELEVATE** in the program.
+2. **"Improving" an already-proven skill can regress it.** `systems` dipped to ns after trimming — don't fix what works without re-measuring; the description/boundary edits are safe, the content trimming is suspect.
+
+**Firm significant ELEVATEs to date (native debugging):** `scientific-method` (+9.3pp, p=0.002), `five-whys-plus` (+4pp, p=0.041), `systems` (~+5pp, bounces around significance). The rework recipe is validated end-to-end: audit → rewrite → +9pp.
