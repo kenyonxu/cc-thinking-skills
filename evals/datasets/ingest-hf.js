@@ -60,10 +60,25 @@ const SOURCES = {
       answer: r.target === 1 ? 'Yes' : 'No', skill_fit: ['red-team'], cwe: r.cwe,
     } : null,
   },
-  selfaware: { // circle-of-competence: abstention routing (downloaded for the routing runner)
+  'diversevul-balanced': { // red-team: BALANCED Yes/No eval — ~100 vuln + ~100 safe from test split.
+    // The test split is sorted: target=1 rows first (~18945), then target=0 rows (~311547).
+    // balance config tells main() to run two separate passes and merge.
+    dataset: 'claudios/DiverseVul', config: 'default', split: 'test',
+    mode: 'correctness', license: 'MIT/research',
+    balance: { positiveOffset: 0, negativeOffset: 19000 }, // start offsets for each class
+    map: r => (r.func && r.func.length > 40 && r.func.length < 2200) ? {
+      prompt: 'Is the following C/C++ function vulnerable to a security issue (memory safety, injection, auth bypass, etc.)? Answer Yes or No.\n\n```c\n' + r.func + '\n```',
+      answer: r.target === 1 ? 'Yes' : 'No', skill_fit: ['red-team'], cwe: r.cwe,
+    } : null,
+  },
+  selfaware: { // circle-of-competence: abstention routing (BALANCED answerable/unanswerable).
+    // Unanswerable items are sparse and scattered (~1/40 rows), so we scan sequentially
+    // and bucket by class until both halves are full (balanceScan), rather than by offset.
     dataset: 'OkayestProgrammer/selfAware', config: 'default', split: 'train',
     mode: 'abstention', license: 'CC-BY-SA-4.0',
-    map: r => ({ prompt: r.question, answerable: r.answerable, skill_fit: ['circle-of-competence'] }),
+    balanceScan: true,
+    classOf: m => (m.answerable ? 'positive' : 'negative'),
+    map: r => (r.question && typeof r.answerable === 'boolean') ? { prompt: r.question, answerable: r.answerable, skill_fit: ['circle-of-competence'] } : null,
   },
   fermi: { // fermi-estimation: numeric order-of-magnitude ground truth
     dataset: 'jeggers/fermi', config: 'real', split: 'test',
@@ -155,19 +170,74 @@ async function main() {
   const src = SOURCES[tag];
   if (!src) { console.error('unknown source. options:', Object.keys(SOURCES).join(', ')); process.exit(1); }
 
-  const out = [];
-  let pulled = 0;
-  while (out.length < count && pulled < count * 6) {
-    const batch = fetchRows(src.dataset, src.config, src.split, offset, Math.min(100, count * 2));
-    if (!batch.length) break;
-    for (const row of batch) {
-      pulled++;
-      const mapped = src.map(row);
-      if (!mapped || !mapped.prompt) continue;
-      out.push({ id: `${tag}-${offset + out.length}`, source: src.dataset, mode: src.mode, license: src.license, ...mapped });
-      if (out.length >= count) break;
+  let out = [];
+
+  if (src.balanceScan) {
+    // Balanced fetch for datasets where classes are scattered (not offset-sorted):
+    // sweep pages sequentially and bucket each mapped item by src.classOf until both
+    // halves hold `count/2`.
+    const half = Math.ceil(count / 2);
+    const buckets = { positive: [], negative: [] };
+    let scanOffset = 0, scanned = 0;
+    while ((buckets.positive.length < half || buckets.negative.length < half) && scanned < count * 60) {
+      const batch = fetchRows(src.dataset, src.config, src.split, scanOffset, 100);
+      if (!batch.length) break;
+      for (const row of batch) {
+        scanned++;
+        const mapped = src.map(row);
+        if (!mapped || !mapped.prompt) continue;
+        const cls = src.classOf(mapped);
+        if (buckets[cls] && buckets[cls].length < half) buckets[cls].push(mapped);
+      }
+      scanOffset += batch.length;
     }
-    offset += batch.length;
+    const take = Math.min(half, buckets.positive.length, buckets.negative.length);
+    for (let i = 0; i < take; i++) {
+      out.push({ id: `${tag}-positive-${i}`, source: src.dataset, mode: src.mode, license: src.license, ...buckets.positive[i] });
+      out.push({ id: `${tag}-negative-${i}`, source: src.dataset, mode: src.mode, license: src.license, ...buckets.negative[i] });
+    }
+    console.log(`  balanced scan (offset ${scanOffset}): positive=${buckets.positive.length} negative=${buckets.negative.length} -> kept ${take} of each`);
+  } else if (src.balance) {
+    // Balanced fetch: collect `count/2` positives (answer=Yes) and `count/2` negatives (answer=No)
+    // by starting from the known class-separated offsets.
+    const half = Math.ceil(count / 2);
+    const passes = [
+      { startOffset: src.balance.positiveOffset, want: half, label: 'positive' },
+      { startOffset: src.balance.negativeOffset, want: half, label: 'negative' },
+    ];
+    for (const pass of passes) {
+      let passOffset = pass.startOffset;
+      let passCollected = 0;
+      let passPulled = 0;
+      while (passCollected < pass.want && passPulled < pass.want * 8) {
+        const batch = fetchRows(src.dataset, src.config, src.split, passOffset, Math.min(100, pass.want * 3));
+        if (!batch.length) break;
+        for (const row of batch) {
+          passPulled++;
+          const mapped = src.map(row);
+          if (!mapped || !mapped.prompt) continue;
+          out.push({ id: `${tag}-${pass.label}-${passCollected}`, source: src.dataset, mode: src.mode, license: src.license, ...mapped });
+          passCollected++;
+          if (passCollected >= pass.want) break;
+        }
+        passOffset += batch.length;
+      }
+      console.log(`  balanced pass '${pass.label}': collected ${passCollected}/${pass.want}`);
+    }
+  } else {
+    let pulled = 0;
+    while (out.length < count && pulled < count * 6) {
+      const batch = fetchRows(src.dataset, src.config, src.split, offset, Math.min(100, count * 2));
+      if (!batch.length) break;
+      for (const row of batch) {
+        pulled++;
+        const mapped = src.map(row);
+        if (!mapped || !mapped.prompt) continue;
+        out.push({ id: `${tag}-${offset + out.length}`, source: src.dataset, mode: src.mode, license: src.license, ...mapped });
+        if (out.length >= count) break;
+      }
+      offset += batch.length;
+    }
   }
 
   let kept = out;
