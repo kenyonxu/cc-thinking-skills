@@ -128,6 +128,24 @@ The `description` field is critical - it helps Claude Code understand when to in
 - Focus on the use case, not the theory
 - Include keywords that users might mention
 
+### Eval Expectations
+
+Structural quality is not enough. Any change that alters a skill's reasoning procedure or scope should include the narrowest relevant eval evidence:
+
+- Run `node scripts/validate-skills.js` for format regressions.
+- Run `EVAL_RUN=<name> node evals/run-structural.js` after skill catalog changes.
+- For routing/description changes, run `EVAL_RUN=<name> node evals/run-routing.js`.
+- For behavioral claims, use length-controlled skill-vs-placebo comparisons and document the dataset, model, N, and p-value.
+- For debugging-skill claims, prefer `evals/run-swe.js` on SWE-bench localization.
+
+Do not claim a skill is "proven" or "firm" from pre-edit results. Re-run after edits, especially after trimming content.
+
+### Generated and Local Artifacts
+
+- Do not commit `backups/`; it contains local backups of global Claude state.
+- Do not commit third-party downloaded datasets under `evals/datasets/external/*.jsonl` unless they are authored here and license-cleared.
+- README images should live under `assets/` and be referenced with relative paths.
+
 ## Pull Request Process
 
 1. **Fork** the repository

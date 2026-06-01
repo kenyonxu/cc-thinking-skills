@@ -8,10 +8,13 @@ A comprehensive collection of thinking skills for [Claude Code](https://claude.a
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Skills Count](https://img.shields.io/badge/Skills-39-blue)](https://github.com/tjboudreaux/cc-thinking-skills)
 
+![Claude Code Thinking Skills banner](assets/readme-banner.png)
+
 ## Features
 
 - **39 Thinking Frameworks** - Comprehensive mental models for better decision-making
-- **Battle-Tested** - Based on proven frameworks from cognitive science and systems thinking
+- **Eval-Informed** - Includes an isolated evaluation harness and evidence notes for elevate/kill decisions
+- **Battle-Tested Foundations** - Based on proven frameworks from cognitive science and systems thinking
 - **Claude Code Native** - Designed specifically for Claude Code's skill system
 - **Quality Scripts** - Tools to validate and enhance skill quality
 - **Zero Configuration** - Just install and invoke with skill names
@@ -112,7 +115,7 @@ Once installed, invoke any skill by name in Claude Code:
 | `thinking-circle-of-competence` | Know the boundaries of expertise | Delegation, learning decisions |
 | `thinking-triz` | Resolve technical contradictions | Engineering design, innovation |
 | `thinking-five-whys-plus` | Enhanced root cause analysis with bias guards | Debugging, incident postmortems |
-| `thinking-scientific-method` | Hypothesis-driven investigation | Debugging, A/B testing, experimentation |
+| `thinking-scientific-method` | Hypothesis-differential debugging | Fault localization, ambiguous symptoms |
 | `thinking-thought-experiment` | Structured imagination for exploration | Architecture, edge cases, philosophy |
 
 ### Estimation & Risk
@@ -143,6 +146,18 @@ Once installed, invoke any skill by name in Claude Code:
 ## Quality Assurance Tools
 
 This collection includes scripts to maintain and improve skill quality:
+
+### Outcome Evals
+
+The `evals/` and `experiments/` directories contain the current outcome-based harness:
+
+- **Structural lint** for frontmatter and format checks
+- **Routing evals** for skill discoverability and false-positive control
+- **Length-controlled behavioral evals** using skill-vs-placebo prompts
+- **Objective SWE-bench localization evals** for debugging skills
+- **SQLite dashboard** for reviewing eval and experiment results
+
+Current evidence is documented in `analysis/ELEVATE-OR-KILL.md`. The strongest post-improvement result is `thinking-scientific-method`, now implemented as hypothesis-differential debugging: SWE-bench fault localization improved from a flat original to **+9.3pp, p=0.002** after the agent-native rewrite. Other debugging skills need careful revalidation after trimming; do not treat old pre-trim results as current.
 
 ### Validate Skills
 
@@ -214,6 +229,14 @@ Every system has exactly one constraint limiting throughput. Optimizing anything
 - Process improvement
 - Resource allocation
 - Identifying bottlenecks
+
+### Scientific Method / Hypothesis-Differential Debugging
+Localize an ambiguous bug by enumerating falsifiable hypotheses, ranking them by likelihood x cheapness-to-check, and making the cheapest discriminating observation first.
+
+**When to use:**
+- A symptom could plausibly come from several files/functions/components
+- You can inspect code, logs, diffs, traces, or tests now
+- You need to localize the fault before applying root-cause analysis
 
 ### Cynefin Framework
 Classify problems by the relationship between cause and effect: Clear, Complicated, Complex, or Chaotic. Each domain requires a different approach.

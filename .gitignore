@@ -4,6 +4,8 @@
 .claude/
 # transient run logs
 *.log
+# local backups of global Claude state; do not commit
+backups/
 # scratch eval runs (regenerable)
 evals/results/smoke/
 evals/results/pilot/
