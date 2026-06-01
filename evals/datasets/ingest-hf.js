@@ -109,11 +109,13 @@ const SOURCES = {
       };
     },
   },
-  strategyqa: { // second-order proxy: implicit multi-hop yes/no
-    dataset: 'voidful/StrategyQA', config: 'default', split: 'train',
-    mode: 'correctness', license: 'CC (Wikipedia-derived)',
+  strategyqa: { // second-order proxy: implicit multi-hop yes/no (balanced Yes/No)
+    dataset: 'ChilleD/StrategyQA', config: 'default', split: 'train',
+    mode: 'correctness', license: 'CC (Wikipedia-derived, Apache-2.0 repo)',
+    balanceScan: true,
+    classOf: m => (m.answer === 'Yes' ? 'positive' : 'negative'),
     map: r => (r.question && typeof r.answer === 'boolean') ? {
-      prompt: r.question + '\n\nAnswer Yes or No.', answer: r.answer ? 'Yes' : 'No', skill_fit: ['second-order'],
+      prompt: r.question + '\n\nThink step by step about the implicit chain of facts, then answer Yes or No.', answer: r.answer ? 'Yes' : 'No', skill_fit: ['second-order'],
     } : null,
   },
 };
