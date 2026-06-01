@@ -23,7 +23,7 @@ Situation changing rapidly AND need to act before certainty? → yes → APPLY O
 ## When NOT to Use
 - The situation is static and you have time → deliberate analysis beats fast looping.
 - The action is irreversible/high-blast-radius → gather more information before acting; 70% confidence isn't enough.
-- You can cheaply and directly localize the cause (read the diff/log) → use `thinking-scientific-method-v2` (hypothesis differential) instead of looping in the dark.
+- You can cheaply and directly localize the cause (read the diff/log) → use `thinking-scientific-method` (hypothesis differential) instead of looping in the dark.
 
 ## The Four Phases
 

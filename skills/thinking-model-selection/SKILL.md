@@ -132,7 +132,7 @@ EVALUATION PROBLEMS (Is this good?)
 
 | Domain | Primary Models | Why |
 |--------|---------------|-----|
-| Debugging | Scientific Method, 5 Whys | Hypothesis testing, root cause |
+| Debugging | Scientific Method, 5 Whys | Hypothesis-differential localization, root cause |
 | Architecture | Systems Thinking, Leverage Points | Interconnections, intervention |
 | Product | Jobs to be Done, Cynefin | User needs, complexity |
 | Strategy | Red Team, Pre-mortem | Adversarial, risk |

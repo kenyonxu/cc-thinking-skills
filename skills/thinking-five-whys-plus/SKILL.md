@@ -21,14 +21,14 @@ The Five Whys technique from the Toyota Production System is powerful but often 
 ```
 Problem occurred?
   → Is the root cause already obvious and verified? → yes → Fix directly
-  → Could the symptom have several distinct causes?  → yes → first localize with thinking-scientific-method-v2 (hypothesis differential), then Five Whys the confirmed cause
+  → Could the symptom have several distinct causes?  → yes → first localize with thinking-scientific-method (hypothesis differential), then Five Whys the confirmed cause
   → Proximate cause known, systemic cause unclear?   → yes → APPLY FIVE WHYS PLUS
 ```
 
 ## When NOT to Use
 
 - The root cause is already obvious and verified → just fix it; the chain adds nothing.
-- You don't yet know *which* component is at fault (multiple candidate causes) → that's a localization problem; use a hypothesis differential first (`thinking-scientific-method-v2`), then run Five Whys on the cause it confirms.
+- You don't yet know *which* component is at fault (multiple candidate causes) → that's a localization problem; use a hypothesis differential first (`thinking-scientific-method`), then run Five Whys on the cause it confirms.
 - The chain would be pure speculation with no evidence for the next "why" → stop and gather evidence; don't speculate deeper (see the Speculation Dive guard).
 
 ## Standard Five Whys Failure Modes

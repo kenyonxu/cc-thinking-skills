@@ -91,9 +91,9 @@ Feature prioritization           → Opportunity Cost, Theory of Constraints
 Why aren't users engaging?       → Jobs to be Done, 5 Whys Plus
 New product exploration          → Effectuation, First Principles
 Should we pivot?                 → Regret Minimization, Reversibility
-Product-market fit               → Jobs to be Done, Scientific Method
+Product-market fit               → Jobs to be Done, Bayesian
 Roadmap planning                 → Theory of Constraints, Opportunity Cost
-A/B test design                  → Scientific Method, Bayesian
+A/B test interpretation          → Bayesian, Probabilistic
 ```
 
 **Default for product:** Start with **Jobs to be Done** (what job is the user hiring this for?).
