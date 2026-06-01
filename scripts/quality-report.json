@@ -890,95 +890,6 @@
     "maxScore": 18
   },
   {
-    "name": "thinking-systems",
-    "path": "/Users/tjboudreaux/Sandbox/cc-thinking-skills/skills/thinking-systems/SKILL.md",
-    "sections": [
-      {
-        "name": "YAML Frontmatter",
-        "found": true
-      },
-      {
-        "name": "Overview",
-        "found": true
-      },
-      {
-        "name": "Core Principle",
-        "found": true
-      },
-      {
-        "name": "When to Use",
-        "found": true
-      },
-      {
-        "name": "Decision Flow",
-        "found": true
-      },
-      {
-        "name": "Process/Steps",
-        "found": true
-      },
-      {
-        "name": "Examples",
-        "found": false
-      },
-      {
-        "name": "Template",
-        "found": true
-      },
-      {
-        "name": "Verification Checklist",
-        "found": true
-      },
-      {
-        "name": "Key Questions",
-        "found": true
-      },
-      {
-        "name": "Wisdom/Attribution",
-        "found": true
-      }
-    ],
-    "quality": [
-      {
-        "name": "Description Length",
-        "pass": true,
-        "detail": "183 chars (max 200)"
-      },
-      {
-        "name": "Has Multiple Examples",
-        "pass": false,
-        "detail": "Found 0 example(s)"
-      },
-      {
-        "name": "Has Tables",
-        "pass": false,
-        "detail": "Found 0 table row(s)"
-      },
-      {
-        "name": "Has Checklists",
-        "pass": true,
-        "detail": "Found 7 checklist item(s)"
-      },
-      {
-        "name": "Has Code Blocks",
-        "pass": true,
-        "detail": "Found 14 code block(s)"
-      },
-      {
-        "name": "Word Count (500-3000)",
-        "pass": true,
-        "detail": "1164 words"
-      },
-      {
-        "name": "Has Anti-patterns/Failure Modes",
-        "pass": true,
-        "detail": "Found warnings"
-      }
-    ],
-    "score": 15,
-    "maxScore": 18
-  },
-  {
     "name": "thinking-dual-process",
     "path": "/Users/tjboudreaux/Sandbox/cc-thinking-skills/skills/thinking-dual-process/SKILL.md",
     "sections": [
@@ -1235,6 +1146,95 @@
         "name": "Word Count (500-3000)",
         "pass": true,
         "detail": "1464 words"
+      },
+      {
+        "name": "Has Anti-patterns/Failure Modes",
+        "pass": true,
+        "detail": "Found warnings"
+      }
+    ],
+    "score": 16,
+    "maxScore": 18
+  },
+  {
+    "name": "thinking-systems",
+    "path": "/Users/tjboudreaux/Sandbox/cc-thinking-skills/skills/thinking-systems/SKILL.md",
+    "sections": [
+      {
+        "name": "YAML Frontmatter",
+        "found": true
+      },
+      {
+        "name": "Overview",
+        "found": true
+      },
+      {
+        "name": "Core Principle",
+        "found": true
+      },
+      {
+        "name": "When to Use",
+        "found": true
+      },
+      {
+        "name": "Decision Flow",
+        "found": true
+      },
+      {
+        "name": "Process/Steps",
+        "found": true
+      },
+      {
+        "name": "Examples",
+        "found": false
+      },
+      {
+        "name": "Template",
+        "found": true
+      },
+      {
+        "name": "Verification Checklist",
+        "found": true
+      },
+      {
+        "name": "Key Questions",
+        "found": true
+      },
+      {
+        "name": "Wisdom/Attribution",
+        "found": true
+      }
+    ],
+    "quality": [
+      {
+        "name": "Description Length",
+        "pass": true,
+        "detail": "183 chars (max 200)"
+      },
+      {
+        "name": "Has Multiple Examples",
+        "pass": false,
+        "detail": "Found 0 example(s)"
+      },
+      {
+        "name": "Has Tables",
+        "pass": true,
+        "detail": "Found 9 table row(s)"
+      },
+      {
+        "name": "Has Checklists",
+        "pass": true,
+        "detail": "Found 7 checklist item(s)"
+      },
+      {
+        "name": "Has Code Blocks",
+        "pass": true,
+        "detail": "Found 14 code block(s)"
+      },
+      {
+        "name": "Word Count (500-3000)",
+        "pass": true,
+        "detail": "1221 words"
       },
       {
         "name": "Has Anti-patterns/Failure Modes",
