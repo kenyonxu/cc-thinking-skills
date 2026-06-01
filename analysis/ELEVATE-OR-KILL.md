@@ -99,14 +99,17 @@ SWE-bench fault localization, isolated, length-controlled, n=150:
 **Takeaway:** the +5 is real, sparse, and *manufacturable* — reworking a skill to the best-practices spec is a repeatable recipe to turn a flat skill into a measurable lift, demonstrated end-to-end (0 → +5.3) on `scientific-method`.
 
 ## ★★★ Post-improvement verification (improve → re-measure loop)
-After applying the audit best-practices to all 39 skills, re-ran the two most informative on SWE-bench (n=150, isolated):
+After applying the audit best-practices to all 39 skills, re-ran the **entire debugging cluster** on SWE-bench (n=150, isolated, length-controlled). This closes the improve→re-measure loop for every skill that has a native objective eval:
 | Skill | pre-improvement | post-improvement | read |
 |---|---|---|---|
 | **scientific-method** (in-place rework) | 0pp (flat) | **+9.3pp, p=0.002 SIG** | rework WORKED — flat→firm ELEVATE (beat the v2 prototype's +5.3) |
-| **systems** (trimmed) | +5.3pp, p=0.043 SIG | +3.3pp, p=0.182 ns | within-noise dip; trimming a proven skill is risky → re-validate, consider restoring trimmed content |
+| **systems** (trimmed) | +5.3pp, p=0.043 SIG | +3.3pp, p=0.182 ns | within-noise dip after trimming |
+| **five-whys-plus** (trimmed) | +4.0pp, p=0.041 SIG | +3.3pp, p=0.131 ns | within-noise dip after trimming — slipped just below sig |
+| **occams-razor** (trigger-scoped) | +2.0pp, p=0.45 ns | +2.0pp, p=0.505 ns | flat both ways — never confirmed, TRIGGER-ONLY stands |
 
-**Two lessons, both evidence-backed:**
+**Three lessons, all evidence-backed:**
 1. **Reworking a broken skill is the highest-leverage move** — `scientific-method` went 0 → +9.3pp (p=0.002) purely from the agent-native rewrite (evidence-ranked differential, native scope, boundaries, no human stage-directions). It is now the **strongest single ELEVATE** in the program.
-2. **"Improving" an already-proven skill can regress it.** `systems` dipped to ns after trimming — don't fix what works without re-measuring; the description/boundary edits are safe, the content trimming is suspect.
+2. **"Improving" an already-proven skill can regress it — now backed by TWO data points.** Both proven skills dipped to ns after trimming: `systems` +5.3→+3.3 and `five-whys-plus` +4.0→+3.3. The description/boundary edits are safe; the content *trimming* is the suspect. Restore the trimmed procedure content and re-validate before shipping.
+3. **A cosmetic edit is not a rework.** `occams-razor` was edited (trigger-scoped) but stayed at +2pp ns — only a true agent-native rewrite moved the needle. Editing ≠ reworking.
 
-**Firm significant ELEVATEs to date (native debugging):** `scientific-method` (+9.3pp, p=0.002), `five-whys-plus` (+4pp, p=0.041), `systems` (~+5pp, bounces around significance). The rework recipe is validated end-to-end: audit → rewrite → +9pp.
+**Firm significant ELEVATEs to date (native debugging):** `scientific-method` (+9.3pp, p=0.002, current). `systems` (+5.3pp) and `five-whys-plus` (+4pp) were firm pre-trim and need their trimmed content restored to recover significance. The rework recipe is validated end-to-end (audit → agent-native rewrite → +9pp); the trimming caution is now backed by two regressions, not one.

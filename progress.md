@@ -76,3 +76,9 @@ Needs: numeric/OOM+Brier scorer (bayesian/probabilistic/fermi), abstention/routi
 - scientific-method (in-place improved): 0pp → +9.3pp, p=0.002 SIG. Audit rework converted flat skill to strongest ELEVATE (beat v2's +5.3). Recorded EVAL-SWE-scientific-method-improved.
 - systems (improved/trimmed): +5.3pp sig → +3.3pp ns. Within-noise dip; caution: don't trim proven skills without re-validating. Recorded EVAL-SWE-systems-improved.
 - LESSON: rework fixes broken skills (big win); trimming proven skills risks regression → always re-measure after editing.
+
+### Debugging cluster — FULL post-improvement re-measure CLOSED (n=150 each, SWE-bench, isolated)
+- five-whys-plus (trimmed): +4.0pp p=0.041 SIG → +3.3pp p=0.131 ns. Recorded exp-eval-swe-five-whys-plus-improved-fb01.
+- occams-razor (trigger-scoped): +2.0pp p=0.45 ns → +2.0pp p=0.505 ns. Unchanged — cosmetic edit, not a rework. Recorded exp-eval-swe-occams-razor-improved-cd02.
+- COMPLETE 4-skill before/after: sci-method 0→+9.3 (rework win); systems +5.3→+3.3 and five-whys +4.0→+3.3 (BOTH trimming regressions — now 2 data points for the trim-caution lesson); occams +2→+2 (flat, trigger-only stands).
+- Task #32 DONE. Net verdict: 1 firm ELEVATE current (sci-method); 2 proven skills need trimmed content restored to recover sig; 1 trigger-only. ELEVATE-OR-KILL.md updated with the full table + 3 lessons.
