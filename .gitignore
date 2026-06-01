@@ -10,6 +10,7 @@ backups/
 evals/results/smoke/
 evals/results/pilot/
 evals/results/micro/
+evals/results/local/
 # third-party / NON-COMMERCIAL datasets — do NOT redistribute in this MIT repo
 # (see evals/datasets/external/NOTICE.md). Re-download via evals/datasets/ingest-hf.js
 evals/datasets/external/diversevul.jsonl
