@@ -47,7 +47,7 @@ A thinking skill earns its place only if there is a **realistic moment** where a
 | `thinking-leverage-points` | Rank interventions by Meadows' hierarchy (parameters → rules → goals → paradigm). | Incremental tweaks (cost trims, more QA) that never stick — find the higher-leverage change. |
 | `thinking-theory-of-constraints` | Find the single throughput bottleneck; exploit and subordinate to it. | Optimizing performance/delivery where effort is being spread across non-constraints. |
 | `thinking-cynefin` | Classify a problem's domain and match the method to it. | Choosing how much to plan vs experiment vs act (over-analyzing the emergent, experimenting in a crisis). |
-| `thinking-scientific-method` | Force falsifiable hypotheses and discriminating tests over confirmation. | Debugging/rollout amid multiple simultaneous changes, or shipping a redesign with no control. |
+| `thinking-scientific-method` | Localize an ambiguous fault by ranking falsifiable hypotheses and checking the cheapest discriminating observation first. | Debugging a symptom that could plausibly originate in several files, functions, configs, or services. |
 | `thinking-five-whys-plus` | Rigorous root-cause analysis guarding against premature stop and single-cause bias. | Incident post-mortems and recurring bugs that keep getting "fixed" but return. |
 
 ## Problem-solving & innovation
@@ -88,7 +88,7 @@ A thinking skill earns its place only if there is a **realistic moment** where a
 
 These groups share triggers; a router will struggle to disambiguate them from a natural prompt, and they are the prime consolidation/cross-linking candidates. (Surfaced during routing-dataset authoring and confirmed against descriptions.)
 
-1. **Root-cause cluster:** `five-whys-plus` ↔ `scientific-method` ↔ `kepner-tregoe`. Descriptions even reference each other ("beyond 5 Whys"). Any "find the root cause of this incident" prompt fits all three. **Highest discriminability risk.**
+1. **Debugging cluster:** `scientific-method` localizes the faulty component, `five-whys-plus` traces the confirmed cause to a systemic root, and `kepner-tregoe` is reserved for formal problem analysis. Keep those distinctions explicit to avoid "whichever fires first" routing.
 2. **Systems-dynamics cluster:** `systems` ↔ `feedback-loops` ↔ `archetypes`. All about interconnected dynamics/loops; `archetypes` is separable only by "recurring fix that keeps failing."
 3. **Attack-the-plan cluster:** `inversion` ↔ `pre-mortem` ↔ `red-team`. All find failure paths; differ only by stance (work-backward vs imagine-failed vs adversarial). A single planning prompt fits all three.
 4. **Belief-update cluster:** `bayesian` ↔ `probabilistic`. Bayesian is the mechanism, probabilistic the framing; heavy overlap on "how confident should I be / update my estimate."

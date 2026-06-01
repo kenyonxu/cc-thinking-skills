@@ -66,14 +66,14 @@ Needs: numeric/OOM+Brier scorer (bayesian/probabilistic/fermi), abstention/routi
 
 ### Phase 7a — powered five-whys + occams (n=150)
 - five-whys-plus: 83→87%, Δ+4pp, p=0.041 SIGNIFICANT → 2nd firm ELEVATE. occams-razor: +4.4@n45 → +2pp p=0.45 @n150 (regressed, NOT sig). "+5 on other skills" = real but sparse (genuine debugging skills only).
-### Phase 7b — REWORK test: scientific-method-v2 (agent-native evidence-ranked differential) on SWE-bench, vs original 0pp.
+### Phase 7b — REWORK test: scientific-method hypothesis-differential prototype on SWE-bench, vs original 0pp.
 
-### Phase 7b — REWORK RESULT: scientific-method-v2 = 0pp → +5.3pp (p=0.061, n=150)
-- Agent-native rewrite (evidence-ranked hypothesis differential, native debugging scope, boundaries, no human stage-directions) converted the flat original (0pp) into a near-significant +5.3pp. PROVES rework-to-best-practices can manufacture +5. Recorded EVAL-SWE-scientific-method-v2.
-- Phase 7 COMPLETE. Phase 6 (audit) COMPLETE. +5 answer: 2 firm ELEVATEs (systems, five-whys), 1 rework-engineered +5 (scientific-method-v2), occams not confirmed; ceiling/negative skills can't reach +5.
+### Phase 7b — REWORK RESULT: scientific-method prototype = 0pp → +5.3pp (p=0.061, n=150)
+- Agent-native rewrite (evidence-ranked hypothesis differential, native debugging scope, boundaries, no human stage-directions) converted the flat original (0pp) into a near-significant +5.3pp. This demonstrated the rework recipe. Recorded the scientific-method rework prototype as historical evidence before replacing the shipped skill.
+- Phase 7 COMPLETE. Phase 6 (audit) COMPLETE. +5 answer: systems and five-whys were firm pre-trim, scientific-method was rework-engineered, occams not confirmed; ceiling/negative skills can't reach +5 without harder data or a real rewrite.
 
 ### Post-improvement verification — improve→re-measure loop
-- scientific-method (in-place improved): 0pp → +9.3pp, p=0.002 SIG. Audit rework converted flat skill to strongest ELEVATE (beat v2's +5.3). Recorded EVAL-SWE-scientific-method-improved.
+- scientific-method (shipped replacement): 0pp → +9.3pp, p=0.002 SIG. Audit rework converted flat skill to strongest ELEVATE. Recorded EVAL-SWE-scientific-method-improved.
 - systems (improved/trimmed): +5.3pp sig → +3.3pp ns. Within-noise dip; caution: don't trim proven skills without re-validating. Recorded EVAL-SWE-systems-improved.
 - LESSON: rework fixes broken skills (big win); trimming proven skills risks regression → always re-measure after editing.
 

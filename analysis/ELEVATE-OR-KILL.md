@@ -86,23 +86,23 @@ SWE-bench fault localization, isolated, length-controlled, n=150:
 | systems | 80→85% | +5.3 | **0.043** | ELEVATE (firm) |
 | five-whys-plus | 83→87% | +4.0 | **0.041** | ELEVATE (firm) |
 | occams-razor | 83→85% | +2.0 | 0.45 | NOT confirmed (n=45 +4.4 was noise) |
-| **scientific-method (original)** | — | **+0** | — | flat |
-| **scientific-method-v2 (REWORKED)** | 84→89% | **+5.3** | 0.061 | near-sig — **rework converted 0 → +5** |
+| **scientific-method (old broad version)** | — | **+0** | — | flat |
+| **scientific-method rework prototype** | 84→89% | **+5.3** | 0.061 | near-sig — **rework converted 0 → +5** |
 
 ### Answer
 **Yes — but only two ways, and not for every skill:**
 1. **Confirm it where domain-fit + headroom already exist.** `systems` and `five-whys-plus` are now *firm significant ELEVATEs* (+4–5pp) in native debugging. `occams-razor` is NOT (regressed to +2pp ns — it was n=45 noise).
-2. **Engineer it by reworking the skill** per the audit best-practices (agent-native, narrowed domain, evidence-ranked procedure, drop human stage-directions, add boundaries). The reworked `scientific-method-v2` went **0pp → +5.3pp (p=0.061)** — a flat skill turned into a near-significant +5 by the rewrite alone.
+2. **Engineer it by reworking the skill** per the audit best-practices (agent-native, narrowed domain, evidence-ranked procedure, drop human stage-directions, add boundaries). The hypothesis-differential prototype went **0pp → +5.3pp (p=0.061)**, then replaced the shipped `thinking-scientific-method` and improved further to **+9.3pp (p=0.002)**.
 
 **Where +5 is NOT available:** redundant-at-ceiling skills (`debiasing`, `bayesian` — model already ~100%), measured-negative skills (`fermi`), and any skill applied out-of-domain. For those, the move is kill/merge/trigger-only, not "+5."
 
-**Takeaway:** the +5 is real, sparse, and *manufacturable* — reworking a skill to the best-practices spec is a repeatable recipe to turn a flat skill into a measurable lift, demonstrated end-to-end (0 → +5.3) on `scientific-method`.
+**Takeaway:** the +5 is real, sparse, and *manufacturable* — reworking a skill to the best-practices spec can turn a flat skill into a measurable lift, demonstrated end-to-end on `scientific-method`.
 
 ## ★★★ Post-improvement verification (improve → re-measure loop)
 After applying the audit best-practices to all 39 skills, re-ran the **entire debugging cluster** on SWE-bench (n=150, isolated, length-controlled). This closes the improve→re-measure loop for every skill that has a native objective eval:
 | Skill | pre-improvement | post-improvement | read |
 |---|---|---|---|
-| **scientific-method** (in-place rework) | 0pp (flat) | **+9.3pp, p=0.002 SIG** | rework WORKED — flat→firm ELEVATE (beat the v2 prototype's +5.3) |
+| **scientific-method** (hypothesis-differential replacement) | 0pp (flat) | **+9.3pp, p=0.002 SIG** | rework WORKED — flat→firm ELEVATE |
 | **systems** (trimmed) | +5.3pp, p=0.043 SIG | +3.3pp, p=0.182 ns | within-noise dip after trimming |
 | **five-whys-plus** (trimmed) | +4.0pp, p=0.041 SIG | +3.3pp, p=0.131 ns | within-noise dip after trimming — slipped just below sig |
 | **occams-razor** (trigger-scoped) | +2.0pp, p=0.45 ns | +2.0pp, p=0.505 ns | flat both ways — never confirmed, TRIGGER-ONLY stands |

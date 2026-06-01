@@ -25,7 +25,7 @@ A good agent-facing thinking skill:
 | **systems** | **KEEP-FULL + refocus to cross-service debugging; make it the hub** | Rewrite desc ≤200 to the proven debugging trigger; front-load the Step-1–5 debugging procedure (it's the one firm ELEVATE, +5.3pp). |
 | **theory-of-constraints** | KEEP, narrow to perf/throughput bottleneck | Add stop ("no dominant stage → no constraint, use systems"); re-anchor desc on latency/throughput. |
 | **red-team** | KEEP-FULL, narrow to **security**; ELEVATE candidate | Add anti-fabrication gate ("report only vulns with a reproducible attack path"); split off plan/decision variants → pre-mortem/steel-manning. |
-| **five-whys-plus** | KEEP (trim); **merge-target for scientific-method** | Keep bias-guards + 5-criteria stop gate; drop one template; absorb scientific-method's falsification step. |
+| **five-whys-plus** | KEEP; restore trimmed procedure content before shipping | Use after scientific-method has localized the proximate cause; keep bias-guards + 5-criteria stop gate. |
 | **second-order** | KEEP, trim | Replace human "10/10/10" emotional horizons with agent horizons (immediate/next-deploy/at-scale) + a stop condition. |
 | **opportunity-cost** | KEEP, trim toward trigger | Lead with the 2 operative prompts (next-best-alternative + explicit do-nothing); add stop for trivial choices. |
 | **steel-manning** | KEEP, trim toward trigger | Keep the core loop + "red flags" table; counters sycophancy (a real LLM failure); add "when NOT". |
@@ -46,7 +46,7 @@ A good agent-facing thinking skill:
 | **bounded-rationality** | REWORK to agent-loop framing | Re-justify on tool-call budgets/stop-criteria, not "working memory"; trim desc ≤200. |
 | **socratic** | REWORK, narrow to pre-build clarification | Cut facilitation tips (silence/tone); keep the 6 question-types as a clarification trigger. |
 | **kepner-tregoe** | **SPLIT** — keep PA(IS/IS-NOT) for debugging, retire DA/PPA | Extract Problem Analysis as a focused root-cause skill; fold PPA→pre-mortem. |
-| **scientific-method** | **REWORK or merge → five-whys-plus** | Replace observe→question narration + A/B-canary templates with an agent-executable evidence-ranked hypothesis differential (see Phase 7b). |
+| **scientific-method** | **REPLACED with hypothesis-differential debugging** | The old broad observe→question skill was replaced by the agent-executable evidence-ranked differential. Post-rewrite SWE-bench: +9.3pp, p=0.002. |
 | **dual-process** | **REWORK or KILL** (anthropomorphizing) | Delete System 1/2 + "gut"; rebuild as "force a verification pass on high-stakes/obvious answers" — overlaps debiasing. |
 | **circle-of-competence** | **REWORK → abstention** | Rebuild around "lack evidence/context → abstain/ask/fetch, don't confabulate" (selfAware-testable); drop personal-track-record tables. |
 | **debiasing** | **KILL / trigger-only** (redundant-ceiling) | Model already avoids textbook biases (100% even haiku); if kept, one trigger for sunk-cost/confirmation in long trajectories. |
@@ -63,7 +63,7 @@ A good agent-facing thinking skill:
 | **model-combination** | KEEP (distinct), trim | Lead with anti-patterns (Model Soup, max 3-4); cut worked recipes. |
 
 ## Consolidation map (39 → ~26 sharper skills)
-- **Merge clusters:** `inversion`+`pre-mortem` → *failure-enumeration*; `bayesian`+`probabilistic` → *reasoning-under-uncertainty*; `model-selection` → `model-router`; `feedback-loops`+`archetypes` → `systems` (hub); `scientific-method` → `five-whys-plus`.
+- **Merge clusters:** `inversion`+`pre-mortem` → *failure-enumeration*; `bayesian`+`probabilistic` → *reasoning-under-uncertainty*; `model-selection` → `model-router`; `feedback-loops`+`archetypes` → `systems` (hub). Keep `scientific-method` separate as the fault-localization differential and `five-whys-plus` as post-localization root-cause analysis.
 - **Kill candidates:** `debiasing`, `regret-minimization`, `fermi-estimation`, `dual-process` (rework-or-kill).
 - **Trigger-only (ship lean, drop the textbook):** ~13 skills (first-principles, reversibility, occams, lindy, via-negativa, ooda, cynefin, archetypes, leverage-points, triz, thought-experiment, jobs-to-be-done, bounded-rationality).
 - **Keep full guide (procedure earns its length):** `systems`, `theory-of-constraints`, `red-team`, `five-whys-plus`, `model-router`, `model-combination`.
