@@ -82,3 +82,22 @@ Needs: numeric/OOM+Brier scorer (bayesian/probabilistic/fermi), abstention/routi
 - occams-razor (trigger-scoped): +2.0pp p=0.45 ns → +2.0pp p=0.505 ns. Unchanged — cosmetic edit, not a rework. Recorded exp-eval-swe-occams-razor-improved-cd02.
 - COMPLETE 4-skill before/after: sci-method 0→+9.3 (rework win); systems +5.3→+3.3 and five-whys +4.0→+3.3 (BOTH trimming regressions — now 2 data points for the trim-caution lesson); occams +2→+2 (flat, trigger-only stands).
 - Task #32 DONE. Net verdict: 1 firm ELEVATE current (sci-method); 2 proven skills need trimmed content restored to recover sig; 1 trigger-only. ELEVATE-OR-KILL.md updated with the full table + 3 lessons.
+
+## Session: Waves A–E (goal: complete A–E, create datasets, track all revisions, document everything)
+Adversarial per-wave validation by `droid -m deepseek-v4-pro` (codex substitute — codex workspace out of credits this session); records under `reviews/wave-validation/`.
+
+### Wave A — commit uncommitted change set — COMPLETE (#33)
+- 6 logical commits: ship hypothesis-differential scientific-method + retire v2; audit follow-ups (five-whys/ooda/model-router/selection); eval-informed repo metadata + README banner + AGENTS.md/CLAUDE.md; analysis/backup-record/dashboard refresh; gitignore scratch local runs.
+- Adversarial verdict: claims 2–7 PASS (v2 retired, 39 skills, banner tracked, no backups in git, validate passes, no stray v2 refs). "FAIL" only on tree-clean, which was Wave B work already in flight — not a Wave A miss.
+
+### Wave B — eval infrastructure + datasets — COMPLETE (#35,#36,#37,#38)
+- NEW runners: `run-abstention.js` (circle-of-competence, balanced SelfAware) + `run-routing-data.js` (binary-decision: socratic clarify-or-not, cynefin ordered-vs-unordered). Both smoke-tested.
+- NEW/fixed datasets: `diversevul-balanced` 100/100 vuln/safe (ingest-hf offset-balance); `selfaware` rebalanced 35/35 via NEW `balanceScan` mechanism; authored `socratic-clarify` + `cynefin-classify` (30 each, 15/15). 17 pairwise behavioral sets expanded 3→25 problems.
+- Adversarial verdict: claims 1–6 PASS (runners parse, datasets balanced, labels "defensible on spot-check"); lone FAIL was the validator's own report file being written — a self-referential artifact.
+
+### Wave C — powered elevate/kill sweep — IN PROGRESS (#34,#39)
+- `run-wavec.sh`: sequential (quota-safe) — red-team (diversevul-balanced n=80), circle-of-competence abstention (n=70), socratic (n=30), cynefin (n=30), systems-restored SWE (n=150), five-whys-plus SWE replication (n=150).
+- #34: diff review showed almost NOTHING was trimmed — five-whys content fully intact (+2 lines), systems lost only the Meadows leverage TABLE (now restored) + a reorder. So the +4.0→+3.3 / +5.3→+3.3 regressions are most likely borderline-significance noise (both were p≈0.04), NOT content loss. Corrects the earlier "trimming" lesson; the Wave C replication re-tests it.
+
+### Wave D — rework flat/negative skills — EDITS ALREADY DONE (#40)
+- fermi-estimation + dual-process were ALREADY reworked agent-native in the audit commit: dual-process 62→0 System-1/2/gut/intuition references (now mechanical fast-generation vs deliberate-verification); fermi gained When-NOT-to-Use + "don't Fermi a lookup-able value". Remaining: RE-MEASURE reworked fermi on jeggers/fermi (queued after Wave C); dual-process objective eval deferred (no clean dataset — behavioral pairwise would be judge-biased).
