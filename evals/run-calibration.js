@@ -54,13 +54,109 @@ function loadDataset(file) {
   });
 }
 
-function judgeBinary(prediction, label) {
-  if (typeof prediction !== 'boolean') return null;
-  return prediction === label;
+// ---- Label normalization ----
+// Pools use different field names for the ground-truth label.
+function normalizeLabel(item) {
+  // Priority: label (boolean) > answer (Yes/No string) > answer_idx (A-E string) > gold_files (string list)
+  if (item.label !== undefined && item.label !== null) return { raw: item.label, type: typeof item.label === 'boolean' ? 'boolean' : 'string', field: 'label' };
+  if (item.answer !== undefined && item.answer !== null) return { raw: item.answer, type: 'yesno', field: 'answer' };
+  if (item.answer_idx !== undefined && item.answer_idx !== null) return { raw: item.answer_idx, type: 'choice', field: 'answer_idx' };
+  if (item.gold_files !== undefined && item.gold_files !== null) return { raw: item.gold_files, type: 'filepath', field: 'gold_files' };
+  return null; // no label — judge-only or distractor without ground truth
+}
+
+// ---- Prediction parsing ----
+// The model returns JSON. We try to extract whatever format the item demands.
+function parsePrediction(json) {
+  if (!json) return { value: null, ok: false };
+
+  // Boolean fields (answer, decision, label, result, yes, classification, answerable)
+  for (const key of ['answer', 'decision', 'label', 'result', 'yes', 'classification', 'answerable']) {
+    if (typeof json[key] === 'boolean') return { value: json[key], type: 'boolean', ok: true };
+  }
+
+  // String fields — answer (Yes/No), answer_idx (A-E), file/result (file path)
+  for (const key of ['answer', 'answer_idx', 'result', 'file', 'files', 'path']) {
+    if (typeof json[key] === 'string' && json[key].trim().length > 0) {
+      return { value: json[key].trim(), type: 'string', ok: true };
+    }
+  }
+
+  // Array fields — gold_files, files
+  for (const key of ['gold_files', 'files', 'answer']) {
+    if (Array.isArray(json[key]) && json[key].length > 0) {
+      return { value: json[key], type: 'array', ok: true };
+    }
+  }
+
+  return { value: null, ok: false };
+}
+
+// ---- Judgment ----
+// Compares prediction to expected label, handling different formats.
+function judgePrediction(predParsed, normLabel) {
+  if (!predParsed.ok || !normLabel) return null;
+
+  if (normLabel.type === 'boolean') {
+    // Compare boolean prediction to boolean label
+    if (predParsed.type === 'boolean') return predParsed.value === normLabel.raw;
+    return null;
+  }
+
+  if (normLabel.type === 'yesno') {
+    // Compare prediction to "Yes"/"No" label
+    const predBool = predParsed.type === 'boolean' ? predParsed.value :
+      (typeof predParsed.value === 'string' && predParsed.value.toLowerCase() === 'yes' ? true :
+       typeof predParsed.value === 'string' && predParsed.value.toLowerCase() === 'no' ? false : null);
+    if (predBool === null) return null;
+    const labelBool = normLabel.raw.toLowerCase() === 'yes';
+    return predBool === labelBool;
+  }
+
+  if (normLabel.type === 'choice') {
+    // Compare prediction string (e.g. "A") to answer_idx (e.g. "A")
+    if (predParsed.type === 'string') {
+      return predParsed.value.toUpperCase() === normLabel.raw.toUpperCase();
+    }
+    // Also support boolean-keyed answer: {"A": true, "B": false, ...}
+    if (predParsed.type === 'boolean' && normLabel.raw.toUpperCase() === 'A') {
+      // Must check all possible choice letters
+      return null; // ambiguous without knowing the full choice set
+    }
+    return null;
+  }
+
+  if (normLabel.type === 'filepath') {
+    // Compare predicted file path to gold_files list
+    const goldFiles = Array.isArray(normLabel.raw) ? normLabel.raw : [normLabel.raw];
+    if (predParsed.type === 'string') {
+      return goldFiles.some(gf => {
+        const normPred = predParsed.value.replace(/^\/+/, '').replace(/\\/g, '/');
+        const normGold = String(gf).replace(/^\/+/, '').replace(/\\/g, '/');
+        return normPred === normGold || normPred.endsWith(normGold) || normGold.endsWith(normPred);
+      });
+    }
+    if (predParsed.type === 'array') {
+      const predFiles = predParsed.value.map(f => String(f).replace(/^\/+/, '').replace(/\\/g, '/'));
+      return goldFiles.some(gf => {
+        const normGold = String(gf).replace(/^\/+/, '').replace(/\\/g, '/');
+        return predFiles.some(pf => pf === normGold || pf.endsWith(normGold) || normGold.endsWith(pf));
+      });
+    }
+    return null;
+  }
+
+  return null;
 }
 
 function buildCalibrationPrompt(problemText, decisionInstruction) {
-  return `${decisionInstruction}\n\nProblem:\n${problemText}\n\nReturn ONLY valid JSON: {"answer": true/false}`;
+  // Don't duplicate JSON format if the instruction already contains one.
+  const hasJsonInstruction = /return\s+only\s+valid\s+json/i.test(decisionInstruction) ||
+    /\{"\w+":/i.test(decisionInstruction);
+  if (hasJsonInstruction) {
+    return `${decisionInstruction}\n\nProblem:\n${problemText}`;
+  }
+  return `${decisionInstruction}\n\nProblem:\n${problemText}\n\nReturn ONLY valid JSON with your answer.`;
 }
 
 async function runCalibration() {
@@ -92,31 +188,34 @@ async function runCalibration() {
 
     let correct = null;
     let prediction = null;
+    let predType = null;
     let rawText = '';
+
+    const normLabel = normalizeLabel(item);
 
     if (r.ok && r.json) {
       rawText = JSON.stringify(r.json);
-      // Expect JSON response with a boolean field matching the label type
-      // Try common boolean fields
-      const json = r.json;
-      if (typeof json.answer === 'boolean') prediction = json.answer;
-      else if (typeof json.decision === 'boolean') prediction = json.decision;
-      else if (typeof json.label === 'boolean') prediction = json.label;
-      else if (typeof json.result === 'boolean') prediction = json.result;
-      else if (typeof json.yes === 'boolean') prediction = json.yes;
-      else if (typeof json.classification === 'boolean') prediction = json.classification;
+      const parsed = parsePrediction(r.json);
+      predType = parsed.type;
+      prediction = parsed.value;
 
-      if (prediction !== null && item.label !== undefined) {
-        correct = judgeBinary(prediction, item.label);
+      if (parsed.ok && normLabel) {
+        const result = judgePrediction(parsed, normLabel);
+        correct = result;
       }
     }
 
     return {
       id: item.id,
       itemIndex,
+      itemType: item.type || null,
+      target: item.target,
       prompt: item.prompt,
-      label: item.label,
+      labelRaw: normLabel ? normLabel.raw : null,
+      labelField: normLabel ? normLabel.field : null,
+      labelType: normLabel ? normLabel.type : null,
       prediction,
+      predType,
       correct,
       raw: rawText,
       ok: r.ok,
@@ -130,7 +229,17 @@ async function runCalibration() {
   const perItemMap = new Map();
   for (const t of trialResults) {
     if (!perItemMap.has(t.itemIndex)) {
-      perItemMap.set(t.itemIndex, { id: t.id, label: t.label, predictions: [], corrects: [], trials: [] });
+      perItemMap.set(t.itemIndex, {
+        id: t.id,
+        itemType: t.itemType,
+        target: t.target,
+        labelRaw: t.labelRaw,
+        labelField: t.labelField,
+        labelType: t.labelType,
+        predictions: [],
+        corrects: [],
+        trials: []
+      });
     }
     const entry = perItemMap.get(t.itemIndex);
     entry.trials.push(t);
@@ -144,12 +253,16 @@ async function runCalibration() {
   for (const [itemIndex, entry] of perItemMap) {
     const attempted = entry.corrects.length;
     const successes = entry.corrects.filter(c => c === true).length;
-    // Fractional difficulty: successes / attempted (0 if no attempts, null if 0 < difficulty < 1)
+    // Fractional difficulty: successes / attempted
     const baseline = attempted > 0 ? successes / attempted : null;
     perItem.push({
       id: entry.id,
       itemIndex,
-      label: entry.label,
+      itemType: entry.itemType,
+      target: entry.target,
+      labelField: entry.labelField,
+      labelType: entry.labelType,
+      labelRaw: entry.labelRaw,
       trials: K_TRIALS,
       attempted,
       successes,

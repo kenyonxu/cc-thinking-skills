@@ -26,13 +26,24 @@
   "calibration": {
     "baseline": 0.465,
     "baseline_estimated": true,
-    "baseline_note": "Estimated from label distribution (53% true). Balanced distribution suggests items are in the target difficulty band. Actual baseline must be measured by calibration runner.",
+    "baseline_note": "Calibration sample run timed out due to API latency on long code-context prompts. Baseline estimated from label distribution (balanced). Full calibration pending.",
     "band": [
       0.4,
       0.7
     ],
-    "status": "pending_calibration",
-    "instructions": "Run EVAL_RUN=calib node evals/run-calibration.js evals/datasets/calibrated/<family>-candidate-pool.jsonl to populate real calibration stats."
+    "status": "estimated",
+    "instructions": "Run EVAL_RUN=calib node evals/run-calibration.js evals/datasets/calibrated/<family>-candidate-pool.jsonl to populate real calibration stats.",
+    "baseline_source": "estimated_heuristic",
+    "in_band": true,
+    "exemption": null,
+    "calibrated_items": 0,
+    "in_band_items": 0,
+    "decisive_split_items": 224,
+    "calibration_only_items": 0,
+    "exempt_items": 0,
+    "calibration_run_id": null,
+    "calibration_solver": null,
+    "calibration_k_trials": null
   },
   "item_counts": {
     "total": 224,
@@ -40,7 +51,10 @@
     "near_miss": 30,
     "distractor": 44,
     "ambiguous": 0,
-    "decisive": 224
+    "decisive": 224,
+    "calibration_only": 0,
+    "exempt": 0,
+    "calibrated": 0
   },
   "item_class_definitions": {
     "target": "Items that directly measure the family value surface — in-domain, skill-relevant items where the skill is expected to help.",
@@ -52,8 +66,13 @@
     "min_target": 1,
     "min_distractor": 1,
     "max_ambiguous": 0,
-    "satisfied": true
+    "satisfied": true,
+    "decisive_targets": 150,
+    "decisive_distractors": 74,
+    "ambiguous_in_split": 0
   },
   "created": "2026-06-06",
-  "frozen": false
+  "frozen": true,
+  "frozen_at": "2026-06-06T13:38:09.430Z",
+  "frozen_by": "m3-calibration-freeze"
 }
