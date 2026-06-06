@@ -13,10 +13,11 @@
  * Exposes a pure verdict() function so the guardrail is unit-testable offline.
  *
  * Usage:
- *   node evals/run-replication.js <primary-results.json> <replication-results.json>
- *   EVAL_RUN=smoke LIMIT=4 node evals/run-replication.js primary.jsonl replication.jsonl
+ *   node evals/run-replication.js <primary-results.json> --replication=<replication-results.json>
+ *   EVAL_RUN=smoke LIMIT=4 node evals/run-replication.js primary.jsonl --replication=replication.jsonl
  *
  * The runner accepts either:
+ * - Pretty-JSON result files from objective runners (with delta_pp, mcnemar_p, significant, n)
  * - JSONL result files from paired experiments (with delta_pp, p_value, direction fields)
  * - Direct object input to verdict() for unit testing
  */
@@ -93,27 +94,53 @@ function normalizeSample(s) {
 }
 
 /**
- * Check if sample meets the threshold:
- * - |delta_pp| >= 5 (at least 5 percentage points lift in the direction)
+ * Check if sample meets the ELEVATE threshold:
+ * - delta_pp >= 5 (at least 5 percentage points POSITIVE lift — NEVER use Math.abs;
+ *   a replicated negative delta must NOT qualify for ELEVATE)
  * - p_value < 0.05 (passes paired statistical test)
  */
 function passesThreshold(s) {
   return s != null &&
     typeof s.delta_pp === 'number' &&
-    Math.abs(s.delta_pp) >= 5 &&
+    s.delta_pp >= 5 &&           // POSITIVE lift only — NO Math.abs
     typeof s.p_value === 'number' &&
-    s.p_value < 0.05 &&
-    (s.direction === 1 || s.direction === -1);
+    s.p_value < 0.05;
 }
 
 /**
- * Parse JSONL result file from paired experiment runner.
- * Expected format per line: { delta_pp, p_value, direction, n, ... }
- * Returns aggregated stats for the sample.
+ * Parse a result file, accepting both pretty-JSON (objective-runner schema
+ * with delta_pp / mcnemar_p / significant) and JSONL (one object per line).
+ *
+ * Pretty-JSON schema (objective runners like run-swe.js):
+ *   { delta_pp, mcnemar_p, significant, n, ... }
+ *
+ * JSONL schema (paired experiment runners):
+ *   { delta_pp, p_value, direction, n, ... } per line
+ *
+ * Returns normalized { delta_pp, p_value, n } or null if unparseable/empty.
  */
 function parseResultsFile(filePath) {
-  const text = fs.readFileSync(filePath, 'utf8');
-  const lines = text.trim().split('\n').filter(l => l.trim());
+  const text = fs.readFileSync(filePath, 'utf8').trim();
+
+  // Try pretty-JSON first (single object with delta_pp / mcnemar_p / significant)
+  try {
+    const obj = JSON.parse(text);
+    if (typeof obj === 'object' && obj !== null && typeof obj.delta_pp === 'number') {
+      const p_value = obj.mcnemar_p ?? obj.p_value ?? null;
+      if (p_value !== null) {
+        return {
+          delta_pp: obj.delta_pp,
+          p_value,
+          n: obj.n ?? null,
+        };
+      }
+    }
+  } catch (e) {
+    // Not valid JSON — fall through to JSONL
+  }
+
+  // Try JSONL (one JSON object per line)
+  const lines = text.split('\n').filter(l => l.trim());
   const results = lines.map((line, i) => {
     try { return JSON.parse(line); } catch (e) {
       throw new Error(`Invalid JSONL at line ${i + 1}: ${e.message}`);
@@ -128,9 +155,8 @@ function parseResultsFile(filePath) {
   const first = results[0];
   return {
     delta_pp: first.delta_pp ?? 0,
-    p_value: first.p_value ?? 1,
-    direction: first.direction ?? 0,
-    n: results.length,
+    p_value: first.p_value ?? first.mcnemar_p ?? 1,
+    n: first.n ?? results.length,
   };
 }
 
@@ -141,7 +167,8 @@ async function main() {
   const replicationPath = args.find(a => a.startsWith('--replication='))?.split('=')[1];
 
   if (!primaryPath) {
-    console.error('Usage: node evals/run-replication.js <primary-results.jsonl> [--replication=<replication-results.jsonl>]');
+    console.error('Usage: node evals/run-replication.js <primary-results.json> [--replication=<replication-results.json>]');
+    console.error('  Accepts pretty-JSON (delta_pp/mcnemar_p/significant) or JSONL');
     process.exit(1);
   }
 

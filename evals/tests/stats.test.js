@@ -89,3 +89,24 @@ test('summarize: preserves all five legacy fields', () => {
   assert.strictEqual(s.decisive, 10);
 });
 
+test('mcnemarFull: exposes validation-compatible alias fields cc and midp', () => {
+  const result = mcnemarFull(8, 2);
+  // Aliases must be present
+  assert.ok('cc' in result, 'mcnemarFull must expose cc alias');
+  assert.ok('midp' in result, 'mcnemarFull must expose midp alias');
+  // Aliases match the canonical fields
+  assert.strictEqual(result.cc, result.continuityCorrected, 'cc alias must equal continuityCorrected');
+  assert.strictEqual(result.midp, result.midP, 'midp alias must equal midP');
+  // Original fields still present
+  assert.ok('continuityCorrected' in result, 'continuityCorrected must remain');
+  assert.ok('midP' in result, 'midP must remain');
+  // midp < cc for (8,2)
+  assert.ok(result.midp < result.cc, `midp ${result.midp} should be < cc ${result.cc}`);
+});
+
+test('mcnemarFull: legacy mcnemar scalar unchanged on (8,2) ~0.114', () => {
+  const { mcnemar } = require('../lib/stats.js');
+  const p = mcnemar(8, 2);
+  assert.ok(Math.abs(p - 0.114) < 0.003, `legacy mcnemar(8,2) should be ~0.114, got ${p}`);
+});
+

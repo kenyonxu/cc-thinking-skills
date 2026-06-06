@@ -55,14 +55,16 @@ function mcnemarMidp(b, c) {
   return Math.min(1, midp);
 }
 
-/** Returns both continuity-corrected McNemar (legacy scalar) AND mid-p. */
+/** Returns both continuity-corrected McNemar (legacy scalar) AND mid-p.
+ *  Also exposes validation-compatible aliases cc (=continuityCorrected) and
+ *  midp (=midP) to satisfy VAL-HARNESS-005/006 probes. */
 function mcnemarFull(b, c) {
   const n = b + c;
-  if (n === 0) return { continuityCorrected: 1, midP: 1 };
+  if (n === 0) return { continuityCorrected: 1, midP: 1, cc: 1, midp: 1 };
   const chi = Math.pow(Math.abs(b - c) - 1, 2) / n;
   const continuityCorrected = Math.min(1, 2 * (1 - normCdf(Math.sqrt(chi))));
   const midP = mcnemarMidp(b, c);
-  return { continuityCorrected, midP };
+  return { continuityCorrected, midP, cc: continuityCorrected, midp: midP };
 }
 
 /** Wilson score interval for a binomial proportion. */
