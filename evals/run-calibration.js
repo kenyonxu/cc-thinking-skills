@@ -126,6 +126,14 @@ function parsePrediction(json, rawText) {
   const m = str.match(ANSWER_LINE_RE);
   if (m) return { value: m[1].trim(), type: 'string', ok: true };
 
+  // Fallback: try ANSWER: pattern in the raw text (model may have returned JSON
+  // wrapper around a text answer, or the raw text may contain the answer line
+  // that wasn't captured by JSON field iteration).
+  if (rawText) {
+    const rm = rawText.match(ANSWER_LINE_RE);
+    if (rm) return { value: rm[1].trim(), type: 'string', ok: true };
+  }
+
   return { value: null, ok: false };
 }
 
@@ -215,40 +223,57 @@ function truncatePrompt(prompt, maxLen = MAX_PROMPT_LEN) {
 }
 
 function buildCalibrationPrompt(problemText, decisionInstruction) {
-  // Replace "ANSWER: <path>" format requests with JSON format for reliable parsing.
-  // The ANSWER_LINE_RE in parsePrediction handles the text format as fallback,
-  // but we prefer JSON when we can control the prompt.
-  let di = decisionInstruction;
-  const answerMatch = di.match(/End\s+with\s+exactly\s*:\s*ANSWER\s*:\s*(.+)/i);
+  // Strip the ANSWER: format instruction from the problem text since we add our
+  // own format instruction. Conflicting format signals (ANSWER: vs JSON) cause
+  // the model to follow the embedded text instruction and return non-JSON text
+  // that droidJsonAsync cannot parse.
+  let cleanProblem = problemText;
+  // Remove trailing "End with exactly: ANSWER: ..." from the problem text
+  // (SWE-bench items embed the decision instruction inside the prompt field).
+  cleanProblem = cleanProblem.replace(/\n*\s*End\s+with\s+exactly\s*:\s*ANSWER\s*:.+\s*$/im, '');
+
+  // Construct a single, unambiguous instruction.
+  // Use a descriptive key name, not a literal placeholder like "<path/to/file.ext>"
+  // which the model may return verbatim.
+  let instruction = decisionInstruction;
+  // If the original instruction references ANSWER:, generalize it for JSON.
+  const answerMatch = instruction.match(/End\s+with\s+exactly\s*:\s*ANSWER\s*:\s*(.+)/i);
   if (answerMatch) {
-    const answerDesc = answerMatch[1].trim();
-    di = di.replace(/End\s+with\s+exactly\s*:\s*ANSWER\s*:.+/i,
-      `Return ONLY valid JSON: {"answer": "${answerDesc}"}`);
+    // Replace only the "End with exactly: ANSWER: <placeholder>" part with a clean
+    // JSON instruction. Keep the substantive question text.
+    instruction = instruction.replace(/\s*End\s+with\s+exactly\s*:\s*ANSWER\s*:.+\s*$/i, '');
+    instruction += '\n\nReturn ONLY valid JSON. Use the key "answer" for your file path. Example: {"answer": "path/to/file.ext"}';
   }
-  // Don't duplicate JSON format if the instruction already contains one.
-  const hasJsonInstruction = /return\s+only\s+valid\s+json/i.test(di) ||
-    /\{"\w+":/i.test(di);
+
+  // Check if the instruction already has JSON guidance (avoid duplication).
+  const hasJsonInstruction = /return\s+only\s+valid\s+json/i.test(instruction) ||
+    /\{"\w+":/i.test(instruction);
+
   if (hasJsonInstruction) {
-    return `${di}\n\nProblem:\n${problemText}`;
+    return `${instruction}\n\nProblem:\n${cleanProblem}`;
   }
-  return `${di}\n\nProblem:\n${problemText}\n\nReturn ONLY valid JSON with your answer.`;
+  return `${instruction}\n\nProblem:\n${cleanProblem}\n\nReturn ONLY valid JSON with your answer.`;
 }
 
 // ---- Shared trial processing ----
 async function processItemTrial(item, itemIndex) {
+  const normLabel = normalizeLabel(item);
   const rawPrompt = buildCalibrationPrompt(item.prompt, item.decision_instruction);
-  const prompt = truncatePrompt(rawPrompt);
+
+  // For filepath items (SWE-bench fault localization), skip truncation:
+  // MAX_PROMPT_LEN=1600 strips the code context needed to localize bugs.
+  const isFilepathItem = normLabel && normLabel.type === 'filepath';
+  const prompt = isFilepathItem ? rawPrompt : truncatePrompt(rawPrompt);
+
   const r = await droidJsonAsync({ model: SOLVER_MODEL, prompt, effort: SOLVER_EFFORT });
 
   let correct = null;
   let prediction = null;
   let predType = null;
-  let rawText = '';
-
-  const normLabel = normalizeLabel(item);
+  // droidJsonAsync returns {raw: text} not {text: text} — use r.raw
+  const rawText = r.raw || '';
 
   if (r.ok) {
-    rawText = r.text || (r.json ? JSON.stringify(r.json) : '');
     const parsed = parsePrediction(r.json, rawText);
     predType = parsed.type;
     prediction = parsed.value;
@@ -256,6 +281,19 @@ async function processItemTrial(item, itemIndex) {
     if (parsed.ok && normLabel) {
       const result = judgePrediction(parsed, normLabel);
       correct = result;
+    }
+  } else {
+    // JSON parsing failed — the model likely returned text with ANSWER: format.
+    // Try to extract the answer from the raw text using the ANSWER_LINE_RE pattern.
+    if (rawText) {
+      const parsed = parsePrediction(null, rawText);
+      predType = parsed.type;
+      prediction = parsed.value;
+
+      if (parsed.ok && normLabel) {
+        const result = judgePrediction(parsed, normLabel);
+        correct = result;
+      }
     }
   }
 
@@ -271,7 +309,7 @@ async function processItemTrial(item, itemIndex) {
     predType,
     correct,
     raw: rawText,
-    ok: r.ok,
+    ok: r.ok || (prediction !== null), // mark as ok if we managed to extract a prediction
     error: r.error,
     usage: r.usage,
     durationMs: r.durationMs,

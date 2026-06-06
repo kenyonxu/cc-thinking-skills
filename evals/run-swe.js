@@ -32,11 +32,20 @@ function loadItems() {
 function skillContent(s) { return fs.readFileSync(path.join(SKILLS_DIR, 'thinking-' + s.replace(/^thinking-/, ''), 'SKILL.md'), 'utf8'); }
 
 function locatedCorrectly(item, text) {
-  // correct if a gold file path or its (distinctive) basename appears in the response
+  // Correct if a gold file path or its (distinctive) basename appears in the response.
+  // Normalize paths (handle backslashes, leading slashes) for consistency with
+  // run-calibration.js judgePrediction filepath handling.
+  const normText = text.replace(/\\/g, '/');
   for (const g of item.gold_files) {
-    if (text.includes(g)) return true;
-    const base = g.split('/').pop();
-    if (base && !/^(__init__|utils|index|main|app|setup)\.\w+$/.test(base) && new RegExp('\\b' + base.replace('.', '\\.') + '\\b').test(text)) return true;
+    const normGold = String(g).replace(/\\/g, '/');
+    // Exact path match (normalized)
+    if (normText.includes(normGold)) return true;
+    // Also try without leading slash
+    const stripped = normGold.replace(/^\/+/, '');
+    if (stripped !== normGold && normText.includes(stripped)) return true;
+    // Basename fallback (for responses that only mention the file name)
+    const base = normGold.split('/').pop();
+    if (base && !/^(__init__|utils|index|main|app|setup)\.\w+$/.test(base) && new RegExp('\\b' + base.replace('.', '\\.') + '\\b').test(normText)) return true;
   }
   return false;
 }
