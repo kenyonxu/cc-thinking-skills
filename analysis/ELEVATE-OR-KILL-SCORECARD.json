@@ -1,0 +1,1322 @@
+{
+  "meta": {
+    "generated": "2026-06-06T00:00:00Z",
+    "source_documents": [
+      "analysis/EVAL-COVERAGE.md",
+      "analysis/ELEVATE-OR-KILL.md (final two sections only)",
+      "analysis/SKILL-AUDIT.md",
+      "evals/results/run1/*.json",
+      "evals/results/wavec/*.json",
+      "evals/results/confirm/*.json",
+      "evals/results/rerun/*.json",
+      "evals/db/evals.db"
+    ],
+    "provenance_taxonomy": [
+      "OBJ-powered-significant",
+      "OBJ-powered-null",
+      "OBJ-powered-directional",
+      "OBJ-small-ceiling",
+      "OBJ-small-negative",
+      "routing/abstention-null",
+      "judge-only-n3-superseded",
+      "unmeasured"
+    ],
+    "skill_count": 39,
+    "objective_coverage": {
+      "measured": 17,
+      "unmeasured": 22
+    },
+    "notes": "Stale claims from run1/scorecard.md (n=3 wins) and mid-document ELEVATE-OR-KILL.md narrative are flagged superseded, not deleted. scientific-method is the sole robust objective ELEVATE."
+  },
+  "skills": {
+    "archetypes": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; judge-only n=9, no objective formulation"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Conceptual reframes",
+      "value_surface": "paired reasoning quality"
+    },
+    "bayesian": {
+      "objective_evidence": [
+        {
+          "metric": "accuracy",
+          "dataset": "authored base-rate MCQ",
+          "n": 40,
+          "placebo": 0.975,
+          "treatment": 1,
+          "delta_pp": 2.5,
+          "p": 1,
+          "significant": false,
+          "verdict": "ceiling",
+          "provenance": "OBJ-small-ceiling",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/run1/correctness-bayesian.json"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.5,
+          "lift": 0,
+          "verdict": "unproven-tie",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "null",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; ceiling at 98% placebo"
+        }
+      ],
+      "verdict": "ceiling",
+      "eval_family": "Quantitative/uncertainty",
+      "value_surface": "calibrated classification"
+    },
+    "bounded-rationality": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; T3=3 only, no objective formulation"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Conceptual reframes",
+      "value_surface": "paired reasoning quality"
+    },
+    "circle-of-competence": {
+      "objective_evidence": [
+        {
+          "metric": "abstention_accuracy",
+          "dataset": "SelfAware balanced",
+          "n": 70,
+          "placebo": 0.7,
+          "treatment": 0.7,
+          "delta_pp": 0,
+          "p": 0.773,
+          "significant": false,
+          "verdict": "no calibration benefit",
+          "provenance": "routing/abstention-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/wavec/abstention-circle-of-competence.json"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; Tier 1 flagged as potentially misleading (hallucinated track record)"
+        }
+      ],
+      "verdict": "no calibration benefit",
+      "eval_family": "Routing/abstention",
+      "value_surface": "abstention/calibration"
+    },
+    "cynefin": {
+      "objective_evidence": [
+        {
+          "metric": "accuracy",
+          "dataset": "authored classify",
+          "n": 30,
+          "placebo": 0.967,
+          "treatment": 1,
+          "delta_pp": 3.3,
+          "p": 1,
+          "significant": false,
+          "verdict": "ceiling",
+          "provenance": "OBJ-small-ceiling",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/wavec/routing-cynefin.json"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; placebo at ceiling"
+        }
+      ],
+      "verdict": "ceiling",
+      "eval_family": "Routing/abstention",
+      "value_surface": "routing/discoverability"
+    },
+    "debiasing": {
+      "objective_evidence": [
+        {
+          "metric": "accuracy",
+          "dataset": "authored bias MCQ",
+          "n": 40,
+          "placebo": 1,
+          "treatment": 0.975,
+          "delta_pp": -2.5,
+          "p": 1,
+          "significant": false,
+          "verdict": "ceiling",
+          "provenance": "OBJ-small-ceiling",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/run1/correctness-debiasing.json"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0,
+          "lift": -3,
+          "verdict": "regresses",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "null",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; ceiling at 100% placebo"
+        }
+      ],
+      "verdict": "ceiling",
+      "eval_family": "Quantitative/uncertainty",
+      "value_surface": "calibrated classification"
+    },
+    "dual-process": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 1,
+          "lift": 3,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; human stage-directions flagged in audit"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Conceptual reframes",
+      "value_surface": "paired reasoning quality"
+    },
+    "effectuation": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; no objective formulation"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Conceptual reframes",
+      "value_surface": "paired reasoning quality"
+    },
+    "feedback-loops": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.33,
+          "lift": -1,
+          "verdict": "regresses",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "null",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Run1 scorecard n=3 win claim superseded; audit recommends merge into systems"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Systems/product/strategy pairwise",
+      "value_surface": "paired reasoning quality"
+    },
+    "fermi-estimation": {
+      "objective_evidence": [
+        {
+          "metric": "accuracy",
+          "dataset": "jeggers/fermi",
+          "n": 40,
+          "placebo": 0.425,
+          "treatment": 0.375,
+          "delta_pp": -5,
+          "p": 0.724,
+          "significant": false,
+          "verdict": "negative",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/run1/numeric-fermi-estimation.json",
+          "note": "Original ELEVATE-OR-KILL.md labeled KILL/REWORK"
+        },
+        {
+          "metric": "accuracy",
+          "dataset": "jeggers/fermi",
+          "n": 150,
+          "placebo": 0.407,
+          "treatment": 0.413,
+          "delta_pp": 0.7,
+          "p": 1,
+          "significant": false,
+          "verdict": "flat",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/confirm/numeric-fermi-n150.json",
+          "note": "Powered confirmation of reworked skill; rework rescue was n=40 noise"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded"
+        }
+      ],
+      "verdict": "no-lift",
+      "eval_family": "Quantitative/uncertainty",
+      "value_surface": "objective correctness"
+    },
+    "first-principles": {
+      "objective_evidence": [
+        {
+          "metric": "accuracy",
+          "dataset": "authored constraint",
+          "n": 30,
+          "placebo": 0.933,
+          "treatment": 1,
+          "delta_pp": 6.7,
+          "p": 0.479,
+          "significant": false,
+          "verdict": "near-ceiling, ns",
+          "provenance": "OBJ-small-ceiling",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/rerun/first-principles-constraint.json"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 1,
+          "lift": 3,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded"
+        }
+      ],
+      "verdict": "ceiling",
+      "eval_family": "Conceptual reframes",
+      "value_surface": "paired reasoning quality"
+    },
+    "five-whys-plus": {
+      "objective_evidence": [
+        {
+          "metric": "fault_localization_accuracy",
+          "dataset": "SWE-bench",
+          "n": 150,
+          "placebo": 0.833,
+          "treatment": 0.873,
+          "delta_pp": 4,
+          "p": 0.041,
+          "significant": true,
+          "verdict": "ELEVATE (superseded by replication failure)",
+          "provenance": "OBJ-powered-significant",
+          "temporal": "post-edit",
+          "significance": "significant",
+          "replicated": false,
+          "source": "evals/results/run1/swe-five-whys-plus-powered.json",
+          "superseded": true,
+          "note": "Original firm ELEVATE claim; replication at n=150 gave +1.3pp p=0.752 — superseded"
+        },
+        {
+          "metric": "fault_localization_accuracy",
+          "dataset": "SWE-bench",
+          "n": 150,
+          "placebo": 0.827,
+          "treatment": 0.84,
+          "delta_pp": 1.3,
+          "p": 0.752,
+          "significant": false,
+          "verdict": "no robust effect",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/wavec/swe-five-whys-plus-replication.json",
+          "note": "Replication run; earlier n=150 +4.0pp p=0.041 did not replicate"
+        },
+        {
+          "metric": "fault_localization_accuracy",
+          "dataset": "SWE-bench",
+          "n": 45,
+          "placebo": 0.822,
+          "treatment": 0.889,
+          "delta_pp": 6.7,
+          "p": 0.25,
+          "significant": false,
+          "verdict": "directional only",
+          "provenance": "OBJ-powered-directional",
+          "temporal": "post-edit",
+          "significance": "directional",
+          "replicated": false,
+          "source": "evals/results/run1/swe-five-whys-plus.json",
+          "note": "Earlier n=45 run; directional only"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.33,
+          "lift": -1,
+          "verdict": "regresses",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "null",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Run1 scorecard n=3 win claim superseded; ELEVATE-OR-KILL.md initially leaned ELEVATE but TRIGGER-ONLY"
+        }
+      ],
+      "verdict": "no-lift",
+      "eval_family": "Debugging/fault-localization",
+      "value_surface": "localization"
+    },
+    "inversion": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.33,
+          "lift": -1,
+          "verdict": "regresses",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "null",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Run1 scorecard n=3 win claim superseded; audit recommends merge to pre-mortem"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Conceptual reframes",
+      "value_surface": "paired reasoning quality"
+    },
+    "jobs-to-be-done": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.33,
+          "lift": -1,
+          "verdict": "regresses",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "null",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Run1 scorecard n=3 win claim superseded"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Conceptual reframes",
+      "value_surface": "paired reasoning quality"
+    },
+    "kepner-tregoe": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Run1 scorecard n=3 win claim superseded; audit recommends split (PA for debugging, retire DA/PPA)"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Debugging/fault-localization",
+      "value_surface": "paired reasoning quality"
+    },
+    "leverage-points": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.33,
+          "lift": -1,
+          "verdict": "regresses",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "null",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Run1 scorecard n=3 win claim superseded; Meadows table duplicated in systems/feedback-loops"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Systems/product/strategy pairwise",
+      "value_surface": "paired reasoning quality"
+    },
+    "lindy-effect": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.33,
+          "lift": -1,
+          "verdict": "regresses",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "null",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Run1 scorecard n=3 win claim superseded"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Conceptual reframes",
+      "value_surface": "paired reasoning quality"
+    },
+    "map-territory": {
+      "objective_evidence": [
+        {
+          "metric": "accuracy",
+          "dataset": "authored verify",
+          "n": 30,
+          "placebo": 0.967,
+          "treatment": 1,
+          "delta_pp": 3.3,
+          "p": 1,
+          "significant": false,
+          "verdict": "ceiling",
+          "provenance": "OBJ-small-ceiling",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/rerun/map-territory-verify.json"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded"
+        }
+      ],
+      "verdict": "ceiling",
+      "eval_family": "Routing/abstention",
+      "value_surface": "routing/discoverability"
+    },
+    "margin-of-safety": {
+      "objective_evidence": [
+        {
+          "metric": "accuracy",
+          "dataset": "authored provision",
+          "n": 30,
+          "placebo": 0.867,
+          "treatment": 0.767,
+          "delta_pp": -10,
+          "p": 0.248,
+          "significant": false,
+          "verdict": "headroom, no benefit",
+          "provenance": "OBJ-small-negative",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/rerun/margin-of-safety-provision.json"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.5,
+          "lift": 0,
+          "verdict": "unproven-tie",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "null",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded"
+        }
+      ],
+      "verdict": "headroom, no benefit",
+      "eval_family": "Quantitative/uncertainty",
+      "value_surface": "objective correctness"
+    },
+    "model-combination": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": null,
+          "lift": null,
+          "verdict": "not evaluated",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "unmeasured",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "No T3 behavioral eval; routing only (T2)"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Routing/abstention",
+      "value_surface": "routing/discoverability"
+    },
+    "model-router": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": null,
+          "lift": null,
+          "verdict": "not evaluated",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "unmeasured",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "No T3 behavioral eval; routing only (T2)"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Routing/abstention",
+      "value_surface": "routing/discoverability"
+    },
+    "model-selection": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": null,
+          "lift": null,
+          "verdict": "not evaluated",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "unmeasured",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "No T3 behavioral eval; audit recommends merge into model-router"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Routing/abstention",
+      "value_surface": "routing/discoverability"
+    },
+    "occams-razor": {
+      "objective_evidence": [
+        {
+          "metric": "accuracy",
+          "dataset": "authored correctness",
+          "n": 40,
+          "placebo": 0.4,
+          "treatment": 0.45,
+          "delta_pp": 5,
+          "p": 0.617,
+          "significant": false,
+          "verdict": "directional only",
+          "provenance": "OBJ-powered-directional",
+          "temporal": "post-edit",
+          "significance": "directional",
+          "replicated": false,
+          "source": "evals/results/run1/correctness-occams.json"
+        },
+        {
+          "metric": "fault_localization_accuracy",
+          "dataset": "SWE-bench",
+          "n": 150,
+          "placebo": 0.827,
+          "treatment": 0.847,
+          "delta_pp": 2,
+          "p": 0.505,
+          "significant": false,
+          "verdict": "not confirmed",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/run1/swe-occams-razor-improved.json",
+          "note": "Trigger-scoped rework did not move needle"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.33,
+          "lift": -1,
+          "verdict": "regresses",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "null",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Run1 scorecard n=3 win claim superseded; audit recommends TRIGGER-ONLY"
+        }
+      ],
+      "verdict": "directional, not confirmed",
+      "eval_family": "Debugging/fault-localization",
+      "value_surface": "paired reasoning quality"
+    },
+    "ooda": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Systems/product/strategy pairwise",
+      "value_surface": "paired reasoning quality"
+    },
+    "opportunity-cost": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.33,
+          "lift": -1,
+          "verdict": "regresses",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "null",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Run1 scorecard n=3 win claim superseded"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Conceptual reframes",
+      "value_surface": "paired reasoning quality"
+    },
+    "pre-mortem": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 1,
+          "lift": 3,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Run1 scorecard n=3 win claim superseded; audit recommends merge with inversion, rework agent-native"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Conceptual reframes",
+      "value_surface": "paired reasoning quality"
+    },
+    "probabilistic": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; audit recommends merge with bayesian"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Quantitative/uncertainty",
+      "value_surface": "calibrated classification"
+    },
+    "red-team": {
+      "objective_evidence": [
+        {
+          "metric": "accuracy",
+          "dataset": "DiverseVul balanced",
+          "n": 80,
+          "placebo": 0.563,
+          "treatment": 0.675,
+          "delta_pp": 11.3,
+          "p": 0.052,
+          "significant": false,
+          "verdict": "strong elevate-leaning",
+          "provenance": "OBJ-powered-directional",
+          "temporal": "post-edit",
+          "significance": "directional",
+          "replicated": false,
+          "source": "evals/results/wavec/redteam-diversevul-balanced.json",
+          "note": "Largest objective effect in program; needs n=150/200 confirmation"
+        },
+        {
+          "metric": "accuracy",
+          "dataset": "DiverseVul balanced",
+          "n": 200,
+          "placebo": 0.59,
+          "treatment": 0.64,
+          "delta_pp": 5,
+          "p": 0.1,
+          "significant": false,
+          "verdict": "directional, not significant",
+          "provenance": "OBJ-powered-directional",
+          "temporal": "post-edit",
+          "significance": "directional",
+          "replicated": false,
+          "source": "evals/results/confirm/redteam-diversevul-balanced-n200.json",
+          "note": "Powered confirmation at n=200; +11.3pp at n=80 collapsed to +5.0pp p=0.10"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded"
+        }
+      ],
+      "verdict": "directional-not-replicated",
+      "eval_family": "Security/adversarial",
+      "value_surface": "false-positive reduction"
+    },
+    "regret-minimization": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0,
+          "lift": -3,
+          "verdict": "regresses",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "null",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Run1 scorecard n=3 win claim superseded; audit recommends kill (not agent-applicable)"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Conceptual reframes",
+      "value_surface": "paired reasoning quality"
+    },
+    "reversibility": {
+      "objective_evidence": [
+        {
+          "metric": "accuracy",
+          "dataset": "authored doors",
+          "n": 30,
+          "placebo": 1,
+          "treatment": 1,
+          "delta_pp": 0,
+          "p": 1,
+          "significant": false,
+          "verdict": "ceiling",
+          "provenance": "OBJ-small-ceiling",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/rerun/reversibility-doors.json"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; audit recommends TRIGGER-ONLY"
+        }
+      ],
+      "verdict": "ceiling",
+      "eval_family": "Conceptual reframes",
+      "value_surface": "paired reasoning quality"
+    },
+    "scientific-method": {
+      "objective_evidence": [
+        {
+          "metric": "fault_localization_accuracy",
+          "dataset": "SWE-bench fault localization",
+          "n": 150,
+          "placebo": 0.82,
+          "treatment": 0.913,
+          "delta_pp": 9.3,
+          "p": 0.002,
+          "significant": true,
+          "verdict": "ELEVATE",
+          "provenance": "OBJ-powered-significant",
+          "temporal": "post-edit",
+          "significance": "significant",
+          "replicated": false,
+          "source": "evals/results/run1/swe-scientific-method-improved.json",
+          "note": "Sole robust objective ELEVATE in the program; hypothesis-differential debugging rework; p=0.002, +9.3pp, n=150. Fresh replication pending M5."
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; this skill is the only one with objective ELEVATE"
+        }
+      ],
+      "verdict": "ELEVATE",
+      "eval_family": "Debugging/fault-localization",
+      "value_surface": "localization"
+    },
+    "second-order": {
+      "objective_evidence": [
+        {
+          "metric": "accuracy",
+          "dataset": "authored consequence",
+          "n": 30,
+          "placebo": 0.9,
+          "treatment": 0.833,
+          "delta_pp": -6.7,
+          "p": 0.617,
+          "significant": false,
+          "verdict": "negative",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/rerun/second-order-consequence.json"
+        },
+        {
+          "metric": "accuracy",
+          "dataset": "StrategyQA",
+          "n": 40,
+          "placebo": 0.85,
+          "treatment": 0.85,
+          "delta_pp": 0,
+          "p": 0.479,
+          "significant": false,
+          "verdict": "no effect",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/rerun/strategyqa-second-order.json"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded"
+        }
+      ],
+      "verdict": "no effect",
+      "eval_family": "Debugging/fault-localization",
+      "value_surface": "objective correctness"
+    },
+    "socratic": {
+      "objective_evidence": [
+        {
+          "metric": "accuracy",
+          "dataset": "authored clarify",
+          "n": 29,
+          "placebo": 1,
+          "treatment": 0.931,
+          "delta_pp": -6.9,
+          "p": 0.479,
+          "significant": false,
+          "verdict": "negative",
+          "provenance": "OBJ-small-negative",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/wavec/routing-socratic.json"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; Tier 1 flagged as potentially misleading (coaching persona)"
+        }
+      ],
+      "verdict": "ceiling",
+      "eval_family": "Routing/abstention",
+      "value_surface": "routing/discoverability"
+    },
+    "steel-manning": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Conceptual reframes",
+      "value_surface": "paired reasoning quality"
+    },
+    "systems": {
+      "objective_evidence": [
+        {
+          "metric": "fault_localization_accuracy",
+          "dataset": "SWE-bench",
+          "n": 150,
+          "placebo": 0.8,
+          "treatment": 0.853,
+          "delta_pp": 5.3,
+          "p": 0.043,
+          "significant": true,
+          "verdict": "ELEVATE (superseded by replication failure)",
+          "provenance": "OBJ-powered-significant",
+          "temporal": "post-edit",
+          "significance": "significant",
+          "replicated": false,
+          "source": "evals/results/run1/swe-systems-powered.json",
+          "superseded": true,
+          "note": "Original firm ELEVATE claim; replication at n=150 gave −1.3pp p=0.683 — superseded"
+        },
+        {
+          "metric": "fault_localization_accuracy",
+          "dataset": "SWE-bench",
+          "n": 150,
+          "placebo": 0.84,
+          "treatment": 0.827,
+          "delta_pp": -1.3,
+          "p": 0.683,
+          "significant": false,
+          "verdict": "no robust effect",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/wavec/swe-systems-restored.json",
+          "note": "Replication run; earlier n=150 +5.3pp p=0.043 did not replicate"
+        },
+        {
+          "metric": "fault_localization_accuracy",
+          "dataset": "SWE-bench",
+          "n": 45,
+          "placebo": 0.8,
+          "treatment": 0.889,
+          "delta_pp": 8.9,
+          "p": 0.221,
+          "significant": false,
+          "verdict": "elevate-leaning (ns)",
+          "provenance": "OBJ-powered-directional",
+          "temporal": "post-edit",
+          "significance": "directional",
+          "replicated": false,
+          "source": "evals/results/run1/swe-systems.json",
+          "note": "n=45 native domain run; directional only"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.33,
+          "lift": -1,
+          "verdict": "regresses",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "null",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Run1 scorecard n=3 win claim superseded; ELEVATE-OR-KILL.md initially leaned ELEVATE"
+        }
+      ],
+      "verdict": "no-lift",
+      "eval_family": "Debugging/fault-localization",
+      "value_surface": "localization"
+    },
+    "theory-of-constraints": {
+      "objective_evidence": [
+        {
+          "metric": "accuracy",
+          "dataset": "authored bottleneck",
+          "n": 30,
+          "placebo": 0.967,
+          "treatment": 0.967,
+          "delta_pp": 0,
+          "p": 1,
+          "significant": false,
+          "verdict": "ceiling",
+          "provenance": "OBJ-small-ceiling",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/rerun/theory-of-constraints-bottleneck.json"
+        }
+      ],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 1,
+          "lift": 3,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded"
+        }
+      ],
+      "verdict": "ceiling",
+      "eval_family": "Debugging/fault-localization",
+      "value_surface": "objective correctness"
+    },
+    "thought-experiment": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 1,
+          "lift": 3,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; audit recommends TRIGGER-ONLY"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Conceptual reframes",
+      "value_surface": "paired reasoning quality"
+    },
+    "triz": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0,
+          "lift": -3,
+          "verdict": "regresses",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "null",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Run1 scorecard n=3 win claim superseded; audit recommends TRIGGER-ONLY"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Conceptual reframes",
+      "value_surface": "paired reasoning quality"
+    },
+    "via-negativa": {
+      "objective_evidence": [],
+      "judge_evidence": [
+        {
+          "metric": "behavioral_win_rate",
+          "value": 0.67,
+          "lift": 1,
+          "verdict": "proven",
+          "provenance": "judge-only-n3-superseded",
+          "temporal": "pre-edit",
+          "significance": "directional",
+          "replicated": false,
+          "n": 9,
+          "source": "evals/results/run1/tier3-behavioral.json",
+          "superseded": true,
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; audit recommends TRIGGER-ONLY"
+        }
+      ],
+      "verdict": "unmeasured",
+      "eval_family": "Systems/product/strategy pairwise",
+      "value_surface": "paired reasoning quality"
+    }
+  }
+}
