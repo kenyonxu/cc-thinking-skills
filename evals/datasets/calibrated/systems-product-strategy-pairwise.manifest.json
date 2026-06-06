@@ -1,0 +1,61 @@
+{
+  "family": "Systems/product/strategy pairwise",
+  "family_key": "systems-product-strategy-pairwise",
+  "skills": [
+    "archetypes",
+    "feedback-loops",
+    "leverage-points",
+    "ooda",
+    "via-negativa"
+  ],
+  "value_surface": "paired reasoning quality",
+  "source": "Combined from 3 source files. authored: theory-of-constraints-bottleneck, margin-of-safety-provision; external: glm-distractor",
+  "leakage": "Theory-of-constraints-bottleneck authored dataset is locally authored — zero external leakage. Behavioral items for archetypes, feedback-loops, leverage-points, ooda, and via-negativa are locally authored scenarios. Margin-of-safety-provision authored dataset provides near-miss items. All target items are locally authored with zero training data leakage risk. GLM distractor items may have training data overlap. Overall leakage risk is very low.\n\nSource breakdown: 2 authored dataset(s) with zero external leakage; ",
+  "label": {
+    "definition": "Paired reasoning quality for systems/product/strategy scenarios. Items are behavioral scenarios scored by a judge panel comparing the skill-guided response against a placebo/filler baseline.",
+    "values": {
+      "win": "Skill response preferred by majority of judge panel",
+      "loss": "Placebo response preferred",
+      "tie": "No clear preference"
+    },
+    "eval_mode": "judge_panel",
+    "judge_models": [
+      "gemini-3.1-pro-preview",
+      "gpt-5.5-pro"
+    ],
+    "judge_criteria": "Compare responses on: diagnostic accuracy, leverage point identification, actionable specificity, and avoidance of symptomatic fixes."
+  },
+  "calibration": {
+    "baseline": 0.563,
+    "baseline_estimated": true,
+    "baseline_note": "Estimated from label distribution (52% true). Balanced distribution suggests items are in the target difficulty band. Actual baseline must be measured by calibration runner.",
+    "band": [
+      0.4,
+      0.7
+    ],
+    "status": "pending_calibration",
+    "instructions": "Run EVAL_RUN=calib node evals/run-calibration.js evals/datasets/calibrated/<family>-candidate-pool.jsonl to populate real calibration stats."
+  },
+  "item_counts": {
+    "total": 104,
+    "target": 30,
+    "near_miss": 30,
+    "distractor": 44,
+    "ambiguous": 0,
+    "decisive": 104
+  },
+  "item_class_definitions": {
+    "target": "Items that directly measure the family value surface — in-domain, skill-relevant items where the skill is expected to help.",
+    "near_miss": "Items that are similar to the family domain but not an exact match. Useful for calibration but may not benefit from the skill.",
+    "distractor": "Items that are clearly off-target (target=false). Used to measure false-positive rate and specificity.",
+    "ambiguous": "Items whose relevance to the family is unclear. Excluded from decisive splits."
+  },
+  "decisive_split_rules": {
+    "min_target": 1,
+    "min_distractor": 1,
+    "max_ambiguous": 0,
+    "satisfied": true
+  },
+  "created": "2026-06-06",
+  "frozen": false
+}

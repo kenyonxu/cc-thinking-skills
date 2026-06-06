@@ -1,0 +1,52 @@
+{
+  "family": "Security/adversarial",
+  "family_key": "security-adversarial",
+  "skills": [
+    "red-team"
+  ],
+  "value_surface": "false-positive reduction",
+  "source": "Combined from 3 source files. external: diversevul-balanced, diversevul, glm-distractor",
+  "leakage": "DiverseVul data is derived from public CVE records and NVD entries through 2023. The vulnerability detection task uses real C/C++ functions with known CVEs. Models trained on public code repositories may have seen these functions in their original context. Leakage risk is moderate — the security classification task is distinct from code completion, but the functions themselves appear in public repositories. The balanced subset (diversevul-balanced) was constructed to have equal positive/negative examples. No overlap with SWE-bench or selfaware datasets. GLM distractor items are from a 2025 reasoning dataset.\n\nSource breakdown: 2 external dataset(s) with potential training-data leakage; ",
+  "label": {
+    "definition": "Vulnerability detection: whether the model correctly classifies a C/C++ function as vulnerable (true) or safe (false).",
+    "values": {
+      "true": "Vulnerable (answer=Yes)",
+      "false": "Safe (answer=No)"
+    },
+    "eval_mode": "ground_truth",
+    "ground_truth_field": "answer"
+  },
+  "calibration": {
+    "baseline": null,
+    "baseline_estimated": true,
+    "baseline_note": "No labeled items available for difficulty estimation. Behavioral items require judge-based calibration.",
+    "band": [
+      0.4,
+      0.7
+    ],
+    "status": "pending_calibration",
+    "instructions": "Run EVAL_RUN=calib node evals/run-calibration.js evals/datasets/calibrated/<family>-candidate-pool.jsonl to populate real calibration stats."
+  },
+  "item_counts": {
+    "total": 644,
+    "target": 200,
+    "near_miss": 400,
+    "distractor": 44,
+    "ambiguous": 0,
+    "decisive": 644
+  },
+  "item_class_definitions": {
+    "target": "Items that directly measure the family value surface — in-domain, skill-relevant items where the skill is expected to help.",
+    "near_miss": "Items that are similar to the family domain but not an exact match. Useful for calibration but may not benefit from the skill.",
+    "distractor": "Items that are clearly off-target (target=false). Used to measure false-positive rate and specificity.",
+    "ambiguous": "Items whose relevance to the family is unclear. Excluded from decisive splits."
+  },
+  "decisive_split_rules": {
+    "min_target": 1,
+    "min_distractor": 1,
+    "max_ambiguous": 0,
+    "satisfied": true
+  },
+  "created": "2026-06-06",
+  "frozen": false
+}

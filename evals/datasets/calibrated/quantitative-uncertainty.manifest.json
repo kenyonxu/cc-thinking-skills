@@ -1,0 +1,60 @@
+{
+  "family": "Quantitative/uncertainty",
+  "family_key": "quantitative-uncertainty",
+  "skills": [
+    "bayesian",
+    "debiasing",
+    "fermi-estimation",
+    "margin-of-safety",
+    "probabilistic"
+  ],
+  "value_surface": "objective correctness",
+  "source": "Combined from 8 source files. external: bayesian-authored, debias-authored, fermi, strategyqa, forecasting, financial, glm-distractor; authored: margin-of-safety-provision",
+  "leakage": "Multiple sources with varying leakage profiles: (1) Bayesian-authored and debias-authored are locally authored — zero external leakage. (2) Fermi estimation problems (jeggers/fermi) are CC-BY-4.0 licensed estimation problems; the numeric answers may appear in training data but the estimation process is the measured skill. (3) StrategyQA (ChilleD/StrategyQA) is Wikipedia-derived with Apache-2.0 license; implicit reasoning chains may be in training data. (4) Forecasting questions from a 2023-2024 forecasting dataset; models may have seen similar questions. (5) Financial dataset — domain-specific financial reasoning. Overall leakage risk: low-to-moderate depending on the source.\n\nSource breakdown: 6 external dataset(s) with potential training-data leakage; 1 authored dataset(s) with zero external leakage; ",
+  "label": {
+    "definition": "Objective correctness on quantitative reasoning, probability calibration, and numerical estimation tasks.",
+    "values": {
+      "true": "Correct answer (matches answer_idx or within tolerance of answer_num)",
+      "false": "Incorrect answer"
+    },
+    "eval_mode": "ground_truth",
+    "ground_truth_fields": [
+      "answer_idx",
+      "answer_num",
+      "answer"
+    ]
+  },
+  "calibration": {
+    "baseline": 0.455,
+    "baseline_estimated": true,
+    "baseline_note": "Estimated from label distribution (53% true). Balanced distribution suggests items are in the target difficulty band. Actual baseline must be measured by calibration runner.",
+    "band": [
+      0.4,
+      0.7
+    ],
+    "status": "pending_calibration",
+    "instructions": "Run EVAL_RUN=calib node evals/run-calibration.js evals/datasets/calibrated/<family>-candidate-pool.jsonl to populate real calibration stats."
+  },
+  "item_counts": {
+    "total": 505,
+    "target": 340,
+    "near_miss": 121,
+    "distractor": 44,
+    "ambiguous": 0,
+    "decisive": 505
+  },
+  "item_class_definitions": {
+    "target": "Items that directly measure the family value surface — in-domain, skill-relevant items where the skill is expected to help.",
+    "near_miss": "Items that are similar to the family domain but not an exact match. Useful for calibration but may not benefit from the skill.",
+    "distractor": "Items that are clearly off-target (target=false). Used to measure false-positive rate and specificity.",
+    "ambiguous": "Items whose relevance to the family is unclear. Excluded from decisive splits."
+  },
+  "decisive_split_rules": {
+    "min_target": 1,
+    "min_distractor": 1,
+    "max_ambiguous": 0,
+    "satisfied": true
+  },
+  "created": "2026-06-06",
+  "frozen": false
+}

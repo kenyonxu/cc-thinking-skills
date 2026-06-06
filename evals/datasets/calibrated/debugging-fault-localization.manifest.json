@@ -1,0 +1,59 @@
+{
+  "family": "Debugging/fault-localization",
+  "family_key": "debugging-fault-localization",
+  "skills": [
+    "scientific-method",
+    "five-whys-plus",
+    "systems",
+    "occams-razor",
+    "map-territory",
+    "kepner-tregoe",
+    "second-order",
+    "theory-of-constraints"
+  ],
+  "value_surface": "localization",
+  "source": "Combined from 3 source files. external: swebench, glm-distractor; authored: map-territory-verify",
+  "leakage": "SWE-bench data cutoff is 2024-06. All solver models used in this mission have training data post-dating the SWE-bench collection cutoff. However, the task is fault localization on specific GitHub issues from individual repos (astropy, django, etc.), which are unlikely to be memorized verbatim. The specific file-path answers may appear in model training data from public GitHub discussions. Leakage risk is moderate for popular repos (django, scikit-learn) and low for niche repos (astropy subpackages). Cross-contamination with the DiverseVul security dataset is negligible — different domains entirely. GLM distractor items are from a 2025 reasoning dataset and may overlap with training data for models released after 2025-Q1.\n\nSource breakdown: 1 external dataset(s) with potential training-data leakage; 1 authored dataset(s) with zero external leakage; ",
+  "label": {
+    "definition": "Fault localization accuracy: whether the model correctly identifies the source file(s) responsible for a described bug or issue.",
+    "values": {
+      "true": "Correct file identified (matches gold_files)",
+      "false": "Incorrect file identified"
+    },
+    "eval_mode": "ground_truth",
+    "ground_truth_field": "gold_files"
+  },
+  "calibration": {
+    "baseline": 0.465,
+    "baseline_estimated": true,
+    "baseline_note": "Estimated from label distribution (53% true). Balanced distribution suggests items are in the target difficulty band. Actual baseline must be measured by calibration runner.",
+    "band": [
+      0.4,
+      0.7
+    ],
+    "status": "pending_calibration",
+    "instructions": "Run EVAL_RUN=calib node evals/run-calibration.js evals/datasets/calibrated/<family>-candidate-pool.jsonl to populate real calibration stats."
+  },
+  "item_counts": {
+    "total": 224,
+    "target": 150,
+    "near_miss": 30,
+    "distractor": 44,
+    "ambiguous": 0,
+    "decisive": 224
+  },
+  "item_class_definitions": {
+    "target": "Items that directly measure the family value surface — in-domain, skill-relevant items where the skill is expected to help.",
+    "near_miss": "Items that are similar to the family domain but not an exact match. Useful for calibration but may not benefit from the skill.",
+    "distractor": "Items that are clearly off-target (target=false). Used to measure false-positive rate and specificity.",
+    "ambiguous": "Items whose relevance to the family is unclear. Excluded from decisive splits."
+  },
+  "decisive_split_rules": {
+    "min_target": 1,
+    "min_distractor": 1,
+    "max_ambiguous": 0,
+    "satisfied": true
+  },
+  "created": "2026-06-06",
+  "frozen": false
+}
