@@ -5,10 +5,10 @@
     "red-team"
   ],
   "value_surface": "false-positive reduction",
-  "source": "Combined from 3 source files. external: diversevul-balanced, diversevul, glm-distractor",
-  "leakage": "DiverseVul data is derived from public CVE records and NVD entries through 2023. The vulnerability detection task uses real C/C++ functions with known CVEs. Models trained on public code repositories may have seen these functions in their original context. Leakage risk is moderate — the security classification task is distinct from code completion, but the functions themselves appear in public repositories. The balanced subset (diversevul-balanced) was constructed to have equal positive/negative examples. No overlap with SWE-bench or selfaware datasets. GLM distractor items are from a 2025 reasoning dataset.\n\nSource breakdown: 2 external dataset(s) with potential training-data leakage; ",
+  "source": "Harder rebuild from diversevul.jsonl diverse-CWE items (CWE-362/400/310/200/399/189/16/346/94/22/269/415/59/193) + 10 authored near-miss safe variants (functions that look vulnerable but are actually safe) + glm-distractor items. Replaces the original diversevul-balanced pool which was predominantly CWE-787/119 (too easy for claude-sonnet-4-6). Near-miss safe variants are intentionally designed to trigger false positives from overeager security scanners — scoring penalizes FPR.",
+  "leakage": "DiverseVul data (items 0-24) derived from public CVE records and NVD entries through 2023. The vulnerability detection task uses real C/C++ functions with known CVEs. Models trained on public code repositories may have seen these functions in their original context. Leakage risk is moderate — the security classification task is distinct from code completion, but the functions themselves appear in public repositories. Near-miss safe variants (items 25-34) are freshly authored C code snippets created for this calibration and have ZERO external leakage risk. GLM distractor items are from a 2025 reasoning dataset with potential training-data overlap.\n\nSource breakdown: 1 external dataset (diversevul, diverse CWE items) with moderate training-data leakage risk; 1 authored dataset (near-miss safe variants) with zero external leakage; 1 external dataset (glm-distractor) with potential training-data overlap.",
   "label": {
-    "definition": "Vulnerability detection: whether the model correctly classifies a C/C++ function as vulnerable (true) or safe (false).",
+    "definition": "Vulnerability detection: whether the model correctly classifies a C/C++ function as vulnerable (true) or safe (false). Scoring penalizes false positives (flagging safe code as vulnerable). Balanced vulnerable/safe pairs with near-miss safe variants that look suspicious but are actually secure.",
     "values": {
       "true": "Vulnerable (answer=Yes)",
       "false": "Safe (answer=No)"
@@ -17,57 +17,60 @@
     "ground_truth_field": "answer"
   },
   "calibration": {
-    "baseline": 0.832,
+    "baseline": 0.648,
     "baseline_estimated": false,
     "baseline_source": "measured_sample",
     "band": [
       0.4,
       0.7
     ],
-    "in_band": false,
-    "exemption": "claude-sonnet-4-6 achieves 83.2% baseline accuracy on placebo/baseline condition (1 in-band, 20 ceiling, 3 floor over 25 items at K_TRIALS=5). No meaningful headroom for skill improvement measurement; the DiverseVul balanced vulnerability detection items are too easy for this solver. The pool is predominantly ceiling.",
+    "in_band": true,
+    "exemption": null,
     "status": "measured_sample",
     "calibrated_items": 25,
     "in_band_items": 1,
-    "decisive_split_items": 644,
+    "decisive_split_items": 70,
     "calibration_only_items": 0,
-    "calibration_run_id": "calib-m3",
+    "calibration_run_id": "calib-m3-fixed",
     "calibration_solver": "claude-sonnet-4-6",
     "calibration_k_trials": 5,
     "sample_size": 25,
-    "ceiling_items": 20,
-    "floor_items": 3,
-    "other_out_of_band": 1,
-    "exemption_reason": "measured_baseline_outside_band"
+    "ceiling_items": 14,
+    "floor_items": 7,
+    "other_out_of_band": 3,
+    "prior_baseline": 0.832,
+    "prior_run_id": "calib-m3",
+    "improvement_notes": "Rebuilt pool with diverse-CWE items (non-787/119) and 10 authored near-miss safe variants. Overall baseline dropped from 83.2% to 64.8% — now within the [0.40,0.70] calibration band. Per-item baselines remain bimodal at K_TRIALS=5 (mostly 0.0 or 1.0), but the overall average is correctly positioned for headroom measurement. Prior ceiling exemption removed."
   },
   "item_counts": {
-    "total": 644,
-    "target": 200,
-    "near_miss": 400,
-    "distractor": 44,
+    "total": 70,
+    "target": 25,
+    "near_miss": 10,
+    "distractor": 35,
     "ambiguous": 0,
-    "decisive": 644,
+    "decisive": 70,
     "calibration_only": 0,
     "exempt": 0,
     "calibrated": 25
   },
   "item_class_definitions": {
-    "target": "Items that directly measure the family value surface — in-domain, skill-relevant items where the skill is expected to help.",
-    "near_miss": "Items that are similar to the family domain but not an exact match. Useful for calibration but may not benefit from the skill.",
-    "distractor": "Items that are clearly off-target (target=false). Used to measure false-positive rate and specificity.",
-    "ambiguous": "Items whose relevance to the family is unclear. Excluded from decisive splits."
+    "target": "Diverse-CWE vulnerable C/C++ functions (CWE-362 race condition, CWE-400 resource consumption, CWE-310 crypto, CWE-200 info disclosure, CWE-399 resource mgmt, CWE-189 numeric errors, etc.) — genuinely vulnerable functions requiring careful analysis.",
+    "near_miss": "Authored safe C code snippets that mimic vulnerability patterns (TOCTOU-looking code under mutex, buffer ops with guards, use-after-free-like patterns with refcounting, etc.) — these are actually SAFE but designed to trigger false positives from careless security analysis.",
+    "distractor": "GLM reasoning items unrelated to security — used to measure false-positive rate (FPR). The solver should NOT flag these as vulnerable.",
+    "ambiguous": "None in this pool."
   },
   "decisive_split_rules": {
     "min_target": 1,
     "min_distractor": 1,
     "max_ambiguous": 0,
     "satisfied": true,
-    "decisive_targets": 200,
-    "decisive_distractors": 444,
+    "decisive_targets": 35,
+    "decisive_distractors": 35,
     "ambiguous_in_split": 0
   },
   "created": "2026-06-06",
+  "updated": "2026-06-06T19:05:00.000Z",
   "frozen": true,
-  "frozen_at": "2026-06-06T15:16:01.827Z",
-  "frozen_by": "fix-m3-real-calibration-all-pools"
+  "frozen_at": "2026-06-06T19:05:00.000Z",
+  "frozen_by": "m3-harder-data-security-routing"
 }
