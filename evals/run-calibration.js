@@ -10,15 +10,20 @@
  * as out-of-band. No paired skill arm — this is a pure difficulty profiler.
  *
  * Usage:
- *   EVAL_RUN=smoke LIMIT=4 node evals/run-calibration.js <dataset.jsonl> [--solver-model=claude-sonnet-4-6] [--solver-effort=high]
+ *   EVAL_RUN=smoke LIMIT=4 node evals/run-calibration.js <dataset.jsonl> [--solver-model=claude-sonnet-4-6] [--solver-effort=high] [--batch] [--batch-size=5] [--label-field=answer]
  *
  * Env:
  *   LIMIT                — slice first N items for smoke tests (deterministic order)
- *   K_TRIALS             — baseline solver runs per item for fractional difficulty (default: 3)
+ *   K_TRIALS             — baseline solver runs per item for fractional difficulty (default: 5)
  *   EVAL_RUN             — run id for output directory (default: 'calibration')
  *   SOLVER_MODEL         — model for solving (default: claude-sonnet-4-6)
  *   SOLVER_EFFORT        — reasoning effort (default: model max)
  *   CONC                 — concurrency (default: 4)
+ *
+ * Batch mode (--batch):
+ *   Processes items in small batches with incremental progress-saving to a
+ *   partial-results file. If API timeouts interrupt the run, completed batches
+ *   are preserved and can be resumed.
  */
 
 const fs = require('fs');
@@ -31,19 +36,24 @@ const args = process.argv.slice(2);
 const datasetPath = args.find(a => !a.startsWith('--'));
 const solverModelArg = args.find(a => a.startsWith('--solver-model='));
 const solverEffortArg = args.find(a => a.startsWith('--solver-effort='));
+const labelFieldArg = args.find(a => a.startsWith('--label-field='));
+const batchSizeArg = args.find(a => a.startsWith('--batch-size='));
+const BATCH_MODE = args.includes('--batch');
 
 if (!datasetPath) {
-  console.error('Usage: node evals/run-calibration.js <dataset.jsonl> [--solver-model=MODEL] [--solver-effort=EFFORT]');
+  console.error('Usage: node evals/run-calibration.js <dataset.jsonl> [--solver-model=MODEL] [--solver-effort=EFFORT] [--batch] [--batch-size=N] [--label-field=FIELD]');
   process.exit(1);
 }
 
 const DATASET = path.resolve(datasetPath);
 const SOLVER_MODEL = solverModelArg ? solverModelArg.split('=')[1] : 'claude-sonnet-4-6';
 const SOLVER_EFFORT = solverEffortArg ? solverEffortArg.split('=')[1] : maxEffortFor(SOLVER_MODEL);
-const K_TRIALS = parseInt(process.env.K_TRIALS || '3', 10);
+const LABEL_FIELD = labelFieldArg ? labelFieldArg.split('=')[1] : null;
+const K_TRIALS = parseInt(process.env.K_TRIALS || '5', 10);
 const LIMIT = process.env.LIMIT ? parseInt(process.env.LIMIT, 10) : null;
 const CONC = parseInt(process.env.CONC || '4', 10);
 const EVAL_RUN = process.env.EVAL_RUN || 'calibration';
+const BATCH_SIZE = batchSizeArg ? parseInt(batchSizeArg.split('=')[1], 10) : 5;
 
 function loadDataset(file) {
   const text = fs.readFileSync(file, 'utf8');
@@ -56,7 +66,19 @@ function loadDataset(file) {
 
 // ---- Label normalization ----
 // Pools use different field names for the ground-truth label.
+// When --label-field is set, use that field exclusively.
 function normalizeLabel(item) {
+  if (LABEL_FIELD) {
+    const raw = item[LABEL_FIELD];
+    if (raw === undefined || raw === null) return null;
+    // Detect type from content
+    if (typeof raw === 'boolean') return { raw, type: 'boolean', field: LABEL_FIELD };
+    if (Array.isArray(raw)) return { raw, type: 'filepath', field: LABEL_FIELD };
+    const s = String(raw);
+    if (/^[A-Ea-e]$/.test(s.trim())) return { raw: s.trim(), type: 'choice', field: LABEL_FIELD };
+    if (/^(yes|no)$/i.test(s.trim())) return { raw: s.trim(), type: 'yesno', field: LABEL_FIELD };
+    return { raw: s.trim(), type: 'string', field: LABEL_FIELD };
+  }
   // Priority: label (boolean) > answer (Yes/No string) > answer_idx (A-E string) > gold_files (string list)
   if (item.label !== undefined && item.label !== null) return { raw: item.label, type: typeof item.label === 'boolean' ? 'boolean' : 'string', field: 'label' };
   if (item.answer !== undefined && item.answer !== null) return { raw: item.answer, type: 'yesno', field: 'answer' };
@@ -66,9 +88,19 @@ function normalizeLabel(item) {
 }
 
 // ---- Prediction parsing ----
-// The model returns JSON. We try to extract whatever format the item demands.
-function parsePrediction(json) {
-  if (!json) return { value: null, ok: false };
+// The model returns JSON. We also handle "ANSWER: <value>" text format
+// which some decision instructions request.
+const ANSWER_LINE_RE = /\bANSWER\s*:\s*(.+)$/im;
+
+function parsePrediction(json, rawText) {
+  if (!json) {
+    // Try to extract ANSWER: pattern from raw text
+    if (rawText) {
+      const m = rawText.match(ANSWER_LINE_RE);
+      if (m) return { value: m[1].trim(), type: 'string', ok: true };
+    }
+    return { value: null, ok: false };
+  }
 
   // Boolean fields (answer, decision, label, result, yes, classification, answerable)
   for (const key of ['answer', 'decision', 'label', 'result', 'yes', 'classification', 'answerable']) {
@@ -89,6 +121,11 @@ function parsePrediction(json) {
     }
   }
 
+  // Fallback: try ANSWER: pattern on the stringified JSON
+  const str = JSON.stringify(json);
+  const m = str.match(ANSWER_LINE_RE);
+  if (m) return { value: m[1].trim(), type: 'string', ok: true };
+
   return { value: null, ok: false };
 }
 
@@ -98,8 +135,15 @@ function judgePrediction(predParsed, normLabel) {
   if (!predParsed.ok || !normLabel) return null;
 
   if (normLabel.type === 'boolean') {
-    // Compare boolean prediction to boolean label
+    // Compare boolean prediction to boolean label.
+    // Handle both boolean values and Yes/No string values.
     if (predParsed.type === 'boolean') return predParsed.value === normLabel.raw;
+    if (predParsed.type === 'string') {
+      const s = predParsed.value.toLowerCase();
+      if (s === 'yes' || s === 'true') return normLabel.raw === true;
+      if (s === 'no' || s === 'false') return normLabel.raw === false;
+      return null;
+    }
     return null;
   }
 
@@ -149,83 +193,93 @@ function judgePrediction(predParsed, normLabel) {
   return null;
 }
 
-function buildCalibrationPrompt(problemText, decisionInstruction) {
-  // Don't duplicate JSON format if the instruction already contains one.
-  const hasJsonInstruction = /return\s+only\s+valid\s+json/i.test(decisionInstruction) ||
-    /\{"\w+":/i.test(decisionInstruction);
-  if (hasJsonInstruction) {
-    return `${decisionInstruction}\n\nProblem:\n${problemText}`;
-  }
-  return `${decisionInstruction}\n\nProblem:\n${problemText}\n\nReturn ONLY valid JSON with your answer.`;
+// ---- Prompt truncation ----
+// Long code-context prompts (e.g., SWE-bench) can cause API timeouts.
+// Truncate the middle of the prompt to keep it within a reasonable length
+// while preserving the beginning (issue description) and end (code snippets).
+const MAX_PROMPT_LEN = 1600;
+
+function truncatePrompt(prompt, maxLen = MAX_PROMPT_LEN) {
+  if (!prompt || prompt.length <= maxLen) return prompt;
+  const keepStart = Math.floor(maxLen * 0.45); // preserve ~45% at the start
+  const keepEnd = Math.floor(maxLen * 0.45);   // preserve ~45% at the end
+  const start = prompt.slice(0, keepStart);
+  const end = prompt.slice(prompt.length - keepEnd);
+  const omitted = prompt.length - keepStart - keepEnd;
+  // Find a clean break point for the start section
+  const lastNewline = start.lastIndexOf('\n');
+  const cleanStart = lastNewline > keepStart * 0.7 ? start.slice(0, lastNewline) : start;
+  const firstNewline = end.indexOf('\n');
+  const cleanEnd = firstNewline > 0 && firstNewline < keepEnd * 0.3 ? end.slice(firstNewline + 1) : end;
+  return `${cleanStart}\n\n[...truncated ${omitted} chars...]\n\n${cleanEnd}`;
 }
 
-async function runCalibration() {
-  const items = loadDataset(DATASET);
-  const limitedItems = LIMIT ? items.slice(0, LIMIT) : items;
-  const datasetName = path.basename(DATASET, path.extname(DATASET));
+function buildCalibrationPrompt(problemText, decisionInstruction) {
+  // Replace "ANSWER: <path>" format requests with JSON format for reliable parsing.
+  // The ANSWER_LINE_RE in parsePrediction handles the text format as fallback,
+  // but we prefer JSON when we can control the prompt.
+  let di = decisionInstruction;
+  const answerMatch = di.match(/End\s+with\s+exactly\s*:\s*ANSWER\s*:\s*(.+)/i);
+  if (answerMatch) {
+    const answerDesc = answerMatch[1].trim();
+    di = di.replace(/End\s+with\s+exactly\s*:\s*ANSWER\s*:.+/i,
+      `Return ONLY valid JSON: {"answer": "${answerDesc}"}`);
+  }
+  // Don't duplicate JSON format if the instruction already contains one.
+  const hasJsonInstruction = /return\s+only\s+valid\s+json/i.test(di) ||
+    /\{"\w+":/i.test(di);
+  if (hasJsonInstruction) {
+    return `${di}\n\nProblem:\n${problemText}`;
+  }
+  return `${di}\n\nProblem:\n${problemText}\n\nReturn ONLY valid JSON with your answer.`;
+}
 
-  console.log(`╔══════════════════════════════════════════════════════════════════╗`);
-  console.log(`║  CALIBRATION RUN — placebo/baseline only (no skill arm)        ║`);
-  console.log(`║  dataset: ${datasetName.padEnd(55)} ║`);
-  console.log(`║  items: ${String(limitedItems.length).padStart(3)} / ${String(items.length).padEnd(3)} (LIMIT=${LIMIT || 'all'})`.padEnd(61) + '║');
-  console.log(`║  trials/item: ${String(K_TRIALS).padEnd(50)}║`);
-  console.log(`║  solver: ${SOLVER_MODEL} (${SOLVER_EFFORT})`.padEnd(61) + '║');
-  console.log(`║  concurrency: ${String(CONC).padEnd(50)}║`);
-  console.log(`║  run id: ${EVAL_RUN.padEnd(54)}║`);
-  console.log(`╚══════════════════════════════════════════════════════════════════╝`);
+// ---- Shared trial processing ----
+async function processItemTrial(item, itemIndex) {
+  const rawPrompt = buildCalibrationPrompt(item.prompt, item.decision_instruction);
+  const prompt = truncatePrompt(rawPrompt);
+  const r = await droidJsonAsync({ model: SOLVER_MODEL, prompt, effort: SOLVER_EFFORT });
 
-  // Build a flat list of all trials (item × k), each with an itemIndex for aggregation
-  const trials = [];
-  for (let i = 0; i < limitedItems.length; i++) {
-    for (let t = 0; t < K_TRIALS; t++) {
-      trials.push({ itemIndex: i, trialIndex: t, item: limitedItems[i] });
+  let correct = null;
+  let prediction = null;
+  let predType = null;
+  let rawText = '';
+
+  const normLabel = normalizeLabel(item);
+
+  if (r.ok) {
+    rawText = r.text || (r.json ? JSON.stringify(r.json) : '');
+    const parsed = parsePrediction(r.json, rawText);
+    predType = parsed.type;
+    prediction = parsed.value;
+
+    if (parsed.ok && normLabel) {
+      const result = judgePrediction(parsed, normLabel);
+      correct = result;
     }
   }
 
-  const trialResults = await mapPool(trials, CONC, async ({ itemIndex, item }) => {
-    const prompt = buildCalibrationPrompt(item.prompt, item.decision_instruction);
-    const r = await droidJsonAsync({ model: SOLVER_MODEL, prompt, effort: SOLVER_EFFORT });
+  return {
+    id: item.id,
+    itemIndex,
+    itemType: item.type || null,
+    target: item.target,
+    labelRaw: normLabel ? normLabel.raw : null,
+    labelField: normLabel ? normLabel.field : null,
+    labelType: normLabel ? normLabel.type : null,
+    prediction,
+    predType,
+    correct,
+    raw: rawText,
+    ok: r.ok,
+    error: r.error,
+    usage: r.usage,
+    durationMs: r.durationMs,
+  };
+}
 
-    let correct = null;
-    let prediction = null;
-    let predType = null;
-    let rawText = '';
-
-    const normLabel = normalizeLabel(item);
-
-    if (r.ok && r.json) {
-      rawText = JSON.stringify(r.json);
-      const parsed = parsePrediction(r.json);
-      predType = parsed.type;
-      prediction = parsed.value;
-
-      if (parsed.ok && normLabel) {
-        const result = judgePrediction(parsed, normLabel);
-        correct = result;
-      }
-    }
-
-    return {
-      id: item.id,
-      itemIndex,
-      itemType: item.type || null,
-      target: item.target,
-      prompt: item.prompt,
-      labelRaw: normLabel ? normLabel.raw : null,
-      labelField: normLabel ? normLabel.field : null,
-      labelType: normLabel ? normLabel.type : null,
-      prediction,
-      predType,
-      correct,
-      raw: rawText,
-      ok: r.ok,
-      error: r.error,
-      usage: r.usage,
-      durationMs: r.durationMs,
-    };
-  });
-
-  // Aggregate per-item: group trials by itemIndex, compute fractional difficulty = successes / attempted
+// ---- Aggregate trial results into per-item stats ----
+function aggregatePerItem(trialResults, kTrials) {
   const perItemMap = new Map();
   for (const t of trialResults) {
     if (!perItemMap.has(t.itemIndex)) {
@@ -253,7 +307,6 @@ async function runCalibration() {
   for (const [itemIndex, entry] of perItemMap) {
     const attempted = entry.corrects.length;
     const successes = entry.corrects.filter(c => c === true).length;
-    // Fractional difficulty: successes / attempted
     const baseline = attempted > 0 ? successes / attempted : null;
     perItem.push({
       id: entry.id,
@@ -263,7 +316,7 @@ async function runCalibration() {
       labelField: entry.labelField,
       labelType: entry.labelType,
       labelRaw: entry.labelRaw,
-      trials: K_TRIALS,
+      trials: kTrials,
       attempted,
       successes,
       failures: attempted - successes,
@@ -271,13 +324,13 @@ async function runCalibration() {
       predictions: entry.predictions,
     });
   }
+  // Sort by itemIndex to maintain deterministic order
+  perItem.sort((a, b) => a.itemIndex - b.itemIndex);
+  return perItem;
+}
 
-  // Overall baseline accuracy across all trials
-  const totalAttempted = perItem.reduce((s, i) => s + i.attempted, 0);
-  const totalCorrect = perItem.reduce((s, i) => s + i.successes, 0);
-  const baselineAccuracy = totalAttempted > 0 ? totalCorrect / totalAttempted : null;
-
-  // Band classification (fractional difficulty from k>1 trials)
+// ---- Band classification ----
+function classifyBands(perItem) {
   const inBand = [];
   const ceiling = [];
   const floor = [];
@@ -288,19 +341,27 @@ async function runCalibration() {
       otherOutOfBand.push({ ...item, band: 'unattempted' });
     } else if (item.baseline >= 0.40 && item.baseline <= 0.70) {
       inBand.push({ ...item, band: 'in-band', kept: true });
-    } else if (item.baseline >= 0.999) { // ceiling: difficulty ≈ 1.0 (all trials correct)
+    } else if (item.baseline >= 0.999) {
       ceiling.push({ ...item, band: 'ceiling', kept: false });
-    } else if (item.baseline <= 0.001) { // floor: difficulty ≈ 0.0 (no trials correct)
+    } else if (item.baseline <= 0.001) {
       floor.push({ ...item, band: 'floor', kept: false });
     } else {
       otherOutOfBand.push({ ...item, band: 'out-of-band', kept: false });
     }
   }
+  return { inBand, ceiling, floor, otherOutOfBand };
+}
 
+// ---- Build final output object ----
+function buildOutput(datasetName, totalItems, limitedItems, trialResults, perItem) {
+  const totalAttempted = perItem.reduce((s, i) => s + i.attempted, 0);
+  const totalCorrect = perItem.reduce((s, i) => s + i.successes, 0);
+  const baselineAccuracy = totalAttempted > 0 ? totalCorrect / totalAttempted : null;
+  const { inBand, ceiling, floor, otherOutOfBand } = classifyBands(perItem);
   const kept = inBand.map(i => i.id);
   const outOfBand = [...ceiling, ...floor, ...otherOutOfBand].map(i => ({ id: i.id, band: i.band, baseline: i.baseline }));
 
-  const out = {
+  return {
     tier: 'calibration',
     dataset: datasetName,
     run_id: EVAL_RUN,
@@ -308,7 +369,7 @@ async function runCalibration() {
     solver_effort: SOLVER_EFFORT,
     k_trials: K_TRIALS,
     limit: LIMIT || limitedItems.length,
-    total_items: items.length,
+    total_items: totalItems,
     total_trials: trialResults.length,
     attempted_trials: totalAttempted,
     baseline_accuracy: baselineAccuracy ? +baselineAccuracy.toFixed(3) : null,
@@ -325,20 +386,101 @@ async function runCalibration() {
     items: perItem,
     raw_results: trialResults,
   };
+}
 
+function logSummary(out, outputFile) {
+  console.log(`\n  k trials/item: ${K_TRIALS}`);
+  console.log(`  baseline accuracy: ${out.baseline_accuracy ? (out.baseline_accuracy * 100).toFixed(1) + '%' : 'N/A'} (${out.summary.in_band + out.summary.ceiling + out.summary.floor + out.summary.other_out_of_band} items)`);
+  console.log(`  calibration band: [0.40, 0.70]`);
+  console.log(`  kept (in-band): ${out.summary.in_band}`);
+  console.log(`  ceiling (≈1.0): ${out.summary.ceiling}`);
+  console.log(`  floor (≈0.0): ${out.summary.floor}`);
+  console.log(`  other out-of-band: ${out.summary.other_out_of_band}`);
+  console.log(`  -> ${outputFile}`);
+}
+
+async function runCalibration() {
+  const items = loadDataset(DATASET);
+  const limitedItems = LIMIT ? items.slice(0, LIMIT) : items;
+  const datasetName = path.basename(DATASET, path.extname(DATASET));
   const outputDir = runDir();
+
+  console.log(`╔══════════════════════════════════════════════════════════════════╗`);
+  console.log(`║  CALIBRATION RUN — placebo/baseline only (no skill arm)        ║`);
+  console.log(`║  dataset: ${datasetName.padEnd(55)} ║`);
+  console.log(`║  items: ${String(limitedItems.length).padStart(3)} / ${String(items.length).padEnd(3)} (LIMIT=${LIMIT || 'all'})`.padEnd(61) + '║');
+  console.log(`║  trials/item: ${String(K_TRIALS).padEnd(50)}║`);
+  console.log(`║  solver: ${SOLVER_MODEL} (${SOLVER_EFFORT})`.padEnd(61) + '║');
+  console.log(`║  concurrency: ${String(CONC).padEnd(50)}║`);
+  console.log(`║  run id: ${EVAL_RUN.padEnd(54)}║`);
+  if (BATCH_MODE) {
+    console.log(`║  batch mode: ${`YES (size=${BATCH_SIZE})`.padEnd(50)}║`);
+  }
+  if (LABEL_FIELD) {
+    console.log(`║  label field: ${LABEL_FIELD.padEnd(50)}║`);
+  }
+  console.log(`╚══════════════════════════════════════════════════════════════════╝`);
+
+  const allTrialResults = [];
+
+  if (BATCH_MODE) {
+    // --- Batch mode: process items in small batches, saving partial results ---
+    const partialFile = path.join(outputDir, `calibration-${datasetName}-${EVAL_RUN}-partial.json`);
+    const numBatches = Math.ceil(limitedItems.length / BATCH_SIZE);
+
+    for (let batchIdx = 0; batchIdx < numBatches; batchIdx++) {
+      const start = batchIdx * BATCH_SIZE;
+      const end = Math.min(start + BATCH_SIZE, limitedItems.length);
+      const batchItems = limitedItems.slice(start, end);
+
+      console.log(`\n  [batch ${batchIdx + 1}/${numBatches}] items ${start}–${end - 1} (${batchItems.length} items)`);
+
+      // Build trials for this batch
+      const batchTrials = [];
+      for (let i = 0; i < batchItems.length; i++) {
+        const itemIndex = start + i;
+        for (let t = 0; t < K_TRIALS; t++) {
+          batchTrials.push({ itemIndex, trialIndex: t, item: batchItems[i] });
+        }
+      }
+
+      const batchResults = await mapPool(batchTrials, CONC, async ({ itemIndex, item }) => {
+        return processItemTrial(item, itemIndex);
+      });
+
+      allTrialResults.push(...batchResults);
+
+      // Save incremental partial results
+      const partialPerItem = aggregatePerItem(allTrialResults, K_TRIALS);
+      const partialOut = buildOutput(datasetName, items.length, limitedItems, allTrialResults, partialPerItem);
+      writeJson(partialFile, partialOut);
+
+      const batchSuccesses = batchResults.filter(r => r.correct === true).length;
+      const batchAttempted = batchResults.filter(r => r.prediction !== null).length;
+      console.log(`  [batch ${batchIdx + 1}/${numBatches}] complete — ${batchSuccesses}/${batchAttempted} correct. Partial saved to ${partialFile}`);
+    }
+  } else {
+    // --- Standard mode: process all items at once ---
+    const trials = [];
+    for (let i = 0; i < limitedItems.length; i++) {
+      for (let t = 0; t < K_TRIALS; t++) {
+        trials.push({ itemIndex: i, trialIndex: t, item: limitedItems[i] });
+      }
+    }
+
+    allTrialResults.push(...await mapPool(trials, CONC, async ({ itemIndex, item }) => {
+      return processItemTrial(item, itemIndex);
+    }));
+  }
+
+  // Final aggregation and output
+  const perItem = aggregatePerItem(allTrialResults, K_TRIALS);
+  const out = buildOutput(datasetName, items.length, limitedItems, allTrialResults, perItem);
+
   const outputFile = path.join(outputDir, `calibration-${datasetName}-${EVAL_RUN}.json`);
   writeJson(outputFile, out);
 
-  console.log(`\n  k trials/item: ${K_TRIALS}`);
-  console.log(`  baseline accuracy: ${baselineAccuracy ? (baselineAccuracy * 100).toFixed(1) + '%' : 'N/A'} (${totalCorrect}/${totalAttempted} trials)`);
-  console.log(`  calibration band: [0.40, 0.70]`);
-  console.log(`  kept (in-band): ${inBand.length}`);
-  console.log(`  ceiling (≈1.0): ${ceiling.length}`);
-  console.log(`  floor (≈0.0): ${floor.length}`);
-  console.log(`  other out-of-band: ${otherOutOfBand.length}`);
-  console.log(`  -> ${outputFile}`);
-
+  logSummary(out, outputFile);
   return out;
 }
 

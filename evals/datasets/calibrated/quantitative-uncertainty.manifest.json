@@ -25,26 +25,29 @@
     ]
   },
   "calibration": {
-    "baseline": 0.455,
-    "baseline_estimated": true,
-    "baseline_note": "Calibration not yet run. Baseline estimated from label distribution. Full calibration pending.",
+    "baseline": 1,
+    "baseline_estimated": false,
     "band": [
       0.4,
       0.7
     ],
-    "status": "estimated",
-    "instructions": "Run EVAL_RUN=calib node evals/run-calibration.js evals/datasets/calibrated/<family>-candidate-pool.jsonl to populate real calibration stats.",
-    "baseline_source": "estimated_heuristic",
-    "in_band": true,
-    "exemption": null,
-    "calibrated_items": 0,
+    "status": "measured_sample",
+    "baseline_source": "measured_sample",
+    "in_band": false,
+    "exemption": "claude-sonnet-4-6 achieves 100% baseline accuracy on placebo/baseline condition (25 ceiling over 25 items at K_TRIALS=5). The authored Bayesian/debiasing/fermi multiple-choice items are too easy for this solver. Zero headroom for skill improvement measurement.",
+    "calibrated_items": 25,
     "in_band_items": 0,
     "decisive_split_items": 315,
     "calibration_only_items": 0,
     "exempt_items": 190,
-    "calibration_run_id": null,
-    "calibration_solver": null,
-    "calibration_k_trials": null
+    "calibration_run_id": "calib-m3",
+    "calibration_solver": "claude-sonnet-4-6",
+    "calibration_k_trials": 5,
+    "sample_size": 25,
+    "ceiling_items": 25,
+    "floor_items": 0,
+    "other_out_of_band": 0,
+    "exemption_reason": "measured_baseline_outside_band"
   },
   "item_counts": {
     "total": 505,
@@ -55,7 +58,7 @@
     "decisive": 315,
     "calibration_only": 0,
     "exempt": 190,
-    "calibrated": 0
+    "calibrated": 25
   },
   "item_class_definitions": {
     "target": "Items that directly measure the family value surface — in-domain, skill-relevant items where the skill is expected to help.",
@@ -74,6 +77,6 @@
   },
   "created": "2026-06-06",
   "frozen": true,
-  "frozen_at": "2026-06-06T13:38:09.440Z",
-  "frozen_by": "m3-calibration-freeze"
+  "frozen_at": "2026-06-06T15:16:01.831Z",
+  "frozen_by": "fix-m3-real-calibration-all-pools"
 }

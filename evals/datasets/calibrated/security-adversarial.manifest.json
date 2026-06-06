@@ -6,7 +6,7 @@
   ],
   "value_surface": "false-positive reduction",
   "source": "Combined from 3 source files. external: diversevul-balanced, diversevul, glm-distractor",
-  "leakage": "DiverseVul data is derived from public CVE records and NVD entries through 2023. The vulnerability detection task uses real C/C++ functions with known CVEs. Models trained on public code repositories may have seen these functions in their original context. Leakage risk is moderate \u2014 the security classification task is distinct from code completion, but the functions themselves appear in public repositories. The balanced subset (diversevul-balanced) was constructed to have equal positive/negative examples. No overlap with SWE-bench or selfaware datasets. GLM distractor items are from a 2025 reasoning dataset.\n\nSource breakdown: 2 external dataset(s) with potential training-data leakage; ",
+  "leakage": "DiverseVul data is derived from public CVE records and NVD entries through 2023. The vulnerability detection task uses real C/C++ functions with known CVEs. Models trained on public code repositories may have seen these functions in their original context. Leakage risk is moderate — the security classification task is distinct from code completion, but the functions themselves appear in public repositories. The balanced subset (diversevul-balanced) was constructed to have equal positive/negative examples. No overlap with SWE-bench or selfaware datasets. GLM distractor items are from a 2025 reasoning dataset.\n\nSource breakdown: 2 external dataset(s) with potential training-data leakage; ",
   "label": {
     "definition": "Vulnerability detection: whether the model correctly classifies a C/C++ function as vulnerable (true) or safe (false).",
     "values": {
@@ -17,25 +17,28 @@
     "ground_truth_field": "answer"
   },
   "calibration": {
-    "baseline": 0.5,
-    "baseline_estimated": true,
-    "baseline_source": "estimated_balanced",
-    "baseline_note": "Estimated from balanced label distribution in diversevul-balanced (50% vulnerable, 50% safe). Actual baseline must be measured by calibration runner. The diverse vul dataset (diversevul) is 30%/70% vulnerable/safe but the balanced subset ensures items span difficulty range.",
+    "baseline": 0.832,
+    "baseline_estimated": false,
+    "baseline_source": "measured_sample",
     "band": [
       0.4,
       0.7
     ],
-    "in_band": true,
-    "exemption": null,
-    "status": "estimated",
-    "calibrated_items": 0,
-    "in_band_items": 0,
+    "in_band": false,
+    "exemption": "claude-sonnet-4-6 achieves 83.2% baseline accuracy on placebo/baseline condition (1 in-band, 20 ceiling, 3 floor over 25 items at K_TRIALS=5). No meaningful headroom for skill improvement measurement; the DiverseVul balanced vulnerability detection items are too easy for this solver. The pool is predominantly ceiling.",
+    "status": "measured_sample",
+    "calibrated_items": 25,
+    "in_band_items": 1,
     "decisive_split_items": 644,
     "calibration_only_items": 0,
-    "calibration_run_id": null,
-    "calibration_solver": null,
-    "calibration_k_trials": null,
-    "instructions": "Run EVAL_RUN=calib node evals/run-calibration.js evals/datasets/calibrated/security-adversarial-candidate-pool.jsonl to populate real calibration stats. Note: items use 'answer' field (Yes/No) rather than boolean 'label'."
+    "calibration_run_id": "calib-m3",
+    "calibration_solver": "claude-sonnet-4-6",
+    "calibration_k_trials": 5,
+    "sample_size": 25,
+    "ceiling_items": 20,
+    "floor_items": 3,
+    "other_out_of_band": 1,
+    "exemption_reason": "measured_baseline_outside_band"
   },
   "item_counts": {
     "total": 644,
@@ -46,10 +49,10 @@
     "decisive": 644,
     "calibration_only": 0,
     "exempt": 0,
-    "calibrated": 0
+    "calibrated": 25
   },
   "item_class_definitions": {
-    "target": "Items that directly measure the family value surface \u2014 in-domain, skill-relevant items where the skill is expected to help.",
+    "target": "Items that directly measure the family value surface — in-domain, skill-relevant items where the skill is expected to help.",
     "near_miss": "Items that are similar to the family domain but not an exact match. Useful for calibration but may not benefit from the skill.",
     "distractor": "Items that are clearly off-target (target=false). Used to measure false-positive rate and specificity.",
     "ambiguous": "Items whose relevance to the family is unclear. Excluded from decisive splits."
@@ -65,6 +68,6 @@
   },
   "created": "2026-06-06",
   "frozen": true,
-  "frozen_at": "2026-06-06T13:38:09.437Z",
-  "frozen_by": "m3-calibration-freeze"
+  "frozen_at": "2026-06-06T15:16:01.827Z",
+  "frozen_by": "fix-m3-real-calibration-all-pools"
 }

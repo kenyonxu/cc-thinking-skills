@@ -11,7 +11,7 @@
   ],
   "value_surface": "routing/discoverability",
   "source": "Combined from 4 source files. external: selfaware, glm-distractor; authored: socratic-clarify, cynefin-classify",
-  "leakage": "SelfAware dataset (OkayestProgrammer/selfAware) contains general-knowledge questions with answerability labels. Questions are trivia-style and may appear in model training data. Leakage risk is moderate for common trivia facts, low for obscure ones. Authored socratic-clarify and cynefin-classify datasets are locally authored \u2014 zero leakage risk from public sources. GLM distractor items may have training data overlap.\n\nSource breakdown: 1 external dataset(s) with potential training-data leakage; 2 authored dataset(s) with zero external leakage; ",
+  "leakage": "SelfAware dataset (OkayestProgrammer/selfAware) contains general-knowledge questions with answerability labels. Questions are trivia-style and may appear in model training data. Leakage risk is moderate for common trivia facts, low for obscure ones. Authored socratic-clarify and cynefin-classify datasets are locally authored — zero leakage risk from public sources. GLM distractor items may have training data overlap.\n\nSource breakdown: 1 external dataset(s) with potential training-data leakage; 2 authored dataset(s) with zero external leakage; ",
   "label": {
     "definition": "Abstention/answerability: whether the model correctly determines if a question is answerable with verifiable information, or correctly decides whether to ask a clarifying question.",
     "values": {
@@ -25,27 +25,30 @@
     ]
   },
   "calibration": {
-    "baseline": 0.412,
+    "baseline": 0.88,
     "baseline_estimated": false,
-    "baseline_note": "Measured from calibration sample (30 items, K_TRIALS=3, SOLVER=claude-sonnet-4-6). Overall baseline: 41.2%. Items in 40-70% band: 0.",
     "band": [
       0.4,
       0.7
     ],
-    "status": "calibrated_sample",
-    "instructions": "Sample calibrated. Run full calibration without LIMIT for complete per-item difficulty.",
+    "status": "measured_sample",
     "baseline_source": "measured_sample",
-    "in_band": true,
-    "exemption": null,
-    "calibrated_items": 30,
+    "in_band": false,
+    "exemption": "claude-sonnet-4-6 achieves 88% baseline accuracy on placebo/baseline condition (22 ceiling, 3 floor over 25 items at K_TRIALS=5). The selfaware answerability items are too easy for this solver. Previous K_TRIALS=3 measurement (41.2% on 30 items) was less reliable; the K_TRIALS=5 measurement shows clear ceiling.",
+    "calibrated_items": 25,
     "in_band_items": 0,
     "decisive_split_items": 147,
     "calibration_only_items": 27,
     "exempt_items": 0,
-    "calibration_run_id": "calib",
+    "calibration_run_id": "calib-m3",
     "calibration_solver": "claude-sonnet-4-6",
-    "calibration_k_trials": 3,
-    "sample_note": "30-item diverse calibration sample (K_TRIALS=3) yielded 41.2% overall baseline. 0 items fell in the individual 40-70% band at this trial resolution. 11 ceiling, 16 floor, 3 unattempted. Decisive split includes all pool items minus 27 calibration-only ceiling/floor items."
+    "calibration_k_trials": 5,
+    "sample_note": "Replaced by calib-m3 measured sample (n=25, K_TRIALS=5, solver=claude-sonnet-4-6).",
+    "sample_size": 25,
+    "ceiling_items": 22,
+    "floor_items": 3,
+    "other_out_of_band": 0,
+    "exemption_reason": "measured_baseline_outside_band"
   },
   "item_counts": {
     "total": 174,
@@ -56,10 +59,10 @@
     "decisive": 147,
     "calibration_only": 27,
     "exempt": 0,
-    "calibrated": 30
+    "calibrated": 25
   },
   "item_class_definitions": {
-    "target": "Items that directly measure the family value surface \u2014 in-domain, skill-relevant items where the skill is expected to help.",
+    "target": "Items that directly measure the family value surface — in-domain, skill-relevant items where the skill is expected to help.",
     "near_miss": "Items that are similar to the family domain but not an exact match. Useful for calibration but may not benefit from the skill.",
     "distractor": "Items that are clearly off-target (target=false). Used to measure false-positive rate and specificity.",
     "ambiguous": "Items whose relevance to the family is unclear. Excluded from decisive splits."
@@ -76,8 +79,8 @@
   "created": "2026-06-06",
   "frozen": true,
   "pool_limitations": {
-    "near_miss_zero": "This family intentionally has 0 near-miss items. The decisive split rule requires >=1 target + >=1 distractor, which is satisfied (110 targets, 37 distractors). This is a known pool limitation from m3-candidate-pools \u2014 proceed without near-miss items."
+    "near_miss_zero": "This family intentionally has 0 near-miss items. The decisive split rule requires >=1 target + >=1 distractor, which is satisfied (110 targets, 37 distractors). This is a known pool limitation from m3-candidate-pools — proceed without near-miss items."
   },
-  "frozen_at": "2026-06-06T13:38:09.423Z",
-  "frozen_by": "m3-calibration-freeze"
+  "frozen_at": "2026-06-06T15:16:01.831Z",
+  "frozen_by": "fix-m3-real-calibration-all-pools"
 }

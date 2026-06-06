@@ -19,7 +19,7 @@
   ],
   "value_surface": "paired reasoning quality",
   "source": "Combined from 6 source files. authored: first-principles-constraint, reversibility-doors, second-order-consequence, cynefin-classify; external: debias-authored, glm-distractor",
-  "leakage": "First-principles-constraint, reversibility-doors, and second-order-consequence are locally authored datasets \u2014 zero external leakage. Debias-authored items are locally authored cognitive bias scenarios with anchoring bias types. Some items may resemble classic cognitive bias examples from psychology literature which models may have encountered. GLM distractor items may have training data overlap. Overall leakage risk is low because locally authored items dominate the target set.\n\nSource breakdown: 1 external dataset(s) with potential training-data leakage; 4 authored dataset(s) with zero external leakage; ",
+  "leakage": "First-principles-constraint, reversibility-doors, and second-order-consequence are locally authored datasets — zero external leakage. Debias-authored items are locally authored cognitive bias scenarios with anchoring bias types. Some items may resemble classic cognitive bias examples from psychology literature which models may have encountered. GLM distractor items may have training data overlap. Overall leakage risk is low because locally authored items dominate the target set.\n\nSource breakdown: 1 external dataset(s) with potential training-data leakage; 4 authored dataset(s) with zero external leakage; ",
   "label": {
     "definition": "Binary decision quality on conceptual reframing tasks: whether the model correctly identifies whether a constraint is fundamental (true) or merely conventional (false); whether a decision is reversible (true) or not (false); whether a proposed action has important second-order consequences (true) or not (false).",
     "values": {
@@ -30,27 +30,29 @@
     "ground_truth_field": "label"
   },
   "calibration": {
-    "baseline": 0.641,
+    "baseline": 1,
     "baseline_estimated": false,
-    "baseline_source": "measured_sample_with_estimate_fallback",
-    "baseline_note": "Original heuristic estimate (0.641 from balanced label distribution) retained as primary baseline. Calibration sample (10 items, K_TRIALS=2) measured 0.300 but sample was too small for reliable replacement. 3 ceiling, 7 floor, 0 in-band items in calibrated sample. Full calibration pending for complete per-item difficulty.",
+    "baseline_source": "measured_sample",
     "band": [
       0.4,
       0.7
     ],
-    "in_band": true,
-    "exemption": null,
-    "status": "calibrated_partial",
-    "calibrated_items": 10,
+    "in_band": false,
+    "exemption": "claude-sonnet-4-6 achieves 100% baseline accuracy on placebo/baseline condition (20 ceiling over 20 items at K_TRIALS=5, batch-incomplete). First-principles-constraint and reversibility-doors authored items are too easy for this solver. Zero headroom.",
+    "status": "measured_sample",
+    "calibrated_items": 20,
     "in_band_items": 0,
     "decisive_split_items": 194,
     "calibration_only_items": 10,
-    "calibration_run_id": "calib",
+    "calibration_run_id": "calib-m3",
     "calibration_solver": "claude-sonnet-4-6",
-    "calibration_k_trials": 2,
+    "calibration_k_trials": 5,
     "sample_baseline": 0.3,
-    "sample_size": 10,
-    "instructions": "Calibration sample completed (10 items). Run full calibration without LIMIT for complete per-item difficulty. Current decisive split includes all 204 pool items minus 10 calibration-only ceiling/floor items."
+    "sample_size": 20,
+    "ceiling_items": 20,
+    "floor_items": 0,
+    "other_out_of_band": 0,
+    "exemption_reason": "measured_baseline_outside_band"
   },
   "item_counts": {
     "total": 204,
@@ -61,10 +63,10 @@
     "decisive": 194,
     "calibration_only": 10,
     "exempt": 0,
-    "calibrated": 10
+    "calibrated": 20
   },
   "item_class_definitions": {
-    "target": "Items that directly measure the family value surface \u2014 in-domain, skill-relevant items where the skill is expected to help.",
+    "target": "Items that directly measure the family value surface — in-domain, skill-relevant items where the skill is expected to help.",
     "near_miss": "Items that are similar to the family domain but not an exact match. Useful for calibration but may not benefit from the skill.",
     "distractor": "Items that are clearly off-target (target=false). Used to measure false-positive rate and specificity.",
     "ambiguous": "Items whose relevance to the family is unclear. Excluded from decisive splits."
@@ -80,6 +82,6 @@
   },
   "created": "2026-06-06",
   "frozen": true,
-  "frozen_at": "2026-06-06T13:38:09.426Z",
-  "frozen_by": "m3-calibration-freeze"
+  "frozen_at": "2026-06-06T15:16:01.831Z",
+  "frozen_by": "fix-m3-real-calibration-all-pools"
 }

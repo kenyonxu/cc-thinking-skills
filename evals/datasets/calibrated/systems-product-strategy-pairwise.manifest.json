@@ -10,7 +10,7 @@
   ],
   "value_surface": "paired reasoning quality",
   "source": "Combined from 3 source files. authored: theory-of-constraints-bottleneck, margin-of-safety-provision; external: glm-distractor",
-  "leakage": "Theory-of-constraints-bottleneck authored dataset is locally authored \u2014 zero external leakage. Behavioral items for archetypes, feedback-loops, leverage-points, ooda, and via-negativa are locally authored scenarios. Margin-of-safety-provision authored dataset provides near-miss items. All target items are locally authored with zero training data leakage risk. GLM distractor items may have training data overlap. Overall leakage risk is very low.\n\nSource breakdown: 2 authored dataset(s) with zero external leakage; ",
+  "leakage": "Theory-of-constraints-bottleneck authored dataset is locally authored — zero external leakage. Behavioral items for archetypes, feedback-loops, leverage-points, ooda, and via-negativa are locally authored scenarios. Margin-of-safety-provision authored dataset provides near-miss items. All target items are locally authored with zero training data leakage risk. GLM distractor items may have training data overlap. Overall leakage risk is very low.\n\nSource breakdown: 2 authored dataset(s) with zero external leakage; ",
   "label": {
     "definition": "Paired reasoning quality for systems/product/strategy scenarios. Items are behavioral scenarios scored by a judge panel comparing the skill-guided response against a placebo/filler baseline.",
     "values": {
@@ -26,26 +26,29 @@
     "judge_criteria": "Compare responses on: diagnostic accuracy, leverage point identification, actionable specificity, and avoidance of symptomatic fixes."
   },
   "calibration": {
-    "baseline": 0.563,
-    "baseline_estimated": true,
-    "baseline_note": "Estimated from label distribution. Full calibration pending.",
+    "baseline": 1,
+    "baseline_estimated": false,
     "band": [
       0.4,
       0.7
     ],
-    "status": "estimated",
-    "instructions": "Run EVAL_RUN=calib node evals/run-calibration.js evals/datasets/calibrated/<family>-candidate-pool.jsonl to populate real calibration stats.",
-    "baseline_source": "estimated_heuristic",
-    "in_band": true,
-    "exemption": "Judge-based evaluation family. 44 distractor items require judge evaluation \u2014 included in decisive split for false-positive measurement but marked calibration_exempt for objective scoring. 10 ceiling/floor items marked calibration-only. See pool_limitations.judge_based for full details.",
-    "calibrated_items": 10,
+    "status": "measured_sample",
+    "baseline_source": "measured_sample",
+    "in_band": false,
+    "exemption": "claude-sonnet-4-6 achieves 100% baseline accuracy on placebo/baseline condition (20 ceiling over 20 items at K_TRIALS=5, batch-incomplete). Theory-of-constraints authored items are too easy for this solver. Additionally, this family is largely judge-based; objective calibration is limited to the ~30 ground-truth target items. No meaningful headroom on the objectively-gradeable subset.",
+    "calibrated_items": 20,
     "in_band_items": 0,
     "decisive_split_items": 94,
     "calibration_only_items": 10,
     "exempt_items": 0,
-    "calibration_run_id": "calib",
+    "calibration_run_id": "calib-m3",
     "calibration_solver": "claude-sonnet-4-6",
-    "calibration_k_trials": 2
+    "calibration_k_trials": 5,
+    "sample_size": 20,
+    "ceiling_items": 20,
+    "floor_items": 0,
+    "other_out_of_band": 0,
+    "exemption_reason": "measured_baseline_outside_band"
   },
   "item_counts": {
     "total": 104,
@@ -56,10 +59,10 @@
     "decisive": 94,
     "calibration_only": 10,
     "exempt": 0,
-    "calibrated": 10
+    "calibrated": 20
   },
   "item_class_definitions": {
-    "target": "Items that directly measure the family value surface \u2014 in-domain, skill-relevant items where the skill is expected to help.",
+    "target": "Items that directly measure the family value surface — in-domain, skill-relevant items where the skill is expected to help.",
     "near_miss": "Items that are similar to the family domain but not an exact match. Useful for calibration but may not benefit from the skill.",
     "distractor": "Items that are clearly off-target (target=false). Used to measure false-positive rate and specificity.",
     "ambiguous": "Items whose relevance to the family is unclear. Excluded from decisive splits."
@@ -78,6 +81,6 @@
   "pool_limitations": {
     "judge_based": "This family is largely judge-based/behavioral. Only ~30 ground-truth target items (binary-decision mode) can be objectively calibrated. The 30 near-miss items also have labels. The 44 distractor items require judge evaluation for scoring but are included in the decisive split for false-positive measurement (no ground-truth labels). The objective placebo calibration runner cannot profile judge-evaluated items. The decisive split is restricted to the objectively-gradeable subset (60 items with labels) plus distractor items (44 items without labels, included for FPR measurement). No objective baselines are fabricated for judge-only items."
   },
-  "frozen_at": "2026-06-06T13:38:09.427Z",
-  "frozen_by": "m3-calibration-freeze"
+  "frozen_at": "2026-06-06T15:16:01.832Z",
+  "frozen_by": "fix-m3-real-calibration-all-pools"
 }
