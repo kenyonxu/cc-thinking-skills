@@ -18,8 +18,6 @@
  */
 
 const { panelJudge, panelModels } = require('./lib/judge');
-const { droidJsonAsync } = require('./lib/droid');
-const { wilson } = require('./lib/stats');
 
 // ─── agreement(): pure, verifiable on offline vote fixtures ──────────────
 
