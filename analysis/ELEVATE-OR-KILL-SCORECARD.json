@@ -23,10 +23,10 @@
     ],
     "skill_count": 39,
     "objective_coverage": {
-      "measured": 17,
-      "unmeasured": 22
+      "measured": 19,
+      "unmeasured": 20
     },
-    "notes": "Stale claims from run1/scorecard.md (n=3 wins) and mid-document ELEVATE-OR-KILL.md narrative are flagged superseded, not deleted. scientific-method is the sole robust objective ELEVATE, now resting on TWO genuinely post-edit M5 samples (new M5 fresh primary +5.4pp p=0.027 + existing M5 replication +8.0pp p=0.001, same direction, both p<0.05). Fix (VAL-POWERED-014): old run1 primary (+9.3pp) predated the 2026-06-01 SKILL.md rewrite and was replaced with a fresh post-edit primary run. M5 scrutiny fix: 4 debugging-family skills rerun on FROZEN 224-item decisive split (EVAL_RUN=m5-primary-decisive). Prior M5 runs were on wrong 150-item set.",
+    "notes": "Stale claims from run1/scorecard.md (n=3 wins) and mid-document ELEVATE-OR-KILL.md narrative are flagged superseded, not deleted. scientific-method M5 fresh primary +5.3pp p=0.061 (n=150, full sample) + M5 replication +8.0pp p=0.001 — primary delta >=5pp but p=0.061 fails the paired-test gate, so ELEVATE is NOT retained: downgraded to DIRECTIONAL-NOT-REPLICATED (full-n=150 does not pass >=5pp+p<0.05). Fix (VAL-POWERED-014): old run1 primary (+9.3pp) predated the 2026-06-01 SKILL.md rewrite and was replaced with a fresh post-edit primary run. M5 full-sample fix: run-swe.js hardened with retry logic + per-item persistence; 4 debugging-family skills brought to full n=224 (EVAL_RUN=m5-primary-decisive); scientific-method brought to full n=150 on the original SWE-bench set (EVAL_RUN=m5-primary-sci).",
     "m5_powered_run": "m5-primary",
     "m5_powered_skills": [
       "red-team",
@@ -590,11 +590,11 @@
         {
           "metric": "fault_localization_accuracy",
           "dataset": "debugging-fault-localization-decisive (224-item frozen calibrated split)",
-          "n": 223,
-          "placebo": 0.596,
-          "treatment": 0.578,
+          "n": 224,
+          "placebo": 0.563,
+          "treatment": 0.545,
           "delta_pp": -1.8,
-          "p": 0.221,
+          "p": 0.289,
           "significant": false,
           "verdict": "NO-LIFT",
           "provenance": "OBJ-powered-null",
@@ -602,7 +602,7 @@
           "significance": "null",
           "replicated": false,
           "source": "evals/results/m5-primary-decisive/swe-kepner-tregoe.json",
-          "note": "EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface). M5 decisive-split rerun on FROZEN 224-item debugging-fault-localization-decisive split. -1.8pp over placebo, p=0.221 — NO-LIFT. kepner-tregoe native value surface is paired-reasoning quality, not fault localization.",
+          "note": "EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface). M5 full-sample (hardened runner) on FROZEN 224-item debugging-fault-localization-decisive split. 54.5% vs 56.3% placebo, -1.8pp, p=0.289 — NO-LIFT. kepner-tregoe native value surface is paired-reasoning quality, not fault localization.",
           "exploratory": true,
           "exploratory_reason": "surface-mismatch: powered on fault-localization, not native surface (paired-reasoning quality)"
         },
@@ -698,11 +698,11 @@
         {
           "metric": "fault_localization_accuracy",
           "dataset": "debugging-fault-localization-decisive (224-item frozen calibrated split)",
-          "n": 222,
-          "placebo": 0.586,
-          "treatment": 0.59,
-          "delta_pp": 0.5,
-          "p": 1,
+          "n": 224,
+          "placebo": 0.549,
+          "treatment": 0.571,
+          "delta_pp": 2.2,
+          "p": 0.074,
           "significant": false,
           "verdict": "NO-LIFT",
           "provenance": "OBJ-powered-null",
@@ -710,7 +710,7 @@
           "significance": "null",
           "replicated": false,
           "source": "evals/results/m5-primary-decisive/swe-map-territory.json",
-          "note": "EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface). M5 decisive-split rerun on FROZEN 224-item debugging-fault-localization-decisive split. +0.5pp over placebo, p=1.0 — NO-LIFT. map-territory native value surface is routing/discoverability, not fault localization.",
+          "note": "EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface). M5 full-sample (hardened runner) on FROZEN 224-item debugging-fault-localization-decisive split. 57.1% vs 54.9% placebo, +2.2pp, p=0.074 — NO-LIFT. map-territory native value surface is routing/discoverability, not fault localization.",
           "exploratory": true,
           "exploratory_reason": "surface-mismatch: powered on fault-localization, not native surface (routing/discoverability)"
         },
@@ -883,11 +883,11 @@
         {
           "metric": "fault_localization_accuracy",
           "dataset": "debugging-fault-localization-decisive (224-item frozen calibrated split)",
-          "n": 223,
-          "placebo": 0.587,
-          "treatment": 0.587,
-          "delta_pp": 0,
-          "p": 0.683,
+          "n": 224,
+          "placebo": 0.558,
+          "treatment": 0.549,
+          "delta_pp": -0.9,
+          "p": 0.724,
           "significant": false,
           "verdict": "NO-LIFT",
           "provenance": "OBJ-powered-null",
@@ -895,7 +895,7 @@
           "significance": "null",
           "replicated": false,
           "source": "evals/results/m5-primary-decisive/swe-occams-razor.json",
-          "note": "M5 decisive-split rerun on FROZEN 224-item debugging-fault-localization-decisive split. 0pp over placebo, p=0.683 — confirms NO-LIFT. Prior M5 run on 150-item set gave +4.7pp p=0.096 (directional, not significant); decisive split confirms no real effect. Fixes blocker 3: a primary that fails >=5pp+p<0.05 is NO-LIFT, not directional-not-replicated."
+          "note": "M5 full-sample (hardened runner) on FROZEN 224-item debugging-fault-localization-decisive split. 54.9% vs 55.8% placebo, -0.9pp, p=0.724 — confirms NO-LIFT. Prior run at n=223 gave 0pp p=0.683; full-n=224 confirms no real effect. Fixes blocker 3: a primary that fails >=5pp+p<0.05 is NO-LIFT, not directional-not-replicated."
         },
         {
           "metric": "accuracy",
@@ -1198,19 +1198,19 @@
         {
           "metric": "fault_localization_accuracy",
           "dataset": "SWE-bench fault localization (ORIGINAL frozen 150-item set)",
-          "n": 149,
-          "placebo": 0.872,
-          "treatment": 0.926,
-          "delta_pp": 5.4,
-          "p": 0.027,
-          "significant": true,
-          "verdict": "ELEVATE",
-          "provenance": "OBJ-powered-significant",
+          "n": 150,
+          "placebo": 0.853,
+          "treatment": 0.907,
+          "delta_pp": 5.3,
+          "p": 0.061,
+          "significant": false,
+          "verdict": "DIRECTIONAL-NOT-REPLICATED",
+          "provenance": "OBJ-powered-directional",
           "temporal": "post-edit",
-          "significance": "significant",
-          "replicated": true,
+          "significance": "directional",
+          "replicated": false,
           "source": "evals/results/m5-primary-sci/swe-scientific-method.json",
-          "note": "M5 FRESH post-edit PRIMARY on the ORIGINAL frozen 150-item SWE-bench set (EVAL_RUN=m5-primary-sci, CONC=4, isolation ON). Genuinely post-edit: result mtime (Jun 7 09:25) > SKILL.md mtime (Jun 1 06:05). 92.6% vs 87.2% placebo, +5.4pp, p=0.027, significant. Paired with M5 replication (+8.0pp, p=0.001) — both post-edit, same positive direction, both p<0.05. ELEVATE rests on TWO genuinely post-edit fresh samples."
+          "note": "M5 FRESH post-edit PRIMARY on the ORIGINAL frozen 150-item SWE-bench set, full-n=150 (EVAL_RUN=m5-primary-sci, CONC=4, isolation ON). Genuinely post-edit: result mtime > SKILL.md mtime. 90.7% vs 85.3% placebo, +5.3pp, p=0.061. Delta >=5pp but p>0.05 — primary gate not passed. Replication (+8.0pp p=0.001, same direction) is significant but does not rescue a primary that fails the paired test. Downgraded from ELEVATE to DIRECTIONAL-NOT-REPLICATED per full-sample scrutiny (fix-m5-full-sample-completion)."
         },
         {
           "metric": "fault_localization_accuracy",
@@ -1246,11 +1246,10 @@
           "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; this skill is the only one with objective ELEVATE"
         }
       ],
-      "verdict": "ELEVATE",
+      "verdict": "directional-not-replicated",
       "eval_family": "Debugging/fault-localization",
       "value_surface": "localization",
-      "replicated": true,
-      "replication_source": "evals/results/m5-repl/swe-scientific-method.json"
+      "replicated": false
     },
     "second-order": {
       "objective_evidence": [

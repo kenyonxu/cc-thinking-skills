@@ -27,7 +27,7 @@
 
 | Skill | Dataset | N | Placebo → Skill | Δ (pp) | p | Verdict | Provenance |
 |-------|---------|---|-----------------|--------|---|---------|------------|
-| **scientific-method** | SWE-bench fault localization (frozen 150-item set) | 149 | 87% → 93% | **+5.4** | **0.027** | **ELEVATE (replicated: M5 primary +5.4pp p=0.027 + M5 replication +8.0pp p=0.001)** | `OBJ-powered-significant` |
+| **scientific-method** | SWE-bench fault localization (frozen 150-item set) | 150 | 85% → 91% | **+5.3** | 0.061 | **DIRECTIONAL-NOT-REPLICATED** (primary +5.3pp p=0.061 fails paired test; replication +8.0pp p=0.001 cannot rescue) | `OBJ-powered-directional` |
 | red-team | DiverseVul balanced | 200 | 59% → 64% | +5.0 | 0.10 | directional, not sig | `OBJ-powered-directional` |
 | first-principles | authored constraint | 30 | 93% → 100% | +6.7 | 0.48 | ceiling | `OBJ-small-ceiling` |
 | systems | SWE-bench | 150 | 84% → 83% | −1.3 | 0.68 | no effect (was +5.3@n=150) | `OBJ-powered-null` |
@@ -47,12 +47,12 @@
 | **M5: red-team (reworked)** | Security decisive (CWEs) | 70 | 43% → 44% | +1.4 | 1.0 | NO-LIFT (post-edit) | `OBJ-powered-null` |
 | **M5: five-whys-plus (reworked)** | SWE-bench (150) → FROZEN decisive (224) | 150→224 | 84%→84% (err) → 59%→59% (correct) | 0→+0.9 | 0.752→0.724 | NO-LIFT (corrected, n=224) | `OBJ-powered-null` |
 | **M5: systems (reworked)** | SWE-bench | 150 | 83% → 84% | +1.3 | 0.724 | NO-LIFT (post-edit) | `OBJ-powered-null` |
-| **M5: occams-razor (reworked)** | SWE-bench (150) → FROZEN decisive (224) | 150→223 | 80%→85% (err) → 59%→59% (correct) | +4.7→0.0 | 0.096→0.683 | NO-LIFT (corrected, n=223; was DIRECTIONAL-NOT-REPLICATED — blocker 3 fixed) | `OBJ-powered-null` |
-| **M5: map-territory (reworked)** ⚠️ | SWE-bench (150) → FROZEN decisive (224) | 150→222 | 84%→87% (err) → 59%→59% (correct) | +2.7→+0.5 | 0.221→1.0 | NO-LIFT (exploratory, corrected) | `OBJ-powered-null` |
-| **M5: kepner-tregoe (reworked)** ⚠️ | SWE-bench (150) → FROZEN decisive (224) | 150→223 | 81%→84% (err) → 60%→58% (correct) | +2.7→−1.8 | 0.289→0.221 | NO-LIFT (exploratory, corrected) | `OBJ-powered-null` |
+| **M5: occams-razor (reworked)** | SWE-bench (150) → FROZEN decisive (224) | 150→224 | 80%→85% (err) → 55%→56% (correct) | +4.7→-0.9 | 0.096→0.724 | NO-LIFT (full-n=224; was DIRECTIONAL-NOT-REPLICATED — blocker 3 fixed) | `OBJ-powered-null` |
+| **M5: map-territory (reworked)** ⚠️ | SWE-bench (150) → FROZEN decisive (224) | 150→224 | 84%→87% (err) → 57%→55% (correct) | +2.7→+2.2 | 0.221→0.074 | NO-LIFT (exploratory, full-n=224) | `OBJ-powered-null` |
+| **M5: kepner-tregoe (reworked)** ⚠️ | SWE-bench (150) → FROZEN decisive (224) | 150→224 | 81%→84% (err) → 55%→56% (correct) | +2.7→−1.8 | 0.289→0.289 | NO-LIFT (exploratory, full-n=224) | `OBJ-powered-null` |
 | **M5: archetypes (quarantine)** | Systems decisive (binary) | 117 | 72% → 73% | +0.9 | 1.0 | NO-LIFT (post-edit) | `OBJ-powered-null` |
 
-⚠️ **map-territory** and **kepner-tregoe**: Tagged `exploratory: surface-mismatch (powered on fault-localization, not native surface)`. Their eval_family is Debugging/fault-localization (SWE-bench), which MISMATCHES their true value surfaces (routing/discoverability and paired-reasoning quality respectively). A no-lift here is NOT recorded as an honest kill. **CORRECTED RESULTS (M5 decisive rerun):** map-territory n=222, +0.5pp p=1.0; kepner-tregoe n=223, -1.8pp p=0.221.
+⚠️ **map-territory** and **kepner-tregoe**: Tagged `exploratory: surface-mismatch (powered on fault-localization, not native surface)`. Their eval_family is Debugging/fault-localization (SWE-bench), which MISMATCHES their true value surfaces (routing/discoverability and paired-reasoning quality respectively). A no-lift here is NOT recorded as an honest kill. **FULL-N RESULTS (M5 decisive + hardened runner):** map-territory n=224, +2.2pp p=0.074; kepner-tregoe n=224, -1.8pp p=0.289.
 
 ⚠️ **archetypes**: In-band quarantine candidate (aggregate baseline 57.4%) given a fair calibrated chance on the systems-product-strategy-pairwise decisive split. No lift detected.
 
@@ -60,40 +60,40 @@
 
 **M5 decisive-split rerun (FIX):** solver `claude-sonnet-4-6`, CONC=4, isolation ON, EVAL_RUN=m5-primary-decisive. The 4 debugging-family skills (five-whys-plus, occams-razor, kepner-tregoe, map-territory) were rerun on the FROZEN 224-item decisive split. All 4 confirmed NO-LIFT. Dataset provenance now recorded in each result JSON (`dataset_path` + `n` + optional `provenance`). run-swe.js updated to support `SWE_DATASET_PATH` env var (defaults to original 150-item set for backward-compat and scientific-method replication).
 
-**M5 fresh primary (VAL-POWERED-014 FIX):** FRESH post-edit PRIMARY for scientific-method on the ORIGINAL frozen 150-item SWE-bench set. Replaces the stale run1 primary (+9.3pp) whose mtime (Jun 1 03:51) predates the SKILL.md rewrite (Jun 1 06:05, commit 4a176d9). Result: 93% vs 87% placebo, +5.4pp, p=0.027, significant (n=149). EVAL_RUN=m5-primary-sci, solver=claude-sonnet-4-6, CONC=4, isolation ON. Genuinely post-edit: result mtime (Jun 7 09:25) > SKILL.md mtime (Jun 1 06:05).
-**M5 replication:** FRESH scientific-method replication on the ORIGINAL frozen 150-item SWE-bench set. Result: 90% vs 82% placebo, +8.0pp, p=0.001 — same direction as M5 fresh primary (+5.4pp). **ELEVATE confirmed and replicated on TWO genuinely post-edit samples.** EVAL_RUN=m5-repl.
+**M5 fresh primary (VAL-POWERED-014 FIX):** FRESH post-edit PRIMARY for scientific-method on the ORIGINAL frozen 150-item SWE-bench set. Replaces the stale run1 primary (+9.3pp) whose mtime (Jun 1 03:51) predates the SKILL.md rewrite (Jun 1 06:05, commit 4a176d9). Result (full-n=150): 91% vs 85% placebo, +5.3pp, p=0.061, not significant at p<0.05. EVAL_RUN=m5-primary-sci, solver=claude-sonnet-4-6, CONC=4, isolation ON. Genuinely post-edit. **Primary gate not passed (p=0.061 > 0.05) — ELEVATE downgraded to DIRECTIONAL-NOT-REPLICATED per full-sample scrutiny (fix-m5-full-sample-completion).**
+**M5 replication:** FRESH scientific-method replication on the ORIGINAL frozen 150-item SWE-bench set. Result: 90% vs 82% placebo, +8.0pp, p=0.001 — same direction as M5 fresh primary (+5.3pp). Significant replication but does not rescue a primary that fails the paired test.
 
-**Total objectively measured: 17 (+7 M5 primary +1 M5 replication +4 M5 decisive = 29 with post-edit evidence) / 39 skills**  
-**Unmeasured (judge-only / thin / leakage-blocked / meta): 21 skills**
+**Total objectively measured: 19 / 39 skills**  
+**Unmeasured (judge-only / thin / leakage-blocked / meta): 20 skills**
 
 ---
 
 ## Objective Evidence — Skill Detail
 
-### ELEVATE (robust, objectively replicated)
+### DIRECTIONAL-NOT-REPLICATED (primary did not pass paired test)
 
-#### `scientific-method` — **ELEVATE (replicated on TWO genuinely post-edit samples)**
-- **M5 Fresh Primary (VAL-POWERED-014 fix — replaces stale run1 evidence):**
+#### `scientific-method` — **DIRECTIONAL-NOT-REPLICATED (primary fails p<0.05 gate)**
+- **M5 Fresh Primary (VAL-POWERED-014 fix — replaces stale run1 evidence, full-n=150):**
   - **Dataset:** SWE-bench fault localization (ORIGINAL frozen 150-item set)
-  - **N:** 149
-  - **Placebo → Skill:** 87% → 93%
-  - **Δ:** +5.4 pp
-  - **McNemar p:** 0.027
-  - **Discordant pairs:** 10
-  - **Provenance:** `OBJ-powered-significant` | `post-edit` | `significant` | `replicated: true`
+  - **N:** 150
+  - **Placebo → Skill:** 85% → 91%
+  - **Δ:** +5.3 pp
+  - **McNemar p:** 0.061
+  - **Discordant pairs:** 14
+  - **Provenance:** `OBJ-powered-directional` | `post-edit` | `directional` | `replicated: false`
   - **Source:** `evals/results/m5-primary-sci/swe-scientific-method.json`
-  - **Note:** EVAL_RUN=m5-primary-sci, solver=claude-sonnet-4-6, CONC=4, isolation ON. Genuinely post-edit (mtime Jun 7 09:25 > SKILL.md Jun 1 06:05). Replaces the stale run1 primary (+9.3pp, mtime Jun 1 03:51) that predated the SKILL.md procedural rewrite.
+  - **Note:** EVAL_RUN=m5-primary-sci, solver=claude-sonnet-4-6, CONC=4, isolation ON. Genuinely post-edit. Full-n=150; primary gate not passed (p=0.061 > 0.05). Replaces the stale run1 primary (+9.3pp). **Downgraded from ELEVATE: delta >=5pp but p=0.061 fails the paired-test threshold.**
 - **M5 Fresh Replication (independent sample, same frozen 150-item SWE-bench set):**
   - **N:** 150
   - **Placebo → Skill:** 82% → 90%
   - **Δ:** +8.0 pp
   - **McNemar p:** 0.001
   - **Discordant pairs:** 12
-  - **Direction:** SAME (positive), concordant with M5 fresh primary (+5.4pp)
-  - **Provenance:** `OBJ-powered-significant` | `post-edit` | `significant` | `replicated: true`
+  - **Direction:** SAME (positive), concordant with M5 fresh primary (+5.3pp)
+  - **Provenance:** `OBJ-powered-significant` | `post-edit` | `significant` | `replicated: false`
   - **Source:** `evals/results/m5-repl/swe-scientific-method.json`
-  - **Note:** EVAL_RUN=m5-repl. Replicates the M5 fresh primary in the same positive direction at +8.0pp p=0.001.
-- **Note:** This is the agent-native reworked skill (hypothesis-differential debugging). The original broad `scientific-method` scored 0pp at n=45. The v2 prototype scored +5.3pp p=0.061. ELEVATE now rests on TWO genuinely post-edit M5 samples: fresh primary (+5.4pp p=0.027) + independent replication (+8.0pp p=0.001), same positive direction, both p<0.05 — the only skill in the program to earn a replicated ELEVATE verdict.
+  - **Note:** EVAL_RUN=m5-repl. Significant replication at +8.0pp p=0.001, same direction. However, a successful replication cannot rescue a primary that fails the paired-test gate. Per architecture decision gates, ELEVATE requires BOTH primary pass AND replication pass.
+- **Note:** This is the agent-native reworked skill (hypothesis-differential debugging). The original broad `scientific-method` scored 0pp at n=45. The v2 prototype scored +5.3pp p=0.061. Full-n=150 primary: +5.3pp p=0.061 — passes >=5pp threshold but fails p<0.05. Replication +8.0pp p=0.001 is significant but does not rescue the primary gate failure. **Downgraded to DIRECTIONAL-NOT-REPLICATED. No skill currently holds ELEVATE.**
 
 ---
 
@@ -131,26 +131,26 @@
 - **Sources:** `evals/results/run1/swe-five-whys-plus-powered.json` (superseded), `evals/results/wavec/swe-five-whys-plus-replication.json`, `evals/results/m5-primary-decisive/swe-five-whys-plus.json` (M5 decisive, n=224)
 - **Stale claim flagged:** Run1 scorecard "ELEVATE" and mid-document ELEVATE-OR-KILL.md "firm ELEVATE" — **both superseded**.
 
-#### `occams-razor` — **NO-LIFT (verified on decisive split)**
+#### `occams-razor` — **NO-LIFT (verified on decisive split, full-n=224)**
 - **Dataset:** SWE-bench fault localization
-- **N:** 150 (run1) → 223 (M5 decisive)
-- **Placebo → Skill:** 83% → 85% (run1, +2.0pp) → 59% → 59% (M5 decisive, 0pp)
-- **McNemar p:** 0.505 (run1) → 0.683 (M5 decisive)
+- **N:** 150 (run1) → 224 (M5 decisive, full-n)
+- **Placebo → Skill:** 83% → 85% (run1, +2.0pp) → 56% → 55% (M5 decisive, -0.9pp)
+- **McNemar p:** 0.505 (run1) → 0.724 (M5 decisive)
 - **Provenance:** `OBJ-powered-null` | `post-edit` | `null` | `replicated: false`
-- **Sources:** `evals/results/run1/swe-occams-razor-improved.json` (run1, n=150), `evals/results/m5-primary-decisive/swe-occams-razor.json` (M5 decisive, n=223)
-- **Note:** M5 primary run on 150-item set gave +4.7pp p=0.096 (directional, not significant — **originally misclassified as DIRECTIONAL-NOT-REPLICATED; corrected to NO-LIFT per blocker 3 fix**). M5 decisive-split rerun on the FROZEN 224-item split confirms 0pp, p=0.683 — a clear NO-LIFT. Trigger-scoped rework did not move needle. Earlier small-N correctness run (n=40, +5pp p=0.62) was directional only.
+- **Sources:** `evals/results/run1/swe-occams-razor-improved.json` (run1, n=150), `evals/results/m5-primary-decisive/swe-occams-razor.json` (M5 decisive, n=224)
+- **Note:** M5 primary run on 150-item set gave +4.7pp p=0.096 (directional, not significant — **originally misclassified as DIRECTIONAL-NOT-REPLICATED; corrected to NO-LIFT per blocker 3 fix**). M5 decisive-split rerun on the FROZEN 224-item split, full-n=224: -0.9pp, p=0.724 — a clear NO-LIFT. Trigger-scoped rework did not move needle.
 
-#### `kepner-tregoe` — **NO-LIFT (exploratory — surface-mismatch)**
-- **M5 decisive rerun (n=223, FROZEN split):** 60% → 58%, −1.8pp, p=0.221
+#### `kepner-tregoe` — **NO-LIFT (exploratory — surface-mismatch, full-n=224)**
+- **M5 decisive rerun (n=224, FROZEN split):** 55% → 56%, −1.8pp, p=0.289
 - **Provenance:** `OBJ-powered-null` | `post-edit` | `null` | `replicated: false`
 - **Source:** `evals/results/m5-primary-decisive/swe-kepner-tregoe.json`
-- **Note:** **EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface).** M5 decisive-split rerun on the FROZEN 224-item debugging-fault-localization-decisive split. −1.8pp over placebo, p=0.221 — NO-LIFT. kepner-tregoe's native value surface is paired-reasoning quality, not fault localization. Prior M5 run on 150-item set (in error) gave +2.7pp p=0.289.
+- **Note:** **EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface).** M5 full-sample (hardened runner) on the FROZEN 224-item debugging-fault-localization-decisive split. 54.5% vs 56.3% placebo, −1.8pp, p=0.289 — NO-LIFT. kepner-tregoe's native value surface is paired-reasoning quality, not fault localization. Prior M5 run on 150-item set (in error) gave +2.7pp p=0.289.
 
-#### `map-territory` — **NO-LIFT (exploratory — surface-mismatch)**
-- **M5 decisive rerun (n=222, FROZEN split):** 59% → 59%, +0.5pp, p=1.0
+#### `map-territory` — **NO-LIFT (exploratory — surface-mismatch, full-n=224)**
+- **M5 decisive rerun (n=224, FROZEN split):** 57% → 55%, +2.2pp, p=0.074
 - **Provenance:** `OBJ-powered-null` | `post-edit` | `null` | `replicated: false`
 - **Source:** `evals/results/m5-primary-decisive/swe-map-territory.json`
-- **Note:** **EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface).** M5 decisive-split rerun on the FROZEN 224-item debugging-fault-localization-decisive split. +0.5pp over placebo, p=1.0 — NO-LIFT. map-territory's native value surface is routing/discoverability, not fault localization. Prior M5 run on 150-item set (in error) gave +2.7pp p=0.221.
+- **Note:** **EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface).** M5 full-sample (hardened runner) on the FROZEN 224-item debugging-fault-localization-decisive split. 57.1% vs 54.9% placebo, +2.2pp, p=0.074 — NO-LIFT. map-territory's native value surface is routing/discoverability, not fault localization. Prior M5 run on 150-item set (in error) gave +2.7pp p=0.221.
 
 ---
 
@@ -270,11 +270,11 @@ The middle narrative sections of `analysis/ELEVATE-OR-KILL.md` contain the follo
 
 ---
 
-## Unmeasured Skills (22) — No Objective Ground Truth
+## Unmeasured Skills (20) — No Objective Ground Truth
 
 | Group | Skills | Reason |
 |-------|--------|--------|
-| **Pairwise (T3 authored, not run objectively)** | `inversion`, `pre-mortem`, `triz`, `thought-experiment`, `jobs-to-be-done`, `effectuation`, `lindy-effect`, `leverage-points`, `feedback-loops`, `archetypes`, `opportunity-cost`, `via-negativa`, `regret-minimization`, `steel-manning` | No clean objective formulation; judge-only |
+| **Pairwise (T3 authored, not run objectively)** | `inversion`, `pre-mortem`, `triz`, `thought-experiment`, `jobs-to-be-done`, `effectuation`, `lindy-effect`, `leverage-points`, `feedback-loops`, `opportunity-cost`, `via-negativa`, `regret-minimization`, `steel-manning` | No clean objective formulation; judge-only |
 | **Thin / hard-to-objectify** | `ooda`, `bounded-rationality`, `dual-process` | T3 n=3; resist objective framing |
 | **Leakage-blocked** | `probabilistic` | Forecasting items resolve pre-cutoff |
 | **Meta (routing only)** | `model-router`, `model-selection`, `model-combination` | T2 routing-cases only; need routing-accuracy eval |
@@ -285,7 +285,7 @@ The middle narrative sections of `analysis/ELEVATE-OR-KILL.md` contain the follo
 
 | Skill | Objective Verdict | Judge Verdict (superseded) | Final Status |
 |-------|-------------------|----------------------------|--------------|
-| `archetypes` | unmeasured | proven | unmeasured |
+| `archetypes` | null (powered, M5) | proven | no-lift |
 | `bayesian` | ceiling | unproven-tie | ceiling |
 | `bounded-rationality` | unmeasured | proven | unmeasured |
 | `circle-of-competence` | routing/abstention-null | proven | no calibration benefit |
@@ -299,15 +299,15 @@ The middle narrative sections of `analysis/ELEVATE-OR-KILL.md` contain the follo
 | `five-whys-plus` | null (powered, decisive n=224) | regresses | no-lift |
 | `inversion` | unmeasured | regresses | unmeasured |
 | `jobs-to-be-done` | unmeasured | regresses | unmeasured |
-| `kepner-tregoe` | null (powered, decisive n=223, exploratory) | proven | no-lift (exploratory) |
+| `kepner-tregoe` | null (powered, decisive n=224, exploratory) | proven | no-lift (exploratory) |
 | `leverage-points` | unmeasured | regresses | unmeasured |
 | `lindy-effect` | unmeasured | regresses | unmeasured |
-| `map-territory` | null (powered, decisive n=222, exploratory) | proven | no-lift (exploratory) |
+| `map-territory` | null (powered, decisive n=224, exploratory) | proven | no-lift (exploratory) |
 | `margin-of-safety` | negative (small-N) | unproven-tie | headroom, no benefit |
 | `model-combination` | unmeasured | — | unmeasured |
 | `model-router` | unmeasured | — | unmeasured |
 | `model-selection` | unmeasured | — | unmeasured |
-| `occams-razor` | null (powered, decisive n=223) | regresses | no-lift |
+| `occams-razor` | null (powered, decisive n=224) | regresses | no-lift |
 | `ooda` | unmeasured | proven | unmeasured |
 | `opportunity-cost` | unmeasured | regresses | unmeasured |
 | `pre-mortem` | unmeasured | proven | unmeasured |
@@ -315,7 +315,7 @@ The middle narrative sections of `analysis/ELEVATE-OR-KILL.md` contain the follo
 | `red-team` | directional (powered) | proven | directional-not-replicated |
 | `regret-minimization` | unmeasured | regresses | unmeasured |
 | `reversibility` | ceiling | proven | ceiling |
-| `scientific-method` | ELEVATE (robust) | proven | ELEVATE |
+| `scientific-method` | directional-not-replicated (full-n=150 primary: +5.3pp p=0.061) | proven | directional-not-replicated |
 | `second-order` | null (powered) | proven | no effect |
 | `socratic` | ceiling | proven | ceiling |
 | `steel-manning` | unmeasured | proven | unmeasured |
@@ -347,13 +347,15 @@ The middle narrative sections of `analysis/ELEVATE-OR-KILL.md` contain the follo
 - [x] **Every evidence cell has provenance tag** — from allowed taxonomy only
 - [x] **Objective vs Judge evidence separated** — distinct `objective_evidence` / `judge_evidence` fields
 - [x] **Ceiling labeled as ceiling, not kill** — 8 skills at ceiling
-- [x] **scientific-method sole robust ELEVATE** — TWO genuinely post-edit M5 samples: fresh primary 87→93%, +5.4pp p=0.027 (n=149, m5-primary-sci, Jun 7 09:25 > SKILL.md Jun 1 06:05) + replication 82→90%, +8.0pp p=0.001 (n=150, m5-repl)
+- [x] **scientific-method downgraded to DIRECTIONAL-NOT-REPLICATED** — full-n=150 fresh primary 85→91%, +5.3pp p=0.061 (m5-primary-sci) fails p<0.05 gate despite >=5pp; replication 82→90%, +8.0pp p=0.001 (m5-repl) is significant same-direction but cannot rescue primary gate failure. No skill currently holds ELEVATE.
 - [x] **Collapsed leads as null/directional** — systems, five-whys-plus, red-team, fermi-estimation
 - [x] **Stale claims flagged superseded, not deleted** — run1 scorecard, mid-document ELEVATE-OR-KILL.md, SKILL-AUDIT.md
 - [x] **JSON and MD mutually consistent** — same skills, same verdicts, same numbers
-- [x] **Objective coverage 17/22** — 17 measured, 22 unmeasured
+- [x] **Objective coverage 19/20** — 19 measured, 20 unmeasured
 - [x] **No skill directory deleted** — `skills/` still has 39 dirs
 - [x] **No scientific-method-v2** — replaced in-place, no v2 directory
+- [x] **Full-n sample completeness (M5 scrutiny round-2 fix)** — run-swe.js hardened with retry+per-item persistence; all 4 decisive-split results at n=224; scientific-method primary at n=150
+- [x] **scientific-method re-evaluated at full-n=150** — +5.3pp p=0.061 fails p<0.05; ELEVATE downgraded to DIRECTIONAL-NOT-REPLICATED
 
 ---
 
