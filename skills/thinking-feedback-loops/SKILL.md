@@ -11,6 +11,16 @@ Feedback loop analysis (Donella Meadows, "Thinking in Systems") explains how a d
 
 **Core Principle:** System behavior emerges from feedback structure. To change behavior, change the loops.
 
+## Trigger Card
+
+When a system shows dynamic behavior (runaway growth, oscillation, resistance to change):
+
+1. **Classify the behavior:** growing/collapsing → look for a reinforcing loop; oscillating → look for a balancing loop with delay; stuck → look for a dominant balancing loop.
+2. **Trace the loop:** what variable feeds back into itself? Map causal connections with direction (+/-).
+3. **Find the leverage:** shorten a delay, change a loop's gain, or add a balancing loop to a runaway reinforcing one.
+
+If there's no dynamic behavior (static, one-time cause), skip — just fix it. For overall system mapping, use `thinking-systems`. For choosing where to intervene in an already-mapped loop, use `thinking-leverage-points`.
+
 ## When to Use
 
 - A system shows runaway growth or collapse (suspect a dominant reinforcing loop)
@@ -27,9 +37,10 @@ System behavior is puzzling or problematic?
 
 ## When NOT to Use
 
+- **You need to map the overall system structure** (components, stocks, flows, cross-service causes) — use `thinking-systems` instead. Feedback loops zooms in on the specific dynamic loops driving behavior; systems maps the full territory first.
+- **You're looking for where to intervene** in an already-mapped system — use `thinking-leverage-points` (Meadows' 12-level hierarchy). Feedback loops tells you *which loop is dominant*; leverage-points tells you *where in that loop to act*.
 - The symptom has a single static cause with no loop (a fixed bug, a one-time bad config) → just fix it.
 - Behavior isn't changing over time—there's nothing dynamic to model.
-- You only need to map structure or trace a cross-service cause → use `thinking-systems`.
 
 ## Core Concepts
 

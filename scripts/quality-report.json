@@ -1,94 +1,5 @@
 [
   {
-    "name": "thinking-occams-razor",
-    "path": "/Users/tjboudreaux/Sandbox/cc-thinking-skills/skills/thinking-occams-razor/SKILL.md",
-    "sections": [
-      {
-        "name": "YAML Frontmatter",
-        "found": true
-      },
-      {
-        "name": "Overview",
-        "found": true
-      },
-      {
-        "name": "Core Principle",
-        "found": true
-      },
-      {
-        "name": "When to Use",
-        "found": true
-      },
-      {
-        "name": "Decision Flow",
-        "found": true
-      },
-      {
-        "name": "Process/Steps",
-        "found": false
-      },
-      {
-        "name": "Examples",
-        "found": false
-      },
-      {
-        "name": "Template",
-        "found": false
-      },
-      {
-        "name": "Verification Checklist",
-        "found": false
-      },
-      {
-        "name": "Key Questions",
-        "found": false
-      },
-      {
-        "name": "Wisdom/Attribution",
-        "found": true
-      }
-    ],
-    "quality": [
-      {
-        "name": "Description Length",
-        "pass": false,
-        "detail": "218 chars (max 200)"
-      },
-      {
-        "name": "Has Multiple Examples",
-        "pass": false,
-        "detail": "Found 0 example(s)"
-      },
-      {
-        "name": "Has Tables",
-        "pass": true,
-        "detail": "Found 14 table row(s)"
-      },
-      {
-        "name": "Has Checklists",
-        "pass": false,
-        "detail": "Found 0 checklist item(s)"
-      },
-      {
-        "name": "Has Code Blocks",
-        "pass": true,
-        "detail": "Found 3 code block(s)"
-      },
-      {
-        "name": "Word Count (500-3000)",
-        "pass": true,
-        "detail": "932 words"
-      },
-      {
-        "name": "Has Anti-patterns/Failure Modes",
-        "pass": true,
-        "detail": "Found warnings"
-      }
-    ],
-    "score": 10,
-    "maxScore": 18
-  },
-  {
     "name": "thinking-cynefin",
     "path": "/Users/tjboudreaux/Sandbox/cc-thinking-skills/skills/thinking-cynefin/SKILL.md",
     "sections": [
@@ -178,6 +89,95 @@
     "maxScore": 18
   },
   {
+    "name": "thinking-occams-razor",
+    "path": "/Users/tjboudreaux/Sandbox/cc-thinking-skills/skills/thinking-occams-razor/SKILL.md",
+    "sections": [
+      {
+        "name": "YAML Frontmatter",
+        "found": true
+      },
+      {
+        "name": "Overview",
+        "found": true
+      },
+      {
+        "name": "Core Principle",
+        "found": true
+      },
+      {
+        "name": "When to Use",
+        "found": true
+      },
+      {
+        "name": "Decision Flow",
+        "found": true
+      },
+      {
+        "name": "Process/Steps",
+        "found": false
+      },
+      {
+        "name": "Examples",
+        "found": false
+      },
+      {
+        "name": "Template",
+        "found": false
+      },
+      {
+        "name": "Verification Checklist",
+        "found": false
+      },
+      {
+        "name": "Key Questions",
+        "found": false
+      },
+      {
+        "name": "Wisdom/Attribution",
+        "found": true
+      }
+    ],
+    "quality": [
+      {
+        "name": "Description Length",
+        "pass": true,
+        "detail": "192 chars (max 200)"
+      },
+      {
+        "name": "Has Multiple Examples",
+        "pass": false,
+        "detail": "Found 0 example(s)"
+      },
+      {
+        "name": "Has Tables",
+        "pass": true,
+        "detail": "Found 14 table row(s)"
+      },
+      {
+        "name": "Has Checklists",
+        "pass": false,
+        "detail": "Found 0 checklist item(s)"
+      },
+      {
+        "name": "Has Code Blocks",
+        "pass": true,
+        "detail": "Found 3 code block(s)"
+      },
+      {
+        "name": "Word Count (500-3000)",
+        "pass": true,
+        "detail": "928 words"
+      },
+      {
+        "name": "Has Anti-patterns/Failure Modes",
+        "pass": true,
+        "detail": "Found warnings"
+      }
+    ],
+    "score": 11,
+    "maxScore": 18
+  },
+  {
     "name": "thinking-debiasing",
     "path": "/Users/tjboudreaux/Sandbox/cc-thinking-skills/skills/thinking-debiasing/SKILL.md",
     "sections": [
@@ -255,7 +255,7 @@
       {
         "name": "Word Count (500-3000)",
         "pass": true,
-        "detail": "1279 words"
+        "detail": "1308 words"
       },
       {
         "name": "Has Anti-patterns/Failure Modes",
@@ -585,8 +585,8 @@
     "quality": [
       {
         "name": "Description Length",
-        "pass": false,
-        "detail": "230 chars (max 200)"
+        "pass": true,
+        "detail": "191 chars (max 200)"
       },
       {
         "name": "Has Multiple Examples",
@@ -611,185 +611,7 @@
       {
         "name": "Word Count (500-3000)",
         "pass": true,
-        "detail": "1150 words"
-      },
-      {
-        "name": "Has Anti-patterns/Failure Modes",
-        "pass": true,
-        "detail": "Found warnings"
-      }
-    ],
-    "score": 12,
-    "maxScore": 18
-  },
-  {
-    "name": "thinking-five-whys-plus",
-    "path": "/Users/tjboudreaux/Sandbox/cc-thinking-skills/skills/thinking-five-whys-plus/SKILL.md",
-    "sections": [
-      {
-        "name": "YAML Frontmatter",
-        "found": true
-      },
-      {
-        "name": "Overview",
-        "found": true
-      },
-      {
-        "name": "Core Principle",
-        "found": true
-      },
-      {
-        "name": "When to Use",
-        "found": true
-      },
-      {
-        "name": "Decision Flow",
-        "found": true
-      },
-      {
-        "name": "Process/Steps",
-        "found": true
-      },
-      {
-        "name": "Examples",
-        "found": true
-      },
-      {
-        "name": "Template",
-        "found": false
-      },
-      {
-        "name": "Verification Checklist",
-        "found": false
-      },
-      {
-        "name": "Key Questions",
-        "found": false
-      },
-      {
-        "name": "Wisdom/Attribution",
-        "found": true
-      }
-    ],
-    "quality": [
-      {
-        "name": "Description Length",
-        "pass": false,
-        "detail": "219 chars (max 200)"
-      },
-      {
-        "name": "Has Multiple Examples",
-        "pass": true,
-        "detail": "Found 3 example(s)"
-      },
-      {
-        "name": "Has Tables",
-        "pass": true,
-        "detail": "Found 18 table row(s)"
-      },
-      {
-        "name": "Has Checklists",
-        "pass": false,
-        "detail": "Found 0 checklist item(s)"
-      },
-      {
-        "name": "Has Code Blocks",
-        "pass": true,
-        "detail": "Found 4 code block(s)"
-      },
-      {
-        "name": "Word Count (500-3000)",
-        "pass": true,
-        "detail": "1092 words"
-      },
-      {
-        "name": "Has Anti-patterns/Failure Modes",
-        "pass": true,
-        "detail": "Found warnings"
-      }
-    ],
-    "score": 13,
-    "maxScore": 18
-  },
-  {
-    "name": "thinking-red-team",
-    "path": "/Users/tjboudreaux/Sandbox/cc-thinking-skills/skills/thinking-red-team/SKILL.md",
-    "sections": [
-      {
-        "name": "YAML Frontmatter",
-        "found": true
-      },
-      {
-        "name": "Overview",
-        "found": true
-      },
-      {
-        "name": "Core Principle",
-        "found": true
-      },
-      {
-        "name": "When to Use",
-        "found": true
-      },
-      {
-        "name": "Decision Flow",
-        "found": true
-      },
-      {
-        "name": "Process/Steps",
-        "found": true
-      },
-      {
-        "name": "Examples",
-        "found": true
-      },
-      {
-        "name": "Template",
-        "found": false
-      },
-      {
-        "name": "Verification Checklist",
-        "found": false
-      },
-      {
-        "name": "Key Questions",
-        "found": false
-      },
-      {
-        "name": "Wisdom/Attribution",
-        "found": true
-      }
-    ],
-    "quality": [
-      {
-        "name": "Description Length",
-        "pass": false,
-        "detail": "205 chars (max 200)"
-      },
-      {
-        "name": "Has Multiple Examples",
-        "pass": true,
-        "detail": "Found 4 example(s)"
-      },
-      {
-        "name": "Has Tables",
-        "pass": true,
-        "detail": "Found 20 table row(s)"
-      },
-      {
-        "name": "Has Checklists",
-        "pass": false,
-        "detail": "Found 0 checklist item(s)"
-      },
-      {
-        "name": "Has Code Blocks",
-        "pass": true,
-        "detail": "Found 5 code block(s)"
-      },
-      {
-        "name": "Word Count (500-3000)",
-        "pass": true,
-        "detail": "1127 words"
+        "detail": "1144 words"
       },
       {
         "name": "Has Anti-patterns/Failure Modes",
@@ -878,7 +700,96 @@
       {
         "name": "Word Count (500-3000)",
         "pass": true,
-        "detail": "915 words"
+        "detail": "1087 words"
+      },
+      {
+        "name": "Has Anti-patterns/Failure Modes",
+        "pass": true,
+        "detail": "Found warnings"
+      }
+    ],
+    "score": 14,
+    "maxScore": 18
+  },
+  {
+    "name": "thinking-five-whys-plus",
+    "path": "/Users/tjboudreaux/Sandbox/cc-thinking-skills/skills/thinking-five-whys-plus/SKILL.md",
+    "sections": [
+      {
+        "name": "YAML Frontmatter",
+        "found": true
+      },
+      {
+        "name": "Overview",
+        "found": true
+      },
+      {
+        "name": "Core Principle",
+        "found": true
+      },
+      {
+        "name": "When to Use",
+        "found": true
+      },
+      {
+        "name": "Decision Flow",
+        "found": true
+      },
+      {
+        "name": "Process/Steps",
+        "found": true
+      },
+      {
+        "name": "Examples",
+        "found": true
+      },
+      {
+        "name": "Template",
+        "found": false
+      },
+      {
+        "name": "Verification Checklist",
+        "found": false
+      },
+      {
+        "name": "Key Questions",
+        "found": false
+      },
+      {
+        "name": "Wisdom/Attribution",
+        "found": true
+      }
+    ],
+    "quality": [
+      {
+        "name": "Description Length",
+        "pass": true,
+        "detail": "196 chars (max 200)"
+      },
+      {
+        "name": "Has Multiple Examples",
+        "pass": true,
+        "detail": "Found 3 example(s)"
+      },
+      {
+        "name": "Has Tables",
+        "pass": true,
+        "detail": "Found 18 table row(s)"
+      },
+      {
+        "name": "Has Checklists",
+        "pass": false,
+        "detail": "Found 0 checklist item(s)"
+      },
+      {
+        "name": "Has Code Blocks",
+        "pass": true,
+        "detail": "Found 4 code block(s)"
+      },
+      {
+        "name": "Word Count (500-3000)",
+        "pass": true,
+        "detail": "1089 words"
       },
       {
         "name": "Has Anti-patterns/Failure Modes",
@@ -973,6 +884,95 @@
         "name": "Has Anti-patterns/Failure Modes",
         "pass": false,
         "detail": "No anti-patterns documented"
+      }
+    ],
+    "score": 14,
+    "maxScore": 18
+  },
+  {
+    "name": "thinking-red-team",
+    "path": "/Users/tjboudreaux/Sandbox/cc-thinking-skills/skills/thinking-red-team/SKILL.md",
+    "sections": [
+      {
+        "name": "YAML Frontmatter",
+        "found": true
+      },
+      {
+        "name": "Overview",
+        "found": true
+      },
+      {
+        "name": "Core Principle",
+        "found": true
+      },
+      {
+        "name": "When to Use",
+        "found": true
+      },
+      {
+        "name": "Decision Flow",
+        "found": true
+      },
+      {
+        "name": "Process/Steps",
+        "found": true
+      },
+      {
+        "name": "Examples",
+        "found": true
+      },
+      {
+        "name": "Template",
+        "found": false
+      },
+      {
+        "name": "Verification Checklist",
+        "found": false
+      },
+      {
+        "name": "Key Questions",
+        "found": false
+      },
+      {
+        "name": "Wisdom/Attribution",
+        "found": true
+      }
+    ],
+    "quality": [
+      {
+        "name": "Description Length",
+        "pass": true,
+        "detail": "189 chars (max 200)"
+      },
+      {
+        "name": "Has Multiple Examples",
+        "pass": true,
+        "detail": "Found 4 example(s)"
+      },
+      {
+        "name": "Has Tables",
+        "pass": true,
+        "detail": "Found 20 table row(s)"
+      },
+      {
+        "name": "Has Checklists",
+        "pass": false,
+        "detail": "Found 0 checklist item(s)"
+      },
+      {
+        "name": "Has Code Blocks",
+        "pass": true,
+        "detail": "Found 5 code block(s)"
+      },
+      {
+        "name": "Word Count (500-3000)",
+        "pass": true,
+        "detail": "1124 words"
+      },
+      {
+        "name": "Has Anti-patterns/Failure Modes",
+        "pass": true,
+        "detail": "Found warnings"
       }
     ],
     "score": 14,
@@ -1145,7 +1145,7 @@
       {
         "name": "Word Count (500-3000)",
         "pass": true,
-        "detail": "1088 words"
+        "detail": "1221 words"
       },
       {
         "name": "Has Anti-patterns/Failure Modes",
@@ -1412,7 +1412,7 @@
       {
         "name": "Word Count (500-3000)",
         "pass": true,
-        "detail": "2138 words"
+        "detail": "2246 words"
       },
       {
         "name": "Has Anti-patterns/Failure Modes",
@@ -1590,7 +1590,7 @@
       {
         "name": "Word Count (500-3000)",
         "pass": true,
-        "detail": "1354 words"
+        "detail": "1487 words"
       },
       {
         "name": "Has Anti-patterns/Failure Modes",
@@ -1768,7 +1768,7 @@
       {
         "name": "Word Count (500-3000)",
         "pass": true,
-        "detail": "1823 words"
+        "detail": "1987 words"
       },
       {
         "name": "Has Anti-patterns/Failure Modes",
@@ -2302,7 +2302,7 @@
       {
         "name": "Word Count (500-3000)",
         "pass": true,
-        "detail": "1879 words"
+        "detail": "1987 words"
       },
       {
         "name": "Has Anti-patterns/Failure Modes",
@@ -2658,7 +2658,7 @@
       {
         "name": "Word Count (500-3000)",
         "pass": true,
-        "detail": "1619 words"
+        "detail": "1909 words"
       },
       {
         "name": "Has Anti-patterns/Failure Modes",
@@ -2925,7 +2925,7 @@
       {
         "name": "Word Count (500-3000)",
         "pass": true,
-        "detail": "1741 words"
+        "detail": "1843 words"
       },
       {
         "name": "Has Anti-patterns/Failure Modes",

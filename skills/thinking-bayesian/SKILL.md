@@ -10,7 +10,17 @@ Bayesian thinking provides a framework for updating beliefs based on new evidenc
 
 **Core Principle:** State the base rate *before* you look at the evidence, then update. The single most common error is anchoring on a vivid result and skipping the prior — a positive test for a rare condition is usually still a false alarm.
 
-> **Overlaps with `thinking-probabilistic`.** Use this skill when there is a specific prior + a specific piece of evidence to combine (the math of updating). Use `thinking-probabilistic` for the broader practice of expressing forecasts as ranges and reasoning under uncertainty. If you only need a rough updated number, the base-rate-then-likelihood-ratio trigger below is enough — don't run the full theorem.
+> **Redirect:** For nearly all uncertainty-reasoning tasks, prefer `thinking-probabilistic` — it covers forecasting with ranges, calibration, and uncertainty communication without requiring explicit priors and likelihood ratios. Reserve this skill for the narrow case where you have a specific, quantified prior AND a specific piece of evidence to combine via Bayes' rule. If you only need a rough updated number, the base-rate-then-likelihood-ratio trigger below is enough — don't run the full theorem.
+
+## Trigger Card
+
+When interpreting a test result, metric, or new evidence where overreaction is a risk:
+
+1. **State the base rate first** — what was the probability before the evidence?
+2. **Estimate the likelihood ratio** — how much more expected is the evidence under the hypothesis vs. not?
+3. **Update:** posterior odds = prior odds × likelihood ratio.
+
+If the base rate is very low (rare condition), a positive result is usually still a false alarm. Always start with the prior.
 
 ## When to Use
 - Estimating probabilities or likelihoods
@@ -29,10 +39,12 @@ Uncertain about something? → yes → Have prior belief? → yes → New eviden
 ```
 
 ## When NOT to Use
+
+- **You're reasoning under uncertainty and don't have a specific prior + evidence pair.** Use `thinking-probabilistic` instead — it handles forecasting with ranges, calibration, and uncertainty communication without requiring formal Bayesian machinery.
 - **The evidence is conclusive or directly observable.** If you can read the logs, run the query, or look up the answer, do that — don't dress up a near-certainty as a probability.
 - **No meaningful prior exists** and you'd just be inventing numbers. A fabricated base rate gives false rigor; say the prior is unknown instead.
 - **The decision is the same at any plausible posterior.** If you'd act identically whether the probability is 40% or 70%, skip the update and act.
-- **You need a forecast as a range, not a single-evidence update** — use `thinking-probabilistic` instead.
+- **You need to express uncertainty as a calibrated range**, not a point update from a single piece of evidence — that's `thinking-probabilistic` territory.
 
 ## Key Concepts
 

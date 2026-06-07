@@ -11,6 +11,16 @@ Systems archetypes (Peter Senge, "The Fifth Discipline") are recurring structura
 
 **Core Principle:** A recurring problem usually has a structural pattern. Match the pattern and the intervention follows.
 
+## Trigger Card
+
+When the same problem keeps recurring despite multiple fixes:
+
+1. **Describe the problem neutrally** — symptoms, what's been tried, what keeps coming back.
+2. **Match to an archetype** using the Quick Reference Card below (Fixes That Fail, Shifting the Burden, Limits to Growth, Tragedy of the Commons, Escalation, Success to the Successful, Growth and Underinvestment).
+3. **Intervene at the structure, not the symptom** — use the Key Question for that archetype.
+
+If no archetype fits after a genuine look, don't force one — drop to `thinking-systems` and map from scratch. For a first-time one-off problem, just fix it.
+
 ## When to Use
 
 - The same problem keeps recurring despite multiple "fixes"
@@ -28,6 +38,8 @@ Shared resource degrading?              → match an archetype
 
 ## When NOT to Use
 
+- **You need to map the system from scratch** (components, interactions, emergent behavior) — use `thinking-systems` instead. Archetypes are pattern-matching shortcuts for recurring structures; if the system is unfamiliar, map it first, then see if an archetype fits.
+- **You've found the pattern and need to know where to intervene** — use `thinking-leverage-points` (Meadows' hierarchy). Archetypes name the structure; leverage-points tell you where in that structure to act for maximum effect.
 - A first-time, one-off problem with a clear cause → just fix it; there's no recurring structure to match.
 - No candidate archetype fits after a genuine look → don't force one. Drop to `thinking-systems` and map the actual structure from scratch.
 - You need to localize a specific faulty codepath → use a hypothesis differential, not pattern-matching.

@@ -12,6 +12,16 @@ The framing comes from Kahneman's fast/slow distinction, but the operative idea 
 
 **Core Principle:** Fluency is not correctness. When the answer came easily *and* the cost of being wrong is high, that combination is the trigger to slow down and verify — not a signal you're done.
 
+## Trigger Card
+
+When an answer arrives instantly on a high-stakes or unfamiliar task, run one verification pass before committing:
+
+1. **Notice:** Did the answer form immediately, with no intermediate steps? High confidence but nothing checked?
+2. **Check triggers:** Is the task high-stakes/irreversible OR the domain unfamiliar? If neither, ship the fast answer.
+3. **Verify:** Re-state the claim → re-derive or test it a second, independent way → check against ground truth (code, docs, data) → reconcile any disagreement → commit.
+
+The trigger is **easy answer + real cost of error.** If the answer was hard-won, you already deliberated. If the task is trivial and reversible, don't over-verify.
+
 ## When to Use
 - The task is high-stakes or irreversible (data migration, security, deletion, public commitment) and the answer felt obvious.
 - The domain is unfamiliar or the task is novel — no well-worn pattern to rely on.

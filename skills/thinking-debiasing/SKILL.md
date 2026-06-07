@@ -7,20 +7,23 @@ description: In a long trajectory where you're defending a path you committed to
 
 > Usually unnecessary. Current models already avoid the textbook cognitive biases on standard framings, so do not run this checklist by default — it adds friction without lift. It earns its keep in one narrow case: a **long trajectory** where you've committed to an approach early and are now rationalizing past it (sunk-cost) or only collecting evidence that confirms it (confirmation). For everything else, skip it.
 
-## When NOT to Use
-- Standard, single-step reasoning — the bias risk is already low; don't pad the answer with a bias audit.
-- Short tasks with no prior commitment to defend — sunk-cost/confirmation can't apply yet.
-- As decoration to look rigorous — naming biases without changing the decision is theater.
-- When a concrete framework already fits (thinking-pre-mortem for risks, thinking-opportunity-cost for trade-offs, thinking-reversibility for decision speed) — use it instead.
+## Trigger Card
 
-## The narrow case it's for
-You are several steps into a plan and notice one of these patterns. Run the matching self-check:
+Only use this skill when you notice one of these patterns in a long trajectory where you've committed to a path early:
 
 | Pattern you notice | Self-check |
 |---|---|
 | "We've already built/spent a lot, so we should continue" | **Sunk cost:** Would I choose this path *starting fresh today*, ignoring work already done? If no, change course. |
 | You keep finding support for your current hypothesis and discounting counter-evidence | **Confirmation:** What single piece of evidence would prove me wrong? Have I actively looked for it? |
-| Unusually high confidence with thin evidence | **Overconfidence:** Widen the estimate; state what I'd expect to see if I'm wrong, and when I'd know. |
+| Unusually high confidence with thin evidence | **Overconfidence:** Widen the estimate; state what I'd expect to see if I'm wrong. |
+
+If the check doesn't change the decision, you're done. Don't name biases without acting on them. For risk anticipation, use `thinking-pre-mortem`; for trade-off analysis, use `thinking-opportunity-cost`; for decision speed, use `thinking-reversibility`.
+
+## When NOT to Use
+- Standard, single-step reasoning — the bias risk is already low; don't pad the answer with a bias audit.
+- Short tasks with no prior commitment to defend — sunk-cost/confirmation can't apply yet.
+- As decoration to look rigorous — naming biases without changing the decision is theater.
+- When a concrete framework already fits (thinking-pre-mortem for risks, thinking-opportunity-cost for trade-offs, thinking-reversibility for decision speed) — use it instead.
 
 ## Overview
 Based on Daniel Kahneman, Dan Lovallo, and Olivier Sibony's research on cognitive biases. The sections below are a fuller checklist; for an autonomous agent, treat them as a *reference for the narrow case above*, applied as self-checks (not as roles assigned to a team).

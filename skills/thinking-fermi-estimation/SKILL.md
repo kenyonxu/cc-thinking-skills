@@ -11,6 +11,17 @@ Fermi estimation, named after physicist Enrico Fermi, is the art of making reaso
 
 **Core Principle:** Break the unknown into known (or estimable) pieces. Even rough estimates combine to reasonable accuracy due to errors canceling out.
 
+## Trigger Card
+
+When you need a number you can't measure or look up, and order-of-magnitude is enough:
+
+1. **Decompose:** Quantity = Factor₁ × Factor₂ × ... × Factorₙ (by component, by rate×time, or by population×fraction).
+2. **Estimate each factor** with a range, not a point; use geometric mean for order-of-magnitude; round to one significant figure.
+3. **Multiply and sanity-check:** Does the order of magnitude make sense? Would a 10× error change the decision?
+4. **Report:** "~X, within 3-5×" — never false precision.
+
+If the number is lookup-able (COUNT(*), pricing page, profile it), do that instead — a made-up estimate where a real value exists is strictly worse.
+
 ## When to Use
 
 - Capacity planning ("How much storage will we need?")

@@ -7,6 +7,16 @@ description: When advising a human on a high-stakes, hard-to-undo life/career ch
 
 > Scope note: This is a **human-facing advisory** lens. An autonomous agent has no "future self" to regret, so do not apply it to your own tool/architecture choices — for those use thinking-reversibility (one-way vs two-way door) and thinking-opportunity-cost. Use this skill only when helping a *person* reason through a personal/career decision. The reusable core for engineering work is the asymmetry below: a recoverable downside vs. a permanently foregone upside.
 
+## Trigger Card
+
+When advising a human on a high-stakes, hard-to-undo life/career choice:
+
+1. **Check the asymmetry:** Is the downside recoverable but the missed upside permanent? If yes, the asymmetry favors trying. If the downside is catastrophic or harms others, the asymmetry flips — do NOT apply "just try it."
+2. **Demote short-term fear:** Which costs will have faded to nothing years from now? Which path, if untaken, leaves a permanent "what if?"
+3. **Recommend the path that minimizes lifetime regret** — inaction regrets grow larger over time; action regrets usually fade.
+
+For agent decisions (tooling, architecture), use `thinking-reversibility` + `thinking-opportunity-cost` instead.
+
 ## Overview
 
 Jeff Bezos's Regret Minimization Framework reframes a hard, irreversible personal choice around long-term regret rather than short-term fear: imagine looking back from the far future and ask which path you'd regret *not* taking. The transferable insight is an **asymmetry** — a failed attempt is usually recoverable, while a never-taken opportunity is permanently gone.
