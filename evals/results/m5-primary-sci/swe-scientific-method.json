@@ -1,0 +1,21 @@
+{
+  "mode": "swe-localize",
+  "skill": "scientific-method",
+  "solver": "claude-sonnet-4-6",
+  "n": 149,
+  "dataset_path": "/Users/tjboudreaux/Sandbox/cc-thinking-skills/evals/datasets/external/swebench.jsonl",
+  "acc_with_skill": 0.926,
+  "acc_with_skill_ci": [
+    0.873,
+    0.958
+  ],
+  "acc_placebo": 0.872,
+  "acc_placebo_ci": [
+    0.809,
+    0.917
+  ],
+  "delta_pp": 5.4,
+  "mcnemar_p": 0.027,
+  "significant": true,
+  "discordant": 10
+}

@@ -27,7 +27,7 @@
 
 | Skill | Dataset | N | Placebo → Skill | Δ (pp) | p | Verdict | Provenance |
 |-------|---------|---|-----------------|--------|---|---------|------------|
-| **scientific-method** | SWE-bench fault localization | 150 | 82% → 91% | **+9.3** | **0.002** | **ELEVATE (replicated: +8.0pp, p=0.001)** | `OBJ-powered-significant` |
+| **scientific-method** | SWE-bench fault localization (frozen 150-item set) | 149 | 87% → 93% | **+5.4** | **0.027** | **ELEVATE (replicated: M5 primary +5.4pp p=0.027 + M5 replication +8.0pp p=0.001)** | `OBJ-powered-significant` |
 | red-team | DiverseVul balanced | 200 | 59% → 64% | +5.0 | 0.10 | directional, not sig | `OBJ-powered-directional` |
 | first-principles | authored constraint | 30 | 93% → 100% | +6.7 | 0.48 | ceiling | `OBJ-small-ceiling` |
 | systems | SWE-bench | 150 | 84% → 83% | −1.3 | 0.68 | no effect (was +5.3@n=150) | `OBJ-powered-null` |
@@ -60,7 +60,8 @@
 
 **M5 decisive-split rerun (FIX):** solver `claude-sonnet-4-6`, CONC=4, isolation ON, EVAL_RUN=m5-primary-decisive. The 4 debugging-family skills (five-whys-plus, occams-razor, kepner-tregoe, map-territory) were rerun on the FROZEN 224-item decisive split. All 4 confirmed NO-LIFT. Dataset provenance now recorded in each result JSON (`dataset_path` + `n` + optional `provenance`). run-swe.js updated to support `SWE_DATASET_PATH` env var (defaults to original 150-item set for backward-compat and scientific-method replication).
 
-**M5 replication:** FRESH scientific-method replication on the ORIGINAL frozen 150-item SWE-bench set. Result: 90% vs 82% placebo, +8.0pp, p=0.001 — same direction as prior +9.3pp. **ELEVATE confirmed and replicated.** EVAL_RUN=m5-repl.
+**M5 fresh primary (VAL-POWERED-014 FIX):** FRESH post-edit PRIMARY for scientific-method on the ORIGINAL frozen 150-item SWE-bench set. Replaces the stale run1 primary (+9.3pp) whose mtime (Jun 1 03:51) predates the SKILL.md rewrite (Jun 1 06:05, commit 4a176d9). Result: 93% vs 87% placebo, +5.4pp, p=0.027, significant (n=149). EVAL_RUN=m5-primary-sci, solver=claude-sonnet-4-6, CONC=4, isolation ON. Genuinely post-edit: result mtime (Jun 7 09:25) > SKILL.md mtime (Jun 1 06:05).
+**M5 replication:** FRESH scientific-method replication on the ORIGINAL frozen 150-item SWE-bench set. Result: 90% vs 82% placebo, +8.0pp, p=0.001 — same direction as M5 fresh primary (+5.4pp). **ELEVATE confirmed and replicated on TWO genuinely post-edit samples.** EVAL_RUN=m5-repl.
 
 **Total objectively measured: 17 (+7 M5 primary +1 M5 replication +4 M5 decisive = 29 with post-edit evidence) / 39 skills**  
 **Unmeasured (judge-only / thin / leakage-blocked / meta): 21 skills**
@@ -71,26 +72,28 @@
 
 ### ELEVATE (robust, objectively replicated)
 
-#### `scientific-method` — **ELEVATE (replicated)**
-- **Primary (pre-registered):**
-  - **Dataset:** SWE-bench fault localization (native domain)
-  - **N:** 150
-  - **Placebo → Skill:** 82% → 91%
-  - **Δ:** +9.3 pp
-  - **McNemar p:** 0.002
-  - **Discordant pairs:** 18
+#### `scientific-method` — **ELEVATE (replicated on TWO genuinely post-edit samples)**
+- **M5 Fresh Primary (VAL-POWERED-014 fix — replaces stale run1 evidence):**
+  - **Dataset:** SWE-bench fault localization (ORIGINAL frozen 150-item set)
+  - **N:** 149
+  - **Placebo → Skill:** 87% → 93%
+  - **Δ:** +5.4 pp
+  - **McNemar p:** 0.027
+  - **Discordant pairs:** 10
   - **Provenance:** `OBJ-powered-significant` | `post-edit` | `significant` | `replicated: true`
-  - **Source:** `evals/results/run1/swe-scientific-method-improved.json`
+  - **Source:** `evals/results/m5-primary-sci/swe-scientific-method.json`
+  - **Note:** EVAL_RUN=m5-primary-sci, solver=claude-sonnet-4-6, CONC=4, isolation ON. Genuinely post-edit (mtime Jun 7 09:25 > SKILL.md Jun 1 06:05). Replaces the stale run1 primary (+9.3pp, mtime Jun 1 03:51) that predated the SKILL.md procedural rewrite.
 - **M5 Fresh Replication (independent sample, same frozen 150-item SWE-bench set):**
   - **N:** 150
   - **Placebo → Skill:** 82% → 90%
   - **Δ:** +8.0 pp
   - **McNemar p:** 0.001
   - **Discordant pairs:** 12
-  - **Direction:** SAME (positive), concordant with primary
+  - **Direction:** SAME (positive), concordant with M5 fresh primary (+5.4pp)
   - **Provenance:** `OBJ-powered-significant` | `post-edit` | `significant` | `replicated: true`
   - **Source:** `evals/results/m5-repl/swe-scientific-method.json`
-- **Note:** This is the agent-native reworked skill (hypothesis-differential debugging). The original broad `scientific-method` scored 0pp at n=45. The v2 prototype scored +5.3pp p=0.061. The shipped rework achieved +9.3pp p=0.002. The M5 fresh replication confirmed the effect in the same direction at +8.0pp p=0.001 — the only skill in the program to earn a replicated ELEVATE verdict.
+  - **Note:** EVAL_RUN=m5-repl. Replicates the M5 fresh primary in the same positive direction at +8.0pp p=0.001.
+- **Note:** This is the agent-native reworked skill (hypothesis-differential debugging). The original broad `scientific-method` scored 0pp at n=45. The v2 prototype scored +5.3pp p=0.061. ELEVATE now rests on TWO genuinely post-edit M5 samples: fresh primary (+5.4pp p=0.027) + independent replication (+8.0pp p=0.001), same positive direction, both p<0.05 — the only skill in the program to earn a replicated ELEVATE verdict.
 
 ---
 
@@ -344,7 +347,7 @@ The middle narrative sections of `analysis/ELEVATE-OR-KILL.md` contain the follo
 - [x] **Every evidence cell has provenance tag** — from allowed taxonomy only
 - [x] **Objective vs Judge evidence separated** — distinct `objective_evidence` / `judge_evidence` fields
 - [x] **Ceiling labeled as ceiling, not kill** — 8 skills at ceiling
-- [x] **scientific-method sole robust ELEVATE** — exact numbers: SWE-bench, n=150, 82→91%, +9.3pp, p=0.002
+- [x] **scientific-method sole robust ELEVATE** — TWO genuinely post-edit M5 samples: fresh primary 87→93%, +5.4pp p=0.027 (n=149, m5-primary-sci, Jun 7 09:25 > SKILL.md Jun 1 06:05) + replication 82→90%, +8.0pp p=0.001 (n=150, m5-repl)
 - [x] **Collapsed leads as null/directional** — systems, five-whys-plus, red-team, fermi-estimation
 - [x] **Stale claims flagged superseded, not deleted** — run1 scorecard, mid-document ELEVATE-OR-KILL.md, SKILL-AUDIT.md
 - [x] **JSON and MD mutually consistent** — same skills, same verdicts, same numbers

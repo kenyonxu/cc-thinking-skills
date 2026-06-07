@@ -26,7 +26,7 @@
       "measured": 17,
       "unmeasured": 22
     },
-    "notes": "Stale claims from run1/scorecard.md (n=3 wins) and mid-document ELEVATE-OR-KILL.md narrative are flagged superseded, not deleted. scientific-method is the sole robust objective ELEVATE, replicated with fresh M5 sample (same direction: +9.3pp primary, +8.0pp replication, both p<0.01). M5 scrutiny fix: 4 debugging-family skills rerun on FROZEN 224-item decisive split (EVAL_RUN=m5-primary-decisive). Prior M5 runs were on wrong 150-item set.",
+    "notes": "Stale claims from run1/scorecard.md (n=3 wins) and mid-document ELEVATE-OR-KILL.md narrative are flagged superseded, not deleted. scientific-method is the sole robust objective ELEVATE, now resting on TWO genuinely post-edit M5 samples (new M5 fresh primary +5.4pp p=0.027 + existing M5 replication +8.0pp p=0.001, same direction, both p<0.05). Fix (VAL-POWERED-014): old run1 primary (+9.3pp) predated the 2026-06-01 SKILL.md rewrite and was replaced with a fresh post-edit primary run. M5 scrutiny fix: 4 debugging-family skills rerun on FROZEN 224-item decisive split (EVAL_RUN=m5-primary-decisive). Prior M5 runs were on wrong 150-item set.",
     "m5_powered_run": "m5-primary",
     "m5_powered_skills": [
       "red-team",
@@ -1197,20 +1197,20 @@
       "objective_evidence": [
         {
           "metric": "fault_localization_accuracy",
-          "dataset": "SWE-bench fault localization",
-          "n": 150,
-          "placebo": 0.82,
-          "treatment": 0.913,
-          "delta_pp": 9.3,
-          "p": 0.002,
+          "dataset": "SWE-bench fault localization (ORIGINAL frozen 150-item set)",
+          "n": 149,
+          "placebo": 0.872,
+          "treatment": 0.926,
+          "delta_pp": 5.4,
+          "p": 0.027,
           "significant": true,
           "verdict": "ELEVATE",
           "provenance": "OBJ-powered-significant",
           "temporal": "post-edit",
           "significance": "significant",
           "replicated": true,
-          "source": "evals/results/run1/swe-scientific-method-improved.json",
-          "note": "Sole robust objective ELEVATE in the program; hypothesis-differential debugging rework; p=0.002, +9.3pp, n=150. Fresh replication run in M5 confirmed same direction (+8.0pp, p=0.001, n=150)."
+          "source": "evals/results/m5-primary-sci/swe-scientific-method.json",
+          "note": "M5 FRESH post-edit PRIMARY on the ORIGINAL frozen 150-item SWE-bench set (EVAL_RUN=m5-primary-sci, CONC=4, isolation ON). Genuinely post-edit: result mtime (Jun 7 09:25) > SKILL.md mtime (Jun 1 06:05). 92.6% vs 87.2% placebo, +5.4pp, p=0.027, significant. Paired with M5 replication (+8.0pp, p=0.001) — both post-edit, same positive direction, both p<0.05. ELEVATE rests on TWO genuinely post-edit fresh samples."
         },
         {
           "metric": "fault_localization_accuracy",
@@ -1227,7 +1227,7 @@
           "significance": "significant",
           "replicated": true,
           "source": "evals/results/m5-repl/swe-scientific-method.json",
-          "note": "M5 FRESH replication on the ORIGINAL frozen 150-item SWE-bench set. Replicates prior +9.3pp in same direction: 90% vs 82% placebo, +8.0pp, p=0.001, significant. Concordant with primary — ELEVATE confirmed."
+          "note": "M5 FRESH replication on the ORIGINAL frozen 150-item SWE-bench set. Replicates M5 fresh primary (+5.4pp) in same direction: 90% vs 82% placebo, +8.0pp, p=0.001, significant. Concordant with primary — ELEVATE confirmed on TWO genuinely post-edit samples."
         }
       ],
       "judge_evidence": [
