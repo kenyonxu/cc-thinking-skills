@@ -36,6 +36,16 @@ Building/improving a product?
 - **Skip when the job is already well-established** and the open question is purely *how* to build it, not *whether/why*.
 - **Don't use it to retro-justify** a feature decision already made — that's framework theater. Use it before prioritization, to change the decision.
 
+## Trigger Card
+
+When deciding what to build or why a feature isn't adopted:
+
+1. **Identify the job** — what progress is the user trying to make in a specific situation? Frame it as "When [situation], I want to [progress]."
+2. **Map competing solutions** — what do users currently hire to get this job done? Include non-software alternatives.
+3. **Find the underserved job dimension** — where do current solutions fall short? Build for that gap.
+
+Skip if the job is already well-established and the question is purely how to build it. Don't use to retro-justify a decision already made.
+
 ## Understanding Jobs
 
 ### The Job Formula

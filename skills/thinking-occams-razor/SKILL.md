@@ -40,6 +40,16 @@ Multiple explanations exist?
 - **"Simple" would mean ignoring a known interaction or skipping a load-bearing safeguard.** Local simplicity that creates systemic risk isn't parsimony.
 - **The trigger check resolves it.** If you can test the simplest hypothesis in one step and it's confirmed, you're done — don't enumerate for completeness.
 
+## Trigger Card
+
+Before running the full enumeration-and-scoring procedure, ask one question: **"Can I test the simplest hypothesis in one step?"**
+
+1. **Identify the simplest hypothesis** — the one with the fewest assumptions that still explains the evidence.
+2. **Can you test it in one step?** → Yes → **Just test it.** If confirmed, report and stop. If refuted, move to the next simplest.
+3. **If it can't be tested in one step** → run the full Occam's Razor procedure (enumerate, count assumptions, verify explanatory power, test in order).
+
+If evidence already points to a specific cause, follow the evidence — don't downgrade to a "simpler" hypothesis it contradicts. For irreducibly complex domains (distributed consensus, concurrency), the simplest model is wrong.
+
 ## Procedure
 
 ### Trigger Check (Fast Path)

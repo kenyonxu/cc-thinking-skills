@@ -37,6 +37,16 @@ Trying to improve something?
 - **Not when the addition is genuinely required** to meet a real, demonstrated need. Via negativa fights the *reflex* to add; it doesn't forbid all addition.
 - **Don't delete to hit an aesthetic "less is more" target** without checking what each element does — confirm non-use with evidence (usage data, dead-code analysis, removing it in a branch and watching), not assumption.
 
+## Trigger Card
+
+When about to add a feature, layer, or process to fix a problem:
+
+1. **Ask: "What can I remove instead?"** — before adding, scan for something to subtract that would have the same or better effect.
+2. **Identify the highest-cost, lowest-usage candidates** — what's consuming resources (code, process, dependency) but delivering the least value?
+3. **Remove the simplest one first** — subtraction is asymmetric: removing is safer than adding because you can always add back. Test by removing it in a branch and seeing what breaks.
+
+Don't delete to hit an aesthetic target without checking what each element does — confirm non-use with evidence, not assumption. If the addition is genuinely required for a real, demonstrated need, add it — via negativa fights the reflex to add, not all addition.
+
 ## The Via Negativa Process
 
 ### Step 1: Identify What to Eliminate

@@ -31,6 +31,16 @@ Starting significant work? → yes → Plan looks solid / on track? → yes → 
 - You'd only generate generic risks ("requirements unclear", "scope creep") that don't bind to this specific plan — stop if nothing concrete surfaces.
 - The risks are already enforced by automated gates (CI, canary, rollback) — don't re-list what the system already catches.
 
+## Trigger Card
+
+Before committing to a plan or launch where optimism may be hiding risks:
+
+1. **Assume it has already failed** — "It's six months later. The project was a disaster. What happened?"
+2. **List concrete failure reasons** — specific to THIS plan, not generic. Why did it actually fail?
+3. **Mitigate the top 3-5** — for each top failure reason, add a concrete safeguard or change the plan.
+
+Skip if you'd only generate generic risks that don't bind to this specific plan. If risks are already enforced by automated gates (CI, canary, rollback), don't re-list what the system already catches. For a full launch risk review, run the full procedure.
+
 ## The Process
 
 ### Step 1: Set the Failure Frame

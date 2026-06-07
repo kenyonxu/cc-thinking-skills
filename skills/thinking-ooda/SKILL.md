@@ -25,6 +25,17 @@ Situation changing rapidly AND need to act before certainty? → yes → APPLY O
 - The action is irreversible/high-blast-radius → gather more information before acting; 70% confidence isn't enough.
 - You can cheaply and directly localize the cause (read the diff/log) → use `thinking-scientific-method` (hypothesis differential) instead of looping in the dark.
 
+## Trigger Card
+
+When under time pressure (incident, outage, debugging a moving target) and you must act before certainty:
+
+1. **Observe** — what is happening right now? Gather the cheapest, highest-signal data available.
+2. **Orient** — what does it mean given your mental model? Update the model if the data contradicts it.
+3. **Decide** — pick an action on ~70% confidence. Don't wait for 100%.
+4. **Act** — execute, then immediately re-observe. The loop is the point; speed beats precision.
+
+If the action is irreversible or high-blast-radius, gather more information before acting. If you can cheaply localize the cause (read the diff/log), use `thinking-scientific-method` instead.
+
 ## The Four Phases
 
 ### 1. OBSERVE — gather current state fast

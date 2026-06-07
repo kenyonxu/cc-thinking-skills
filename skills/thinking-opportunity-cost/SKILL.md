@@ -42,6 +42,16 @@ Making a commitment?
 - The work is mandatory (compliance, security fix, hard dependency) — there's no optional alternative to weigh.
 - You'd be inventing speculative alternatives to look rigorous — if the next-best option is clearly worse, just proceed.
 
+## Trigger Card
+
+Before committing scarce time, people, or money to one thing:
+
+1. **Name the next-best alternative** — what would these resources do if not used here? Be specific.
+2. **Compare value** — what does the primary option deliver vs. the next-best? The real cost is what you give up.
+3. **Ask: "what does doing nothing cost?"** — sometimes the cheapest option is to wait. If delaying is free, consider it.
+
+Skip if the work is mandatory (compliance, security fix, hard dependency) — there's no optional alternative. If the next-best option is clearly worse, don't manufacture alternatives to look rigorous.
+
 ## The Opportunity Cost Framework
 
 ### Step 1: Identify the Choice

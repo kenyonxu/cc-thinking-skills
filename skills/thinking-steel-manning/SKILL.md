@@ -43,6 +43,16 @@ This skill is the direct counter to **sycophancy** — the pull to validate what
 - **Trivial or fully reversible choices** where the cost of being wrong is near zero — the deliberation isn't worth the budget.
 - **An emergency requiring immediate action** — steel-man the post-incident review, not the live fire.
 
+## Trigger Card
+
+Before rejecting a proposal or when you're inclined to just agree with the user:
+
+1. **State the opposing case in its strongest form** — not the version that's easy to knock down. What would its best advocate say?
+2. **Find what's actually true in it** — even if you reject the conclusion, what valid insight or concern does it surface?
+3. **Engage that strongest version** — respond to what was actually claimed, not a weak version. If your position still holds, great; if not, update.
+
+Skip for trivial or fully reversible choices where the cost of being wrong is near zero. In an emergency, steel-man the post-incident review, not the live fire.
+
 ## The Steel-Manning Process
 
 ### Step 1: Understand the Original Argument

@@ -38,6 +38,16 @@ Defect is selective (not 100%)? → No → IS/IS-NOT has no signal; use direct d
 - **Pure decision-making with no deviation to diagnose** — use `thinking-opportunity-cost`, not KT's Decision Analysis.
 - **Risk assessment for a planned change** — use `thinking-pre-mortem`, not KT's Potential Problem Analysis.
 
+## Trigger Card
+
+When a defect is selective (some cases affected, others not) and the cause is unclear:
+
+1. **State the problem precisely** — what is the deviation? In what object? Where/when does it occur?
+2. **Map IS vs IS-NOT** — what IS affected vs what IS NOT, side by side. The boundary is the signal.
+3. **Find the distinction** — what is different about the IS cases vs the IS-NOT cases? That distinction IS the cause.
+
+Skip if the failure is uniform (100%) — there's no boundary to contrast; use direct debugging. If the cause is obvious from a stack trace or recent change, just fix it. For a single cheaply-testable hypothesis, test it first.
+
 ## Procedure
 
 ### Step 1 (optional): Situation Analysis — Triage Multiple Concerns

@@ -36,6 +36,16 @@ Decision to make?
 - The decision is being forced by a hard external constraint (deadline, contract, regulation) with no real optionality — reversibility doesn't change the available move.
 - An irreversible action is genuinely required and the upside justifies it — name it, accept it, and proceed deliberately rather than stalling.
 
+## Trigger Card
+
+Before deliberating over a decision:
+
+1. **Classify the door** — is it one-way (costly to undo) or two-way (cheap to undo)? If you're not sure, it's probably one-way.
+2. **Two-way door?** → Decide fast. The cost of delay exceeds the cost of a wrong choice you can reverse.
+3. **One-way door?** → Ask: can I make it more reversible? (Feature flag, canary, small rollout, decouple the irreversible part.) Then deliberate — but only on what's actually irreversible.
+
+If the decision is forced by an external constraint with no optionality, reversibility doesn't change the available move. If an irreversible action is genuinely required and the upside justifies it, name it and proceed.
+
 ## Type 1 vs Type 2 Decisions
 
 ### Type 1: One-Way Doors

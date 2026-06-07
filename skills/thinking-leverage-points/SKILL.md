@@ -29,6 +29,16 @@ Want to change system behavior?
 - A single low-level parameter genuinely is the fix (e.g., a wrong timeout value) → just change it; don't manufacture a paradigm shift.
 - The decision is a one-off with no system behind it → this hierarchy adds nothing.
 
+## Trigger Card
+
+When tuning parameters keeps not sticking and you need to pick where to intervene:
+
+1. **Identify the system goal** — what is the system trying to do? This is the highest-leverage point.
+2. **Scan the hierarchy top-down** — from goals/rules/power down to parameters. Don't start at the bottom.
+3. **Intervene at the highest feasible point** — pick the highest-leverage point you can actually change, not the easiest.
+
+If a single low-level parameter genuinely is the fix (wrong timeout value), just change it. If there's no system behind the decision, skip — this hierarchy adds nothing.
+
 ## The 12 Leverage Points (Low to High)
 
 ### Level 12: Constants and Parameters (LOWEST LEVERAGE)

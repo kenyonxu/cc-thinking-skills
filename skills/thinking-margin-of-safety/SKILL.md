@@ -38,6 +38,16 @@ Provisioning, setting a limit, or committing an estimate?
 - **You can eliminate the uncertainty instead of padding it.** If the real number is measurable or lookup-able, get it — a measured value beats a padded guess. (Margin covers *residual* uncertainty, not laziness about checking.)
 - **This is a stopping-criterion problem, not a buffer problem.** If the question is "how long do I keep searching/optimizing?", that's `thinking-bounded-rationality` (set a good-enough threshold), not margin. *Margin sizes the buffer on a number; bounded-rationality decides when to stop looking for the number.*
 
+## Trigger Card
+
+When provisioning capacity, setting a limit, or committing to an estimate under uncertainty:
+
+1. **Estimate the base number** — what's your best estimate without padding?
+2. **Assess the cost of being wrong** — if you undershoot, what breaks and how badly? The higher the cost, the larger the margin.
+3. **Size the buffer to the uncertainty** — add enough margin that the worst plausible miss doesn't cause a catastrophe. Commit with the buffered number.
+
+If you can eliminate the uncertainty by measuring or looking up the real number, do that instead — a measured value beats a padded guess. If the question is "when do I stop searching?", that's `thinking-bounded-rationality`, not margin.
+
 ## The Margin of Safety Framework
 
 ### Step 1: Identify Your Estimate

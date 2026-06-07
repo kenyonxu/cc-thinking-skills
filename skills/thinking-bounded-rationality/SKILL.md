@@ -36,6 +36,16 @@ Search/investigation that could run indefinitely? → yes → Is closing the gap
 - **The answer is cheaply knowable** — if one more grep or a single file read would settle it definitively, just do it; don't satisfice your way past a quick fact.
 - **The threshold can't be stated** — if you can't articulate what "good enough" means, you can't satisfice responsibly; clarify the requirement first.
 
+## Trigger Card
+
+When a search or investigation could run indefinitely and you need to ship:
+
+1. **Set an explicit aspiration level** — what does "good enough" look like? Define a concrete, measurable threshold.
+2. **Search sequentially** — evaluate options one at a time in the order you encounter them. Do not enumerate exhaustively.
+3. **Stop at the first option that clears the threshold.** Commit and move on.
+
+If the threshold can't be articulated or the cost of a wrong choice is catastrophic, don't satisfice — run the full procedure. For a single cheaply-knowable fact, just look it up.
+
 ## The Three Constraints
 
 ### 1. Information Bounds

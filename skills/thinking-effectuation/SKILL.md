@@ -36,6 +36,16 @@ Facing uncertainty about outcomes?
 - **For predictable markets with a known model, use causal planning instead.** If the market exists, the unit economics are knowable, and the path is a known sequence of steps, set the goal and plan to it — effectuation's "let goals emerge" wastes time you don't need to spend exploring.
 - **Not when the cost of a wrong action exceeds affordable loss.** Effectuation assumes you can afford to act-and-learn; if a single misstep is ruinous, plan and de-risk first.
 
+## Trigger Card
+
+When starting a new initiative in an uncertain domain where planning is unreliable:
+
+1. **Inventory your means** — who you are, what you know, who you know. Start from what's available, not from a distant goal.
+2. **Take an affordable-loss step** — what can you act on now where the downside is survivable if it fails? Act; don't plan.
+3. **Co-create with committed partners** — find stakeholders willing to make real commitments, then let the direction emerge from their input.
+
+If the market and path are predictable, use causal planning instead. If a single misstep is ruinous, de-risk before acting.
+
 ## Causal vs Effectual Reasoning
 
 ### Causal (Traditional)

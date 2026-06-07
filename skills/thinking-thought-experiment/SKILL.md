@@ -35,6 +35,16 @@ Need to understand how something behaves?
 - **If you can cheaply test or measure it, test it.** A thought experiment is a substitute for empiricism, not a replacement — a load test, a feature flag, a query against real data, or a quick spike beats imagined consequences every time. Reach for this skill only when the real experiment is genuinely out of reach.
 - **For adversarial "how would an attacker break this" analysis, use thinking-red-team** — it has the structured attack-surface and findings format. Don't reinvent it here.
 
+## Trigger Card
+
+When you need to trace how a system would behave at a scale you can't cheaply test:
+
+1. **Define the scenario precisely** — what changed? What's different from normal operation? Set initial conditions.
+2. **Walk the consequence chain step by step** — given these conditions, what does the system do next? Then what? Then what? Be mechanistic, not hand-wavy.
+3. **Derive what you'd need to check** — what observation would confirm or refute this chain? If you can test one link cheaply, test it.
+
+If you can cheaply test or measure the real thing (load test, feature flag, query against real data), do that instead — a thought experiment is a substitute for empiricism, not a replacement. For adversarial "how would an attacker break this" analysis, use `thinking-red-team`.
+
 ## Types of Thought Experiments
 
 ### 1. The Hypothetical Scenario

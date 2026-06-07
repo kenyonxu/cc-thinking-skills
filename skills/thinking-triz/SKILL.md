@@ -36,6 +36,16 @@ Two requirements seem mutually exclusive?
 - **Non-technical or people problems.** Separation principles target system parameters, not organizational dynamics or interpersonal conflicts.
 - **The contradiction is already well-solved by standard patterns.** If there's an established pattern (cache-aside, CQRS, feature flags), apply the pattern directly.
 
+## Trigger Card
+
+When stuck between two architecture or API requirements that seem mutually exclusive:
+
+1. **Name the contradiction precisely** — "We need [PARAMETER A] to be [STATE 1] for [BENEFIT 1] BUT also [STATE 2] for [BENEFIT 2]." If you can't write it in this form, it's not a TRIZ problem.
+2. **Try separation** — can you satisfy state 1 at one TIME and state 2 at another? In different SPACES (components, layers)? Under different CONDITIONS (context, load, user)?
+3. **Test the simplest separation first** — separate in time (feature flags, scheduled behavior) before space (separate services) before condition.
+
+If one option is simply better given your constraints, just pick it. If you can cheaply test which side actually matters, test instead of designing a separation. For standard patterns (cache-aside, CQRS, feature flags), apply the pattern directly.
+
 ## Procedure
 
 ### Step 1: Name the Contradiction Precisely
