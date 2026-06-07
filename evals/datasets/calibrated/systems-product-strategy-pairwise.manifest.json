@@ -1,6 +1,8 @@
 {
   "family": "Systems/product/strategy pairwise",
   "family_key": "systems-product-strategy-pairwise",
+  "aggregate_governed": true,
+  "aggregate_governed_rationale": "Binary classification; per-item baselines are necessarily 0%/100%; powerability governed by aggregate baseline + paired McNemar (which ignores concordant both-correct ceiling pairs, so ceiling items cannot inflate positive lift; floor items are the discriminative set); aggregate baseline 57.4% = in-band/poweable",
   "skills": [
     "archetypes",
     "feedback-loops",
