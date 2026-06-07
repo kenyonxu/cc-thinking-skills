@@ -1,5 +1,8 @@
 # Skill Audit + Best Practices + Scope/Domain Recommendations
 
+> **⚠️ SUPERSEDED — 2026-06-07 (Elevate-or-Kill M5 outcome)**
+> This audit was written BEFORE the M5 powered runs. Several of its key dispositions are superseded by powered evidence. The canonical scorecard at `analysis/ELEVATE-OR-KILL-SCORECARD.md` is the authoritative source for current verdicts. See `analysis/STALE-CLAIM-CLEANUP.md` for the full cleanup notes. **The best-practices rubric remains useful; per-skill dispositions are superseded where contradicted by powered evidence.** The "Consolidation map (39 → ~26)" section is obsolete — a new evidence-based consolidation plan exists at `analysis/FUTURE-CONSOLIDATION-PLAN.md`.
+
 Audit of all 39 skills against an evidence-grounded best-practices rubric, with a scope/domain disposition for each — built on this session's eval verdicts (`ELEVATE-OR-KILL.md`), the adversarial review (`ADVERSARIAL-SYNTHESIS.md`), and the harness-isolation findings.
 
 ## Skill best practices (the rubric, derived from what actually moved the needle)

@@ -13,7 +13,7 @@ A comprehensive collection of thinking skills for [Claude Code](https://claude.a
 ## Features
 
 - **39 Thinking Frameworks** - Comprehensive mental models for better decision-making
-- **Eval-Informed** - Includes an isolated evaluation harness and evidence notes for elevate/kill decisions
+- **Eval-Informed** - Backed by a rigorous replication-gated evaluation pipeline (see [Elevate-or-Kill Scorecard](analysis/ELEVATE-OR-KILL-SCORECARD.md))
 - **Battle-Tested Foundations** - Based on proven frameworks from cognitive science and systems thinking
 - **Claude Code Native** - Designed specifically for Claude Code's skill system
 - **Quality Scripts** - Tools to validate and enhance skill quality
@@ -157,7 +157,7 @@ The `evals/` and `experiments/` directories contain the current outcome-based ha
 - **Objective SWE-bench localization evals** for debugging skills
 - **SQLite dashboard** for reviewing eval and experiment results
 
-Current evidence is documented in `analysis/ELEVATE-OR-KILL.md`. The strongest post-improvement result is `thinking-scientific-method`, now implemented as hypothesis-differential debugging: SWE-bench fault localization improved from a flat original to **+9.3pp, p=0.002** after the agent-native rewrite. Other debugging skills need careful revalidation after trimming; do not treat old pre-trim results as current.
+Current evidence is documented in the [Elevate-or-Kill Scorecard](analysis/ELEVATE-OR-KILL-SCORECARD.md) (canonical single source of truth for all 39 skills) and the [Executive Synthesis](analysis/ELEVATE-OR-KILL-SYNTHESIS.md). The mission's headline result: **zero skills currently hold a robust, replicated ELEVATE verdict.** `thinking-scientific-method` (hypothesis-differential debugging) is the closest candidate: its M5 fresh primary scored +5.3pp (p=0.061, n=150, directional) and its replication was significant (+8.0pp, p=0.001), but the primary's borderline p-value fails the paired-test gate — final verdict DIRECTIONAL-NOT-REPLICATED. A pre-registered larger-N study is recommended as future work. All 39 skills remain shipped; no directories were removed. See `analysis/ELEVATE-OR-KILL-SYNTHESIS.md` for the full executive summary and `analysis/FUTURE-CONSOLIDATION-PLAN.md` for a proposed (unexecuted) consolidation plan.
 
 ### Validate Skills
 

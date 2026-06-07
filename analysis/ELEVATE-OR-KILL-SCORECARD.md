@@ -10,7 +10,7 @@
 
 | Tag | Meaning |
 |-----|---------|
-| `OBJ-powered-significant` | Objective ground-truth run, powered (n≥150), p<0.05, replicated direction |
+| `OBJ-powered-significant` | Objective ground-truth run, powered (n≥150), p<0.05 (may be a standalone replication run; does NOT imply the skill-level verdict is replicated) |
 | `OBJ-powered-null` | Objective powered run, no significant effect (p≥0.05) |
 | `OBJ-powered-directional` | Objective powered run, directional effect (same sign) but p≥0.05 |
 | `OBJ-small-ceiling` | Small-N objective run, placebo at ceiling (90–100%), no headroom |
@@ -19,7 +19,7 @@
 | `judge-only-n3-superseded` | Judge-based behavioral eval (n=3–9 per skill), superseded by later evidence |
 | `unmeasured` | No objective ground-truth run exists |
 
-**Temporal/Significance Qualifiers:** `pre-edit` / `post-edit`, `directional` / `significant` / `null`, `replicated: true/false`
+**Temporal/Significance Qualifiers:** `pre-edit` / `post-edit`, `directional` / `significant` / `null`, `replicated: false` (no skill-level ELEVATE verdict currently meets the replication gate; individual evidence rows may carry a significant replication signal that does not rescue a failed primary)
 
 ---
 

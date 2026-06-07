@@ -63,6 +63,12 @@ The native-domain run **nuances the earlier "no objective lift" finding**: in th
 
 **Synthesis across all Phase-4 evidence:** the thinking skills add (a) a modest *significant* lift on **open-ended in-domain reasoning** (pairwise 63%, p=0.015), (b) a *consistent directional* lift on **objective native-domain debugging** (+4–9pp, ns at n=45), and (c) **nothing** out-of-domain or where the model is already at ceiling. The value is real but small and **entirely conditional on domain-fit** — supporting situation-named descriptions, trigger-only delivery for redundant skills, and rework/kill for the consistently-flat ones (`scientific-method`, `fermi-estimation`).
 
+> **⚠️ SUPERSEDED MID-DOCUMENT NARRATIVE — 2026-06-07 (Elevate-or-Kill M5 outcome)**
+> The following sections (★ through ★★★) contain ELEVATE claims that have been overturned by powered replication evidence. These sections are retained for historical provenance only. The CURRENT verdicts are documented in `analysis/ELEVATE-OR-KILL-SCORECARD.md`. See `analysis/STALE-CLAIM-CLEANUP.md` for the full cleanup notes.
+> **Only the final two sections (★ Wave C replication failure + ★★★★★ Powered confirmation collapse) and the final program verdict are current.**
+>
+> Key overturned claims below: `systems` +5.3pp p=0.043 was not replicated (−1.3pp p=0.683); `five-whys-plus` +4.0pp p=0.041 was not replicated (+1.3pp p=0.752); the "trimming regression" lesson is retracted (both original and trimmed were noise draws); `scientific-method` +9.3pp p=0.002 was the old run1 primary (superseded by M5 fresh primary +5.3pp p=0.061 — DIRECTIONAL-NOT-REPLICATED).
+
 ## ★ FIRST SIGNIFICANT VERDICT — thinking-systems = ELEVATE
 Powered SWE-bench fault localization, n=150, isolated, length-controlled:
 **placebo 80% → skill 85%, Δ+5.3pp, McNemar p=0.043 (SIGNIFICANT).** 12 discordant pairs.
