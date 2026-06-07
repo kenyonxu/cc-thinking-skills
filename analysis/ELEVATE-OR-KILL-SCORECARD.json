@@ -1221,13 +1221,13 @@
           "delta_pp": 8,
           "p": 0.001,
           "significant": true,
-          "verdict": "ELEVATE",
+          "verdict": "SIGNIFICANT-REPLICATION-SIGNAL",
           "provenance": "OBJ-powered-significant",
           "temporal": "post-edit",
           "significance": "significant",
-          "replicated": true,
+          "replicated": false,
           "source": "evals/results/m5-repl/swe-scientific-method.json",
-          "note": "M5 FRESH replication on the ORIGINAL frozen 150-item SWE-bench set. Replicates M5 fresh primary (+5.4pp) in same direction: 90% vs 82% placebo, +8.0pp, p=0.001, significant. Concordant with primary — ELEVATE confirmed on TWO genuinely post-edit samples."
+          "note": "M5 FRESH replication on the ORIGINAL frozen 150-item SWE-bench set. Successfully replicates the M5 fresh primary (+5.3pp) in the same positive direction: 90% vs 82% placebo, +8.0pp, p=0.001, significant. This is a strong replication SIGNAL confirming the directional effect is real. However, the overall skill verdict remains DIRECTIONAL-NOT-REPLICATED because the full-n=150 PRIMARY (+5.3pp, p=0.061) failed the p<0.05 decision gate — per architecture rules, BOTH primary AND replication must pass for ELEVATE."
         }
       ],
       "judge_evidence": [
@@ -1243,7 +1243,7 @@
           "n": 9,
           "source": "evals/results/run1/tier3-behavioral.json",
           "superseded": true,
-          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; this skill is the only one with objective ELEVATE"
+          "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; this skill was the closest to objective ELEVATE but downgraded to DIRECTIONAL-NOT-REPLICATED (primary +5.3pp p=0.061 fails gate)"
         }
       ],
       "verdict": "directional-not-replicated",

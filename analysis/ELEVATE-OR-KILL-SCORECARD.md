@@ -227,7 +227,7 @@
 | `red-team` | 67% | +1 | proven | superseded (powered directional) |
 | `regret-minimization` | 0% | −3 | regresses | superseded |
 | `reversibility` | 67% | +1 | proven | superseded (ceiling) |
-| `scientific-method` | 67% | +1 | proven | superseded (robust ELEVATE) |
+| `scientific-method` | 67% | +1 | proven | superseded (directional-not-replicated) |
 | `second-order` | 67% | +1 | proven | superseded (powered null) |
 | `socratic` | 67% | +1 | proven | superseded (ceiling, Tier 1 flagged) |
 | `steel-manning` | 67% | +1 | proven | superseded |
