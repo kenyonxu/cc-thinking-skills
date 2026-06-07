@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-06-06T00:00:00Z",
+    "generated": "2026-06-07T05:00:00Z",
     "source_documents": [
       "analysis/EVAL-COVERAGE.md",
       "analysis/ELEVATE-OR-KILL.md (final two sections only)",
@@ -26,11 +26,42 @@
       "measured": 17,
       "unmeasured": 22
     },
-    "notes": "Stale claims from run1/scorecard.md (n=3 wins) and mid-document ELEVATE-OR-KILL.md narrative are flagged superseded, not deleted. scientific-method is the sole robust objective ELEVATE."
+    "notes": "Stale claims from run1/scorecard.md (n=3 wins) and mid-document ELEVATE-OR-KILL.md narrative are flagged superseded, not deleted. scientific-method is the sole robust objective ELEVATE.",
+    "m5_powered_run": "m5-primary",
+    "m5_powered_skills": [
+      "red-team",
+      "occams-razor",
+      "five-whys-plus",
+      "systems",
+      "archetypes",
+      "map-territory",
+      "kepner-tregoe"
+    ],
+    "m5_powered_count": 7,
+    "m5_powered_solver": "claude-sonnet-4-6",
+    "m5_powered_conc": 4
   },
   "skills": {
     "archetypes": {
-      "objective_evidence": [],
+      "objective_evidence": [
+        {
+          "metric": "binary_decision_accuracy",
+          "dataset": "Systems/product/strategy pairwise decisive split (117 items: 42 target bottleneck/margin-of-safety, 29 near-miss, 46 distractor)",
+          "n": 117,
+          "placebo": 0.72,
+          "treatment": 0.73,
+          "delta_pp": 0.9,
+          "p": 1,
+          "significant": false,
+          "verdict": "NO-LIFT",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/m5-primary/binary-archetypes.json",
+          "note": "M5 powered run on systems-product-strategy-pairwise decisive split (aggregate baseline 57.4% — in-band). In-band quarantine candidate given a fair calibrated chance. +0.9pp over placebo not significant. Target-only: 88% vs 88% (Δ0pp, p=0.479). Distractor FPR: 36% with skill vs 37% placebo (trivially better). No lift detected."
+        }
+      ],
       "judge_evidence": [
         {
           "metric": "behavioral_win_rate",
@@ -47,9 +78,10 @@
           "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded; judge-only n=9, no objective formulation"
         }
       ],
-      "verdict": "unmeasured",
-      "eval_family": "Conceptual reframes",
-      "value_surface": "paired reasoning quality"
+      "verdict": "no-lift",
+      "eval_family": "Systems/product/strategy pairwise",
+      "value_surface": "paired reasoning quality",
+      "powered_run": "OBJ-powered-null"
     },
     "bayesian": {
       "objective_evidence": [
@@ -444,6 +476,23 @@
           "replicated": false,
           "source": "evals/results/run1/swe-five-whys-plus.json",
           "note": "Earlier n=45 run; directional only"
+        },
+        {
+          "metric": "fault_localization_accuracy",
+          "dataset": "SWE-bench fault localization (decisive split, 150 items)",
+          "n": 150,
+          "placebo": 0.84,
+          "treatment": 0.84,
+          "delta_pp": 0,
+          "p": 0.752,
+          "significant": false,
+          "verdict": "NO-LIFT",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/m5-primary/swe-five-whys-plus.json",
+          "note": "M5 powered run with M4-reworked skill. No lift over placebo on SWE-bench fault localization. Confirms previous replication failure."
         }
       ],
       "judge_evidence": [
@@ -464,7 +513,8 @@
       ],
       "verdict": "no-lift",
       "eval_family": "Debugging/fault-localization",
-      "value_surface": "localization"
+      "value_surface": "localization",
+      "powered_run": "OBJ-powered-null"
     },
     "inversion": {
       "objective_evidence": [],
@@ -511,7 +561,27 @@
       "value_surface": "paired reasoning quality"
     },
     "kepner-tregoe": {
-      "objective_evidence": [],
+      "objective_evidence": [
+        {
+          "metric": "fault_localization_accuracy",
+          "dataset": "SWE-bench fault localization (decisive split, 150 items)",
+          "n": 150,
+          "placebo": 0.81,
+          "treatment": 0.84,
+          "delta_pp": 2.7,
+          "p": 0.289,
+          "significant": false,
+          "verdict": "NO-LIFT",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/m5-primary/swe-kepner-tregoe.json",
+          "note": "EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface). M5 powered run with M4-reworked skill. kepner-tregoe's true value surface is paired-reasoning quality, not fault localization. +2.7pp over placebo not significant; this is NOT recorded as an honest kill — the eval surface does not match the skill's native value surface. Contract eval_family is Debugging/fault-localization which MISMATCHES the skill's paired reasoning quality value surface.",
+          "exploratory": true,
+          "exploratory_reason": "surface-mismatch: powered on fault-localization, not native surface (paired-reasoning quality)"
+        }
+      ],
       "judge_evidence": [
         {
           "metric": "behavioral_win_rate",
@@ -528,9 +598,12 @@
           "note": "Run1 scorecard n=3 win claim superseded; audit recommends split (PA for debugging, retire DA/PPA)"
         }
       ],
-      "verdict": "unmeasured",
+      "verdict": "no-lift",
       "eval_family": "Debugging/fault-localization",
-      "value_surface": "paired reasoning quality"
+      "value_surface": "paired reasoning quality",
+      "powered_run": "OBJ-powered-null",
+      "exploratory": true,
+      "exploratory_reason": "surface-mismatch: powered on fault-localization, not native surface (paired-reasoning quality)"
     },
     "leverage-points": {
       "objective_evidence": [],
@@ -593,6 +666,25 @@
           "significance": "null",
           "replicated": false,
           "source": "evals/results/rerun/map-territory-verify.json"
+        },
+        {
+          "metric": "fault_localization_accuracy",
+          "dataset": "SWE-bench fault localization (decisive split, 150 items)",
+          "n": 150,
+          "placebo": 0.84,
+          "treatment": 0.87,
+          "delta_pp": 2.7,
+          "p": 0.221,
+          "significant": false,
+          "verdict": "NO-LIFT",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/m5-primary/swe-map-territory.json",
+          "note": "EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface). M5 powered run with M4-reworked skill. map-territory's true value surface is routing/discoverability, not fault localization. +2.7pp over placebo not significant; this is NOT recorded as an honest kill — the eval surface does not match the skill's native value surface. Contract eval_family is Debugging/fault-localization which MISMATCHES the skill's routing/discoverability value surface.",
+          "exploratory": true,
+          "exploratory_reason": "surface-mismatch: powered on fault-localization, not native surface (routing/discoverability)"
         }
       ],
       "judge_evidence": [
@@ -611,9 +703,12 @@
           "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded"
         }
       ],
-      "verdict": "ceiling",
-      "eval_family": "Routing/abstention",
-      "value_surface": "routing/discoverability"
+      "verdict": "no-lift",
+      "eval_family": "Debugging/fault-localization",
+      "value_surface": "routing/discoverability",
+      "powered_run": "OBJ-powered-null",
+      "exploratory": true,
+      "exploratory_reason": "surface-mismatch: powered on fault-localization, not native surface (routing/discoverability)"
     },
     "margin-of-safety": {
       "objective_evidence": [
@@ -754,6 +849,23 @@
           "replicated": false,
           "source": "evals/results/run1/swe-occams-razor-improved.json",
           "note": "Trigger-scoped rework did not move needle"
+        },
+        {
+          "metric": "fault_localization_accuracy",
+          "dataset": "SWE-bench fault localization (decisive split, 150 items)",
+          "n": 150,
+          "placebo": 0.8,
+          "treatment": 0.85,
+          "delta_pp": 4.7,
+          "p": 0.096,
+          "significant": false,
+          "verdict": "NO-LIFT",
+          "provenance": "OBJ-powered-directional",
+          "temporal": "post-edit",
+          "significance": "directional",
+          "replicated": false,
+          "source": "evals/results/m5-primary/swe-occams-razor.json",
+          "note": "M5 powered run with M4-reworked skill. +4.7pp directional improvement over placebo but p=0.096 (not significant) and below 5pp threshold. Prior run1 gave +2.0pp p=0.505."
         }
       ],
       "judge_evidence": [
@@ -772,9 +884,10 @@
           "note": "Run1 scorecard n=3 win claim superseded; audit recommends TRIGGER-ONLY"
         }
       ],
-      "verdict": "directional, not confirmed",
+      "verdict": "directional-not-replicated",
       "eval_family": "Debugging/fault-localization",
-      "value_surface": "paired reasoning quality"
+      "value_surface": "paired reasoning quality",
+      "powered_run": "OBJ-powered-directional"
     },
     "ooda": {
       "objective_evidence": [],
@@ -899,6 +1012,23 @@
           "replicated": false,
           "source": "evals/results/confirm/redteam-diversevul-balanced-n200.json",
           "note": "Powered confirmation at n=200; +11.3pp at n=80 collapsed to +5.0pp p=0.10"
+        },
+        {
+          "metric": "vulnerability_detection_accuracy",
+          "dataset": "Security/adversarial decisive split (70 items: diverse CWE, near-miss safe, distractors)",
+          "n": 70,
+          "placebo": 0.43,
+          "treatment": 0.44,
+          "delta_pp": 1.4,
+          "p": 1,
+          "significant": false,
+          "verdict": "NO-LIFT",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/m5-primary/redteam-security-decisive.json",
+          "note": "M5 powered run with M4-reworked skill on harder diverse-CWE decisive split (baseline 43% — in-band headroom). +1.4pp over placebo not significant. Prior +5.0pp at n=200 p=0.10 on easier diversevul-balanced pool did not replicate on harder items."
         }
       ],
       "judge_evidence": [
@@ -917,9 +1047,10 @@
           "note": "Mid-document ELEVATE-OR-KILL.md pooled 63% ELEVATE claim superseded"
         }
       ],
-      "verdict": "directional-not-replicated",
+      "verdict": "no-lift",
       "eval_family": "Security/adversarial",
-      "value_surface": "false-positive reduction"
+      "value_surface": "false-positive reduction",
+      "powered_run": "OBJ-powered-null"
     },
     "regret-minimization": {
       "objective_evidence": [],
@@ -1191,6 +1322,23 @@
           "replicated": false,
           "source": "evals/results/run1/swe-systems.json",
           "note": "n=45 native domain run; directional only"
+        },
+        {
+          "metric": "fault_localization_accuracy",
+          "dataset": "SWE-bench fault localization (decisive split, 150 items)",
+          "n": 150,
+          "placebo": 0.83,
+          "treatment": 0.84,
+          "delta_pp": 1.3,
+          "p": 0.724,
+          "significant": false,
+          "verdict": "NO-LIFT",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/m5-primary/swe-systems.json",
+          "note": "M5 powered run with M4-reworked skill. +1.3pp over placebo not significant. Confirms previous replication failure."
         }
       ],
       "judge_evidence": [
@@ -1211,7 +1359,8 @@
       ],
       "verdict": "no-lift",
       "eval_family": "Debugging/fault-localization",
-      "value_surface": "localization"
+      "value_surface": "localization",
+      "powered_run": "OBJ-powered-null"
     },
     "theory-of-constraints": {
       "objective_evidence": [

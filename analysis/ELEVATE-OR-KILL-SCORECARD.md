@@ -44,8 +44,21 @@
 | circle-of-competence | SelfAware (abstention) | 70 | 70% → 70% | 0 | 0.77 | no calibration benefit | `routing/abstention-null` |
 | bayesian | authored base-rate | 40 | 98% → 100% | +2 | 1.0 | ceiling | `OBJ-small-ceiling` |
 | debiasing | authored bias | 40 | 100% → 98% | −2 | 1.0 | ceiling | `OBJ-small-ceiling` |
+| **M5: red-team (reworked)** | Security decisive (CWEs) | 70 | 43% → 44% | +1.4 | 1.0 | NO-LIFT (post-edit) | `OBJ-powered-null` |
+| **M5: five-whys-plus (reworked)** | SWE-bench | 150 | 84% → 84% | 0 | 0.752 | NO-LIFT (post-edit) | `OBJ-powered-null` |
+| **M5: systems (reworked)** | SWE-bench | 150 | 83% → 84% | +1.3 | 0.724 | NO-LIFT (post-edit) | `OBJ-powered-null` |
+| **M5: occams-razor (reworked)** | SWE-bench | 150 | 80% → 85% | +4.7 | 0.096 | directional, NO-LIFT | `OBJ-powered-directional` |
+| **M5: map-territory (reworked)** ⚠️ | SWE-bench | 150 | 84% → 87% | +2.7 | 0.221 | NO-LIFT (exploratory) | `OBJ-powered-null` |
+| **M5: kepner-tregoe (reworked)** ⚠️ | SWE-bench | 150 | 81% → 84% | +2.7 | 0.289 | NO-LIFT (exploratory) | `OBJ-powered-null` |
+| **M5: archetypes (quarantine)** | Systems decisive (binary) | 117 | 72% → 73% | +0.9 | 1.0 | NO-LIFT (post-edit) | `OBJ-powered-null` |
 
-**Total objectively measured: 17 / 39 skills**  
+⚠️ **map-territory** and **kepner-tregoe**: Tagged `exploratory: surface-mismatch (powered on fault-localization, not native surface)`. Their eval_family is Debugging/fault-localization (SWE-bench), which MISMATCHES their true value surfaces (routing/discoverability and paired-reasoning quality respectively). A no-lift here is NOT recorded as an honest kill.
+
+⚠️ **archetypes**: In-band quarantine candidate (aggregate baseline 57.4%) given a fair calibrated chance on the systems-product-strategy-pairwise decisive split. No lift detected.
+
+**M5 powered run:** solver `claude-sonnet-4-6`, CONC=4, isolation ON, EVAL_RUN=m5-primary. All 7 results are post-edit (run after M4 skill reworks). No skill passed the primary gate (≥5pp + p<0.05), so no replications were triggered.
+
+**Total objectively measured: 17 (+7 M5 powered = 24 with post-edit evidence) / 39 skills**  
 **Unmeasured (judge-only / thin / leakage-blocked / meta): 22 skills**
 
 ---
