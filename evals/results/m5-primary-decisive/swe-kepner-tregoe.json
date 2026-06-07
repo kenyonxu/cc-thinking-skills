@@ -1,0 +1,22 @@
+{
+  "mode": "swe-localize",
+  "skill": "kepner-tregoe",
+  "solver": "claude-sonnet-4-6",
+  "n": 223,
+  "dataset_path": "/Users/tjboudreaux/Sandbox/cc-thinking-skills/evals/datasets/calibrated/debugging-fault-localization-decisive.jsonl",
+  "acc_with_skill": 0.578,
+  "acc_with_skill_ci": [
+    0.513,
+    0.641
+  ],
+  "acc_placebo": 0.596,
+  "acc_placebo_ci": [
+    0.531,
+    0.659
+  ],
+  "delta_pp": -1.8,
+  "mcnemar_p": 0.221,
+  "significant": false,
+  "discordant": 6,
+  "provenance": "exploratory: surface-mismatch (powered on fault-localization, not native surface)"
+}

@@ -1,0 +1,21 @@
+{
+  "mode": "swe-localize",
+  "skill": "occams-razor",
+  "solver": "claude-sonnet-4-6",
+  "n": 223,
+  "dataset_path": "/Users/tjboudreaux/Sandbox/cc-thinking-skills/evals/datasets/calibrated/debugging-fault-localization-decisive.jsonl",
+  "acc_with_skill": 0.587,
+  "acc_with_skill_ci": [
+    0.522,
+    0.65
+  ],
+  "acc_placebo": 0.587,
+  "acc_placebo_ci": [
+    0.522,
+    0.65
+  ],
+  "delta_pp": 0,
+  "mcnemar_p": 0.683,
+  "significant": false,
+  "discordant": 6
+}

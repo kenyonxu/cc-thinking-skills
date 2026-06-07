@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-06-07T05:00:00Z",
+    "generated": "2026-06-07T08:00:00Z",
     "source_documents": [
       "analysis/EVAL-COVERAGE.md",
       "analysis/ELEVATE-OR-KILL.md (final two sections only)",
@@ -26,7 +26,7 @@
       "measured": 17,
       "unmeasured": 22
     },
-    "notes": "Stale claims from run1/scorecard.md (n=3 wins) and mid-document ELEVATE-OR-KILL.md narrative are flagged superseded, not deleted. scientific-method is the sole robust objective ELEVATE, replicated with fresh M5 sample (same direction: +9.3pp primary, +8.0pp replication, both p<0.01).",
+    "notes": "Stale claims from run1/scorecard.md (n=3 wins) and mid-document ELEVATE-OR-KILL.md narrative are flagged superseded, not deleted. scientific-method is the sole robust objective ELEVATE, replicated with fresh M5 sample (same direction: +9.3pp primary, +8.0pp replication, both p<0.01). M5 scrutiny fix: 4 debugging-family skills rerun on FROZEN 224-item decisive split (EVAL_RUN=m5-primary-decisive). Prior M5 runs were on wrong 150-item set.",
     "m5_powered_run": "m5-primary",
     "m5_powered_skills": [
       "red-team",
@@ -39,7 +39,15 @@
     ],
     "m5_powered_count": 7,
     "m5_powered_solver": "claude-sonnet-4-6",
-    "m5_powered_conc": 4
+    "m5_powered_conc": 4,
+    "m5_decisive_run": "m5-primary-decisive",
+    "m5_decisive_skills": [
+      "five-whys-plus",
+      "occams-razor",
+      "kepner-tregoe",
+      "map-territory"
+    ],
+    "m5_decisive_count": 4
   },
   "skills": {
     "archetypes": {
@@ -427,6 +435,23 @@
       "objective_evidence": [
         {
           "metric": "fault_localization_accuracy",
+          "dataset": "debugging-fault-localization-decisive (224-item frozen calibrated split)",
+          "n": 224,
+          "placebo": 0.585,
+          "treatment": 0.594,
+          "delta_pp": 0.9,
+          "p": 0.724,
+          "significant": false,
+          "verdict": "NO-LIFT",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/m5-primary-decisive/swe-five-whys-plus.json",
+          "note": "M5 decisive-split rerun on FROZEN 224-item debugging-fault-localization-decisive split (prior M5 run was on 150-item SWE-bench set by error). +0.9pp over placebo, p=0.724 — confirms NO-LIFT."
+        },
+        {
+          "metric": "fault_localization_accuracy",
           "dataset": "SWE-bench",
           "n": 150,
           "placebo": 0.833,
@@ -492,7 +517,7 @@
           "significance": "null",
           "replicated": false,
           "source": "evals/results/m5-primary/swe-five-whys-plus.json",
-          "note": "M5 powered run with M4-reworked skill. No lift over placebo on SWE-bench fault localization. Confirms previous replication failure."
+          "note": "M5 powered run with M4-reworked skill. No lift over placebo on SWE-bench fault localization. Confirms previous replication failure. NOTE (fix-m5): This run was powered on the raw 150-item evals/datasets/external/swebench.jsonl instead of the FROZEN 224-item decisive split. CORRECT result at n=224 is in evals/results/m5-primary-decisive/."
         }
       ],
       "judge_evidence": [
@@ -564,6 +589,25 @@
       "objective_evidence": [
         {
           "metric": "fault_localization_accuracy",
+          "dataset": "debugging-fault-localization-decisive (224-item frozen calibrated split)",
+          "n": 223,
+          "placebo": 0.596,
+          "treatment": 0.578,
+          "delta_pp": -1.8,
+          "p": 0.221,
+          "significant": false,
+          "verdict": "NO-LIFT",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/m5-primary-decisive/swe-kepner-tregoe.json",
+          "note": "EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface). M5 decisive-split rerun on FROZEN 224-item debugging-fault-localization-decisive split. -1.8pp over placebo, p=0.221 — NO-LIFT. kepner-tregoe native value surface is paired-reasoning quality, not fault localization.",
+          "exploratory": true,
+          "exploratory_reason": "surface-mismatch: powered on fault-localization, not native surface (paired-reasoning quality)"
+        },
+        {
+          "metric": "fault_localization_accuracy",
           "dataset": "SWE-bench fault localization (decisive split, 150 items)",
           "n": 150,
           "placebo": 0.81,
@@ -577,7 +621,7 @@
           "significance": "null",
           "replicated": false,
           "source": "evals/results/m5-primary/swe-kepner-tregoe.json",
-          "note": "EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface). M5 powered run with M4-reworked skill. kepner-tregoe's true value surface is paired-reasoning quality, not fault localization. +2.7pp over placebo not significant; this is NOT recorded as an honest kill — the eval surface does not match the skill's native value surface. Contract eval_family is Debugging/fault-localization which MISMATCHES the skill's paired reasoning quality value surface.",
+          "note": "EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface). M5 powered run with M4-reworked skill. kepner-tregoe's true value surface is paired-reasoning quality, not fault localization. +2.7pp over placebo not significant; this is NOT recorded as an honest kill — the eval surface does not match the skill's native value surface. Contract eval_family is Debugging/fault-localization which MISMATCHES the skill's paired reasoning quality value surface. NOTE (fix-m5): This run was powered on the raw 150-item evals/datasets/external/swebench.jsonl instead of the FROZEN 224-item decisive split. CORRECT result at n=224 is in evals/results/m5-primary-decisive/.",
           "exploratory": true,
           "exploratory_reason": "surface-mismatch: powered on fault-localization, not native surface (paired-reasoning quality)"
         }
@@ -652,6 +696,25 @@
     "map-territory": {
       "objective_evidence": [
         {
+          "metric": "fault_localization_accuracy",
+          "dataset": "debugging-fault-localization-decisive (224-item frozen calibrated split)",
+          "n": 222,
+          "placebo": 0.586,
+          "treatment": 0.59,
+          "delta_pp": 0.5,
+          "p": 1,
+          "significant": false,
+          "verdict": "NO-LIFT",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/m5-primary-decisive/swe-map-territory.json",
+          "note": "EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface). M5 decisive-split rerun on FROZEN 224-item debugging-fault-localization-decisive split. +0.5pp over placebo, p=1.0 — NO-LIFT. map-territory native value surface is routing/discoverability, not fault localization.",
+          "exploratory": true,
+          "exploratory_reason": "surface-mismatch: powered on fault-localization, not native surface (routing/discoverability)"
+        },
+        {
           "metric": "accuracy",
           "dataset": "authored verify",
           "n": 30,
@@ -682,7 +745,7 @@
           "significance": "null",
           "replicated": false,
           "source": "evals/results/m5-primary/swe-map-territory.json",
-          "note": "EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface). M5 powered run with M4-reworked skill. map-territory's true value surface is routing/discoverability, not fault localization. +2.7pp over placebo not significant; this is NOT recorded as an honest kill — the eval surface does not match the skill's native value surface. Contract eval_family is Debugging/fault-localization which MISMATCHES the skill's routing/discoverability value surface.",
+          "note": "EXPLORATORY: surface-mismatch (powered on fault-localization, not native surface). M5 powered run with M4-reworked skill. map-territory's true value surface is routing/discoverability, not fault localization. +2.7pp over placebo not significant; this is NOT recorded as an honest kill — the eval surface does not match the skill's native value surface. Contract eval_family is Debugging/fault-localization which MISMATCHES the skill's routing/discoverability value surface. NOTE (fix-m5): This run was powered on the raw 150-item evals/datasets/external/swebench.jsonl instead of the FROZEN 224-item decisive split. CORRECT result at n=224 is in evals/results/m5-primary-decisive/.",
           "exploratory": true,
           "exploratory_reason": "surface-mismatch: powered on fault-localization, not native surface (routing/discoverability)"
         }
@@ -818,6 +881,23 @@
     "occams-razor": {
       "objective_evidence": [
         {
+          "metric": "fault_localization_accuracy",
+          "dataset": "debugging-fault-localization-decisive (224-item frozen calibrated split)",
+          "n": 223,
+          "placebo": 0.587,
+          "treatment": 0.587,
+          "delta_pp": 0,
+          "p": 0.683,
+          "significant": false,
+          "verdict": "NO-LIFT",
+          "provenance": "OBJ-powered-null",
+          "temporal": "post-edit",
+          "significance": "null",
+          "replicated": false,
+          "source": "evals/results/m5-primary-decisive/swe-occams-razor.json",
+          "note": "M5 decisive-split rerun on FROZEN 224-item debugging-fault-localization-decisive split. 0pp over placebo, p=0.683 — confirms NO-LIFT. Prior M5 run on 150-item set gave +4.7pp p=0.096 (directional, not significant); decisive split confirms no real effect. Fixes blocker 3: a primary that fails >=5pp+p<0.05 is NO-LIFT, not directional-not-replicated."
+        },
+        {
           "metric": "accuracy",
           "dataset": "authored correctness",
           "n": 40,
@@ -865,7 +945,7 @@
           "significance": "directional",
           "replicated": false,
           "source": "evals/results/m5-primary/swe-occams-razor.json",
-          "note": "M5 powered run with M4-reworked skill. +4.7pp directional improvement over placebo but p=0.096 (not significant) and below 5pp threshold. Prior run1 gave +2.0pp p=0.505."
+          "note": "M5 powered run with M4-reworked skill. +4.7pp directional improvement over placebo but p=0.096 (not significant) and below 5pp threshold. Prior run1 gave +2.0pp p=0.505. NOTE (fix-m5): This run was powered on the raw 150-item evals/datasets/external/swebench.jsonl instead of the FROZEN 224-item decisive split. CORRECT result at n=224 is in evals/results/m5-primary-decisive/."
         }
       ],
       "judge_evidence": [
@@ -884,10 +964,10 @@
           "note": "Run1 scorecard n=3 win claim superseded; audit recommends TRIGGER-ONLY"
         }
       ],
-      "verdict": "directional-not-replicated",
+      "verdict": "no-lift",
       "eval_family": "Debugging/fault-localization",
       "value_surface": "paired reasoning quality",
-      "powered_run": "OBJ-powered-directional"
+      "powered_run": "OBJ-powered-null"
     },
     "ooda": {
       "objective_evidence": [],

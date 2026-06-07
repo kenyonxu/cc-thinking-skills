@@ -1,0 +1,22 @@
+{
+  "mode": "swe-localize",
+  "skill": "map-territory",
+  "solver": "claude-sonnet-4-6",
+  "n": 222,
+  "dataset_path": "/Users/tjboudreaux/Sandbox/cc-thinking-skills/evals/datasets/calibrated/debugging-fault-localization-decisive.jsonl",
+  "acc_with_skill": 0.59,
+  "acc_with_skill_ci": [
+    0.524,
+    0.653
+  ],
+  "acc_placebo": 0.586,
+  "acc_placebo_ci": [
+    0.52,
+    0.648
+  ],
+  "delta_pp": 0.5,
+  "mcnemar_p": 1,
+  "significant": false,
+  "discordant": 5,
+  "provenance": "exploratory: surface-mismatch (powered on fault-localization, not native surface)"
+}

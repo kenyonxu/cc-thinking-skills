@@ -22,7 +22,12 @@ const SOLVER = process.env.SOLVER_MODEL || 'claude-sonnet-4-6';
 const SOLVER_EFFORT = process.env.SOLVER_EFFORT || 'medium';
 const CONC = parseInt(process.env.CONC || '4', 10);
 const FORCE_SKILL = process.env.FORCE_SKILL;
-const FILE = path.join(__dirname, 'datasets', 'external', 'swebench.jsonl');
+// Default to the ORIGINAL 150-item external/swebench.jsonl for backward-compat.
+// Set SWE_DATASET_PATH to target a different dataset (e.g. the frozen calibrated decisive split).
+const DEFAULT_FILE = path.join(__dirname, 'datasets', 'external', 'swebench.jsonl');
+const FILE = process.env.SWE_DATASET_PATH
+  ? path.resolve(process.env.SWE_DATASET_PATH)
+  : DEFAULT_FILE;
 const SKILLS_DIR = path.join(__dirname, '..', 'skills');
 
 function loadItems() {
@@ -74,10 +79,13 @@ async function main() {
   const b = r.filter(x => x.skill_correct && !x.placebo_correct).length, c = r.filter(x => !x.skill_correct && x.placebo_correct).length;
   const out = {
     mode: 'swe-localize', skill: FORCE_SKILL, solver: SOLVER, n: N,
+    dataset_path: FILE,
     acc_with_skill: +(SC / N).toFixed(3), acc_with_skill_ci: wilson(SC, N).map(x => +x.toFixed(3)),
     acc_placebo: +(PC / N).toFixed(3), acc_placebo_ci: wilson(PC, N).map(x => +x.toFixed(3)),
     delta_pp: +(((SC - PC) / N) * 100).toFixed(1), mcnemar_p: +mcnemar(b, c).toFixed(3), significant: mcnemar(b, c) < 0.05, discordant: b + c,
   };
+  // Add optional provenance/tags field for dataset misuse detection
+  if (process.env.PROVENANCE) out.provenance = process.env.PROVENANCE;
   const file = process.env.OUTFILE || path.join(runDir(), `swe-${FORCE_SKILL}.json`);
   fs.mkdirSync(path.dirname(file), { recursive: true }); writeJson(file, out);
   console.log(`\n  localize WITH skill ${(out.acc_with_skill * 100).toFixed(0)}% CI[${(out.acc_with_skill_ci[0] * 100).toFixed(0)},${(out.acc_with_skill_ci[1] * 100).toFixed(0)}]  vs placebo ${(out.acc_placebo * 100).toFixed(0)}% CI[${(out.acc_placebo_ci[0] * 100).toFixed(0)},${(out.acc_placebo_ci[1] * 100).toFixed(0)}]  Δ${out.delta_pp >= 0 ? '+' : ''}${out.delta_pp}pp  McNemar p=${out.mcnemar_p}${out.significant ? ' SIG' : ''}`);
