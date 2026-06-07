@@ -26,7 +26,7 @@
       "measured": 17,
       "unmeasured": 22
     },
-    "notes": "Stale claims from run1/scorecard.md (n=3 wins) and mid-document ELEVATE-OR-KILL.md narrative are flagged superseded, not deleted. scientific-method is the sole robust objective ELEVATE.",
+    "notes": "Stale claims from run1/scorecard.md (n=3 wins) and mid-document ELEVATE-OR-KILL.md narrative are flagged superseded, not deleted. scientific-method is the sole robust objective ELEVATE, replicated with fresh M5 sample (same direction: +9.3pp primary, +8.0pp replication, both p<0.01).",
     "m5_powered_run": "m5-primary",
     "m5_powered_skills": [
       "red-team",
@@ -1128,9 +1128,26 @@
           "provenance": "OBJ-powered-significant",
           "temporal": "post-edit",
           "significance": "significant",
-          "replicated": false,
+          "replicated": true,
           "source": "evals/results/run1/swe-scientific-method-improved.json",
-          "note": "Sole robust objective ELEVATE in the program; hypothesis-differential debugging rework; p=0.002, +9.3pp, n=150. Fresh replication pending M5."
+          "note": "Sole robust objective ELEVATE in the program; hypothesis-differential debugging rework; p=0.002, +9.3pp, n=150. Fresh replication run in M5 confirmed same direction (+8.0pp, p=0.001, n=150)."
+        },
+        {
+          "metric": "fault_localization_accuracy",
+          "dataset": "SWE-bench fault localization (ORIGINAL frozen 150-item set)",
+          "n": 150,
+          "placebo": 0.82,
+          "treatment": 0.9,
+          "delta_pp": 8,
+          "p": 0.001,
+          "significant": true,
+          "verdict": "ELEVATE",
+          "provenance": "OBJ-powered-significant",
+          "temporal": "post-edit",
+          "significance": "significant",
+          "replicated": true,
+          "source": "evals/results/m5-repl/swe-scientific-method.json",
+          "note": "M5 FRESH replication on the ORIGINAL frozen 150-item SWE-bench set. Replicates prior +9.3pp in same direction: 90% vs 82% placebo, +8.0pp, p=0.001, significant. Concordant with primary — ELEVATE confirmed."
         }
       ],
       "judge_evidence": [
@@ -1151,7 +1168,9 @@
       ],
       "verdict": "ELEVATE",
       "eval_family": "Debugging/fault-localization",
-      "value_surface": "localization"
+      "value_surface": "localization",
+      "replicated": true,
+      "replication_source": "evals/results/m5-repl/swe-scientific-method.json"
     },
     "second-order": {
       "objective_evidence": [
@@ -1338,7 +1357,7 @@
           "significance": "null",
           "replicated": false,
           "source": "evals/results/m5-primary/swe-systems.json",
-          "note": "M5 powered run with M4-reworked skill. +1.3pp over placebo not significant. Confirms previous replication failure."
+          "note": "M5 powered run. +1.3pp over placebo not significant. Confirms previous replication failure. PROVENANCE NOTE: systems was NOT reworked in this mission (no rework spec; SKILL.md edit predates the mission, split frozen 2026-06-06 before the 2026-06-07 result), so its anti-p-hacking guarantee is split-frozen-before-result (VAL-DATASET-009 refined two-tier rule), and its NO-LIFT verdict is immune to win-manufacturing."
         }
       ],
       "judge_evidence": [

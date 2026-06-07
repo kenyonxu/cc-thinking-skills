@@ -27,7 +27,7 @@
 
 | Skill | Dataset | N | Placebo → Skill | Δ (pp) | p | Verdict | Provenance |
 |-------|---------|---|-----------------|--------|---|---------|------------|
-| **scientific-method** | SWE-bench fault localization | 150 | 82% → 91% | **+9.3** | **0.002** | **ELEVATE (robust)** | `OBJ-powered-significant` |
+| **scientific-method** | SWE-bench fault localization | 150 | 82% → 91% | **+9.3** | **0.002** | **ELEVATE (replicated: +8.0pp, p=0.001)** | `OBJ-powered-significant` |
 | red-team | DiverseVul balanced | 200 | 59% → 64% | +5.0 | 0.10 | directional, not sig | `OBJ-powered-directional` |
 | first-principles | authored constraint | 30 | 93% → 100% | +6.7 | 0.48 | ceiling | `OBJ-small-ceiling` |
 | systems | SWE-bench | 150 | 84% → 83% | −1.3 | 0.68 | no effect (was +5.3@n=150) | `OBJ-powered-null` |
@@ -56,27 +56,39 @@
 
 ⚠️ **archetypes**: In-band quarantine candidate (aggregate baseline 57.4%) given a fair calibrated chance on the systems-product-strategy-pairwise decisive split. No lift detected.
 
-**M5 powered run:** solver `claude-sonnet-4-6`, CONC=4, isolation ON, EVAL_RUN=m5-primary. All 7 results are post-edit (run after M4 skill reworks). No skill passed the primary gate (≥5pp + p<0.05), so no replications were triggered.
+**M5 powered run:** solver `claude-sonnet-4-6`, CONC=4, isolation ON, EVAL_RUN=m5-primary. All 7 results are post-edit (run after M4 skill reworks). No skill passed the primary gate (≥5pp + p<0.05), so no replications were triggered from the primary batch.
 
-**Total objectively measured: 17 (+7 M5 powered = 24 with post-edit evidence) / 39 skills**  
+**M5 replication:** FRESH scientific-method replication on the ORIGINAL frozen 150-item SWE-bench set. Result: 90% vs 82% placebo, +8.0pp, p=0.001 — same direction as prior +9.3pp. **ELEVATE confirmed and replicated.** EVAL_RUN=m5-repl.
+
+**Total objectively measured: 17 (+7 M5 primary +1 M5 replication = 25 with post-edit evidence) / 39 skills**  
 **Unmeasured (judge-only / thin / leakage-blocked / meta): 22 skills**
 
 ---
 
 ## Objective Evidence — Skill Detail
 
-### ELEVATE (robust, replicated)
+### ELEVATE (robust, objectively replicated)
 
-#### `scientific-method` — **ELEVATE**
-- **Dataset:** SWE-bench fault localization (native domain)
-- **N:** 150
-- **Placebo → Skill:** 82% → 91%
-- **Δ:** +9.3 pp
-- **McNemar p:** 0.002
-- **Discordant pairs:** 18
-- **Provenance:** `OBJ-powered-significant` | `post-edit` | `significant` | `replicated: false` (fresh replication pending M5)
-- **Source:** `evals/results/run1/swe-scientific-method-improved.json`
-- **Note:** This is the agent-native reworked skill (hypothesis-differential debugging). The original broad `scientific-method` scored 0pp at n=45. The v2 prototype scored +5.3pp p=0.061. The shipped rework achieved +9.3pp p=0.002.
+#### `scientific-method` — **ELEVATE (replicated)**
+- **Primary (pre-registered):**
+  - **Dataset:** SWE-bench fault localization (native domain)
+  - **N:** 150
+  - **Placebo → Skill:** 82% → 91%
+  - **Δ:** +9.3 pp
+  - **McNemar p:** 0.002
+  - **Discordant pairs:** 18
+  - **Provenance:** `OBJ-powered-significant` | `post-edit` | `significant` | `replicated: true`
+  - **Source:** `evals/results/run1/swe-scientific-method-improved.json`
+- **M5 Fresh Replication (independent sample, same frozen 150-item SWE-bench set):**
+  - **N:** 150
+  - **Placebo → Skill:** 82% → 90%
+  - **Δ:** +8.0 pp
+  - **McNemar p:** 0.001
+  - **Discordant pairs:** 12
+  - **Direction:** SAME (positive), concordant with primary
+  - **Provenance:** `OBJ-powered-significant` | `post-edit` | `significant` | `replicated: true`
+  - **Source:** `evals/results/m5-repl/swe-scientific-method.json`
+- **Note:** This is the agent-native reworked skill (hypothesis-differential debugging). The original broad `scientific-method` scored 0pp at n=45. The v2 prototype scored +5.3pp p=0.061. The shipped rework achieved +9.3pp p=0.002. The M5 fresh replication confirmed the effect in the same direction at +8.0pp p=0.001 — the only skill in the program to earn a replicated ELEVATE verdict.
 
 ---
 
@@ -100,9 +112,11 @@
 #### `systems` — **NO-LIFT (did not replicate)**
 - **Original powered run (n=150):** 80% → 85%, +5.3pp, p=0.043, 12 discordant — **superseded**
 - **Replication (n=150, restored content):** 84% → 83%, −1.3pp, p=0.683
+- **M5 powered (n=150):** 83% → 84%, +1.3pp, p=0.724, NO-LIFT
 - **Provenance:** `OBJ-powered-null` | `post-edit` | `null` | `replicated: false`
-- **Sources:** `evals/results/run1/swe-systems-powered.json` (superseded), `evals/results/wavec/swe-systems-restored.json`
+- **Sources:** `evals/results/run1/swe-systems-powered.json` (superseded), `evals/results/wavec/swe-systems-restored.json`, `evals/results/m5-primary/swe-systems.json`
 - **Stale claim flagged:** Run1 scorecard "ELEVATE" and mid-document ELEVATE-OR-KILL.md "firm ELEVATE" — **both superseded**. The original p=0.043 was borderline noise; replication crossed back to negative.
+- **Anti-p-hacking guarantee (VAL-DATASET-009):** Systems was NOT reworked in this mission (no rework spec; SKILL.md edit predates the mission, split frozen 2026-06-06 before the 2026-06-07 result), so its anti-p-hacking guarantee is `split-frozen-before-result` (VAL-DATASET-009 refined two-tier rule), and its NO-LIFT verdict is immune to win-manufacturing.
 
 #### `five-whys-plus` — **NO-LIFT (did not replicate)**
 - **Original powered run (n=150):** 83% → 87%, +4.0pp, p=0.041, 6 discordant — **superseded**
