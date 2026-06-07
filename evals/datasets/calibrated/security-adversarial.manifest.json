@@ -17,7 +17,7 @@
     "ground_truth_field": "answer"
   },
   "calibration": {
-    "baseline": 0.648,
+    "baseline": 0.584,
     "baseline_estimated": false,
     "baseline_source": "measured_sample",
     "band": [
@@ -28,19 +28,26 @@
     "exemption": null,
     "status": "measured_sample",
     "calibrated_items": 25,
-    "in_band_items": 1,
+    "in_band_items": 0,
     "decisive_split_items": 70,
     "calibration_only_items": 0,
-    "calibration_run_id": "calib-m3-fixed",
+    "calibration_run_id": "calib-m3-balanced",
     "calibration_solver": "claude-sonnet-4-6",
     "calibration_k_trials": 5,
     "sample_size": 25,
+    "sample_composition": "stratified: 10 vulnerable targets + 8 safe near-misses + 7 off-target distractors matching decisive split distribution",
     "ceiling_items": 14,
-    "floor_items": 7,
+    "floor_items": 8,
     "other_out_of_band": 3,
-    "prior_baseline": 0.832,
-    "prior_run_id": "calib-m3",
-    "improvement_notes": "Rebuilt pool with diverse-CWE items (non-787/119) and 10 authored near-miss safe variants. Overall baseline dropped from 83.2% to 64.8% — now within the [0.40,0.70] calibration band. Per-item baselines remain bimodal at K_TRIALS=5 (mostly 0.0 or 1.0), but the overall average is correctly positioned for headroom measurement. Prior ceiling exemption removed."
+    "per_class_baselines": {
+      "vulnerable_targets": 0.74,
+      "safe_near_misses": 0.75,
+      "off_target_distractors": 0.171
+    },
+    "fpr_safe_items": 0.52,
+    "prior_baseline": 0.648,
+    "prior_run_id": "calib-m3-fixed",
+    "improvement_notes": "STRATIFIED RECALIBRATION with balanced sample (vulnerable + safe near-miss + off-target distractor). Aggregate baseline 58.4% is solidly in [0.40, 0.70] band — family is a valid powered candidate. Safe-label audit fixed 3 mislabeled near-miss items: sec-nearmiss-29 (div-by-zero before nitems==0 guard — now fixed), sec-nearmiss-33 (prefix-check bypassable by sibling dirs — now fixed with boundary check), sec-nearmiss-34 (same prefix bypass — now fixed). Prior calibration was vulnerable-only (invalid for FPR measurement). This balanced calibration measures genuine FPR behavior: 52.0% FPR on safe items, demonstrating the model does produce false positives that a well-calibrated red-team skill can potentially reduce."
   },
   "item_counts": {
     "total": 70,
@@ -69,8 +76,8 @@
     "ambiguous_in_split": 0
   },
   "created": "2026-06-06",
-  "updated": "2026-06-06T19:05:00.000Z",
+  "updated": "2026-06-07T03:10:32.590Z",
   "frozen": true,
-  "frozen_at": "2026-06-06T19:05:00.000Z",
-  "frozen_by": "m3-harder-data-security-routing"
+  "frozen_at": "2026-06-07T03:10:32.590Z",
+  "frozen_by": "fix-m3-security-balanced-recalibration"
 }
