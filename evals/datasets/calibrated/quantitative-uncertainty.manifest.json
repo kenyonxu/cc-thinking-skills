@@ -1,6 +1,8 @@
 {
   "family": "Quantitative/uncertainty",
   "family_key": "quantitative-uncertainty",
+  "aggregate_governed": true,
+  "aggregate_governed_rationale": "Binary/multiple-choice classification; per-item baselines are necessarily 0%/100%; powerability governed by aggregate baseline + paired McNemar (which ignores concordant both-correct ceiling pairs); aggregate ~93% = CEILING/no-power",
   "skills": [
     "bayesian",
     "debiasing",
