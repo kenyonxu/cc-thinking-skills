@@ -44,10 +44,12 @@
       "safe_near_misses": 0.875,
       "off_target_distractors": 0.171
     },
-    "fpr_safe_items": 0.125,
+    "fpr_safe_items": 0.453,
+    "fpr_near_miss": 0.125,
+    "fpr_off_target_distractor": 0.829,
     "prior_baseline": 0.648,
     "prior_run_id": "calib-m3-fixed",
-    "improvement_notes": "STRATIFIED RECALIBRATION with balanced sample (vulnerable + safe near-miss + off-target distractor). Aggregate baseline 58.4% is solidly in [0.40, 0.70] band \u2014 family is a valid powered candidate. Safe-label audit fixed 3 mislabeled near-miss items: sec-nearmiss-29 (div-by-zero before nitems==0 guard \u2014 now fixed), sec-nearmiss-33 (prefix-check bypassable by sibling dirs \u2014 now fixed with boundary check), sec-nearmiss-34 (same prefix bypass \u2014 now fixed). Prior calibration was vulnerable-only (invalid for FPR measurement). This balanced calibration measures genuine FPR behavior: 52.0% FPR on safe items, demonstrating the model does produce false positives that a well-calibrated red-team skill can potentially reduce. sec-nearmiss-26 code was genuinely vulnerable (strnlen(src,255) bounded at 255 but guard if(len>=256) was dead code; no dest size check). Fixed to use dest_size-1 bound with explicit zero-size guard \u2014 now genuinely safe. Re-scored single item: baseline changed from 0.0 to 1.0 (model now correctly identifies as safe). Aggregate baseline updated from 0.584 to 0.624."
+    "improvement_notes": "STRATIFIED RECALIBRATION with balanced sample (vulnerable + safe near-miss + off-target distractor). Aggregate baseline 62.4% is solidly in [0.40, 0.70] band \u2014 family is a valid powered candidate. Safe-label audit fixed 3 mislabeled near-miss items: sec-nearmiss-29 (div-by-zero before nitems==0 guard \u2014 now fixed), sec-nearmiss-33 (prefix-check bypassable by sibling dirs \u2014 now fixed with boundary check), sec-nearmiss-34 (same prefix bypass \u2014 now fixed). Prior calibration was vulnerable-only (invalid for FPR measurement). This balanced calibration measures genuine FPR behavior: combined 45.3% FPR across all safe (answer=No) items (near-miss FPR=12.5%, distractor FPR=82.9%), demonstrating the model does produce false positives that a well-calibrated red-team skill can potentially reduce. sec-nearmiss-26 code was genuinely vulnerable (strnlen(src,255) bounded at 255 but guard if(len>=256) was dead code; no dest size check). Fixed to use dest_size-1 bound with explicit zero-size guard \u2014 now genuinely safe. Re-scored single item: baseline changed from 0.0 to 1.0 (model now correctly identifies as safe). Aggregate baseline updated from 0.584 to 0.624."
   },
   "item_counts": {
     "total": 70,
