@@ -1,44 +1,57 @@
 ---
 name: thinking-occams-razor
-description: When several causes could explain a bug or failure, count the assumptions each requires and test the fewest-assumption one first — escalate to complex explanations only when evidence forces it.
+description: Use when multiple causes could explain a bug — test the fewest-assumption hypothesis first; escalate to complex only when evidence forces it. Skip the full procedure when one step resolves it.
 ---
 
-# Occam's Razor (Parsimony Principle)
+# Occam's Razor
 
 ## Overview
 
-Occam's Razor, attributed to 14th-century philosopher William of Ockham, states: "Entities should not be multiplied beyond necessity" (entia non sunt multiplicanda praeter necessitatem). When multiple explanations fit the evidence equally well, prefer the simplest one—the one with the fewest assumptions.
+Occam's Razor states: among competing hypotheses that fit the evidence equally well, prefer the one with the fewest assumptions. This skill operationalizes that principle for debugging: **test the simplest hypothesis first, and escalate to complex explanations only when evidence forces it.**
 
-**Core Principle:** Among competing hypotheses that explain the data equally well, select the one with the fewest assumptions.
+The skill has a **trigger-shrink gate**: if the simplest hypothesis can be tested in one step, just test it — don't run the full enumeration-and-scoring procedure. Reserve the full procedure for situations where multiple hypotheses genuinely compete and the simplest is not obviously testable.
 
-**Einstein's Corollary:** "Everything should be made as simple as possible, but no simpler."
+**Core Principle:** "Everything should be made as simple as possible, but no simpler." — Einstein
 
 ## When to Use
 
-- Debugging: Multiple hypotheses could explain a bug
-- Architecture: Choosing between design approaches
-- Root cause analysis: Several causes seem plausible
-- Code review: Evaluating implementation complexity
-- Technical decisions: Selecting between tools or patterns
-- Incident response: Narrowing down failure causes
+- Multiple hypotheses could explain a bug and the simplest is NOT obviously testable in one step
+- You're about to investigate a complex hypothesis without first testing a simpler one
+- Architecture or design decisions where several approaches are viable and differ in complexity
+- Root cause analysis where several causes seem plausible
 
 Decision flow:
 
 ```
-Multiple explanations exist? → yes → Do they explain the evidence equally? → yes → APPLY OCCAM'S RAZOR
-                                                                          ↘ no → Prefer better explanation
-                           ↘ no → Use available explanation
+Multiple explanations exist?
+  → No → Use the available explanation
+  → Yes → Can the simplest be tested in one step?
+      → Yes → JUST TEST IT (trigger-shrink — skip full procedure)
+      → No → Do they explain the evidence equally well?
+          → No → Prefer the better explanation
+          → Yes → RUN FULL OCCAM'S RAZOR PROCEDURE
 ```
 
 ## When NOT to Use
-- Evidence already points to a specific cause — follow the evidence; don't downgrade to the "simpler" hypothesis it contradicts.
-- The domain is irreducibly complex (distributed consensus, concurrency, security threat models) — the simplest model is wrong; don't oversimplify ("but no simpler").
-- Only one plausible explanation exists — there's nothing to compare, just test it.
-- "Simple" would mean ignoring a known interaction or skipping a load-bearing safeguard — local simplicity that creates systemic risk isn't parsimony.
 
-## The Process
+- **Evidence already points to a specific cause.** Follow the evidence; don't downgrade to a "simpler" hypothesis it contradicts.
+- **The domain is irreducibly complex** (distributed consensus, concurrency, security threat models). The simplest model is wrong; don't oversimplify ("but no simpler").
+- **Only one plausible explanation exists.** There's nothing to compare — just test it.
+- **"Simple" would mean ignoring a known interaction or skipping a load-bearing safeguard.** Local simplicity that creates systemic risk isn't parsimony.
+- **The trigger check resolves it.** If you can test the simplest hypothesis in one step and it's confirmed, you're done — don't enumerate for completeness.
 
-### Step 1: Enumerate Competing Hypotheses
+## Procedure
+
+### Trigger Check (Fast Path)
+
+Before running the full procedure, ask: **"Can I test the simplest hypothesis in one step?"**
+
+- Yes → Test it. If confirmed, report and stop. If falsified, move to the next simplest.
+- No → The simplest hypothesis requires non-trivial investigation → run the full procedure below.
+
+### Full Procedure: When the Trigger Check Doesn't Resolve
+
+#### Step 1: Enumerate Competing Hypotheses
 
 List all plausible explanations for the observed behavior:
 
@@ -49,246 +62,58 @@ Hypotheses:
 A. Session token expiration edge case
 B. Race condition in auth service
 C. Database connection pool exhaustion
-D. Cosmic rays flipping bits in memory
-E. Complex interaction between CDN cache, load balancer, and session service
+D. Complex interaction between CDN cache, load balancer, and session service
 ```
 
-### Step 2: Count the Assumptions
+#### Step 2: Count Assumptions per Hypothesis
 
-For each hypothesis, list required assumptions:
-
-| Hypothesis | Assumptions Required |
-|------------|---------------------|
-| A. Token expiration | 1. Token validation has edge case |
+| Hypothesis | Assumptions |
+|------------|-------------|
+| A. Token expiration | 1. Token validation has an edge case |
 | B. Race condition | 1. Concurrent requests possible, 2. Shared mutable state exists |
 | C. DB pool exhaustion | 1. Pool is undersized, 2. Connections are leaking |
-| D. Cosmic rays | 1. Hardware failure, 2. No ECC memory, 3. Perfect timing |
-| E. Complex interaction | 1. CDN caches auth, 2. LB sticky sessions fail, 3. Session sync delayed |
+| D. Complex interaction | 1. CDN caches auth, 2. LB sticky sessions fail, 3. Session sync delayed |
 
-### Step 3: Verify Explanatory Power
+Count each independent assumption: +1 per assumption, +1 per component involved, +2 per external dependency, +2 for timing-dependent behavior, +3 for rare conditions, +5 for "perfect storm" scenarios.
+
+#### Step 3: Verify Explanatory Power
 
 Ensure simpler hypotheses actually explain the evidence:
 
 ```
 Evidence: Failures correlate with high traffic periods
-
-Hypothesis A (token edge case): 
-  - Doesn't explain traffic correlation ❌
-  
-Hypothesis C (DB pool exhaustion):
-  - Explains traffic correlation ✓
-  - Fewer assumptions than E
-  - PREFERRED by Occam's Razor ✓
+Hypothesis A (token edge case): Doesn't explain traffic correlation ✗
+Hypothesis C (DB pool exhaustion): Explains traffic correlation ✓ — fewer assumptions than D
+→ PREFERRED by Occam's Razor
 ```
 
-### Step 4: Test Simplest First
+#### Step 4: Test in Order of Fewest Assumptions
 
-Investigate hypotheses in order of simplicity:
+Investigate hypotheses from fewest to most assumptions. Do not skip to complex hypotheses until simple ones are ruled out.
 
-```
-1. Check DB connection pool metrics (simplest)
-2. Review token validation code (simple)
-3. Analyze race condition potential (moderate)
-4. Instrument complex service interactions (complex)
-5. Check for hardware issues (last resort)
-```
+#### Step 5: Escalate Complexity Only When Evidence Forces It
 
-### Step 5: Escalate Complexity Only When Needed
+When simple explanations are ruled out with evidence, move to more complex ones. Never escalate on intuition alone.
 
-If simple explanations are ruled out, move to complex ones with new evidence.
+## Output Contract
 
-## Complexity Assessment Framework
+A completed Occam's Razor analysis produces:
 
-### Counting Complexity
+1. **Trigger Check Result** — whether the simplest hypothesis was testable in one step
+2. **Hypothesis Ranking** — ordered by assumption count, with each hypothesis' assumptions listed
+3. **Explanatory Power Check** — which hypotheses fit the evidence
+4. **Test Order and Results** — which hypotheses were tested, in what order, and the outcome
+5. **Conclusion** — the confirmed hypothesis (or the next to test if unresolved)
 
-| Factor | Complexity Cost |
-|--------|-----------------|
-| Each independent assumption | +1 |
-| Each component involved | +1 |
-| Each external dependency | +2 |
-| Timing-dependent behavior | +2 |
-| Requires rare conditions | +3 |
-| "Perfect storm" scenarios | +5 |
+For trigger-shrink cases, the output may be a single line: "Tested simplest hypothesis X — confirmed/refuted."
 
-### Example Comparison
+## Anti-Patterns
 
-```
-Solution A: Add caching layer
-- New component (Redis): +1
-- Cache invalidation logic: +1  
-- New failure mode: +1
-Total: 3
-
-Solution B: Optimize existing query
-- Query modification: +1
-Total: 1
-
-→ Prefer Solution B unless evidence shows it's insufficient
-```
-
-## When Simplicity Yields to Complexity
-
-Occam's Razor is a heuristic, not an absolute law. Prefer complexity when:
-
-### 1. Evidence Demands It
-
-```
-Simple hypothesis: Single bug in auth service
-Evidence: Failures only occur when Feature X AND Feature Y are both enabled
-
-→ Complex interaction hypothesis now has supporting evidence
-→ Accept complexity that explains the evidence
-```
-
-### 2. Domain Complexity Is Irreducible
-
-```
-Problem: Distributed consensus
-Simple solution: Single leader (but single point of failure)
-Reality: Distributed systems require complex solutions (Raft, Paxos)
-
-→ Some domains have irreducible complexity
-→ Don't oversimplify beyond what's correct
-```
-
-### 3. Future Requirements Are Known
-
-```
-Current need: Store user preferences
-Simple: JSON file
-Future need: Multi-device sync, conflict resolution
-
-→ Database is more complex but necessary
-→ Known future needs justify upfront complexity
-```
-
-### 4. Simplicity Introduces Technical Debt
-
-```
-Simple now: Copy-paste code in 5 places
-Simpler long-term: Extract shared function
-
-→ Local simplicity vs. systemic simplicity
-→ Prefer systemic simplicity
-```
-
-## Application Examples
-
-### Debugging Example
-
-```
-Bug: API returns 500 errors sporadically
-
-Hypothesis A: Null pointer in rare code path
-  Assumptions: 1
-  
-Hypothesis B: Memory pressure causes GC pauses that timeout requests
-  Assumptions: 3 (memory issues + GC behavior + timeout settings)
-  
-Hypothesis C: Race condition between cache refresh and request handling
-  Assumptions: 4 (concurrent access + shared state + timing + cache implementation)
-
-Occam's Razor: Start with Hypothesis A
-Action: Search logs for null pointer exceptions
-Result: Found! NPE in user profile edge case
-```
-
-### Architecture Example
-
-```
-Requirement: Service needs to call another service
-
-Option A: Direct HTTP call
-  Components: 1 (HTTP client)
-  Assumptions: Target available, network reliable
-  
-Option B: Message queue with retry
-  Components: 3 (queue, producer, consumer)
-  Assumptions: Need async, need retry, need decoupling
-  
-Option C: Service mesh with circuit breaker, retry, timeout
-  Components: 5+ (sidecar, control plane, observability)
-  Assumptions: At scale, need observability, need traffic management
-
-Occam's Razor: Start with Option A
-Escalate to B/C only when evidence shows need for resilience
-```
-
-### Code Implementation Example
-
-```python
-# Complex (unnecessary assumptions)
-def is_even(n):
-    binary = bin(n)
-    last_bit = binary[-1]
-    return last_bit == '0'
-
-# Simple (minimal assumptions)  
-def is_even(n):
-    return n % 2 == 0
-
-# Occam's Razor: Prefer the modulo approach
-# Fewer concepts, fewer operations, same result
-```
-
-### Root Cause Analysis Example
-
-```
-Symptom: Deployment failed
-
-Complex hypothesis:
-"The CI server's Docker daemon ran out of disk space because 
-a cron job that cleans old images was disabled when we upgraded 
-the server OS last month, and nobody noticed because the monitoring 
-alert was routed to a deprecated Slack channel."
-
-Simple hypothesis:
-"The build script has a typo in the new environment variable name."
-
-Occam's Razor: Check the build script first
-Result: Typo found. DATABSE_URL instead of DATABASE_URL
-```
-
-## Common Anti-Patterns
-
-| Anti-Pattern | Description | Correction |
-|--------------|-------------|------------|
-| Rube Goldberg | Complex solution to simple problem | Ask "what's the minimum needed?" |
-| Premature abstraction | Abstracting for hypothetical cases | Wait for evidence of need |
-| Resume-driven development | Using complex tech to learn it | Match tool to problem |
-| Cargo culting | Copying complex patterns blindly | Understand why patterns exist |
-| Conspiracy thinking | Assuming coordinated complex causes | Check simple causes first |
-
-## Verification Checklist
-
-- [ ] Listed all plausible hypotheses/solutions
-- [ ] Counted assumptions required for each
-- [ ] Verified simpler options have equal explanatory power
-- [ ] Investigated in order of simplicity
-- [ ] Escalated to complexity only with evidence
-- [ ] Confirmed solution is "as simple as possible, but no simpler"
-- [ ] Checked for domain-irreducible complexity
-- [ ] Considered systemic vs. local simplicity
-
-## Combining with Other Models
-
-- **First Principles**: Reduce to fundamentals, then apply Occam's to solutions
-- **Inversion**: "What would make this unnecessarily complex?"
-- **Debiasing**: Watch for complexity bias (assuming complex = sophisticated)
-- **Pre-Mortem**: Would a simpler approach have fewer failure modes?
-
-## Key Questions
-
-- "What's the simplest explanation that fits all the evidence?"
-- "How many things have to be true for this hypothesis to hold?"
-- "Am I adding complexity to handle cases I haven't seen?"
-- "Would a junior engineer understand this solution?"
-- "If I explained this to a non-technical person, how many steps would it take?"
-- "What's the minimum change that could fix this?"
-- "Am I solving the problem I have, or a problem I might have?"
-
-## Ockham's Warning
-
-"Plurality must never be posited without necessity."
-
-The simplest solution isn't always correct, but it should always be tested first. Complexity should be earned through evidence, not assumed through speculation. When you find yourself building elaborate explanations, step back and ask: "What's the minimum hypothesis that explains what I'm seeing?"
+| Anti-Pattern | Symptom | Correction |
+|---|---|---|
+| **Oversimplifying irreducible domains** | Applying "simplest" to distributed consensus or security models | "But no simpler" — respect domain complexity |
+| **Complexity bias** | Assuming complex = sophisticated, testing complex hypotheses first | Test fewest-assumption hypotheses first, always |
+| **Trigger inflation** | Running the full enumeration for a one-step test | If the simplest is one-step testable, just test it |
+| **Ignoring explanatory power** | Choosing the simplest hypothesis that doesn't fit the evidence | Fewer assumptions doesn't beat not fitting the data |
+| **Local simplicity, systemic risk** | Choosing a simple local fix that creates fragility elsewhere | Prefer systemic simplicity over local simplicity |
+| **Ritualistic assumption counting** | Spending more time counting assumptions than testing | The point is prioritization, not precision; rough count is enough |

@@ -1,348 +1,139 @@
 ---
 name: thinking-five-whys-plus
-description: Use after an incident or recurring bug when the proximate cause is known but you must reach the systemic root—chains "why" with evidence and bias guards so you stop at a real, actionable cause.
+description: Use when a fault is localized to a component and the proximate cause is known but the systemic root is not — chain 'why' with evidence, a counterfactual cause test, and an explicit stop condition.
 ---
 
 # Five Whys Plus
 
 ## Overview
 
-The Five Whys technique from the Toyota Production System is powerful but often misapplied. This enhanced version adds explicit guards against its known failures: premature stopping, single-cause bias, blame-oriented thinking, and confirmation bias. Each "why" carries an evidence requirement, so the chain stays falsifiable rather than speculative.
+Five Whys Plus is a **post-localization root-cause analysis** skill. It assumes a fault has already been localized to a specific component or subsystem (by `thinking-scientific-method` or equivalent hypothesis-differential debugging). From that starting point — the proximate cause is known — it chains "why" questions backward to reach the systemic root cause, with explicit guards against the technique's known failure modes.
 
-**Core Principle:** Keep asking "why" until you reach an actionable, evidenced root cause—and guard against the technique's known failure modes at every step.
+**Core Principle:** Never ask "why" without evidence for the answer. Chain backward from localized fault to actionable root cause, and stop only when the cause passes a counterfactual test: "Would the problem NOT have occurred if this cause were absent?"
 
 ## When to Use
 
-- Incident post-mortems
-- Bug investigations where the proximate cause is known but the systemic cause isn't
-- A problem that keeps recurring despite previous fixes
-- Any case where you need the root cause, not just the proximate one
+- A fault has been localized to a specific component (use `thinking-scientific-method` first if you don't know which component is at fault)
+- The proximate cause is known but the systemic cause isn't
+- A problem keeps recurring despite previous fixes
+- You need the root cause, not just the proximate one
+
+Decision flow:
 
 ```
-Problem occurred?
-  → Is the root cause already obvious and verified? → yes → Fix directly
-  → Could the symptom have several distinct causes?  → yes → first localize with thinking-scientific-method (hypothesis differential), then Five Whys the confirmed cause
-  → Proximate cause known, systemic cause unclear?   → yes → APPLY FIVE WHYS PLUS
+Fault localized to a specific component?
+  → No → Run thinking-scientific-method first to localize
+  → Yes → Proximate cause known?
+      → No → Gather evidence on proximate cause
+      → Yes → Is the root cause already obvious and verified?
+          → Yes → Fix directly; don't chain
+          → No → APPLY FIVE WHYS PLUS
 ```
 
 ## When NOT to Use
 
-- The root cause is already obvious and verified → just fix it; the chain adds nothing.
-- You don't yet know *which* component is at fault (multiple candidate causes) → that's a localization problem; use a hypothesis differential first (`thinking-scientific-method`), then run Five Whys on the cause it confirms.
-- The chain would be pure speculation with no evidence for the next "why" → stop and gather evidence; don't speculate deeper (see the Speculation Dive guard).
+- **The fault is not yet localized.** If you don't know which component is at fault (multiple candidate causes), this is a localization problem. Use `thinking-scientific-method` (hypothesis-differential debugging) first, then run Five Whys on the cause it confirms.
+- **The root cause is already obvious and verified.** Don't ritualistically chain "why" — just fix it.
+- **The chain would be pure speculation with no evidence for the next "why".** Stop and gather evidence; don't speculate deeper (see Anti-Patterns: Speculation Dive).
+- **The problem is a one-off with no systemic dimension.** If a single fat-finger error caused an outage and there's no process gap, don't force a chain.
 
-## Standard Five Whys Failure Modes
-
-| Failure Mode | Description | Guard |
-|--------------|-------------|-------|
-| Premature stopping | Accepting first plausible cause | Minimum depth + actionability test |
-| Single-cause bias | Assuming one root cause | Branch on "what else?" |
-| Blame orientation | Stopping at human error | "Why was error possible?" |
-| Confirmation bias | Finding expected cause | Devil's advocate review |
-| Circular reasoning | Why loops back on itself | Detect and break cycles |
-| Speculation depth | Going beyond evidence | Evidence requirement |
-
-## The Five Whys Plus Process
+## Procedure
 
 ### Step 1: State the Problem Precisely
 
-Bad: "The system was slow"
-Good: "API response times exceeded 2 seconds for 30% of requests between 14:00-14:45 UTC on January 15"
+Document the localized fault with specific, measurable details:
 
 ```markdown
 Problem Statement:
 - What happened: [Specific observable symptom]
+- Localized to: [Component/subsystem confirmed by scientific-method or equivalent]
 - When: [Time range]
 - Where: [Affected systems/users]
 - Extent: [Scope and severity]
 - Impact: [Business/user impact]
 ```
 
-### Step 2: Apply "Why" with Evidence Requirement
+### Step 2: Build the Evidence Chain
 
-For each "why," require evidence:
+For each "why," require evidence, confidence, and alternatives considered:
 
 ```markdown
-Why #1: Why did [problem] occur?
+Why #N: Why did [answer N-1] occur?
 Answer: [Hypothesis]
-Evidence: [Data, logs, metrics that support this]
-Confidence: [High/Medium/Low]
+Evidence: [Data, logs, metrics that support this — NOT speculation]
+Confidence: High / Medium / Low
+What else considered: [Alternative causes checked]
+Ruled out because: [Evidence against alternatives]
 ```
 
-**Evidence types:**
-- Logs showing the event
-- Metrics correlating with timeline
-- Code showing the behavior
-- Configuration proving the state
-- Testimony from multiple sources
+**Evidence types:** Logs showing the event, metrics correlating with timeline, code showing the behavior, configuration proving the state, testimony from multiple independent sources.
 
-### Step 3: Branch on "What Else?"
+**Branch on "what else?"** at each step — explicitly list and rule out alternative explanations before proceeding.
 
-After each "why," explicitly ask "what else could cause this?"
+### Step 3: Apply the Counterfactual Cause Test
+
+Before stopping, test the proposed root cause:
+
+> **Counterfactual:** "Would the problem NOT have occurred if this cause were absent?"
+
+If the answer is "no" or "maybe not" — you haven't reached the root cause. Keep going.
+
+If the answer is "yes, the problem would not have occurred" — AND the cause passes the stop condition (Step 4) — you've found the root cause.
+
+### Step 4: Check the Stop Condition
+
+Only stop when ALL criteria are met:
+
+| Criterion | Question |
+|-----------|----------|
+| Actionable | Can we take concrete action on this cause? |
+| Controllable | Is this within our control to fix? |
+| Fundamental | Would fixing this prevent recurrence? |
+| Evidenced | Do we have evidence, not just speculation? |
+| Counterfactual | Would the problem NOT have occurred if this cause were absent? |
+| Not-blame | Is this a system/process issue, not just "someone messed up"? |
+
+**Never stop at human error.** When you reach "someone made a mistake," ask "Why was the mistake possible?" — that's the systemic cause.
+
+### Step 5: Apply Devil's Advocate Review
+
+Before finalizing, challenge the conclusion:
 
 ```markdown
-Why #1: Why did API response times spike?
-Primary answer: Database queries were slow
-Evidence: DB query times increased from 50ms to 1.5s
-
-What else could cause this?
-- [ ] Network latency (checked: normal)
-- [ ] Application code changes (checked: none deployed)
-- [ ] Memory pressure (checked: normal)
-- [ ] External API dependencies (checked: normal)
-
-→ Proceeding with database queries as verified cause
-```
-
-### Step 4: Apply "Why Was This Possible?" for Human Error
-
-Never stop at "human error" or "someone made a mistake."
-
-```
-BAD chain:
-Why did the outage occur? → Config was wrong
-Why was config wrong? → Engineer made a typo
-→ STOP (blames human)
-
-GOOD chain:
-Why did the outage occur? → Config was wrong
-Why was config wrong? → Engineer made a typo
-Why was a typo possible? → No validation on config changes
-Why was there no validation? → Config system doesn't support schemas
-Why doesn't it support schemas? → Tech debt, never prioritized
-→ ROOT CAUSE: Config validation infrastructure gap
-```
-
-### Step 5: Check Stopping Criteria
-
-Only stop when ALL are true:
-
-| Criterion | Question | ✓ |
-|-----------|----------|---|
-| Actionable | Can we take concrete action on this cause? | |
-| Controllable | Is this within our control to fix? | |
-| Fundamental | Would fixing this prevent recurrence? | |
-| Evidenced | Do we have evidence, not just speculation? | |
-| Not-blame | Is this a system issue, not just "someone messed up"? | |
-
-### Step 6: Verify with Counter-Analysis
-
-Before finalizing, apply devil's advocate:
-
-```markdown
-Proposed root cause: [X]
-
 Counter-analysis:
 1. What evidence contradicts this conclusion?
-2. What other explanation fits the evidence?
-3. Would someone with a different perspective agree?
+2. What other explanation fits the evidence equally well?
+3. Would someone outside our team reach the same conclusion?
 4. If we fix X, are we confident the problem won't recur?
 5. Are we finding what we expected to find? (confirmation bias check)
 ```
 
-## Enhanced Template
+### Step 6: Document and Recommend
 
-```markdown
-# Five Whys Plus Analysis
+Record the full chain and prescribe actions that address the root cause (not just the symptom).
 
-## Problem Statement
-- **What:** [Specific symptom]
-- **When:** [Time range]
-- **Where:** [Affected scope]
-- **Impact:** [Severity and consequences]
+## Output Contract
 
-## Why Chain
+A completed Five Whys Plus analysis produces:
 
-### Why #1: Why did [problem] occur?
-**Answer:**
-**Evidence:**
-**Confidence:** High / Medium / Low
-**What else considered:**
-**Ruled out because:**
+1. **Problem Statement** — specific, measurable, with localized component
+2. **Evidence Chain** — each "why" step with answer, evidence, confidence, and alternatives ruled out
+3. **Counterfactual Test Result** — explicit answer to "would the problem NOT have occurred?"
+4. **Stop Condition Check** — all six criteria satisfied
+5. **Devil's Advocate Review** — contradicting evidence, alternative explanations, bias check
+6. **Root Cause(s)** — primary and any contributing factors
+7. **Recommended Actions** — addressing root cause, with owner and timeline
+8. **Verification Plan** — how to confirm the fix worked
 
-### Why #2: Why did [answer #1] occur?
-**Answer:**
-**Evidence:**
-**Confidence:**
-**What else considered:**
-**Ruled out because:**
+## Anti-Patterns
 
-### Why #3: Why did [answer #2] occur?
-**Answer:**
-**Evidence:**
-**Confidence:**
-**What else considered:**
-**Ruled out because:**
-
-[Continue as needed...]
-
-## Stopping Criteria Check
-- [ ] Actionable: We can take concrete action
-- [ ] Controllable: Within our control
-- [ ] Fundamental: Prevents recurrence
-- [ ] Evidenced: Supported by data
-- [ ] System-focused: Not blaming individuals
-
-## Counter-Analysis
-**Contradicting evidence:**
-**Alternative explanations:**
-**Confirmation bias check:**
-**Confidence in conclusion:**
-
-## Root Causes Identified
-1. [Primary root cause]
-2. [Contributing factor if applicable]
-
-## Recommended Actions
-| Action | Addresses | Owner | Timeline |
-|--------|-----------|-------|----------|
-| | | | |
-
-## Verification Plan
-How will we know the fix worked?
-```
-
-## Example: Production Outage
-
-```markdown
-# Five Whys Plus: Payment Service Outage
-
-## Problem Statement
-- What: Payment service returned 500 errors
-- When: 2024-01-15 14:00-14:45 UTC
-- Where: Production, US-East region
-- Impact: 2,400 failed transactions, ~$180K revenue impact
-
-## Why Chain
-
-### Why #1: Why did payment service return 500 errors?
-**Answer:** Database connection pool exhausted
-**Evidence:** Connection pool metrics showed 100/100 in use, logs show "connection wait timeout"
-**Confidence:** High
-**What else considered:**
-- Application bugs (no recent deploys)
-- Memory issues (heap normal)
-- Network problems (latency normal)
-
-### Why #2: Why was connection pool exhausted?
-**Answer:** Queries taking 10x longer than normal
-**Evidence:** P99 query time went from 50ms to 500ms at 14:00
-**Confidence:** High
-**What else considered:**
-- Connection leak (connection count stable before incident)
-- Sudden traffic spike (traffic was normal)
-
-### Why #3: Why were queries taking 10x longer?
-**Answer:** Missing index on payment_status table
-**Evidence:** EXPLAIN shows sequential scan on 10M row table
-**Confidence:** High
-**What else considered:**
-- Lock contention (no blocking locks)
-- DB resource exhaustion (CPU/memory normal)
-
-### Why #4: Why was the index missing?
-**Answer:** Migration to add index was rolled back 2 weeks ago
-**Evidence:** Deployment logs show rollback on 2024-01-01
-**Confidence:** High
-
-### Why #5: Why was the migration rolled back?
-**Answer:** Migration timed out during deploy window
-**Evidence:** Deploy log shows "migration timeout after 30 minutes"
-
-### Why #6: Why did migration timeout?
-**Answer:** Table too large for online migration in current window
-**Evidence:** Table has 10M rows, online migration takes ~2 hours
-**Confidence:** High
-
-### Why #7 (System-level): Why wasn't this caught before impact?
-**Answer:** No alerting on query performance degradation
-**Evidence:** No alerts fired until connection pool exhausted
-
-## Stopping Criteria Check
-- [x] Actionable: Can add index, fix alerting
-- [x] Controllable: Within our control
-- [x] Fundamental: Index prevents query issue, alerting prevents impact
-- [x] Evidenced: All steps have supporting data
-- [x] System-focused: Process and tooling issues, not blame
-
-## Root Causes Identified
-1. **Primary:** Index migration process doesn't handle large tables
-2. **Contributing:** No alerting on query latency before connection exhaustion
-
-## Recommended Actions
-| Action | Addresses | Owner | Timeline |
-|--------|-----------|-------|----------|
-| Implement online index creation tool | Root cause 1 | Platform | 2 weeks |
-| Add query latency alerting | Root cause 2 | SRE | 1 week |
-| Create index during maintenance window | Immediate fix | DBA | Tonight |
-```
-
-## Common Patterns to Catch
-
-### The Blame Stop
-
-```
-BAD: "Why did it fail?" → "Engineer didn't test properly" → STOP
-
-BETTER: → "Why was it possible to deploy without proper testing?"
-        → "Why doesn't the pipeline enforce testing?"
-        → System/process root cause
-```
-
-### The Premature Technical Stop
-
-```
-BAD: "Why was it slow?" → "Query was inefficient" → STOP
-
-BETTER: → "Why was an inefficient query in production?"
-        → "Why didn't code review catch it?"
-        → "Why don't we have query performance testing?"
-```
-
-### The Circular Why
-
-```
-DETECT: "Why A?" → "Because B" → "Why B?" → "Because A"
-
-BREAK: Introduce external evidence or third factor
-```
-
-### The Speculation Dive
-
-```
-DETECT: Answers become increasingly speculative without evidence
-
-BREAK: "What evidence do we have for this?"
-       If none, mark as hypothesis and seek evidence
-```
-
-## Verification Checklist
-
-- [ ] Problem stated with specific details (what, when, where, extent)
-- [ ] Each "why" has supporting evidence
-- [ ] "What else?" asked at each branch point
-- [ ] Didn't stop at human error—asked "why was error possible?"
-- [ ] Stopping criteria all satisfied
-- [ ] Counter-analysis performed
-- [ ] Root cause is actionable and controllable
-- [ ] Actions address root cause, not just symptoms
-
-## Key Questions
-
-- "What evidence supports this answer?"
-- "What else could explain this?"
-- "Why was this mistake/error/failure possible?"
-- "If we stop here, will the problem actually be prevented?"
-- "Are we finding what we expected, or what the evidence shows?"
-- "Would someone outside our team reach the same conclusion?"
-
-## Ohno's Wisdom (Extended)
-
-Taiichi Ohno said: "By asking 'why' five times and answering each time, we can get to the real cause of the problem."
-
-The extension: Five is not magic. The real guidance is:
-1. Keep asking until you reach something actionable
-2. But don't speculate past your evidence
-3. And never stop at human blame
-
-The technique is simple. Applying it well requires discipline.
+| Anti-Pattern | Symptom | Correction |
+|---|---|---|
+| **Pre-localization application** | Running Five Whys when you don't know which component failed | Use `thinking-scientific-method` first to localize |
+| **Premature stop** | Accepting the first plausible cause without the counterfactual test | Apply the counterfactual: "Would the problem NOT have occurred?" |
+| **Blame stop** | Ending at "someone made a mistake" | Ask "Why was the mistake possible?" — find the systemic gap |
+| **Speculation dive** | Answers become increasingly speculative without evidence | Stop and gather evidence; mark un-evidenced steps as hypotheses |
+| **Circular why** | "Why A?" → "Because B" → "Why B?" → "Because A" | Introduce external evidence or a third factor to break the cycle |
+| **Single-cause bias** | Assuming one root cause without branching | At each step, ask "what else could cause this?" and rule out alternatives |
+| **Confirmation bias** | Finding the cause you expected to find | Devil's advocate review; ask "what evidence contradicts this?" |
+| **Ritualistic chaining** | Asking five whys when one would do | Stop when the counterfactual test passes and the stop condition is met |
