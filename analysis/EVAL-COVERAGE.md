@@ -4,12 +4,15 @@ Authoritative map of what eval each of the 39 skills has, the result, and the re
 Generated against `experiments.db` + `evals/datasets/`. Layers: **T0** structural lint · **T1** rubric · **T2** routing/discoverability (all 39 have ≥1 case) · **T3** behavioral A/B (authored prompts) · **OBJ** objective ground-truth run (the layer that decides elevate/kill).
 
 ## Headline
+
+> **[SUPERSEDED — 2026-06-07 M5 full-sample scrutiny] The claim below that `scientific-method` is a "robust, significant objective lift (+9.3pp, p=0.002)" and "ELEVATE (robust, replicate-worthy)" is SUPERSEDED. Canonical outcome: scientific-method is DIRECTIONAL-NOT-REPLICATED. The +9.3pp p=0.002 was a PRE-EDIT run1 primary that predates the SKILL.md rewrite. The M5 fresh post-edit primary scored +5.3pp p=0.061 (n=150) — FAILS the p<0.05 gate. The M5 replication (+8.0pp p=0.001) cannot rescue a failed primary. The mission produced ZERO robust-ELEVATE skills. See `analysis/ELEVATE-OR-KILL-SCORECARD.md` for the canonical verdicts.**
+
 After full powering, **`scientific-method` is the only skill with a robust, significant objective lift (+9.3pp, p=0.002, SWE-bench n=150).** Every other measured positive — `systems`, `five-whys-plus`, `red-team`, `fermi` — regressed to non-significance at n≥150. The consistent pattern across five skills: borderline p≈0.04–0.05 small-N results do **not** survive replication. Objective coverage is now **17/39 skills run**; the rest are genuinely pairwise (no objective formulation), at ceiling, or meta.
 
 ## Objectively measured (17 skills) — run with ground-truth verdicts
 | Skill | Objective dataset (N) | placebo→skill | Δ | p | Verdict |
 |---|---|---|---|---|---|
-| **scientific-method** | SWE-bench n=150 (native) | 82→91% | **+9.3** | **0.002** | **ELEVATE (robust, replicate-worthy)** |
+| **scientific-method** | SWE-bench n=150 (native) | 82→91% | **+9.3** | **0.002** | **[SUPERSEDED] ELEVATE (robust, replicate-worthy)** — old run1 primary was PRE-EDIT; M5 fresh post-edit primary +5.3pp p=0.061 FAILS p<0.05 gate; replication +8.0pp p=0.001 cannot rescue; canonical verdict = DIRECTIONAL-NOT-REPLICATED; mission outcome = ZERO robust-ELEVATE |
 | red-team | DiverseVul balanced n=200 | 59→64% | +5.0 | 0.10 | directional, not sig (was +11@n80) |
 | first-principles | authored constraint n=30 | 93→100% | +6.7 | 0.48 | near-ceiling, ns |
 | systems | SWE-bench n=150 | 84→83% | −1.3 | 0.68 | no robust effect (was +5.3@earlier) |

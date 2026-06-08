@@ -57,9 +57,9 @@ Skills that received a powered evaluation on their calibrated decisive split and
 
 | Skill | Dataset | N | Placebo → Skill | Δ (pp) | p | Family | Notes |
 |-------|---------|---|-----------------|--------|---|--------|-------|
-| **red-team** | Security/adversarial decisive | 70 | 43% → 44% | +1.4 | 1.0 | Security/adversarial | M5 powered primary on harder diverse-CWE decisive split (post-edit, null, not replicated). Earlier n=80 +11.3pp p=0.052 **superseded**; n=200 +5.0pp p=0.10 directional **superseded**. Primary did not pass ≥5pp + p<0.05 gate → NO-LIFT (not directional-not-replicated — red-team never passed primary). |
-| **systems** | SWE-bench decisive split | 150 | 83% → 84% | +1.3 | 0.724 | Debugging/fault-localization | Original +5.3pp p=0.043 **superseded**; replication −1.3pp p=0.683 (post-edit, null, not replicated). Not reworked this mission; split frozen before result. |
-| **five-whys-plus** | debugging-fault-localization-decisive | 224 | 59% → 59% | +0.9 | 0.724 | Debugging/fault-localization | Original +4.0pp p=0.041 **superseded**; replication +1.3pp p=0.752 (post-edit, null, not replicated). M4 reworked skill, decisive split, full-n=224. |
+| **red-team** | Security/adversarial decisive | 70 | 43% → 44% | +1.4 | 1.0 | Security/adversarial | M5 powered primary on harder diverse-CWE decisive split (post-edit, null, not replicated). Earlier n=80 +11.3pp p=0.052 (post-edit, directional, not replicated, **superseded**); n=200 +5.0pp p=0.10 (post-edit, directional, not replicated, **superseded**). Primary did not pass ≥5pp + p<0.05 gate → NO-LIFT (not directional-not-replicated — red-team never passed primary). |
+| **systems** | SWE-bench decisive split | 150 | 83% → 84% | +1.3 | 0.724 | Debugging/fault-localization | Original +5.3pp p=0.043 (post-edit, significant, not replicated, **superseded**); replication −1.3pp p=0.683 (post-edit, null, not replicated). Not reworked this mission; split frozen before result. |
+| **five-whys-plus** | debugging-fault-localization-decisive | 224 | 59% → 59% | +0.9 | 0.724 | Debugging/fault-localization | Original +4.0pp p=0.041 (post-edit, significant, not replicated, **superseded**); replication +1.3pp p=0.752 (post-edit, null, not replicated). M4 reworked skill, decisive split, full-n=224. |
 | **occams-razor** | debugging-fault-localization-decisive | 224 | 56% → 55% | −0.9 | 0.724 | Debugging/fault-localization | M4 reworked skill (post-edit, null, not replicated); trigger-scoped rework did not move needle. Full-n=224. |
 | **archetypes** | systems-product-strategy-pairwise decisive | 117 | 72% → 73% | +0.9 | 1.0 | Systems/product/strategy pairwise | In-band quarantine candidate given fair chance (post-edit, null, not replicated). No lift detected. |
 | **fermi-estimation** | jeggers/fermi | 150 | 41% → 41% | +0.7 | 1.0 | Quantitative/uncertainty | Rework "rescue" at n=40 (+7.5pp — post-edit, directional, not replicated) was noise. Powered n=150 confirmation flat (post-edit, null, not replicated). |
@@ -79,14 +79,14 @@ Skills where the placebo/baseline accuracy is at or near ceiling (90–100%), le
 
 | Skill | Dataset | N | Placebo | Δ (pp) | Provenance |
 |-------|---------|---|---------|--------|------------|
-| `first-principles` | authored constraint | 30 | 93% | +6.7 (ns) | `OBJ-small-ceiling` |
-| `map-territory` | authored verify | 30 | 97% | +3.3 (ns) | `OBJ-small-ceiling` |
-| `cynefin` | authored classify | 30 | 97% | +3.3 (ns) | `OBJ-small-ceiling` |
-| `theory-of-constraints` | authored bottleneck | 30 | 97% | 0 (ns) | `OBJ-small-ceiling` |
-| `reversibility` | authored doors | 30 | 100% | 0 (ns) | `OBJ-small-ceiling` |
-| `bayesian` | authored base-rate | 40 | 98% | +2 (ns) | `OBJ-small-ceiling` |
-| `debiasing` | authored bias | 40 | 100% | −2 (ns) | `OBJ-small-ceiling` |
-| `socratic` | authored clarify | 29 | 100% | −6.9 (ns) | `OBJ-small-ceiling` |
+| `first-principles` | authored constraint | 30 | 93% | +6.7 (ns) | `OBJ-small-ceiling`, post-edit, null, not replicated |
+| `map-territory` | authored verify | 30 | 97% | +3.3 (ns) | `OBJ-small-ceiling`, post-edit, null, not replicated |
+| `cynefin` | authored classify | 30 | 97% | +3.3 (ns) | `OBJ-small-ceiling`, post-edit, null, not replicated |
+| `theory-of-constraints` | authored bottleneck | 30 | 97% | 0 (ns) | `OBJ-small-ceiling`, post-edit, null, not replicated |
+| `reversibility` | authored doors | 30 | 100% | 0 (ns) | `OBJ-small-ceiling`, post-edit, null, not replicated |
+| `bayesian` | authored base-rate | 40 | 98% | +2 (ns) | `OBJ-small-ceiling`, post-edit, null, not replicated |
+| `debiasing` | authored bias | 40 | 100% | −2 (ns) | `OBJ-small-ceiling`, post-edit, null, not replicated |
+| `socratic` | authored clarify | 29 | 100% | −6.9 (ns) | `OBJ-small-ceiling`, post-edit, null, not replicated |
 
 ### 1.8 UNRESOLVED/UNMEASURED — Pending Objective Evaluation
 
