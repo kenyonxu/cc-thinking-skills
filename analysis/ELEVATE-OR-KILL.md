@@ -63,11 +63,18 @@ The native-domain run **nuances the earlier "no objective lift" finding**: in th
 
 **Synthesis across all Phase-4 evidence:** the thinking skills add (a) a modest *significant* lift on **open-ended in-domain reasoning** (pairwise 63%, p=0.015), (b) a *consistent directional* lift on **objective native-domain debugging** (+4–9pp, ns at n=45), and (c) **nothing** out-of-domain or where the model is already at ceiling. The value is real but small and **entirely conditional on domain-fit** — supporting situation-named descriptions, trigger-only delivery for redundant skills, and rework/kill for the consistently-flat ones (`scientific-method`, `fermi-estimation`).
 
-> **⚠️ SUPERSEDED MID-DOCUMENT NARRATIVE — 2026-06-07 (Elevate-or-Kill M5 outcome)**
-> The following sections (★ through ★★★) contain ELEVATE claims that have been overturned by powered replication evidence. These sections are retained for historical provenance only. The CURRENT verdicts are documented in `analysis/ELEVATE-OR-KILL-SCORECARD.md`. See `analysis/STALE-CLAIM-CLEANUP.md` for the full cleanup notes.
-> **Only the final two sections (★ Wave C replication failure + ★★★★★ Powered confirmation collapse) and the final program verdict are current.**
+> **⚠️ SUPERSEDED NARRATIVE — 2026-06-07 (M5/M6 scrutiny round-1)**
+> The canonical scorecard (`analysis/ELEVATE-OR-KILL-SCORECARD.json`) is AUTHORITATIVE for ALL verdicts and supersedes ALL conflicting claims anywhere in this document — including any robust-ELEVATE assertions in the supposedly-current final sections (★ Wave C and ★★★★★).
 >
-> Key overturned claims below: `systems` +5.3pp p=0.043 was not replicated (−1.3pp p=0.683); `five-whys-plus` +4.0pp p=0.041 was not replicated (+1.3pp p=0.752); the "trimming regression" lesson is retracted (both original and trimmed were noise draws); `scientific-method` +9.3pp p=0.002 was the old run1 primary (superseded by M5 fresh primary +5.3pp p=0.061 — DIRECTIONAL-NOT-REPLICATED).
+> **EVERY section of this document is superseded wherever it asserts robust-ELEVATE for ANY skill** (including `scientific-method`, `systems`, `five-whys-plus`, `red-team`). The M5 evidence conclusively established:
+> - **ZERO skills achieved robust-ELEVATE** (mission outcome)
+> - **`scientific-method` is DIRECTIONAL-NOT-REPLICATED** (M5 fresh primary +5.3pp p=0.061 post-edit directional — fails p<0.05 gate; replication +8.0pp p=0.001 post-edit significant cannot rescue). The claim "scientific-method is the only skill with a robust, significant, replicated objective lift (+9.3pp, p=0.002)" in sections ★★★★ and ★★★★★ is **SUPERSEDED** — that +9.3pp was the old run1 primary (pre-edit, superseded). The M5 fresh post-edit primary (+5.3pp p=0.061) failed the gate.
+> - **`red-team` is NO-LIFT** (M5 powered primary +1.4pp p=1.0 on harder CWE decisive split; earlier +5.0pp p=0.10 on diversevul also fails gate)
+> - **`systems` and `five-whys-plus` did not replicate** (NO-LIFT)
+>
+> These sections are retained for historical provenance only. The CURRENT verdicts are documented in `analysis/ELEVATE-OR-KILL-SCORECARD.{json,md}`. See `analysis/STALE-CLAIM-CLEANUP.md` for the full cleanup notes.
+>
+> Key overturned claims below: `systems` +5.3pp p=0.043 was not replicated (−1.3pp p=0.683); `five-whys-plus` +4.0pp p=0.041 was not replicated (+1.3pp p=0.752); the "trimming regression" lesson is retracted (both original and trimmed were noise draws); `scientific-method` +9.3pp p=0.002 was the old run1 primary (superseded by M5 fresh primary +5.3pp p=0.061 — DIRECTIONAL-NOT-REPLICATED); `red-team` +11.3pp p=0.052 was not confirmed (+5.0pp p=0.10, then +1.4pp p=1.0 on harder split — NO-LIFT).
 
 ## ★ FIRST SIGNIFICANT VERDICT — thinking-systems = ELEVATE
 Powered SWE-bench fault localization, n=150, isolated, length-controlled:
@@ -136,12 +143,12 @@ Powered, isolated, length-controlled sweep (`evals/run-wavec.sh`). Four previous
 **The two "firm ELEVATE" debugging skills do not replicate on a fresh sample.** `systems` went +5.3pp (p=0.043) → −1.3pp, and `five-whys-plus` +4.0pp (p=0.041) → +1.3pp. Restoring `systems`' trimmed leverage table did **not** recover the effect. This means:
 - The earlier "trimming regression" lesson was **wrong** — the dips weren't caused by trimming (content was barely touched). Both the original +5pp *and* the trimmed +3pp were draws from a distribution centered near **zero**; the p≈0.04 originals were **borderline-significance noise that doesn't survive replication.**
 - **Replication, not a single p<0.05, is the bar.** A lone borderline result at n=150 is not enough — these effects are small (a handful of discordant pairs out of 150) and a fresh sample easily crosses back.
-- **Only `scientific-method` (+9.3pp, p=0.002) remains a robust ELEVATE** — its effect is larger and its p an order of magnitude stronger. It should still be independently replicated, but it is in a different class than the borderline debugging skills.
+- **Only `scientific-method` (+9.3pp, p=0.002) remains a robust ELEVATE** **[⛔ SUPERSEDED: this +9.3pp was the old run1 primary (pre-edit). M5 fresh post-edit primary +5.3pp p=0.061 failed the paired-test gate; scientific-method is now DIRECTIONAL-NOT-REPLICATED per canonical scorecard.]** — its effect is larger and its p an order of magnitude stronger. It should still be independently replicated, but it is in a different class than the borderline debugging skills.
 - **`red-team` (+11.3pp, p=0.052) is the new strongest candidate** — a large effect on balanced objective security data. It needs an n=150/200 confirmation run to settle significance, but it is the most promising un-confirmed skill.
 
 ### Revised program conclusion
 Across all evidence now: thinking skills produce **at most a small effect on objective tasks, and most apparent "ELEVATEs" are at the edge of significance and do not robustly replicate.** The honest scorecard:
-- **Robust ELEVATE:** `scientific-method` (debugging rework, +9.3pp p=0.002).
+- **Robust ELEVATE:** `scientific-method` (debugging rework, +9.3pp p=0.002). **[⛔ SUPERSEDED: M5 fresh post-edit primary +5.3pp p=0.061 failed gate; scientific-method is DIRECTIONAL-NOT-REPLICATED per canonical scorecard. No skill currently holds ELEVATE.]**
 - **Strong candidate, unconfirmed:** `red-team` (security, +11.3pp p=0.052 — confirm at higher N).
 - **Not replicated (downgrade from ELEVATE to "no robust effect"):** `systems`, `five-whys-plus`.
 - **No effect / redundant-at-ceiling:** `circle-of-competence`, `cynefin`, `socratic`, `debiasing`, `bayesian`.
@@ -157,7 +164,8 @@ The only two un-confirmed positive effects were re-run at power. Both shrank tow
 | **red-team** | +11.3pp p=0.052 (n=80) | **+5.0pp p=0.10 (n=200)** | directional positive, **NOT significant** |
 | **fermi-estimation** (reworked) | +7.5pp p=0.37 (n=40) | **+0.7pp p=1.0 (n=150)** | **flat** — the rework-rescue was n=40 noise |
 
-### Final program verdict (after full powering)
-**`scientific-method` is the only skill with a robust, significant, replicated objective lift (+9.3pp, p=0.002).** Every other apparent ELEVATE — systems, five-whys-plus, red-team, fermi-rework — **regressed to non-significance once powered to n≥150.** The consistent pattern across *five* skills is decisive: **borderline p≈0.04–0.05 results at small N are draws from a near-zero-centered distribution and do not survive replication.** 
+### Final program verdict (after full powering) — [⛔ SUPERSEDED by M5/M6 scrutiny round-1]
+
+**`scientific-method` is the only skill with a robust, significant, replicated objective lift (+9.3pp, p=0.002).** **[⛔ SUPERSEDED: This +9.3pp was the old run1 primary (pre-edit). The M5 fresh post-edit primary (+5.3pp, p=0.061, n=150) on the original frozen SWE-bench set FAILED the p<0.05 paired-test gate. Replication (+8.0pp, p=0.001, same direction, post-edit, significant) cannot rescue a primary that fails. scientific-method is DIRECTIONAL-NOT-REPLICATED per the canonical scorecard. Mission outcome is ZERO robust-ELEVATE skills.]** Every other apparent ELEVATE — systems, five-whys-plus, red-team, fermi-rework — **regressed to non-significance once powered to n≥150.** The consistent pattern across *five* skills is decisive: **borderline p≈0.04–0.05 results at small N are draws from a near-zero-centered distribution and do not survive replication.** 
 
 Honest bottom line: on objective, judge-free tasks, injecting a thinking-skill guide produces **no reliable accuracy lift for 38 of 39 skills**; the one exception is a debugging skill that was specifically reworked to be agent-native and evidence-ranked. The catalog's value is reasoning *framing* and *discoverability*, not measurable correctness — and "replication, not a single p<0.05" is the standard any future ELEVATE claim must meet.

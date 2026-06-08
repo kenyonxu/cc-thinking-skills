@@ -28,7 +28,7 @@
 | Skill | Dataset | N | Placebo → Skill | Δ (pp) | p | Verdict | Provenance |
 |-------|---------|---|-----------------|--------|---|---------|------------|
 | **scientific-method** | SWE-bench fault localization (frozen 150-item set) | 150 | 85% → 91% | **+5.3** | 0.061 | **DIRECTIONAL-NOT-REPLICATED** (primary +5.3pp p=0.061 fails paired test; replication +8.0pp p=0.001 cannot rescue) | `OBJ-powered-directional` |
-| red-team | DiverseVul balanced | 200 | 59% → 64% | +5.0 | 0.10 | directional, not sig | `OBJ-powered-directional` |
+| red-team | Security decisive (CWEs) | 70 | 43% → 44% | +1.4 | 1.0 | NO-LIFT (M5 primary; earlier +5.0 p=0.10 superseded) | `OBJ-powered-null` |
 | first-principles | authored constraint | 30 | 93% → 100% | +6.7 | 0.48 | ceiling | `OBJ-small-ceiling` |
 | systems | SWE-bench | 150 | 84% → 83% | −1.3 | 0.68 | no effect (was +5.3@n=150) | `OBJ-powered-null` |
 | five-whys-plus | SWE-bench | 150 | 83% → 84% | +1.3 | 0.75 | no effect (was +4.0@n=150) | `OBJ-powered-null` |
@@ -97,18 +97,20 @@
 
 ---
 
-### Directional (powered, same sign, not significant)
+### NO-LIFT (powered primary did not pass gate)
 
-#### `red-team` — **DIRECTIONAL-NOT-REPLICATED**
-- **Dataset:** DiverseVul balanced
-- **N:** 200 (confirmation run; initial n=80 gave +11.3pp p=0.052)
-- **Placebo → Skill:** 59% → 64%
-- **Δ:** +5.0 pp
-- **McNemar p:** 0.10
-- **Discordant pairs:** 30
-- **Provenance:** `OBJ-powered-directional` | `post-edit` | `directional` | `replicated: false`
-- **Sources:** `evals/results/wavec/redteam-diversevul-balanced.json` (n=80, +11.3pp p=0.052), `evals/results/confirm/redteam-diversevul-balanced-n200.json` (n=200, +5.0pp p=0.10)
-- **Note:** Largest objective effect in program but does not reach significance at n=200.
+#### `red-team` — **NO-LIFT**
+- **M5 Primary (decisive split):** Security/adversarial decisive split (70 items, diverse CWE, near-miss safe, distractors)
+- **N:** 70
+- **Placebo → Skill:** 43% → 44%
+- **Δ:** +1.4 pp
+- **McNemar p:** 1.0
+- **Provenance:** `OBJ-powered-null` | `post-edit` | `null` | `replicated: false`
+- **Source:** `evals/results/m5-primary/redteam-security-decisive.json`
+- **Earlier evidence (superseded by decisive split):**
+  - n=80 (DiverseVul balanced): 56% → 68%, +11.3pp, p=0.052 — `superseded`
+  - n=200 (DiverseVul balanced): 59% → 64%, +5.0pp, p=0.10 — directional, not sig; `superseded`
+- **Note:** The M5 powered primary on harder diverse-CWE decisive split (baseline 43% — in-band headroom) produced +1.4pp, p=1.0 — NO-LIFT. Earlier directional signals on easier diversevul-balanced pool (+11.3pp n=80, +5.0pp n=200) are superseded. The primary did not pass the ≥5pp + p<0.05 gate; therefore this is NO-LIFT, not directional-not-replicated (red-team never passed primary).
 
 ---
 
@@ -224,7 +226,7 @@
 | `opportunity-cost` | 33% | −1 | regresses | superseded |
 | `pre-mortem` | 100% | +3 | proven | superseded |
 | `probabilistic` | 67% | +1 | proven | superseded |
-| `red-team` | 67% | +1 | proven | superseded (powered directional) |
+| `red-team` | 67% | +1 | proven | superseded (powered null, M5 no-lift) |
 | `regret-minimization` | 0% | −3 | regresses | superseded |
 | `reversibility` | 67% | +1 | proven | superseded (ceiling) |
 | `scientific-method` | 67% | +1 | proven | superseded (directional-not-replicated) |
@@ -312,7 +314,7 @@ The middle narrative sections of `analysis/ELEVATE-OR-KILL.md` contain the follo
 | `opportunity-cost` | unmeasured | regresses | unmeasured |
 | `pre-mortem` | unmeasured | proven | unmeasured |
 | `probabilistic` | unmeasured | proven | unmeasured |
-| `red-team` | directional (powered) | proven | directional-not-replicated |
+| `red-team` | null (powered, M5 decisive) | proven | no-lift |
 | `regret-minimization` | unmeasured | regresses | unmeasured |
 | `reversibility` | ceiling | proven | ceiling |
 | `scientific-method` | directional-not-replicated (full-n=150 primary: +5.3pp p=0.061) | proven | directional-not-replicated |

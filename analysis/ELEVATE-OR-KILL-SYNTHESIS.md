@@ -17,41 +17,65 @@ This is an honest, evidence-backed conclusion. The mission deliberately did NOT 
 
 ## Section 1: Verdict Categories — Complete Listing
 
-Every claim below carries the three required provenance dimensions: **pre/post-edit**, **directional/significant/null**, **replicated: false** (no skill-level ELEVATE verdict achieved replication).
+Every claim below carries the three required provenance dimensions: **pre/post-edit**, **directional/significant/null**, **replicated: false** (no skill-level ELEVATE verdict achieved replication). Each category is listed even when empty, as required by the synthesis template.
 
-### 1.1 DIRECTIONAL-NOT-REPLICATED
+### 1.1 robust-ELEVATE — EMPTY
 
-Skills that showed a positive primary signal but failed the replication gate (primary did not pass p<0.05, or replication failed/mismatched).
+**ZERO skills achieved robust-ELEVATE.** No skill met the full bar: ≥5pp lift on its primary value surface, passes paired test at p<0.05, AND replicates on a fresh independent sample in the same direction. The mission outcome is zero robust-ELEVATE — this is documented explicitly per synthesis requirements.
+
+### 1.2 DIRECTIONAL-NOT-REPLICATED
+
+Skills where primary showed a positive signal but failed the replication gate (either primary did not pass p<0.05, or replication failed/mismatched). The direction is correct but the evidence does not clear the ELEVATE bar.
 
 | Skill | Primary | Replication | Status |
 |-------|---------|-------------|--------|
-| **scientific-method** | +5.3pp, p=0.061 (n=150, post-edit, directional) | +8.0pp, p=0.001 (n=150, post-edit, significant) | Primary fails p<0.05 gate; replication significant but cannot rescue. **Downgraded from ELEVATE. No skill currently holds ELEVATE.** |
-| **red-team** | +1.4pp, p=1.0 (n=70, post-edit, null) on harder CWE decisive split; earlier +5.0pp p=0.10 (n=200, post-edit, directional) on easier diversevul pool | N/A (primary did not pass) | Directional positive signal on easier items (+5.0pp) but not significant; collapsed to noise on harder items (+1.4pp). |
+| **scientific-method** | +5.3pp, p=0.061 (n=150, post-edit, directional, not replicated) | +8.0pp, p=0.001 (n=150, post-edit, significant, not replicated) | Primary fails p<0.05 gate; replication significant same-direction but cannot rescue. **Downgraded from ELEVATE. No skill currently holds ELEVATE.** |
 
-### 1.2 NO-LIFT
+### 1.3 TRIGGER-ONLY — None Currently Verified
+
+No skill has been verified as TRIGGER-ONLY through a powered trigger-card-vs-full-guide comparison on calibrated in-domain tasks. Earlier trigger-vs-full probes (e.g., on conceptual skills at small N) showed trigger ≈ full guide as a directional signal, but no powered verification was run during this mission. Trigger-card variants exist for some skills but remain unverified by decisive evidence.
+
+### 1.4 QUARANTINE-REDIRECT
+
+Skills flagged for quarantine/redirect based on evidence: either (a) showed no lift on their value surface, (b) were at ceiling, (c) duplicated another skill's mechanism, or (d) were not agent-applicable. All received "When NOT to Use" boundaries and explicit redirect language. No skill directory was deleted — the public count remains 39.
+
+| Skill | Redirect Target | Basis |
+|-------|----------------|-------|
+| `bayesian` | `probabilistic` (post-edit, null, not replicated) | Ceiling (98% placebo); probabilistic covers calibration better |
+| `model-selection` | `model-router` (unmeasured) | Duplicates router mechanism; audit recommends merge |
+| `inversion` | `pre-mortem` (post-edit, directional, not replicated) | Overlap — inversion is pre-mortem's core move |
+| `feedback-loops` | `systems` (unmeasured) | Duplicated Meadows content |
+| `archetypes` | `systems` / `leverage-points` (post-edit, null, not replicated) | Powered null on decisive split; systems covers the same ground |
+| `regret-minimization` | `reversibility` (unmeasured) | Not agent-applicable; reversibility/opportunity-cost cover decision regret |
+| `fermi-estimation` | — (post-edit, null, not replicated) | Powered flat at n=150; no known target |
+| `debiasing` | — (post-edit, null, not replicated) | Ceiling (100% placebo); LLMs already debiased on standard framings |
+| `dual-process` | — (unmeasured) | Resist objective framing; human stage-directions flagged in audit |
+
+### 1.5 NO-LIFT
 
 Skills that received a powered evaluation on their calibrated decisive split and showed no significant lift over placebo. These were given a fair chance — calibrated headroom, frozen split, post-edit evaluation.
 
 | Skill | Dataset | N | Placebo → Skill | Δ (pp) | p | Family | Notes |
 |-------|---------|---|-----------------|--------|---|--------|-------|
-| **systems** | SWE-bench decisive split | 150 | 83% → 84% | +1.3 | 0.724 | Debugging/fault-localization | Original +5.3pp p=0.043 **superseded**; replication −1.3pp p=0.683. Not reworked this mission; split frozen before result. |
-| **five-whys-plus** | debugging-fault-localization-decisive | 224 | 59% → 59% | +0.9 | 0.724 | Debugging/fault-localization | Original +4.0pp p=0.041 **superseded**; replication +1.3pp p=0.752. M4 reworked skill, decisive split, full-n=224. |
-| **occams-razor** | debugging-fault-localization-decisive | 224 | 56% → 55% | −0.9 | 0.724 | Debugging/fault-localization | M4 reworked skill; trigger-scoped rework did not move needle. Full-n=224. |
-| **archetypes** | systems-product-strategy-pairwise decisive | 117 | 72% → 73% | +0.9 | 1.0 | Systems/product/strategy pairwise | In-band quarantine candidate given fair chance. No lift detected. |
-| **fermi-estimation** | jeggers/fermi | 150 | 41% → 41% | +0.7 | 1.0 | Quantitative/uncertainty | Rework "rescue" at n=40 (+7.5pp) was noise. Powered n=150 confirmation flat. |
+| **red-team** | Security/adversarial decisive | 70 | 43% → 44% | +1.4 | 1.0 | Security/adversarial | M5 powered primary on harder diverse-CWE decisive split (post-edit, null, not replicated). Earlier n=80 +11.3pp p=0.052 **superseded**; n=200 +5.0pp p=0.10 directional **superseded**. Primary did not pass ≥5pp + p<0.05 gate → NO-LIFT (not directional-not-replicated — red-team never passed primary). |
+| **systems** | SWE-bench decisive split | 150 | 83% → 84% | +1.3 | 0.724 | Debugging/fault-localization | Original +5.3pp p=0.043 **superseded**; replication −1.3pp p=0.683 (post-edit, null, not replicated). Not reworked this mission; split frozen before result. |
+| **five-whys-plus** | debugging-fault-localization-decisive | 224 | 59% → 59% | +0.9 | 0.724 | Debugging/fault-localization | Original +4.0pp p=0.041 **superseded**; replication +1.3pp p=0.752 (post-edit, null, not replicated). M4 reworked skill, decisive split, full-n=224. |
+| **occams-razor** | debugging-fault-localization-decisive | 224 | 56% → 55% | −0.9 | 0.724 | Debugging/fault-localization | M4 reworked skill (post-edit, null, not replicated); trigger-scoped rework did not move needle. Full-n=224. |
+| **archetypes** | systems-product-strategy-pairwise decisive | 117 | 72% → 73% | +0.9 | 1.0 | Systems/product/strategy pairwise | In-band quarantine candidate given fair chance (post-edit, null, not replicated). No lift detected. |
+| **fermi-estimation** | jeggers/fermi | 150 | 41% → 41% | +0.7 | 1.0 | Quantitative/uncertainty | Rework "rescue" at n=40 (+7.5pp — post-edit, directional, not replicated) was noise. Powered n=150 confirmation flat (post-edit, null, not replicated). |
 
-### 1.3 NO-LIFT (Exploratory — Surface Mismatch)
+### 1.6 NO-LIFT (Exploratory — Surface Mismatch)
 
-Skills powered on a debugging/fault-localization surface that does NOT match their native value surface. A no-lift here is NOT an honest kill — these skills need evaluation on their true surface.
+Skills powered on a debugging/fault-localization surface that does NOT match their native value surface. A no-lift here is NOT an honest kill — these skills need evaluation on their true surface. All evidence in this section is post-edit, null, not replicated.
 
-| Skill | Powered Surface | Native Surface | N | Δ (pp) | p |
-|-------|----------------|----------------|---|--------|---|
-| **kepner-tregoe** | fault-localization | paired reasoning quality | 224 | −1.8 | 0.289 |
-| **map-territory** | fault-localization | routing/discoverability | 224 | +2.2 | 0.074 |
+| Skill | Powered Surface | Native Surface | N | Δ (pp) | p | Provenance |
+|-------|----------------|----------------|---|--------|---|------------|
+| **kepner-tregoe** | fault-localization | paired reasoning quality | 224 | −1.8 | 0.289 | post-edit, null, not replicated |
+| **map-territory** | fault-localization | routing/discoverability | 224 | +2.2 | 0.074 | post-edit, null, not replicated |
 
-### 1.4 CEILING-NEEDS-HARDER-DATA
+### 1.7 CEILING-NEEDS-HARDER-DATA
 
-Skills where the placebo/baseline accuracy is at or near ceiling (90–100%), leaving no headroom to measure a skill effect. These are NOT kill verdicts — they need harder calibrated items before a powered verdict is possible.
+Skills where the placebo/baseline accuracy is at or near ceiling (90–100%), leaving no headroom to measure a skill effect. These are NOT kill verdicts — they need harder calibrated items before a powered verdict is possible. All evidence in this section is post-edit, null, not replicated.
 
 | Skill | Dataset | N | Placebo | Δ (pp) | Provenance |
 |-------|---------|---|---------|--------|------------|
@@ -64,9 +88,9 @@ Skills where the placebo/baseline accuracy is at or near ceiling (90–100%), le
 | `debiasing` | authored bias | 40 | 100% | −2 (ns) | `OBJ-small-ceiling` |
 | `socratic` | authored clarify | 29 | 100% | −6.9 (ns) | `OBJ-small-ceiling` |
 
-### 1.5 Unmeasured / Pending Objective Evaluation
+### 1.8 UNRESOLVED/UNMEASURED — Pending Objective Evaluation
 
-Skills with no objective ground-truth run — either because their value surface resists objective formulation (paired reasoning quality), they are routing meta-skills, or they were not in the M5 powered batch.
+Skills with no objective ground-truth run — either because their value surface resists objective formulation (paired reasoning quality), they are routing meta-skills, or they were not in the M5 powered batch. All skills in this section carry provenance: pre-edit (judge-only evidence superseded), unmeasured objective, not replicated.
 
 | Group | Skills | Reason |
 |-------|--------|--------|
@@ -82,13 +106,13 @@ Skills with no objective ground-truth run — either because their value surface
 
 ### 2.1 The Replication Gate Works As Designed
 
-The mission's defining finding is NOT that skills lack value — it is that **borderline p≈0.04–0.05 results at modest N do not survive replication.** The pattern is consistent across five skills:
+The mission's defining finding is NOT that skills lack value — it is that **borderline p≈0.04–0.05 results at modest N do not survive replication.** The pattern is consistent across five skills (every claim provenance-tagged):
 
-- `systems`: +5.3pp p=0.043 → replication −1.3pp p=0.683
-- `five-whys-plus`: +4.0pp p=0.041 → replication +1.3pp p=0.752
-- `red-team`: +11.3pp p=0.052 (n=80) → +5.0pp p=0.10 (n=200)
-- `fermi-estimation`: rework +7.5pp (n=40) → +0.7pp p=1.0 (n=150)
-- `scientific-method`: +9.3pp p=0.002 (old run1) → +5.3pp p=0.061 (M5 fresh primary, post-edit)
+- `systems`: +5.3pp p=0.043 (post-edit, significant, not replicated, **superseded**) → replication −1.3pp p=0.683 (post-edit, null, not replicated)
+- `five-whys-plus`: +4.0pp p=0.041 (post-edit, significant, not replicated, **superseded**) → replication +1.3pp p=0.752 (post-edit, null, not replicated)
+- `red-team`: +11.3pp p=0.052 n=80 (post-edit, directional, not replicated, **superseded**) → +5.0pp p=0.10 n=200 (post-edit, directional, not replicated, **superseded**)
+- `fermi-estimation`: rework +7.5pp n=40 (post-edit, directional, not replicated, **superseded**) → +0.7pp p=1.0 n=150 (post-edit, null, not replicated)
+- `scientific-method`: +9.3pp p=0.002 old run1 (pre-edit, significant, not replicated, **superseded**) → +5.3pp p=0.061 M5 fresh primary (post-edit, directional, not replicated)
 
 The replication gate prevented false ELEVATE claims that a single-p<0.05 approach would have declared. **"Replication, not a single p<0.05" is the standard any future ELEVATE claim must meet.**
 
@@ -100,14 +124,14 @@ The replication gate prevented false ELEVATE claims that a single-p<0.05 approac
 
 ### 2.3 Domain-Fit Determines the Sign
 
-The native-domain debugging run showed that 3/4 debugging skills had a consistent small positive lift (+4–9pp at n=45), while the same skills were flat or negative in proxy domains (medical dx). The value of thinking skills is **entirely conditional on domain-fit** — they do not generalize across unrelated problem types.
+The native-domain debugging run showed that 3/4 debugging skills had a consistent small positive lift (+4–9pp at n=45, post-edit, directional, not replicated), while the same skills were flat or negative in proxy domains (medical dx, post-edit, null, not replicated). The value of thinking skills is **entirely conditional on domain-fit** — they do not generalize across unrelated problem types.
 
 ### 2.4 The Catalog's Value Is in Reasoning Framing, Not Measurable Correctness
 
 On objective, judge-free tasks, injecting a thinking-skill guide produces **no reliable accuracy lift for 38 of 39 skills.** The honest value proposition of the catalog is:
-- **Reasoning framing on open-ended work** (the pooled 63% pairwise lift, p=0.015, though per-skill is directional)  
+- **Reasoning framing on open-ended work** (the pooled 63% pairwise lift, p=0.015 — pre-edit, significant, not replicated, **superseded** — though per-skill is directional only)  
 - **Discoverability** — well-bounded, situation-named references  
-- **One near-ELEVATE debugging skill** (scientific-method, directional-not-replicated)  
+- **One near-ELEVATE debugging skill** (scientific-method, directional-not-replicated: primary +5.3pp p=0.061 post-edit directional not replicated)  
 
 ### 2.5 Quarantine/Redirect Strategy Is Evidence-Grounded
 
@@ -154,12 +178,15 @@ See `analysis/STALE-CLAIM-CLEANUP.md` for the full cleanup notes. Key actions:
 
 | Verdict Category | Count | Skills |
 |------------------|-------|--------|
-| **DIRECTIONAL-NOT-REPLICATED** | 2 | `scientific-method` (primary +5.3pp p=0.061 fails gate; replication +8.0pp p=0.001 cannot rescue), `red-team` (directional only) |
-| **NO-LIFT** | 5 | `systems`, `five-whys-plus`, `occams-razor`, `archetypes`, `fermi-estimation` |
+| **robust-ELEVATE** | **0** | — (ZERO skills achieved ELEVATE; mission outcome) |
+| **DIRECTIONAL-NOT-REPLICATED** | 1 | `scientific-method` (primary +5.3pp p=0.061 post-edit directional not replicated fails gate; replication +8.0pp p=0.001 post-edit significant not replicated cannot rescue) |
+| **TRIGGER-ONLY** | **0** | — (None verified by powered trigger-vs-full comparison) |
+| **QUARANTINE-REDIRECT** | 9 | `bayesian`→`probabilistic`, `model-selection`→`model-router`, `inversion`→`pre-mortem`, `feedback-loops`→`systems`, `archetypes`→`systems`/`leverage-points`, `regret-minimization`→`reversibility`, `fermi-estimation`, `debiasing`, `dual-process` |
+| **NO-LIFT** | 6 | `red-team`, `systems`, `five-whys-plus`, `occams-razor`, `archetypes`, `fermi-estimation` |
 | **NO-LIFT (exploratory)** | 2 | `kepner-tregoe`, `map-territory` (surface-mismatch) |
 | **CEILING-NEEDS-HARDER-DATA** | 8 | `first-principles`, `cynefin`, `theory-of-constraints`, `reversibility`, `bayesian`, `debiasing`, `socratic` (+ `map-territory` on authored) |
-| **Other measured** | 3 | `circle-of-competence` (no calibration benefit), `second-order` (no effect), `margin-of-safety` (headroom, no benefit) |
-| **Unmeasured** | 19 | All remaining skills (pairwise, thin, leakage-blocked, meta) |
+| **Other measured** | 3 | `circle-of-competence` (no calibration benefit, post-edit, null, not replicated), `second-order` (no effect, post-edit, null, not replicated), `margin-of-safety` (headroom, no benefit, post-edit, null, not replicated) |
+| **UNRESOLVED/UNMEASURED** | 19 | All remaining skills (pairwise, thin, leakage-blocked, meta — pre-edit, unmeasured objective, not replicated) |
 | **Total** | **39** | — |
 
 ---
