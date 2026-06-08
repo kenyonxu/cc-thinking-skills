@@ -329,6 +329,24 @@ The middle narrative sections of `analysis/ELEVATE-OR-KILL.md` contain the follo
 
 ---
 
+## Dispositions (Cross-Cutting — Not Mutually-Exclusive Verdicts)
+
+Dispositions are orthogonal to measured verdicts. A skill can carry both a measured verdict (e.g., NO-LIFT, CEILING, UNMEASURED) and a cross-cutting disposition (QUARANTINE-REDIRECT or TRIGGER-ONLY). Dispositions encode the mission's strategic recommendation; they do NOT replace or contradict the measured verdict.
+
+| Skill | Disposition | Redirect Target | Measured Verdict |
+|-------|-------------|-----------------|------------------|
+| `bayesian` | QUARANTINE-REDIRECT | `probabilistic` | ceiling |
+| `model-selection` | QUARANTINE-REDIRECT | `model-router` | unmeasured |
+| `inversion` | QUARANTINE-REDIRECT | `pre-mortem` | unmeasured |
+| `feedback-loops` | QUARANTINE-REDIRECT | `systems` | unmeasured |
+| `archetypes` | QUARANTINE-REDIRECT | `systems` / `leverage-points` | no-lift |
+| `regret-minimization` | QUARANTINE-REDIRECT | `reversibility` | unmeasured |
+| `fermi-estimation` | QUARANTINE-REDIRECT | — (none) | no-lift |
+| `debiasing` | QUARANTINE-REDIRECT | — (none) | ceiling |
+| `dual-process` | QUARANTINE-REDIRECT | — (none) | unmeasured |
+
+---
+
 ## Reconciliation: Stale Claims Exceptions (Stale Claims Explicitly Flagged)
 
 | Stale Claim | Source | Superseded By | Flag |

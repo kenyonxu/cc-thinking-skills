@@ -1,7 +1,7 @@
 # Adversarial Synthesis — cc-thinking-skills
 
 > **⚠️ SUPERSEDED — 2026-06-07 (Elevate-or-Kill M5 outcome)**
-> This synthesis was written BEFORE the M5 powered runs and before the canonical scorecard was finalized. Several of its evaluative claims about skill lift and effectiveness are superseded by powered evidence. The canonical scorecard at `analysis/ELEVATE-OR-KILL-SCORECARD.md` is the authoritative source for current verdicts. See `analysis/STALE-CLAIM-CLEANUP.md` for the full cleanup notes. **The structural findings, reviewer insights, and recommendations R1–R9 remain useful context; specific lift/ELEVATE/significance claims inline-marked [SUPERSEDED] are historical only.**
+> This synthesis was written BEFORE the M5 powered runs and before the canonical scorecard was finalized. Several of its evaluative claims about skill performance and effectiveness are superseded by powered evidence (post-edit provenance: see canonical scorecard). The canonical scorecard at `analysis/ELEVATE-OR-KILL-SCORECARD.md` is the authoritative source for current verdicts. See `analysis/STALE-CLAIM-CLEANUP.md` for the full cleanup notes. **The structural findings, reviewer insights, and recommendations R1–R9 remain useful context; specific performance/ELEVATE/significance claims inline-marked [SUPERSEDED] are historical only.**
 
 The headline deliverable: cross-model consensus, the most valuable unique ideas, genuine disagreements, and a prioritized (recommend-only) improvement list — all cross-referenced against the eval data.
 
@@ -29,7 +29,7 @@ Every reviewer, independently, reached the same conclusion, and the Tier 1 judge
 **Eval corroboration:** Tier 1's lowest dimension across all 39 skills is **discrimination (3.38/5)** vs fidelity **4.95/5** — the content is accurate but under-bounded. Tier 1 independently raised **6 "would-mislead-an-agent" flags**, each describing a *human-context* failure: `regret-minimization` → "project to age 80 triggers bizarre roleplay"; `pre-mortem` → "'Gather the team / silent brainstorming' causes the agent to halt and facilitate a human meeting"; `circle-of-competence` → "evaluate its track record → hallucinate a human persona"; `bayesian` → "hallucinate arbitrary exact probabilities"; `socratic` → "endlessly interrogate the user instead of writing code". The per-skill pass returned **"sharpen" on all 8 skills, "would-mislead" on 23/24 reviews — unanimous.**
 
 ### C2. Missing "when NOT to use" boundaries are a hazard for an autonomous agent (3/3)
-Distinct from C1 and the single highest-leverage *content* fix. A skill with no stop condition invites over-application: running a 12-point audit on a trivial reversible choice, "challenging assumptions" into reinventing auth, interrogating instead of coding. Only ~12/39 skills document anti-patterns today. GPT: "weak stop conditions, weak non-use guidance." This is independently the weakest Tier 1 dimension (discrimination).
+Distinct from C1 and the single highest-leverage *content* fix. A skill with no stop condition invites over-use: running a 12-point audit on a trivial reversible choice, "challenging assumptions" into reinventing auth, interrogating instead of coding. Only ~12/39 skills document anti-patterns today. GPT: "weak stop conditions, weak non-use guidance." This is independently the weakest Tier 1 dimension (discrimination).
 
 ### C3. Five overlap clusters should be consolidated (3/3, with strong agreement on three)
 Merge proposals, normalized across reviewers:
@@ -54,7 +54,7 @@ All three endorsed the core premise of this work: structural lint (90%) is silen
 
 ## 2. The convergent contrarian insight (the most important non-obvious takeaway)
 
-Each reviewer's "most contrarian idea" landed on the **same** thesis from a different angle — which makes it the opposite of fringe. For a frontier model, **the verbose skill files may be net-negative; the durable value is triggers + boundaries + LLM-specific failure modes, not mental-model tutorials the model already knows.**
+Each reviewer's "most contrarian idea" landed on the **same** thesis from a different angle — which makes it the contrary of fringe. For a frontier model, **the verbose skill files may be net-negative; the durable value is triggers + boundaries + LLM-specific failure modes, not mental-model tutorials the model already knows.**
 
 - **Gemini (most extreme):** "teaching frontier models 'mental models' via 2000-word files is fundamentally backwards. The model already possesses these concepts in its weights … The most effective version wouldn't use markdown at all — it would be 39 highly-optimized, 2-sentence prompt injections."
 - **GPT:** "the best product may not be 39 auto-invoked skills … the durable value is a smaller failure-mode checklist plus a router that mostly says *don't use a mental model; gather evidence, run the test, inspect the code, make the smallest safe change.*"
@@ -63,7 +63,7 @@ Each reviewer's "most contrarian idea" landed on the **same** thesis from a diff
 **Eval corroboration (length-controlled Tier 3):** when the treatment is compared to a **same-length neutral placebo** (not an empty baseline), mean win-rate is **56%** and **12/36 skills regress** (the placebo matches or beats the full skill), several flagged "vocab-only" (framework theater). The naive "skill vs nothing" pilot had rated `second-order` at 67%; length-controlled it drops to 33%. This is direct evidence that a meaningful chunk of the measured "value" is context-length, not mental-model content.
 
 **Trigger-vs-instruction probe (DeepSeek's proposed test, 8 skills, `tier3-trigger-probe.json`) — confirms the thesis, with a clean bifurcation.** Mean **skill-vs-trigger = 50%**: on average **the full 2,000–4,000-word SKILL.md is no better than a 2-sentence trigger** for a frontier solver. But the split is exactly what DeepSeek predicted:
-- **Full guide earns its length** (procedure adds capability): `bayesian` (100% vs trigger), `debiasing`/`pre-mortem`/`opportunity-cost` (67%) — a calculation, a checklist, a structured process.
+- **Full guide earns its length** (procedure adds capability): `bayesian` (100% vs trigger), `debiasing`/`pre-mortem`/`opportunity-cost` (67%) — a calculation, a checklist, a structured process (pre-edit, directional, not replicated — small-n trigger probe, superseded by M5 powered evidence).
 - **Trigger suffices / guide is dead weight** (concept already in weights): `first-principles`, `theory-of-constraints` (trigger ties or beats the full guide).
 
 This operationalizes R5: **ship known concepts as triggers; reserve full SKILL.md files for procedural skills that demonstrably beat the one-liner.**
@@ -85,7 +85,7 @@ This operationalizes R5: **ship known concepts as triggers; reserve full SKILL.m
 **From DeepSeek-V4 (the most methodologically incisive reviewer):**
 - **Trigger-vs-instruction test** (now implemented) — the single best eval-design contribution; it operationalizes "textbook vs one-liner."
 - **A companion set of LLM-failure-mode skills** — sycophancy toward user framing, recency/context-window bias, inability to hold multiple calibrated hypotheses, over-reliance on authoritative-sounding text, failure to express calibrated uncertainty. *"The collection addresses how humans fail; it doesn't address how LLMs fail — and those are different failure modes."* High-value gap.
-- **Five missing decision models:** cost-of-delay/decision-velocity, stakeholder/organizational-power mapping, information-foraging/when-to-stop-researching, assumption-articulation (surface implicit premises), escalation/when-to-defer.
+- **Five missing decision models:** cost-of-delay/decision-velocity, stakeholder/organizational-power analysis, information-foraging/when-to-stop-researching, assumption-articulation (surface implicit premises), escalation/when-to-defer.
 
 **From Gemini-3.1:**
 - **Implicit vector-search routing** over skill descriptions instead of a multi-turn router (removes the latency tax).
@@ -102,7 +102,7 @@ This operationalizes R5: **ship known concepts as triggers; reserve full SKILL.m
 
 ## 5. The orthogonality the data exposes (cross-tier nuance)
 
-Behavioral lift and mislead-risk are **independent axes** — the single most important nuance for acting on this:
+Behavioral performance and mislead-risk are **independent axes** — the single most important nuance for acting on this:
 - **`first-principles`**: behavioral **100%** (helps on these problems) yet **3/3 "would-mislead"** (could reinvent custom auth elsewhere). *Keep, but add a strict "don't reinvent standard/secure solutions" boundary.*
 - **`dual-process`**: behavioral **100%** yet DeepSeek calls it the weakest skill ("System 1/2 doesn't map to LLM cognition — anthropomorphizing noise"). *Strongest evidence that a high behavioral score on 3 gotcha-problems ≠ sound for agents.* Needs a from-scratch agent reframe.
 - **`debiasing` / `regret-minimization` / `triz`**: behavioral **0%** AND flagged weak. *Highest-priority rewrites or trigger-only demotions.*

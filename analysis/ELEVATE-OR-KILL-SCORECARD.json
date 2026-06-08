@@ -51,6 +51,8 @@
   },
   "skills": {
     "archetypes": {
+      "disposition": "QUARANTINE-REDIRECT",
+      "redirect_target": "systems / leverage-points",
       "objective_evidence": [
         {
           "metric": "binary_decision_accuracy",
@@ -92,6 +94,8 @@
       "powered_run": "OBJ-powered-null"
     },
     "bayesian": {
+      "disposition": "QUARANTINE-REDIRECT",
+      "redirect_target": "probabilistic",
       "objective_evidence": [
         {
           "metric": "accuracy",
@@ -231,6 +235,8 @@
       "value_surface": "routing/discoverability"
     },
     "debiasing": {
+      "disposition": "QUARANTINE-REDIRECT",
+      "redirect_target": null,
       "objective_evidence": [
         {
           "metric": "accuracy",
@@ -270,6 +276,8 @@
       "value_surface": "calibrated classification"
     },
     "dual-process": {
+      "disposition": "QUARANTINE-REDIRECT",
+      "redirect_target": null,
       "objective_evidence": [],
       "judge_evidence": [
         {
@@ -314,6 +322,8 @@
       "value_surface": "paired reasoning quality"
     },
     "feedback-loops": {
+      "disposition": "QUARANTINE-REDIRECT",
+      "redirect_target": "systems",
       "objective_evidence": [],
       "judge_evidence": [
         {
@@ -336,6 +346,8 @@
       "value_surface": "paired reasoning quality"
     },
     "fermi-estimation": {
+      "disposition": "QUARANTINE-REDIRECT",
+      "redirect_target": null,
       "objective_evidence": [
         {
           "metric": "accuracy",
@@ -542,6 +554,8 @@
       "powered_run": "OBJ-powered-null"
     },
     "inversion": {
+      "disposition": "QUARANTINE-REDIRECT",
+      "redirect_target": "pre-mortem",
       "objective_evidence": [],
       "judge_evidence": [
         {
@@ -857,6 +871,8 @@
       "value_surface": "routing/discoverability"
     },
     "model-selection": {
+      "disposition": "QUARANTINE-REDIRECT",
+      "redirect_target": "model-router",
       "objective_evidence": [],
       "judge_evidence": [
         {
@@ -1133,6 +1149,8 @@
       "powered_run": "OBJ-powered-null"
     },
     "regret-minimization": {
+      "disposition": "QUARANTINE-REDIRECT",
+      "redirect_target": "reversibility",
       "objective_evidence": [],
       "judge_evidence": [
         {

@@ -176,18 +176,29 @@ See `analysis/STALE-CLAIM-CLEANUP.md` for the full cleanup notes. Key actions:
 
 ## Section 7: Scorecard Summary (All 39 Skills)
 
+### 7.1 Measured Verdicts (Mutually Exclusive — Sums to 39)
+
+Each skill carries exactly one measured verdict below. These categories are mutually exclusive and exhaustive — every one of the 39 skills falls into exactly one row.
+
 | Verdict Category | Count | Skills |
 |------------------|-------|--------|
 | **robust-ELEVATE** | **0** | — (ZERO skills achieved ELEVATE; mission outcome) |
 | **DIRECTIONAL-NOT-REPLICATED** | 1 | `scientific-method` (primary +5.3pp p=0.061 post-edit directional not replicated fails gate; replication +8.0pp p=0.001 post-edit significant not replicated cannot rescue) |
-| **TRIGGER-ONLY** | **0** | — (None verified by powered trigger-vs-full comparison) |
-| **QUARANTINE-REDIRECT** | 9 | `bayesian`→`probabilistic`, `model-selection`→`model-router`, `inversion`→`pre-mortem`, `feedback-loops`→`systems`, `archetypes`→`systems`/`leverage-points`, `regret-minimization`→`reversibility`, `fermi-estimation`, `debiasing`, `dual-process` |
 | **NO-LIFT** | 6 | `red-team`, `systems`, `five-whys-plus`, `occams-razor`, `archetypes`, `fermi-estimation` |
 | **NO-LIFT (exploratory)** | 2 | `kepner-tregoe`, `map-territory` (surface-mismatch) |
 | **CEILING-NEEDS-HARDER-DATA** | 8 | `first-principles`, `cynefin`, `theory-of-constraints`, `reversibility`, `bayesian`, `debiasing`, `socratic` (+ `map-territory` on authored) |
 | **Other measured** | 3 | `circle-of-competence` (no calibration benefit, post-edit, null, not replicated), `second-order` (no effect, post-edit, null, not replicated), `margin-of-safety` (headroom, no benefit, post-edit, null, not replicated) |
-| **UNRESOLVED/UNMEASURED** | 19 | All remaining skills (pairwise, thin, leakage-blocked, meta — pre-edit, unmeasured objective, not replicated) |
+| **UNRESOLVED/UNMEASURED** | 19 | `model-selection`, `inversion`, `feedback-loops`, `regret-minimization`, `dual-process`, `model-router`, `model-combination`, `probabilistic`, `bounded-rationality`, `effectuation`, `jobs-to-be-done`, `leverage-points`, `lindy-effect`, `ooda`, `opportunity-cost`, `pre-mortem`, `steel-manning`, `thought-experiment`, `triz`, `via-negativa` |
 | **Total** | **39** | — |
+
+### 7.2 Cross-Cutting Dispositions (NOT Mutually Exclusive — Overlap with Verdicts)
+
+Dispositions are orthogonal to measured verdicts. A skill can carry both a measured verdict (e.g., NO-LIFT, CEILING, UNMEASURED) and a cross-cutting disposition (QUARANTINE-REDIRECT or TRIGGER-ONLY). The 9 QUARANTINE-REDIRECT skills below are already counted under their measured verdicts in §7.1 — they are NOT double-counted.
+
+| Disposition | Count | Skills | Overlaps With |
+|-------------|-------|--------|---------------|
+| **QUARANTINE-REDIRECT** | 9 | `bayesian`→`probabilistic`, `model-selection`→`model-router`, `inversion`→`pre-mortem`, `feedback-loops`→`systems`, `archetypes`→`systems`/`leverage-points`, `regret-minimization`→`reversibility`, `fermi-estimation` (no target), `debiasing` (no target), `dual-process` (no target) | NO-LIFT (archetypes, fermi-estimation), CEILING (bayesian, debiasing), UNMEASURED (model-selection, inversion, feedback-loops, regret-minimization, dual-process) |
+| **TRIGGER-ONLY** | **0** | — (None verified by powered trigger-vs-full comparison) | — |
 
 ---
 
