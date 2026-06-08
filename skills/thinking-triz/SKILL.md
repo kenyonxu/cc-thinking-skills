@@ -1,376 +1,171 @@
 ---
 name: thinking-triz
-description: Apply TRIZ (Theory of Inventive Problem Solving) methodology to resolve technical contradictions and find innovative solutions. Use for engineering design, breaking through impossible constraints, and systematic innovation.
+description: Use when stuck between two architecture or API requirements that seem mutually exclusive — name the contradiction precisely, then separate the conflicting states in time, space, or condition.
 ---
 
 # TRIZ Thinking
 
 ## Overview
 
-TRIZ (Teoriya Resheniya Izobretatelskikh Zadatch) is a systematic innovation methodology developed by Genrich Altshuller from analyzing 200,000+ patents. It provides structured approaches to solve "impossible" problems by identifying and resolving contradictions rather than accepting trade-offs.
+TRIZ is a systematic method for resolving **architecture and API design contradictions** — situations where two requirements seem mutually exclusive. When you're about to accept a trade-off because "you can't have both," TRIZ says: name the contradiction precisely, then try to **separate** the conflicting states in time, space, or condition so you get both — no compromise.
 
-**Core Principle:** Behind every difficult problem lies a contradiction. Resolve the contradiction, solve the problem. Great innovations don't compromise—they transcend.
+The separation moves are the primary procedure. The 40 Inventive Principles are a reference library, not a required checklist. The skill is scoped to technical design contradictions (architecture, API, system parameters); it is NOT for non-technical problems, ordinary prioritization, or contradictions that dissolve under measurement.
+
+**Core Principle:** Great design doesn't compromise — it separates. Find the dimension where the conflicting states can coexist.
 
 ## When to Use
 
-- Facing "impossible" trade-offs (fast vs. accurate, secure vs. convenient)
-- Stuck choosing between two conflicting requirements
-- Need innovation beyond incremental improvement
-- Design has hit fundamental constraints
-- Competitors all accept the same trade-off you're facing
-- Requirements seem mutually exclusive
-- Breaking through performance plateaus
+- An architecture or API design decision is stuck between two requirements that seem mutually exclusive (fast vs accurate, stable vs evolving, large cache vs fast invalidation)
+- You're about to accept a trade-off because "you can't have both"
+- The same weakness shows up in every solution you've considered — the contradiction is structural
 
 Decision flow:
 
 ```
-Stuck between trade-offs?           → yes → APPLY TRIZ
-Requirements seem contradictory?    → yes → APPLY TRIZ
-Need breakthrough, not compromise?  → yes → APPLY TRIZ
-All solutions have same weakness?   → yes → APPLY TRIZ
+Two requirements seem mutually exclusive?
+  → Yes → NAME THE CONTRADICTION, TRY SEPARATION
+  → No → About to accept a trade-off curve compromise?
+      → Yes → APPLY TRIZ FIRST
+      → No → This is a routine decision — just pick based on constraints
 ```
 
-## The Ideal Final Result (IFR)
+## When NOT to Use
 
-Before solving, envision the ideal outcome—the system that solves itself:
+- **Ordinary trade-offs with a correct answer.** If one option is simply better given your constraints (cheaper, simpler, well-understood), just pick it — don't manufacture a contradiction.
+- **The "contradiction" dissolves under measurement.** If you can cheaply test which side actually matters, do that instead of inventing a separation.
+- **Non-technical or people problems.** Separation principles target system parameters, not organizational dynamics or interpersonal conflicts.
+- **The contradiction is already well-solved by standard patterns.** If there's an established pattern (cache-aside, CQRS, feature flags), apply the pattern directly.
 
-```
-IFR Formula:
-"The [component] [achieves the goal] BY ITSELF,
-without [cost/complexity/side effects],
-while maintaining [all other functions]"
-```
+## Trigger Card
 
-**Software Examples:**
+When stuck between two architecture or API requirements that seem mutually exclusive:
 
-```
-Traditional: "We need a caching layer to improve performance"
-IFR: "The system is instantly fast without any cache complexity"
-→ Leads to: Data structures that are inherently fast, lazy evaluation,
-  computation at write-time instead of read-time
+1. **Name the contradiction precisely** — "We need [PARAMETER A] to be [STATE 1] for [BENEFIT 1] BUT also [STATE 2] for [BENEFIT 2]." If you can't write it in this form, it's not a TRIZ problem.
+2. **Try separation** — can you satisfy state 1 at one TIME and state 2 at another? In different SPACES (components, layers)? Under different CONDITIONS (context, load, user)?
+3. **Test the simplest separation first** — separate in time (feature flags, scheduled behavior) before space (separate services) before condition.
 
-Traditional: "We need monitoring to detect failures"
-IFR: "The system never fails, or failures instantly self-heal"
-→ Leads to: Self-healing architectures, chaos engineering, 
-  designing for failure from the start
-```
+If one option is simply better given your constraints, just pick it. If you can cheaply test which side actually matters, test instead of designing a separation. For standard patterns (cache-aside, CQRS, feature flags), apply the pattern directly.
 
-**IFR Questions:**
+## Procedure
 
-- What if the problem solved itself?
-- What if the harmful element became useful?
-- What if we needed zero of the problematic component?
-- What's the result we want with zero cost/complexity?
+### Step 1: Name the Contradiction Precisely
 
-## Contradiction Types
-
-### Technical Contradictions
-
-Improving one parameter worsens another:
-
-| Improving | Worsens | Example |
-|-----------|---------|---------|
-| Speed | Accuracy | Fast processing loses precision |
-| Security | Usability | Strong auth frustrates users |
-| Reliability | Cost | Redundancy is expensive |
-| Features | Simplicity | More capability, more complexity |
-| Throughput | Latency | Batching improves throughput, hurts latency |
-
-### Physical Contradictions
-
-Same element must have opposite properties:
+Use this template:
 
 ```
-"The timeout must be SHORT (for fast failure detection)
- AND LONG (to tolerate network variance)"
-
-"The cache must be LARGE (for high hit rate)
- AND SMALL (for fast invalidation and low memory)"
-
-"The API must be STABLE (for clients)
- AND CHANGING (for evolution)"
-```
-
-## The 40 Inventive Principles (Software-Adapted)
-
-### Most Applicable to Software Engineering
-
-| # | Principle | Software Application |
-|---|-----------|---------------------|
-| 1 | **Segmentation** | Microservices, sharding, pagination, chunked processing |
-| 2 | **Taking Out** | Extract the problematic part; separation of concerns |
-| 3 | **Local Quality** | Different configs per environment; adaptive algorithms |
-| 5 | **Merging** | Combine operations (batch), merge services, reduce round-trips |
-| 6 | **Universality** | Multi-purpose components, plugins, generic abstractions |
-| 10 | **Preliminary Action** | Pre-computation, caching, lazy loading, warm-up |
-| 11 | **Beforehand Cushioning** | Circuit breakers, graceful degradation, fallbacks |
-| 13 | **The Other Way Round** | Push vs. pull, invert control, event-driven vs. polling |
-| 15 | **Dynamization** | Dynamic scaling, feature flags, runtime configuration |
-| 17 | **Another Dimension** | Add metadata layer, versioning, time dimension (event sourcing) |
-| 22 | **Blessing in Disguise** | Use errors as signals, leverage constraints, fail-fast |
-| 24 | **Intermediary** | Proxy, adapter, facade, message queue, API gateway |
-| 25 | **Self-Service** | Automation, self-healing, auto-scaling, self-documenting |
-| 26 | **Copying** | Caching, replication, CDN, read replicas, memoization |
-| 28 | **Mechanics Substitution** | Replace polling with webhooks, sync with async |
-| 32 | **Color Changes** | Status indicators, logging levels, visual feedback |
-| 34 | **Discarding/Recovering** | Immutability, event sourcing, garbage collection |
-| 35 | **Parameter Changes** | Feature flags, A/B testing, configuration over code |
-| 37 | **Thermal Expansion** | Elastic scaling, auto-tuning, adaptive thresholds |
-| 40 | **Composite Structures** | Composition over inheritance, layered architecture |
-
-### Principle Application Examples
-
-**Segmentation (#1):**
-
-```
-Problem: Monolith is slow to deploy and scale
-Contradiction: Need unified system (consistency) AND independent scaling
-Apply: Segment by bounded context → Microservices with clear boundaries
-```
-
-**Preliminary Action (#10):**
-
-```
-Problem: Complex queries are slow
-Contradiction: Need real-time results AND complex aggregations
-Apply: Pre-compute during write → Materialized views, denormalization
-```
-
-**The Other Way Round (#13):**
-
-```
-Problem: Polling for updates wastes resources
-Contradiction: Need immediate updates AND low server load
-Apply: Invert the flow → Webhooks, Server-Sent Events, WebSockets
-```
-
-**Intermediary (#24):**
-
-```
-Problem: Direct client-service coupling is fragile
-Contradiction: Need loose coupling AND reliable communication
-Apply: Add intermediary → Message queue, API gateway, service mesh
-```
-
-## Resolving Physical Contradictions
-
-When the same element needs opposite properties, use separation:
-
-### Separation in Time
-
-```
-"Cache must be fresh AND cached"
-→ Time-based invalidation: cached now, fresh later
-→ TTL strategies, cache warming schedules
-
-"System must accept AND reject requests"  
-→ Rate limiting: accept up to threshold, reject after
-→ Token bucket, sliding window
-```
-
-### Separation in Space
-
-```
-"Data must be local (fast) AND distributed (resilient)"
-→ Multi-region with local reads, distributed writes
-→ Read replicas, write-through caching
-
-"Logs must be detailed (debugging) AND minimal (performance)"
-→ Detailed in dev, minimal in prod
-→ Different log levels per environment
-```
-
-### Separation by Condition
-
-```
-"Authentication must be strict AND frictionless"
-→ Strict for sensitive operations, frictionless for low-risk
-→ Step-up authentication, risk-based auth
-
-"Validation must be thorough AND fast"
-→ Thorough for untrusted input, fast for internal
-→ Trust boundaries, schema validation at edges only
-```
-
-### Separation in Scale/Level
-
-```
-"API must be stable AND evolving"
-→ Stable interface, evolving implementation
-→ Versioning, backward compatibility, API contracts
-```
-
-## Contradiction Analysis Framework
-
-### Step 1: State the Contradiction Clearly
-
-```
-Template:
 "We need [PARAMETER A] to be [STATE 1] for [BENEFIT 1]
  BUT also [STATE 2] for [BENEFIT 2]"
 
 Example:
-"We need response time to be FAST for user experience
- BUT also processing to be THOROUGH for accuracy"
+"We need the API to be STABLE for client compatibility
+ BUT also EVOLVING to support new features"
 ```
 
-### Step 2: Identify the Conflicting Requirements
+If you can't write the contradiction in this form, it's not a TRIZ problem — use another skill.
 
-List what each state provides:
+### Step 2: Envision the Ideal Final Result (IFR)
 
-```
-FAST processing:              THOROUGH processing:
-- Better UX                   - Higher accuracy  
-- Lower timeout risk          - Complete validation
-- Reduced server load         - Fewer edge case bugs
-```
-
-### Step 3: Apply Separation Principles
-
-Try each separation type:
+Before solving, describe the outcome where the problem solves itself:
 
 ```
-Time: Can we be fast first, thorough later? (async processing)
-Space: Can we be fast here, thorough there? (edge vs. origin)
-Condition: Can we be fast sometimes, thorough others? (adaptive)
-Scale: Can fast and thorough exist at different levels? (layered validation)
+"The API supports both old and new clients simultaneously,
+without version negotiation overhead,
+while maintaining a single codebase."
 ```
 
-### Step 4: Apply Inventive Principles
+IFR questions: What if the problem solved itself? What if the harmful element became useful? What's the result with zero cost?
 
-Scan relevant principles:
+### Step 3: Try Separation Moves (Primary Procedure)
 
-```
-#1 Segmentation: Break into fast-path and slow-path
-#10 Preliminary Action: Pre-compute thorough checks
-#13 Other Way Round: Push complexity to write-time
-#24 Intermediary: Queue for async thorough processing
-#26 Copying: Cache thorough results for fast retrieval
-```
+For each separation dimension, ask: "Can the conflicting states exist at different [times/places/conditions/scales]?"
 
-### Step 5: Synthesize Solutions
+#### Separation in Time
 
-Combine insights into concrete approaches:
+"Can we be in state 1 at one time and state 2 at another?"
 
 ```
-Solution: Layered validation with async completion
-- Edge: Fast syntactic validation (immediate)
-- Queue: Thorough semantic validation (async)
-- Response: Immediate acknowledgment, webhook for final result
+Contradiction: "Cache must be FRESH AND cached"
+Separation in Time: TTL-based invalidation — cached now, refreshed later
 ```
 
-## Software Engineering Contradiction Patterns
+#### Separation in Space
 
-### Speed vs. Accuracy
-
-```
-Contradiction: Need fast results AND accurate results
-TRIZ Solutions:
-- #1 Segmentation: Fast approximate first, accurate refinement
-- #10 Preliminary Action: Pre-compute accurate, serve cached
-- #26 Copying: Cache accurate results, serve instantly
-Example: Typeahead with fast fuzzy match, async precise ranking
-```
-
-### Security vs. Usability
+"Can we be in state 1 in one place and state 2 in another?"
 
 ```
-Contradiction: Need strong security AND frictionless UX
-TRIZ Solutions:
-- Separation by Condition: Risk-based authentication
-- #3 Local Quality: Stricter for sensitive operations
-- #15 Dynamization: Adaptive security based on context
-Example: Passwordless for trusted device, MFA for new device
+Contradiction: "Data must be LOCAL (fast) AND DISTRIBUTED (resilient)"
+Separation in Space: Multi-region with local reads, distributed writes
 ```
 
-### Consistency vs. Availability
+#### Separation by Condition
+
+"Can we be in state 1 under some conditions and state 2 under others?"
 
 ```
-Contradiction: Need strong consistency AND high availability (CAP)
-TRIZ Solutions:
-- Separation in Space: Consistent within region, eventually across
-- #1 Segmentation: Some data strongly consistent, some eventual
-- #17 Another Dimension: Version vectors, conflict resolution
-Example: CRDT for collaborative editing, strong consistency for transactions
+Contradiction: "Auth must be STRICT AND frictionless"
+Separation by Condition: Strict for sensitive operations, frictionless for low-risk — risk-based authentication
 ```
 
-### Simplicity vs. Capability
+#### Separation in Scale/Level
+
+"Can state 1 and state 2 exist at different levels of the system?"
 
 ```
-Contradiction: Need powerful features AND simple interface
-TRIZ Solutions:
-- #1 Segmentation: Progressive disclosure, advanced mode
-- #6 Universality: Composable primitives vs. monolithic features
-- #24 Intermediary: Abstraction layers hiding complexity
-Example: Simple API with sensible defaults, advanced options available
+Contradiction: "API must be STABLE AND evolving"
+Separation in Scale: Stable interface (API contract), evolving implementation — versioned APIs
 ```
 
-## Resource Analysis
+### Step 4: If Separation Fails, Scan the Principles (Reference)
 
-TRIZ teaches using existing resources before adding new ones:
+When no separation dimension resolves the contradiction, scan the software-adapted inventive principles for inspiration:
 
-### Resource Types
+| Principle | Software Pattern |
+|-----------|-----------------|
+| Segmentation (#1) | Microservices, sharding, chunked processing |
+| Preliminary Action (#10) | Pre-computation, caching, warm-up, materialized views |
+| The Other Way Round (#13) | Push vs pull, invert control, event-driven instead of polling |
+| Intermediary (#24) | Proxy, message queue, API gateway, adapter |
+| Copying (#26) | Caching, replication, CDN, read replicas |
+| Dynamization (#15) | Feature flags, runtime configuration, adaptive thresholds |
+| Another Dimension (#17) | Add metadata layer, versioning, event sourcing |
 
-| Type | Examples | Software Analog |
-|------|----------|-----------------|
-| Substance | Materials at hand | Existing data, unused fields |
-| Field | Energy sources | Compute, network, existing events |
-| Space | Unused volume | Memory, disk, idle cores |
-| Time | Idle periods | Off-peak processing, startup time |
-| Information | Available signals | Logs, metrics, existing state |
-| Function | Existing capabilities | Libraries, services already running |
+The full 40 principles are reference material; scan only the most applicable ones.
 
-### Finding Hidden Resources
+### Step 5: Resource Analysis
+
+Before adding new components, ask: what already exists that can be used?
 
 ```
 Before: "We need a new service to track user sessions"
-Resource Analysis:
-- What data already exists? → Auth tokens have user identity
+Resource check:
+- What data already exists? → Auth tokens carry user identity
 - What's already running? → Load balancer sees all requests
 - What's unused? → Request headers have room for session ID
-Solution: Encode session in existing auth flow, no new service
+Solution: Encode session in existing auth flow — no new service
 ```
 
-## Evolution Patterns
+### Step 6: Synthesize and Decide
 
-TRIZ identifies how systems evolve—use to anticipate future state:
+Combine the separation move with resource reuse into a concrete design decision. Document the contradiction, the separation dimension used, and the resolution.
 
-| Pattern | Description | Software Example |
-|---------|-------------|------------------|
-| Increasing Ideality | Systems evolve toward IFR | Serverless (no server management) |
-| Uneven Development | Parts evolve at different rates | Legacy + modern microservices |
-| Transition to Micro | Components get smaller | Monolith → microservices → functions |
-| Dynamization | Static becomes dynamic | Config files → feature flags → ML |
-| Increased Controllability | More fine-grained control | Manual → automated → autonomous |
+## Output Contract
 
-## Verification Checklist
+A completed TRIZ analysis produces:
 
-- [ ] Stated the contradiction explicitly (technical or physical)
-- [ ] Defined the Ideal Final Result
-- [ ] Attempted separation (time, space, condition, scale)
-- [ ] Reviewed applicable inventive principles
-- [ ] Analyzed available resources before adding new ones
-- [ ] Solution resolves contradiction, not just compromises
-- [ ] Considered evolution trajectory of the system
+1. **Contradiction Statement** — in the precise template form (Parameter A must be State 1 for Benefit 1 BUT State 2 for Benefit 2)
+2. **Ideal Final Result** — what the self-solving outcome looks like
+3. **Separation Attempts** — which dimensions were tried (time, space, condition, scale) and the result
+4. **Principles Scanned** (if separation failed) — which inventive principles were considered
+5. **Resources Used** — what existing capabilities were leveraged before adding new ones
+6. **Resolution** — the concrete design decision that resolves the contradiction without compromise
 
-## Integration with Other Thinking Models
+## Anti-Patterns
 
-- **First Principles**: Break down assumptions before applying TRIZ
-- **Inversion**: What would make the contradiction worse? Avoid that.
-- **Systems Thinking**: Trace contradiction through feedback loops
-- **Second-Order**: Consider downstream effects of resolving the contradiction
-
-## Key Questions
-
-- "What is the exact contradiction I'm facing?"
-- "What would the Ideal Final Result look like?"
-- "Can I separate the conflicting requirements in time, space, or condition?"
-- "What resources already exist that I'm not using?"
-- "Which inventive principle fits this contradiction pattern?"
-- "Am I truly resolving the contradiction, or just compromising?"
-
-## Altshuller's Insight
-
-"You can wait a hundred years for enlightenment, or you can solve the problem in 15 minutes with these principles."
-
-The power of TRIZ is that inventive solutions follow patterns. What seems like creative genius is often systematic application of principles that have worked across domains for decades.
+| Anti-Pattern | Symptom | Correction |
+|---|---|---|
+| **Manufacturing contradictions** | Applying TRIZ to "which database should we use" when one is clearly better | Use it only for genuine "I need both opposite states" tension |
+| **Compromising instead of separating** | Accepting a midpoint on the trade-off curve without trying separation | Try all four separation dimensions before compromising |
+| **Skipping separation, jumping to principles** | Immediately scanning the 40 principles without trying time/space/condition/scale | Separation is the primary procedure; principles are the fallback |
+| **Applying to non-technical problems** | Using TRIZ for org dynamics or interpersonal conflicts | Separation targets system parameters, not people |
+| **Over-applying to testable contradictions** | Running full TRIZ when a quick measurement resolves which side matters | If you can test it cheaply, test it |
+| **Ignoring existing resources** | Adding new components when existing ones could be reused | Resource analysis before new component proposals |

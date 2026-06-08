@@ -11,6 +11,10 @@ This is the **master routing skill** for all mental models. Instead of knowing 3
 
 **Core Principle:** Don't memorize models—memorize how to find the right one. Domain + Problem Type → Model.
 
+## Short-Circuit: Skip the Router
+
+**If you already know the right model, invoke it directly — don't route.** This skill is for when you're *unsure* which model fits. If the problem obviously calls for a specific model (e.g., "where's the bottleneck?" → theory-of-constraints; "how would an attacker break this?" → red-team), go straight to it. Routing is overhead you only pay when the match isn't obvious. Likewise, if no model clearly helps, just reason directly — don't force one.
+
 ## Quick Router
 
 ### Step 1: What's Your Domain?
@@ -87,9 +91,9 @@ Feature prioritization           → Opportunity Cost, Theory of Constraints
 Why aren't users engaging?       → Jobs to be Done, 5 Whys Plus
 New product exploration          → Effectuation, First Principles
 Should we pivot?                 → Regret Minimization, Reversibility
-Product-market fit               → Jobs to be Done, Scientific Method
+Product-market fit               → Jobs to be Done, Bayesian
 Roadmap planning                 → Theory of Constraints, Opportunity Cost
-A/B test design                  → Scientific Method, Bayesian
+A/B test interpretation          → Bayesian, Probabilistic
 ```
 
 **Default for product:** Start with **Jobs to be Done** (what job is the user hiring this for?).

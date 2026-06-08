@@ -1,6 +1,6 @@
 ---
 name: thinking-steel-manning
-description: Argue against the strongest version of opposing positions, not the weakest. Use for design reviews, evaluating alternatives, conflict resolution, and decision validation.
+description: Use before rejecting a proposal or when you're inclined to just agree with the user. Build the strongest version of the opposing case first, then engage that — not a weak version.
 ---
 
 # Steel-Manning
@@ -29,7 +29,29 @@ Disagreeing with a proposal?
   → Can you state their best argument? → no → STEEL-MAN FIRST
   → Are you attacking a weak version? → yes → CONSTRUCT STRONGER VERSION
   → Have you found the core insight? → no → DIG DEEPER
+
+About to agree with the user's plan?
+  → Have you stated the strongest case against it? → no → STEEL-MAN THE OPPOSING VIEW FIRST
 ```
+
+This skill is the direct counter to **sycophancy** — the pull to validate whatever the user proposed. Before endorsing a plan, construct the best case *against* it; agreement that survives that is worth more than reflexive agreement.
+
+## When NOT to Use
+
+- **The matter is settled fact, not a position.** Don't steel-man a factual error, a security anti-pattern, or a violated requirement — correct it. Steel-manning is for genuine trade-offs and judgment calls, not for manufacturing a defense of something wrong.
+- **You already agree for good, stated reasons.** If you've actually weighed it, don't perform a fake debate; say why you agree.
+- **Trivial or fully reversible choices** where the cost of being wrong is near zero — the deliberation isn't worth the budget.
+- **An emergency requiring immediate action** — steel-man the post-incident review, not the live fire.
+
+## Trigger Card
+
+Before rejecting a proposal or when you're inclined to just agree with the user:
+
+1. **State the opposing case in its strongest form** — not the version that's easy to knock down. What would its best advocate say?
+2. **Find what's actually true in it** — even if you reject the conclusion, what valid insight or concern does it surface?
+3. **Engage that strongest version** — respond to what was actually claimed, not a weak version. If your position still holds, great; if not, update.
+
+Skip for trivial or fully reversible choices where the cost of being wrong is near zero. In an emergency, steel-man the post-incident review, not the live fire.
 
 ## The Steel-Manning Process
 

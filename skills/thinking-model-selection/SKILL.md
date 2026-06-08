@@ -5,6 +5,8 @@ description: Choose the right mental model for the problem at hand. Use when fac
 
 # Model Selection
 
+> **Overlaps thinking-model-router.** If you already know which model fits, skip routing entirely and just invoke that model. If you don't, **thinking-model-router** is the single entry point — start there. This skill goes deeper on *how* to classify a problem and *when to abandon* a model once chosen. (Audit recommends merging this into thinking-model-router; for now, prefer the router as the front door.)
+
 ## Overview
 
 Every mental model has a domain where it excels and domains where it fails. Model selection is the meta-skill of recognizing which model fits which problem. The expert doesn't just know many models—they know when to apply each one. Using the wrong model is often worse than using no model at all.
@@ -28,6 +30,26 @@ Facing a problem?
   → Does your usual model fit? → no → CONSIDER ALTERNATIVES
   → Are you using a model by habit? → yes → QUESTION THE FIT
 ```
+
+## When NOT to Use
+
+- **You don't know which thinking tool to reach for.** Start with `thinking-model-router` — it is the single entry point that routes to the right skill. This skill goes deeper on *how* to classify problems and match models, but only after the router has narrowed the field.
+- **You've already classified the problem type.** If you know it's a debugging problem, just invoke `thinking-scientific-method` or `thinking-five-whys-plus` directly. Don't run a full model-selection exercise to confirm what you already know.
+- **The problem is routine and your default approach fits.** Model selection adds overhead; on a familiar problem, use the model you know works.
+- **You're tempted to run this as a first step on every task.** That turns a meta-skill into a tax. Most tasks don't need model selection — they need execution. Reserve this for when your usual approach has demonstrably failed.
+
+> **Redirect:** For nearly all cases, start with `thinking-model-router` — it classifies the problem and dispatches to the right skill in one pass. This skill is the reference for *how* that classification works, not a replacement for the router.
+
+## Trigger Card
+
+When your usual problem-solving approach has demonstrably failed and you need to match a different tool to the task:
+
+1. **Classify the problem:** Diagnostic / Decision / Understanding / Creative / Evaluation.
+2. **Check the constraint:** Time pressure? Information gaps? High stakes? Complexity?
+3. **Match:** Use the Problem-Model Matching table below to find the category → select the specific model.
+4. **Set an exit criterion:** If no insight in 15+ minutes or key facts don't fit, switch.
+
+If you don't know which approach to use at all, start with `thinking-model-router` — it does the classification and dispatch in one pass.
 
 ## Problem-Model Matching
 
@@ -130,7 +152,7 @@ EVALUATION PROBLEMS (Is this good?)
 
 | Domain | Primary Models | Why |
 |--------|---------------|-----|
-| Debugging | Scientific Method, 5 Whys | Hypothesis testing, root cause |
+| Debugging | Scientific Method, 5 Whys | Hypothesis-differential localization, root cause |
 | Architecture | Systems Thinking, Leverage Points | Interconnections, intervention |
 | Product | Jobs to be Done, Cynefin | User needs, complexity |
 | Strategy | Red Team, Pre-mortem | Adversarial, risk |

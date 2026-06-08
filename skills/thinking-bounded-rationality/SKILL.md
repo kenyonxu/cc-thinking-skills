@@ -1,34 +1,50 @@
 ---
 name: thinking-bounded-rationality
-description: Apply Herbert Simon's Bounded Rationality and satisficing to make good-enough decisions under real-world constraints. Use for design decisions under time pressure, recognizing cognitive limits, and setting appropriate stopping criteria.
+description: Use when a search or investigation could run indefinitely and you need a stopping rule. Set an explicit "good enough" threshold and stop at the first option that clears it.
 ---
 
 # Bounded Rationality and Satisficing
 
 ## Overview
 
-Herbert Simon's Bounded Rationality recognizes that human decision-making is limited by three fundamental constraints: available information, cognitive capacity, and time. Rather than pursuing optimal solutions (which is often impossible), Simon proposed "satisficing"—a portmanteau of satisfy + suffice—choosing solutions that are good enough to meet requirements.
+Herbert Simon's Bounded Rationality recognizes that any agent operating under finite resources cannot exhaustively optimize: the search space is too large, information is incomplete, and acting has a cost. Rather than pursuing the optimal solution, Simon proposed "satisficing"—a portmanteau of satisfy + suffice—choosing the first solution good enough to meet an explicit threshold, then stopping.
 
-**Core Principle:** "Decision makers can satisfice either by finding optimum solutions for a simplified world, or by finding satisfactory solutions for a more realistic world." — Herbert Simon
+For an autonomous coding agent the binding constraint is a **budget**: tool calls, search/read operations, context window, and wall-clock time per turn. A grep that could keep matching, a file tree you could keep traversing, a doc set you could keep reading — each has steeply diminishing returns. Satisficing converts "search until certain" (which never terminates) into "search until the threshold is met, then act."
+
+**Core Principle:** Define "good enough" *before* you search, and stop at the first option that clears the bar. Optimizing is correct only when the gap between good and best is worth more than the budget it costs to close it.
 
 ## When to Use
 
-- Making design decisions under time pressure
-- Facing complex problems with incomplete information
-- Analysis paralysis is blocking progress
-- Optimization costs exceed potential benefits
-- Need to set stopping criteria for searches/research
-- Evaluating when "good enough" beats "perfect"
-- Resource allocation under constraints
+- An investigation or search has no natural endpoint (greps, file reads, doc crawls, candidate solutions) and could consume the whole budget.
+- Multiple options would all clear the requirement and you're tempted to keep comparing.
+- You're gathering more context than the decision actually needs.
+- A reversible, low-stakes choice is consuming optimization-level effort.
+- You need to commit and ship before the turn/budget runs out.
 
 Decision flow:
 
 ```
-Decision needed? → yes → Do you have perfect information? → rarely
-                                                         ↘
-                    Is optimization cost justified? → no → SATISFICE
-                                                    ↘ yes → Optimize (but verify cost)
+Search/investigation that could run indefinitely? → yes → Is closing the gap to "best" worth the budget? → no → SATISFICE (threshold + stop)
+                                                                                                          ↘ yes → Optimize (and cap the budget)
+                                                  ↘ no → just answer
 ```
+
+## When NOT to Use
+
+- **Irreversible or high-stakes choices** (data deletion, security boundaries, schema/migration decisions, public commitments) — the gap between good and best is worth the budget; optimize and verify.
+- **Correctness gates** — tests, security checks, and "did the fix actually work?" are not satisficeable; you need the right answer, not a sufficient-looking one.
+- **The answer is cheaply knowable** — if one more grep or a single file read would settle it definitively, just do it; don't satisfice your way past a quick fact.
+- **The threshold can't be stated** — if you can't articulate what "good enough" means, you can't satisfice responsibly; clarify the requirement first.
+
+## Trigger Card
+
+When a search or investigation could run indefinitely and you need to ship:
+
+1. **Set an explicit aspiration level** — what does "good enough" look like? Define a concrete, measurable threshold.
+2. **Search sequentially** — evaluate options one at a time in the order you encounter them. Do not enumerate exhaustively.
+3. **Stop at the first option that clears the threshold.** Commit and move on.
+
+If the threshold can't be articulated or the cost of a wrong choice is catastrophic, don't satisfice — run the full procedure. For a single cheaply-knowable fact, just look it up.
 
 ## The Three Constraints
 
@@ -49,38 +65,37 @@ Reality: You can't test every option in production
 Satisfice: Pick a well-supported option that meets current needs
 ```
 
-### 2. Cognitive Bounds
+### 2. Processing Bounds (the budget)
 
-**What you can process is limited**
+**What you can compute and attend to is limited**
 
-- Working memory holds ~4-7 items
-- Complex comparisons overwhelm analysis
-- Decision fatigue degrades quality
-- Expertise helps but doesn't eliminate limits
+- Each turn has a finite budget of tool calls, reads, and context-window tokens
+- Adding more options/criteria to a comparison degrades signal, not improves it — past ~3-5 criteria, marginal context rarely flips the decision
+- Long, sprawling investigations crowd out the context needed to act on what you found
+- More search reduces uncertainty with sharply diminishing returns
 
 ```
-Example: Reviewing architecture options
-Reality: You can't hold 20 tradeoffs in mind simultaneously
-         You can't model all interaction effects
-         You can't foresee all edge cases
-Satisfice: Focus on the 3-5 most critical criteria
+Example: Choosing among architecture options
+Reality: Reading every doc and modeling every interaction effect
+         burns the budget before you produce an answer
+Satisfice: Fix the 3-5 criteria that actually decide it, evaluate
+           against those, and stop at the first option that clears them
 ```
 
-### 3. Time Bounds
+### 3. Action-Cost Bounds
 
-**When you must decide is constrained**
+**Deciding and re-deciding both cost budget and time**
 
-- Deadlines are real
-- Markets move
-- Opportunities expire
+- Every additional search/read consumes budget that can't be spent elsewhere
+- The user is waiting; an answer now usually beats a marginally better answer later
+- Re-opening a settled, reversible decision is rarely worth the cost
 - Perfect is the enemy of shipped
 
 ```
-Example: Technical design for Q1 deadline
-Reality: You have 2 weeks, not 2 months
-         The business needs an answer now
-         Delaying has its own costs
-Satisfice: Make the best decision possible with available time
+Example: Picking a library for a reversible internal task
+Reality: You could compare ten options across a dozen dimensions
+         Reversibility means a wrong-but-adequate pick is cheap to swap
+Satisfice: Pick the first well-supported option that meets the requirement, move on
 ```
 
 ## Satisficing vs. Optimizing

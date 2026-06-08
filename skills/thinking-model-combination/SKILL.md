@@ -11,6 +11,17 @@ Real-world problems rarely fit neatly into a single mental model. Model combinat
 
 **Core Principle:** Multiple lenses reveal what single lenses miss. But combination requires discipline, not just accumulation.
 
+## Read This First: The Anti-Patterns
+
+Most combination attempts fail by *adding* rather than *integrating*. Internalize these limits before doing anything else:
+
+- **Hard cap: 3-4 models, each with a distinct, named role.** More than that is "Model Soup" — contradictory conclusions, analysis paralysis, no recommendation. If you can't say what unique question each model answers, drop it.
+- **Add a model only to cover a specific, named blind spot** — not to look thorough. If a second model just confirms the first, it added nothing (Checkbox Combination).
+- **Don't blend incompatible worldviews** (e.g., Effectuation's "embrace uncertainty" + detailed prediction). Use them in sequence for different phases, or as a deliberate adversarial pair — never mashed together.
+- **Decide how the models relate *before* applying them**, and pick a tiebreaker model up front for when they conflict.
+
+If a single model already answers the question, use it alone and stop. Combination is the exception, justified only by high stakes or genuine multi-domain spread. (Full anti-pattern detail is in the "Combination Anti-Patterns" section below.)
+
 ## When to Use
 
 - Complex problems spanning multiple domains

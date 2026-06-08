@@ -1,348 +1,162 @@
 ---
 name: thinking-scientific-method
-description: Hypothesis → Prediction → Test → Revise with explicit falsification. Use for debugging, feature experimentation, performance investigation, and A/B testing design.
+description: Use when a symptom could have several causes and you must find the faulty code by ranking falsifiable hypotheses and checking the cheapest discriminating observation first.
 ---
 
-# Scientific Method
+# Hypothesis-Differential Debugging
 
 ## Overview
 
-The scientific method is a systematic approach to understanding through observation, hypothesis formation, prediction, testing, and revision. In engineering, it provides rigor to debugging, experimentation, and investigation. The key insight: good hypotheses must be falsifiable—you must be able to prove them wrong.
+The scientific method's payoff for an agent is not narrating "observe -> question." It is the **differential**: when a symptom could come from several places, enumerate competing falsifiable hypotheses and spend your cheapest observation on the one that best discriminates between them.
 
-**Core Principle:** Form hypotheses that could be proven false. Design experiments that could falsify them. Update beliefs based on evidence.
+This is the proven replacement for the old broad scientific-method skill. In SWE-bench fault localization, the original was flat; this agent-native version turned it into the strongest measured debugging lift in the current eval set.
+
+**Core Principle:** Don't guess-and-patch. Enumerate competing causes, then make the cheapest observation that would falsify the most likely one.
 
 ## When to Use
 
-- Debugging (systematic cause identification)
-- Performance investigation
-- A/B test design
-- Feature experimentation
-- Root cause analysis
-- Data analysis
-- Any investigation where you're testing theories
-
-Decision flow:
+- A bug or incident symptom could plausibly come from more than one place
+- You have read access to code, logs, diffs, traces, or tests
+- You need to localize the faulty file, function, branch, config, or invariant before fixing
 
 ```
-Investigating something?
-  → Do you have a clear hypothesis? → no → FORM A HYPOTHESIS
-  → Can your hypothesis be proven false? → no → MAKE IT FALSIFIABLE
-  → Have you designed a test? → no → DESIGN AN EXPERIMENT
-  → Did you update beliefs based on results? → no → REVISE AND ITERATE
+Symptom has several plausible causes?
+  -> no  -> test or fix the obvious cause directly
+  -> yes -> can you make cheap observations now?
+       -> no  -> gather access/evidence first
+       -> yes -> apply hypothesis-differential debugging
 ```
 
-## The Scientific Method Process
+## When NOT to Use
 
-### Step 1: Observe
+- The cause is already obvious from a single trace, failing test, or recent diff -> fix directly.
+- Only one plausible hypothesis exists -> test it directly.
+- You cannot make any observation -> get access first; don't speculate.
+- You are designing an A/B test, canary, or multi-week experiment -> this skill is for observations an agent can make now.
 
-Gather data about the phenomenon:
+## The Procedure
+
+### Step 1: Enumerate competing hypotheses
+
+List 3-5 specific, falsifiable hypotheses. Name the likely file, function, subsystem, input condition, or invariant. Avoid vague buckets like "backend issue" or "race condition somewhere."
 
 ```markdown
-## Observation
-
-What I'm seeing:
-- API latency increased from 200ms to 800ms
-- Started approximately Monday 9 AM
-- Affects /checkout endpoint
-- Other endpoints are normal
-- Error rate is normal
-
-Initial data:
-- P50: 400ms (was 150ms)
-- P99: 2.5s (was 500ms)
-- Traffic: Normal levels
+| # | Hypothesis | Why plausible? |
+|---|------------|----------------|
+| H1 | `auth/session.py:refresh` drops rotated tokens | failures start after token rotation |
+| H2 | cache TTL mismatch in `session_cache` | stale sessions persist across deploys |
+| H3 | frontend retries reuse expired cookie | only browser flow is affected |
 ```
 
-### Step 2: Question
+If you can only think of one hypothesis, you are guessing. Force alternatives before inspecting deeper.
 
-What do you want to understand?
+### Step 2: Name the cheapest discriminating observation
+
+For each hypothesis, name one observation you can make now that would separate it from the others.
+
+Good observations:
+- read the function the stack trace names
+- grep callers of a parser or config key
+- inspect the recent diff touching the failing path
+- compare two log lines across working and broken cases
+- check a test fixture or schema invariant
+
+Bad observations:
+- deploy a canary
+- run a long experiment
+- ask users to wait
+- inspect every file in the subsystem
+
+### Step 3: State falsifiers before looking
+
+For each hypothesis, write what result would make you drop it. This prevents confirmation search.
 
 ```markdown
-## Question
-
-Central question: Why did /checkout latency increase 4x on Monday?
-
-Sub-questions:
-- What changed on/around Monday 9 AM?
-- Why only /checkout and not other endpoints?
-- Why is P99 more affected than P50?
+| Hypothesis | Falsified if... |
+|------------|-----------------|
+| H1 token refresh | refresh path never reads rotated token state |
+| H2 cache TTL | cache entry expires before the observed stale window |
+| H3 frontend retry | same failure occurs in API-only reproduction |
 ```
 
-### Step 3: Hypothesize
+### Step 4: Rank by likelihood x cheapness
 
-Form a testable explanation:
+Test the observation with the best expected information per unit of effort. Start with the cheapest observation that separates your top hypotheses, not the most elaborate investigation.
 
-```markdown
-## Hypothesis
-
-Primary hypothesis:
-"The latency increase is caused by the payment provider SDK update
-deployed Sunday night, which changed from async to sync API calls."
-
-Why this hypothesis:
-- SDK was updated Sunday (timing matches)
-- /checkout is the only endpoint using payment SDK (scope matches)
-- Sync calls would increase variance (P99 impact matches)
+```
+For each hypothesis → name falsifier → rank by likelihood x cheapness → observe → update/drop → localize fault
 ```
 
-**Good hypothesis characteristics:**
-- **Testable:** Can design an experiment
-- **Falsifiable:** Can be proven wrong
-- **Specific:** Not vague or unfalsifiable
-- **Explanatory:** Accounts for observations
+### Step 5: Stop on direct localization
 
-### Step 4: Predict
+Stop when one hypothesis is supported by direct evidence and the key alternatives are ruled out. Name the file/function/config to change and the evidence that localizes it.
 
-What would you expect IF the hypothesis is true?
+## Investigation Template
 
 ```markdown
-## Predictions
-
-If hypothesis is true:
-1. Rolling back the SDK should restore previous latency
-2. Traffic to payment provider should show increased duration
-3. Thread utilization should be higher (blocking calls)
-4. Adding async wrapper should reduce latency
-
-If hypothesis is false:
-1. Rollback won't change latency
-2. Payment provider call duration is unchanged
-3. Thread utilization is normal
-```
-
-**Prediction requirement:**
-Predictions must differentiate hypothesis-true from hypothesis-false. If both would produce the same observation, the prediction is useless.
-
-### Step 5: Experiment
-
-Design and run a test:
-
-```markdown
-## Experiment Design
-
-Test: Deploy SDK rollback to canary group
-
-Setup:
-- Control: 90% traffic, new SDK
-- Treatment: 10% traffic, old SDK
-- Duration: 1 hour
-- Metric: P50 and P99 latency
-
-Success criteria:
-- If P50 < 200ms in treatment → Hypothesis SUPPORTED
-- If P50 > 350ms in treatment → Hypothesis FALSIFIED
-
-Confounds controlled:
-- Same time of day as original issue
-- Same traffic routing rules
-- Same downstream dependencies
-```
-
-### Step 6: Analyze
-
-Examine the results:
-
-```markdown
-## Results
-
-Control (new SDK):
-- P50: 410ms
-- P99: 2.4s
-- n: 45,000 requests
-
-Treatment (old SDK):
-- P50: 155ms
-- P99: 480ms
-- n: 5,000 requests
-
-Statistical significance: p < 0.001
-Effect size: 62% reduction in P50
-
-Analysis:
-Hypothesis SUPPORTED. Old SDK shows pre-incident latency levels.
-```
-
-### Step 7: Conclude and Iterate
-
-Update beliefs and act:
-
-```markdown
-## Conclusion
-
-Finding: Payment SDK update caused latency regression
-Confidence: High (controlled experiment, clear signal)
-
-Action:
-1. Roll back SDK immediately
-2. File bug with payment provider
-3. Add latency monitoring for SDK calls
-4. Evaluate SDK changes before future updates
-
-Next investigation:
-Why didn't we catch this in staging?
-Hypothesis: Staging doesn't have realistic payment provider latency
-```
-
-## Scientific Debugging
-
-### The Debugging Scientific Method
-
-```markdown
-## Bug: Users sometimes see stale data
-
-### Observation
-- Reports of stale data from support tickets
-- No clear pattern in who/when
-- Estimated 5% of users affected
-
-### Hypotheses (Multiple)
-| # | Hypothesis | Falsification Test |
-|---|------------|-------------------|
-| 1 | Cache not invalidating | Check cache hits with stale data |
-| 2 | Read replica lag | Check replica lag at time of reports |
-| 3 | Browser caching | Check with cache-busted requests |
-| 4 | CDN serving old content | Check CDN cache status |
-
-### Testing Strategy
-Test in order of: (ease × likelihood)
-1. CDN cache status (easy to check)
-2. Browser caching (easy to check)
-3. Read replica lag (need to correlate times)
-4. Cache invalidation (needs instrumentation)
-
-### Test 1: CDN Cache Status
-Prediction: If CDN is serving stale content,
-            cache headers will show old timestamps
-Result: CDN timestamps are fresh
-Conclusion: CDN ruled out
-
-### Test 2: Browser Caching
-Prediction: If browser caching,
-            force-refresh will show correct data
-Result: Force-refresh still shows stale data sometimes
-Conclusion: Browser caching ruled out
-
-### Test 3: Read Replica Lag
-Prediction: If replica lag,
-            reports will correlate with lag spikes
-Result: Strong correlation (r=0.84) between reports and lag spikes
-Conclusion: SUPPORTED - read replica lag is the cause
-```
-
-## A/B Test Design
-
-```markdown
-## A/B Test: New Checkout Flow
-
-### Hypothesis
-"The simplified 2-step checkout will increase conversion rate
-compared to current 4-step checkout."
-
-### Predictions
-If hypothesis is true:
-- Conversion rate increases by >5%
-- Time to complete decreases
-- Abandonment rate decreases
-
-If hypothesis is false:
-- Conversion rate unchanged or decreases
-- Potential confusion (errors increase)
-
-### Experiment Design
-Control: Current 4-step checkout
-Treatment: New 2-step checkout
-Traffic split: 50/50
-Duration: 2 weeks (for statistical power)
-Primary metric: Conversion rate
-Guardrail metrics: Error rate, support tickets
-
-### Sample Size Calculation
-Baseline conversion: 3.2%
-Minimum detectable effect: 5% relative (0.16% absolute)
-Required n per group: 150,000 users
-
-### Stopping Criteria
-Stop early if:
-- Treatment errors > 2x control
-- Support tickets > 2x baseline
-- p < 0.01 AND effect > 10%
-```
-
-## Scientific Method Template
-
-```markdown
-# Scientific Investigation: [Topic]
-
-## Observation
-What I'm seeing:
-- [Observation 1]
-- [Observation 2]
-
-Data:
-- [Metric]: [Value]
-
-## Question
-[Central question to answer]
+## Symptom
+[Specific failing behavior, scope, timing, and known constraints]
 
 ## Hypotheses
-| # | Hypothesis | How to Test | How to Falsify |
-|---|------------|-------------|----------------|
-| 1 | | | |
-| 2 | | | |
+| # | Hypothesis | Why plausible? | Cheapest observation | Falsified if... |
+|---|------------|----------------|----------------------|-----------------|
+| H1 | [specific file/function/config cause] | [evidence] | [read/grep/diff/check] | [drop condition] |
+| H2 | [specific alternate cause] | [evidence] | [read/grep/diff/check] | [drop condition] |
+| H3 | [specific alternate cause] | [evidence] | [read/grep/diff/check] | [drop condition] |
 
-## Predictions
-If H1 is true:
-- [Prediction 1]
-- [Prediction 2]
+## Test Order
+1. [Cheapest discriminating observation]
+2. [Next observation if H1 is falsified]
+3. [Deferred only if cheap observations do not localize]
 
-If H1 is false:
-- [Counter-prediction 1]
-
-## Experiment
-Design: [How to test]
-Control: [Baseline]
-Treatment: [Intervention]
-Metric: [What to measure]
-Duration: [How long]
-Success criteria: [What constitutes support/falsification]
-
-## Results
-[Data from experiment]
-
-## Analysis
-Hypothesis [SUPPORTED/FALSIFIED]
-Confidence: [High/Medium/Low]
-Reasoning: [Why]
-
-## Conclusion
-Finding: [What I learned]
-Action: [What to do]
-Next: [Follow-up investigation]
+## Localization
+[Supported hypothesis, ruled-out alternatives, and the file/function/config to change]
 ```
+
+## Worked Shape
+
+```markdown
+Symptom: intermittent 500s on /export, only eu-west, started three days ago.
+
+Hypotheses:
+1. recent diff to export serializer
+   Observation: inspect commits touching `export_serializer`
+   Falsified if: no diff touches the failing codepath
+2. eu-west Redis rotation broke a cache key
+   Observation: read cache key construction + region config
+   Falsified if: key and TTL match healthy regions
+3. upstream timeout under load
+   Observation: compare timeout logs during failure window
+   Falsified if: no upstream latency spike
+
+Test order: H1, H2, H3.
+Result: H1 diff changed nested export handling and matches stack trace.
+Localized fault: `app/export/serializer.py`.
+```
+
+## Anti-Patterns
+
+- Narrating the scientific method without proposing competing causes
+- Looking only for evidence that supports your first guess
+- Calling an expensive experiment a "test" when a cheap observation exists
+- Stopping at a plausible explanation before ruling out alternatives
+- Continuing to analyze after the faulty file/function is localized
 
 ## Verification Checklist
 
-- [ ] Observations documented with data
-- [ ] Hypothesis is falsifiable (can be proven wrong)
-- [ ] Predictions differentiate true vs. false
-- [ ] Experiment controls for confounding variables
-- [ ] Results analyzed objectively
-- [ ] Conclusion follows from evidence
-- [ ] Updated beliefs based on evidence
+- [ ] Listed 3-5 specific hypotheses
+- [ ] Each hypothesis has a cheap observation available now
+- [ ] Each hypothesis has a stated falsifier
+- [ ] Observations are ranked by likelihood x cheapness
+- [ ] Final answer names the localized file/function/config and the evidence
 
 ## Key Questions
 
-- "What would I expect to see if my hypothesis is true?"
-- "What would I expect to see if my hypothesis is false?"
-- "Can this hypothesis be proven wrong?"
-- "Am I testing my hypothesis or confirming my beliefs?"
-- "What's the simplest explanation that fits the data?"
-- "What evidence would change my mind?"
+- What would I see if this hypothesis were false?
+- Which observation best separates the top two hypotheses?
+- Am I testing a hypothesis or confirming my first guess?
+- Can I localize the fault with a cheaper observation?
 
 ## Feynman's Wisdom
 
-"The first principle is that you must not fool yourself—and you are the easiest person to fool."
-
-"It doesn't matter how beautiful your theory is, it doesn't matter how smart you are. If it doesn't agree with experiment, it's wrong."
-
-The scientific method protects you from yourself. Your intuition generates hypotheses; the method tests them ruthlessly. When the experiment disagrees with your expectation, the experiment wins.
+"The first principle is that you must not fool yourself - and you are the easiest person to fool." Your intuition generates hypotheses; the differential tests them.

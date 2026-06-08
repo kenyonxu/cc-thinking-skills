@@ -1,35 +1,46 @@
 ---
 name: thinking-feedback-loops
-description: Analyze systems using Donella Meadows' feedback loop framework to identify reinforcing loops, balancing loops, delays, and leverage points. Use for organizational dynamics, product growth design, debugging runaway or oscillating systems, and finding high-impact interventions.
+description: Use when a system shows runaway growth/collapse, oscillates around a target, or resists change, and you need to find the loop driving it. Identifies reinforcing/balancing loops and delays.
 ---
 
 # Feedback Loop Analysis
 
 ## Overview
 
-Feedback loop analysis, developed by Donella Meadows in "Thinking in Systems," provides a rigorous framework for understanding how systems behave over time. All dynamic systems—software, organizations, markets, products—are driven by feedback loops that either amplify change (reinforcing) or stabilize toward goals (balancing). Understanding these loops reveals why systems grow, collapse, oscillate, or resist change.
+Feedback loop analysis (Donella Meadows, "Thinking in Systems") explains how a dynamic system behaves over time. Loops either amplify change (reinforcing) or stabilize toward a goal (balancing); delays between cause and effect produce oscillation. When a system grows uncontrollably, collapses, oscillates, or refuses to change, the loop structure is the cause.
 
 **Core Principle:** System behavior emerges from feedback structure. To change behavior, change the loops.
 
+## Trigger Card
+
+When a system shows dynamic behavior (runaway growth, oscillation, resistance to change):
+
+1. **Classify the behavior:** growing/collapsing → look for a reinforcing loop; oscillating → look for a balancing loop with delay; stuck → look for a dominant balancing loop.
+2. **Trace the loop:** what variable feeds back into itself? Map causal connections with direction (+/-).
+3. **Find the leverage:** shorten a delay, change a loop's gain, or add a balancing loop to a runaway reinforcing one.
+
+If there's no dynamic behavior (static, one-time cause), skip — just fix it. For overall system mapping, use `thinking-systems`. For choosing where to intervene in an already-mapped loop, use `thinking-leverage-points`.
+
 ## When to Use
 
-- Analyzing organizational dynamics (growth, stagnation, dysfunction)
-- Designing product growth loops and retention mechanisms
-- Debugging systems exhibiting runaway growth or collapse
-- Understanding why a system oscillates instead of stabilizing
-- Finding high-leverage intervention points
-- Predicting unintended consequences of changes
-- Understanding why "obvious" fixes fail or backfire
-
-Decision flow:
+- A system shows runaway growth or collapse (suspect a dominant reinforcing loop)
+- It oscillates around a target instead of settling (suspect delays in a balancing loop)
+- It is stuck/resistant to change (suspect a dominant balancing loop)
+- An "obvious" fix backfired and you need to know why
 
 ```
 System behavior is puzzling or problematic?
   → Is it growing/shrinking unexpectedly?   → Look for REINFORCING LOOPS
   → Is it oscillating around a target?      → Look for DELAYS in BALANCING LOOPS
   → Is it stuck/resistant to change?        → Look for dominant BALANCING LOOPS
-  → Need to intervene effectively?          → Find LEVERAGE POINTS
 ```
+
+## When NOT to Use
+
+- **You need to map the overall system structure** (components, stocks, flows, cross-service causes) — use `thinking-systems` instead. Feedback loops zooms in on the specific dynamic loops driving behavior; systems maps the full territory first.
+- **You're looking for where to intervene** in an already-mapped system — use `thinking-leverage-points` (Meadows' 12-level hierarchy). Feedback loops tells you *which loop is dominant*; leverage-points tells you *where in that loop to act*.
+- The symptom has a single static cause with no loop (a fixed bug, a one-time bad config) → just fix it.
+- Behavior isn't changing over time—there's nothing dynamic to model.
 
 ## Core Concepts
 
@@ -64,24 +75,20 @@ Reinforcing loops amplify change in the same direction—growth or decline. They
 - Virtuous cycles (when beneficial)
 - Vicious cycles (when harmful)
 
-**Software/Product Examples:**
+**Software Examples:**
 
 ```
-Network Effect Loop:
-Users → Value to other users → More users → More value
-(Slack, social networks, marketplaces)
+Retry Storm Loop:
+Service slow → Clients retry → More load → Service slower → More retries
+(Vicious cycle toward outage)
 
 Technical Debt Loop:
 Shortcuts → Bugs → Firefighting → Less time → More shortcuts
 (Vicious cycle toward collapse)
 
-Learning Loop:
-Practice → Skill → Confidence → More practice → More skill
-(Virtuous cycle of improvement)
-
-Viral Growth Loop:
-Users → Invitations → New users → More invitations
-(Product-led growth)
+Cache Stampede Loop:
+Cache miss → Backend load → Slower fills → More misses → More load
+(Reinforcing under expiry)
 ```
 
 ### 2. Balancing Loops (Negative Feedback)
@@ -121,24 +128,20 @@ Balancing loops counteract change, pushing the system toward a goal or equilibri
 - Stability (when working well)
 - Oscillation (when delays exist)
 
-**Software/Product Examples:**
+**Software Examples:**
 
 ```
 Auto-scaling Loop:
 Load increases → Gap from target → Scale up → Load per instance decreases
 (Goal: maintain target response time)
 
-Thermostat Pattern:
-Temperature differs from setpoint → HVAC adjusts → Temperature approaches setpoint
-(Goal-seeking to maintain state)
+Backpressure Loop:
+Queue depth rises → Producers throttled → Arrival rate drops → Queue drains
+(Goal-seeking to bounded queue)
 
-Hiring Loop:
-Work exceeds capacity → Hire → Capacity increases → Work/person normalizes
-(Goal: sustainable workload)
-
-Quality Gate Loop:
-Defects detected → Review/fix required → Quality improves → Fewer defects
-(Goal: maintain quality standards)
+Circuit Breaker Loop:
+Error rate exceeds threshold → Breaker opens → Load sheds → Service recovers
+(Goal: maintain availability)
 ```
 
 ### 3. Delays
@@ -384,24 +387,7 @@ The system behavior is driven by currently dominant loops:
 
 ## Leverage Points
 
-Donella Meadows' hierarchy of intervention effectiveness (increasing power):
-
-| Level | Intervention | Example | Impact |
-|-------|-------------|---------|--------|
-| 12 | Constants/parameters | Adjust timeout values | Lowest |
-| 11 | Buffer sizes | Increase queue limits | Low |
-| 10 | Stock-flow structure | Add caching layer | Low |
-| 9 | Delays | Shorten feedback cycles | Medium |
-| 8 | Balancing loop strength | Improve monitoring | Medium |
-| 7 | Reinforcing loop gain | Amplify growth drivers | Medium-High |
-| 6 | Information flows | Make metrics visible | High |
-| 5 | System rules | Change deployment policy | High |
-| 4 | Self-organization | Enable team autonomy | Very High |
-| 3 | System goals | Redefine success metrics | Very High |
-| 2 | Paradigm/mindset | Shift from output to outcomes | Transformational |
-| 1 | Transcend paradigms | Question the frame itself | Highest |
-
-**Key insight:** Most interventions happen at levels 10-12 (parameters). The highest leverage is in goals, rules, and mental models.
+Once you've found the dominant loop, intervene at the highest-leverage point you can move: changing a delay or a loop's gain beats tuning a parameter; changing a rule beats both. For Meadows' full 12-level hierarchy, see `thinking-leverage-points`—don't re-derive it here.
 
 ## Application Framework
 
@@ -438,42 +424,11 @@ Donella Meadows' hierarchy of intervention effectiveness (increasing power):
 [Highest-leverage, lowest-risk option]
 ```
 
-### Designing a Growth System
-
-```markdown
-## Growth Loop Design: [Product/System]
-
-### Core Reinforcing Loop
-[User action] → [Value created] → [Trigger for more users] → [More user action]
-
-### Supporting Loops
-[Additional loops that feed the core]
-
-### Balancing Constraints
-[What limits growth and when it kicks in]
-
-### Delays to Minimize
-[Where feedback needs to be faster]
-
-### Metrics to Monitor
-[Leading indicators of loop health]
-```
-
 ## Integration with Systems Thinking
 
-This skill extends the `thinking-systems` skill by providing:
-
-1. **Specific loop identification techniques** (vs. general systems mapping)
-2. **Meadows' leverage point hierarchy** (vs. general intervention ideas)
-3. **Pattern library** (exponential, oscillating, limits to growth, etc.)
-4. **Delay analysis methodology** (root cause of oscillation)
-
-Use together:
-
-- `thinking-systems`: Map the overall system structure
-- `thinking-feedback-loops`: Identify and analyze specific loops
-- `thinking-second-order`: Trace consequences of interventions
-- `thinking-pre-mortem`: Identify loops that could cause failure
+- `thinking-systems`: Map the overall system structure and trace cross-service causes
+- `thinking-feedback-loops`: Identify and analyze the specific loop driving the dynamic behavior
+- `thinking-leverage-points`: Choose where to intervene (Meadows' 12-level hierarchy)
 
 ## Verification Checklist
 

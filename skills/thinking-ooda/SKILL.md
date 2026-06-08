@@ -1,232 +1,127 @@
 ---
 name: thinking-ooda
-description: Rapid decision-making loop for dynamic situations. Use for incident response, competitive scenarios, time-sensitive decisions, and situations requiring quick adaptation.
+description: Use under time pressure (incident, outage, debugging a moving target) when you must act before you have certainty—cycle Observe→Orient→Decide→Act on ~70% confidence, then re-observe.
 ---
 
 # OODA Loop
 
 ## Overview
-The OODA Loop (Observe, Orient, Decide, Act), developed by military strategist Colonel John Boyd, is a framework for rapid decision-making in dynamic, competitive, or time-sensitive situations. The key insight: speed through the loop creates advantage. In competitive scenarios, operating faster than your opponent disrupts their decision-making.
+The OODA Loop (Observe, Orient, Decide, Act) is a framework for acting in fast-moving, uncertain situations. The core decision rule: don't wait for certainty—act on the best current understanding, then immediately observe the result and loop again. Speed through the loop beats a perfect plan that arrives too late.
 
-**Core Principle:** Agility beats perfection. Cycle through OODA faster than the situation changes (or faster than your opponent).
+**Core Principle:** Act on ~70% confidence for reversible moves, then re-observe. Cycle faster than the situation changes.
 
 ## When to Use
 - Incident response and outages
-- Competitive market situations
-- Time-sensitive decisions
-- Rapidly changing requirements
-- Crisis management
-- Debugging under pressure
-- Any situation requiring quick adaptation
+- Debugging a moving target (intermittent failure, ongoing degradation)
+- Any time-sensitive decision where the situation is still changing
 
-Decision flow:
 ```
-Situation changing rapidly? → yes → Need quick decisions? → yes → APPLY OODA LOOP
-                                                         ↘ no → Standard analysis
-                          ↘ no → Deliberate analysis may be better
+Situation changing rapidly AND need to act before certainty? → yes → APPLY OODA
+                                                              → no  → use deliberate analysis / a hypothesis differential
 ```
+
+## When NOT to Use
+- The situation is static and you have time → deliberate analysis beats fast looping.
+- The action is irreversible/high-blast-radius → gather more information before acting; 70% confidence isn't enough.
+- You can cheaply and directly localize the cause (read the diff/log) → use `thinking-scientific-method` (hypothesis differential) instead of looping in the dark.
+
+## Trigger Card
+
+When under time pressure (incident, outage, debugging a moving target) and you must act before certainty:
+
+1. **Observe** — what is happening right now? Gather the cheapest, highest-signal data available.
+2. **Orient** — what does it mean given your mental model? Update the model if the data contradicts it.
+3. **Decide** — pick an action on ~70% confidence. Don't wait for 100%.
+4. **Act** — execute, then immediately re-observe. The loop is the point; speed beats precision.
+
+If the action is irreversible or high-blast-radius, gather more information before acting. If you can cheaply localize the cause (read the diff/log), use `thinking-scientific-method` instead.
 
 ## The Four Phases
 
-### 1. OBSERVE
-**Gather information rapidly**
-
-What to observe:
-- Current state of the system/situation
-- Changes since last observation
-- External factors and environment
-- Feedback from previous actions
-- Competitor/opponent movements
+### 1. OBSERVE — gather current state fast
+- Current metrics, logs, alerts, error rates
+- What changed recently (deploys, config, traffic)
+- Feedback from your last action
+- Cast wide, then narrow as a pattern emerges. Time-box it—don't observe forever.
 
 ```
-Incident Example:
-- Error rates: Spiking 10x normal
-- Affected services: API gateway, user service
-- Timeline: Started 5 minutes ago
-- Recent changes: Deploy 15 min ago
-- User reports: "Can't log in"
+Incident: error rate 10x normal; affects API gateway + user service;
+started 5 min ago; a deploy went out 15 min ago; users report login failures.
 ```
 
-Observation principles:
-- Cast wide net initially, narrow as pattern emerges
-- Don't filter prematurely—gather raw data
-- Include lagging AND leading indicators
-- Time-bound: Don't observe forever
-
-### 2. ORIENT
-**Make sense of observations**
-
-Orientation factors (Boyd's framework):
-- **Cultural traditions**: How does our org typically respond?
-- **Genetic heritage**: Our built-in biases and tendencies
-- **Previous experience**: What have we seen before?
-- **New information**: What's different this time?
-- **Analysis/Synthesis**: Combining all of the above
+### 2. ORIENT — make sense of it (the critical phase)
+Match the observations to a pattern and form a hypothesis. This is where most loops go wrong: don't lock onto the first framing. Hold ≥2 candidate explanations and let new evidence shift you.
 
 ```
-Incident Example:
-- Pattern matches: Similar to DB connection pool exhaustion last month
-- But different: No DB metrics anomaly this time
-- Recent deploy touched: Auth service rate limiting
-- Hypothesis: Rate limit config too aggressive
+Pattern resembles last month's connection-pool exhaustion, BUT no DB anomaly this time.
+The deploy touched auth rate-limiting.
+Hypothesis: rate-limit config is too aggressive.
 ```
 
-Orient is the CRITICAL phase:
-- This is where mental models apply
-- Misorientation leads to wrong decisions
-- Update orientation as new info arrives
-- Challenge your initial framing
-
-### 3. DECIDE
-**Select course of action**
-
-Decision characteristics:
-- Based on current orientation
-- Acknowledges uncertainty
-- Identifies what to observe next
-- Has implicit/explicit hypothesis
+### 3. DECIDE — pick an action under uncertainty
+- State the action and the hypothesis it tests.
+- 70% confidence now beats 90% too late, for a reversible action.
+- Decide what you'll observe next to confirm or refute.
 
 ```
-Incident Example:
-Decision: Roll back auth service deploy
-Hypothesis: This will restore normal error rates
-Observation plan: Watch error rates for 2 minutes post-rollback
-Fallback: If no improvement, investigate DB connections
+Decision: roll back the auth deploy.
+Hypothesis: this restores normal error rates.
+Will watch: error rate for 2 minutes; fallback = investigate DB connections.
 ```
 
-Decision speed vs. quality tradeoff:
-- 70% confidence now beats 90% confidence too late
-- Reversible decisions: Bias toward action
-- Irreversible decisions: Gather more info first
-- "Good enough" decision executed fast > perfect decision too slow
-
-### 4. ACT
-**Execute the decision**
-
-Action principles:
-- Execute decisively
-- Immediately return to OBSERVE
-- Don't wait for complete results
-- Create new observations through action
+### 4. ACT — execute, then immediately re-observe
+Execute decisively and go straight back to OBSERVE. The action creates new information; don't wait blindly for it to "settle."
 
 ```
-Incident Example:
-Action: kubectl rollback deployment/auth-service
-Immediate observe: Error rates, response times
-Time limit: 2 minutes to see effect
+Action: roll back deployment/auth-service.
+Immediate observe: error rate, response times, 2-minute window.
 ```
 
-The loop restarts:
-- Actions create new situation
-- New situation requires new observation
-- Cycle continues until stable state
+The loop restarts until the system is stable.
 
-## OODA Loop Speed
-
-### Tempo Advantage
-Operating inside opponent's loop:
-```
-You:     O → O → D → A → O → O → D → A → O ...
-Opponent:     O → O → O →  ...  → D → A (too late)
-```
-
-When you complete loops faster:
-- Your actions change situation before they decide
-- Their orientation becomes outdated
-- They react to old information
-- You maintain initiative
-
-### Speed Multipliers
-| Factor | Effect |
-|--------|--------|
-| Pre-planned responses | Skip D phase for known scenarios |
-| Distributed authority | Parallel loops at different levels |
-| Clear mental models | Faster O (orientation) |
-| Training/practice | Faster execution (A) |
-| Good observability | Faster O (observation) |
-
-### Speed Killers
-| Factor | Effect |
-|--------|--------|
-| Waiting for certainty | Loop stalls at O or D |
-| Hierarchical approval | Adds latency to D |
-| Information overload | O phase never completes |
-| Analysis paralysis | Loop stalls at Orient |
-| Perfect solution seeking | D phase never completes |
+## What Speeds the Loop
+| Speeds it up | Stalls it |
+|--------------|-----------|
+| Pre-planned responses for known scenarios | Waiting for certainty (stuck at Observe/Decide) |
+| Good observability (fast, trustworthy signals) | Information overload (Observe never ends) |
+| Clear hypotheses (fast Orient) | Locking onto one hypothesis (Orient lock) |
+| Reversible actions you can undo | Seeking the perfect fix (Decide never ends) |
 
 ## Application Patterns
 
 ### Incident Response
 ```
-OBSERVE: Metrics, logs, alerts, user reports
-ORIENT:  Match pattern, form hypothesis, assess blast radius
-DECIDE:  Mitigation action (rollback, scale, disable)
-ACT:     Execute mitigation, immediately observe results
-LOOP:    Continue until stable
-```
-
-### Competitive Response
-```
-OBSERVE: Competitor announcement, market reaction, customer feedback
-ORIENT:  Assess threat level, identify our advantages, gaps
-DECIDE:  Response strategy (match, differentiate, ignore)
-ACT:     Execute response, observe market reaction
-LOOP:    Adjust based on effectiveness
+OBSERVE: metrics, logs, alerts, recent changes
+ORIENT:  match pattern, form ≥2 hypotheses, assess blast radius
+DECIDE:  mitigation (rollback, scale, disable feature)
+ACT:     execute, immediately observe results
+LOOP:    continue until stable
 ```
 
 ### Debugging Under Pressure
 ```
-OBSERVE: Error messages, stack traces, recent changes
-ORIENT:  Form hypothesis about cause
-DECIDE:  Test most likely hypothesis first
-ACT:     Add logging, try fix, or eliminate possibility
-LOOP:    Update hypothesis based on results
+OBSERVE: errors, stack traces, recent changes
+ORIENT:  form a hypothesis about the cause
+DECIDE:  test the most likely hypothesis first
+ACT:     add logging / try the fix / eliminate the possibility
+LOOP:    update the hypothesis from the result
 ```
-
-## OODA for Teams
-
-### Parallel Loops
-Different team members can run loops simultaneously:
-```
-SRE:     Infrastructure OODA (scaling, failover)
-Dev:     Code OODA (debugging, fixes)
-Support: Communication OODA (users, stakeholders)
-Lead:    Strategy OODA (coordination, escalation)
-```
-
-### Shared Orientation
-Teams need synchronized mental models:
-- Runbooks create shared orientation
-- Incident channels share observations
-- Clear roles enable parallel action
-- Post-incident updates orientation for next time
-
-## Verification Checklist
-- [ ] Observing actual current state, not assumptions
-- [ ] Orientation considers multiple hypotheses
-- [ ] Decision is actionable and time-bound
-- [ ] Action creates observable feedback
-- [ ] Loop is actually cycling (not stuck in one phase)
-- [ ] Speed is appropriate to situation urgency
 
 ## Common Failure Modes
-
 | Failure | Symptom | Fix |
 |---------|---------|-----|
 | Observation overload | Can't process all data | Filter to key indicators |
-| Orientation lock | Stuck on one hypothesis | Force alternative framing |
-| Decision paralysis | Waiting for certainty | Set decision deadline |
-| Action without observation | Blind execution | Mandate observe after act |
-| Single loop | Not cycling | Time-box each phase |
+| Orientation lock | Stuck on one hypothesis | Force a second framing |
+| Decision paralysis | Waiting for certainty | Set a decision deadline; act on 70% |
+| Action without observation | Blind execution | Mandate observe-after-act |
+| Not actually looping | Stuck in one phase | Time-box each phase |
 
 ## Key Questions
 - "What do I observe RIGHT NOW?" (not 5 minutes ago)
-- "What does this mean? What pattern does it match?"
-- "What's my best action given current understanding?"
-- "How will I know if my action worked?"
-- "Am I cycling fast enough?"
+- "What pattern does this match—and what's my second hypothesis?"
+- "What's my best reversible action given current understanding?"
+- "How will I know in the next 2 minutes whether it worked?"
+- "Am I cycling, or stuck in one phase?"
 
 ## Boyd's Insight
-"He who can handle the quickest rate of change survives."
-
-The goal isn't just making decisions—it's making decisions faster than the situation evolves, faster than competitors adapt, faster than problems compound. Speed creates options; delay eliminates them.
+"He who can handle the quickest rate of change survives." The goal isn't just making decisions—it's making and revising them faster than the situation compounds. Speed creates options; delay eliminates them.

@@ -1,34 +1,35 @@
 ---
 name: thinking-theory-of-constraints
-description: Identify and manage the bottleneck; improvements elsewhere don't matter until the constraint is addressed. Use for performance optimization, process improvement, and resource allocation.
+description: Use when optimizing latency or throughput in a pipeline and one stage dominates—focus all effort on that single bottleneck, since speeding up the others changes nothing until it's fixed.
 ---
 
 # Theory of Constraints
 
 ## Overview
 
-The Theory of Constraints (TOC), developed by Eliyahu Goldratt in "The Goal," states that every system has exactly one constraint that limits its throughput. Optimizing anything other than the constraint is wasted effort—even counterproductive. Find the bottleneck, exploit it, subordinate everything else to it, and only then consider elevating it.
+The Theory of Constraints (TOC), from Eliyahu Goldratt's "The Goal," says a throughput-limited system has exactly one constraint setting its rate. Optimizing anything else is wasted effort—often counterproductive. Find the bottleneck, exploit it, subordinate everything else to it, and only then elevate it.
 
 **Core Principle:** A chain is only as strong as its weakest link. Strengthening any other link does nothing.
 
 ## When to Use
 
-- Performance optimization (systems, processes, teams)
-- Process improvement
-- Resource allocation
-- Throughput analysis
-- Project management
-- Capacity planning
-- Any optimization effort
-
-Decision flow:
+- Latency optimization where one stage dominates the time budget
+- Throughput optimization where one stage caps the rate
+- A pipeline where work piles up before one specific stage
 
 ```
-Trying to improve throughput?
+Trying to improve latency/throughput?
   → Have you identified the constraint? → no → FIND THE CONSTRAINT FIRST
   → Are you optimizing a non-constraint? → yes → STOP, FOCUS ON CONSTRAINT
-  → Is the constraint working at 100%? → no → EXPLOIT BEFORE ELEVATING
+  → Is the constraint working at 100%?   → no → EXPLOIT BEFORE ELEVATING
 ```
+
+## When NOT to Use
+
+- **No single stage dominates** (latency/load is spread roughly evenly, or many stages are near 100%) → there is no one constraint to exploit. Use `thinking-systems` to model the interactions instead.
+- The problem is correctness, not throughput → this is the wrong lens; debug the fault.
+- The bottleneck is already obvious and cheap to fix → just fix it; skip the five steps.
+- "Bottleneck" shifts every run (it's contention/coupling, not a fixed stage) → that's a systems problem, not a constraint.
 
 ## The Five Focusing Steps
 
@@ -220,53 +221,47 @@ Right approach: Focus 100% on database optimization
                 Query optimization, caching, indexing, read replicas
 ```
 
-### Team Productivity
+### Batch/Data Pipeline Throughput
 
 ```markdown
-## Team Throughput Analysis
+## Pipeline Throughput Analysis
 
-Team flow:
-Backlog → Development → Review → Testing → Deployment
+Stage flow:
+Ingest → Parse → Transform → Enrich (external API) → Write
 
 Throughput analysis:
-| Stage | Capacity | Cycle Time |
-|-------|----------|------------|
-| Backlog | Unlimited | 0 |
-| Development | 6 stories/sprint | 2 days |
-| Review | 4 stories/sprint | 4 days | ←CONSTRAINT
-| Testing | 10 stories/sprint | 1 day |
-| Deployment | 20 stories/sprint | 0.5 days |
+| Stage | Rate (rec/s) | Utilization |
+|-------|--------------|-------------|
+| Ingest | 50,000 | 20% |
+| Parse | 30,000 | 35% |
+| Transform | 20,000 | 50% |
+| Enrich (external API) | 2,000 | 100% | ←CONSTRAINT
+| Write | 40,000 | 25% |
 
-Team can only deliver 4 stories/sprint due to review constraint.
-Having developers "work harder" just creates a bigger queue.
+System throughput is capped at 2,000 rec/s by the enrichment call.
+Parallelizing parse/transform does nothing—it just grows the queue before Enrich.
 
-Solution: Subordinate development to review capacity
-          - Developers do more review
-          - Smaller stories (faster to review)
-          - Better PR descriptions
+Exploit: batch the API calls, cache repeat lookups, drop redundant enrichments.
+Subordinate: pace upstream stages to 2,000 rec/s; don't build WIP.
+Elevate (only if exploit insufficient): add API concurrency / a second provider.
 ```
 
-### Project Management
+### Concurrency / Lock Contention
 
 ```markdown
-## Project Timeline Analysis
+## Contention Analysis
 
-Project constraint analysis:
-| Resource | Required | Available | Buffer |
-|----------|----------|-----------|--------|
-| Development | 8 weeks | 10 weeks | 2 weeks |
-| Design | 2 weeks | 3 weeks | 1 week |
-| Backend API | 3 weeks | 3 weeks | 0 weeks | ←CONSTRAINT
-| Frontend | 4 weeks | 5 weeks | 1 week |
-| Testing | 2 weeks | 3 weeks | 1 week |
+Symptom: throughput plateaus far below CPU capacity.
 
-Critical path goes through Backend API (no buffer).
+| Resource | Wait time | Notes |
+|----------|-----------|-------|
+| CPU | low | cores idle |
+| Global mutex | HIGH | every request serializes here | ←CONSTRAINT
+| DB pool | low | |
 
-Project management actions:
-- Protect Backend API timeline at all costs
-- Other resources support Backend API
-- Don't let anything block Backend API
-- Buffer should flow to protect the constraint
+The single hot lock is the constraint; adding workers makes contention worse.
+Exploit: shorten the critical section to the minimum.
+Elevate: shard the lock / switch to a lock-free or per-key structure.
 ```
 
 ## Theory of Constraints Template

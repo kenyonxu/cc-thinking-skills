@@ -1,0 +1,20 @@
+{
+  "skill": "thinking-five-whys-plus",
+  "problems": [
+    {
+      "id": "five-whys-plus-1",
+      "prompt": "Write the post-mortem analysis for this incident. Last Friday a deploy took down our public API for 26 minutes. What we know: an engineer ran the deploy script against the production cluster instead of staging because the two terminal tabs looked identical, the script had no confirmation prompt, and there's no environment indicator in the prompt. It was also 6pm on a Friday with no second person reviewing the deploy, and our rollback tooling took 19 of those 26 minutes because nobody had tested it in months. Leadership wants to know the root cause and what we should change.",
+      "failure_mode": "Stops the analysis at human error ('the engineer ran it against the wrong environment') and proposes 'be more careful' or retraining, instead of asking why the mistake was possible and following the chain into the systemic gaps (no confirmation prompt, no environment indicator, no deploy review, untested rollback) — and treating it as a single-cause story rather than branching into the multiple contributing factors that each independently need a fix."
+    },
+    {
+      "id": "five-whys-plus-2",
+      "prompt": "Same checkout bug has now 'been fixed' three times this quarter and keeps coming back: under load, some orders get charged twice. The first fix added a client-side disable on the pay button; the second added a unique request ID checked in the app layer; the third increased the DB connection timeout. Each was declared the root cause and each time the duplicate charges returned within two weeks. I want a real analysis this time, not another patch. The team is already confident the new theory ('it's just a frontend double-submit') is right. Investigate and tell me what's actually going on.",
+      "failure_mode": "Accepts the team's confident pet theory and the pattern of declaring the first plausible cause 'the root cause' — repeating the premature-stop that already failed three times — instead of demanding evidence for each hypothesized cause, asking 'what else could produce duplicate charges?' (retries, missing idempotency at the payment boundary, race between layers), and running a counter-analysis given that prior 'root causes' were disproven by recurrence."
+    },
+    {
+      "id": "five-whys-plus-3",
+      "prompt": "Our onboarding for new engineers is clearly broken: the last four hires each took 6-8 weeks to ship their first real change, all four privately said they felt lost, and two nearly quit in month one. The eng manager's explanation is 'we just hired people who weren't proactive enough about asking questions,' and his proposed fix is to screen harder for self-starters in interviews. We can interview the recent hires and look at our docs, tooling, and access-provisioning records. Give me a real analysis of why onboarding keeps failing and what to do.",
+      "failure_mode": "Adopts the blame-the-individual explanation ('hires weren't proactive') and a fix aimed at the people rather than the system, without evidence — instead of asking why it was hard for capable people to ramp (stale/missing docs, slow access provisioning, no onboarding owner, no first-task path), gathering evidence from the hires and records, and recognizing that four independent failures point to systemic causes, not a hiring filter."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 name: thinking-lindy-effect
-description: For non-perishable things, future life expectancy is proportional to current age. Use for technology selection, evaluating frameworks/libraries, and predicting tool longevity.
+description: Choosing a technology/framework/dependency and longevity matters. Use the heuristic that for non-perishable things, expected remaining life is proportional to current age — favor the proven.
 ---
 
 # The Lindy Effect
@@ -29,6 +29,23 @@ Choosing between options?
   → Is longevity important for this choice? → yes → FAVOR OLDER, PROVEN OPTIONS
   → Is the new thing solving a new problem? → yes → NEW MIGHT BE APPROPRIATE
 ```
+
+## When NOT to Use
+
+- **Not for perishable things** — specific SaaS vendors, individual products, hardware, fashion-driven choices. Age predicts survival only for non-perishable ideas/technologies/practices.
+- **Not when a paradigm shift is underway.** Lindy holds *within* a stable paradigm; a discontinuity (cloud, LLMs) can make the old thing's age irrelevant. If the ground is moving, age is not evidence.
+- **Not as a tiebreaker for short-lived/experimental work** where longevity doesn't matter — pick on fit, not age.
+- **Don't read Lindy as "old = best."** Survival predicts further survival; it does not say the old option is optimal for a *new* requirement. The burden of proof is on the new — but the new can meet it.
+
+## Trigger Card
+
+When choosing a technology, framework, or dependency and longevity matters:
+
+1. **Check the age** — how long has this option survived? For non-perishable things (ideas, technologies, institutions), expected remaining life is proportional to current age.
+2. **Verify it's non-perishable** — is the option subject to rapid obsolescence (JS framework) or cumulative knowledge (database, language, protocol)? Lindy only applies to the latter.
+3. **Favor the proven over the new** — let the new option carry the burden of proof. Pick the older option unless the new one demonstrates a clear, necessary advantage.
+
+Skip for short-lived/experimental work where longevity doesn't matter. "Old" isn't automatically "best" — survival predicts further survival, not optimality for a new requirement.
 
 ## Understanding Lindy
 

@@ -1,6 +1,6 @@
 ---
 name: thinking-first-principles
-description: Break complex problems into fundamental truths by questioning assumptions and rebuilding from irreducible components. Use for innovation, challenging status quo, or when conventional solutions fail.
+description: When a constraint is treated as fixed ("too expensive", "impossible", "always done this way"), ask whether it's physics or just convention, then rebuild from what's actually true.
 ---
 
 # First Principles Reasoning
@@ -24,6 +24,22 @@ Problem intractable? → yes → Are you reasoning from analogy? → yes → APP
                                                             ↘ no → Already at fundamentals
                   ↘ no → Standard problem-solving may suffice
 ```
+
+## When NOT to Use
+- The constraint is genuinely physics/cost/regulation, not convention — verify, then accept it and move on.
+- A well-trodden, working solution already exists; reinventing from scratch adds risk without lift. Use the convention.
+- Routine implementation where the "why" is settled — don't re-derive a standard library, protocol, or known-good pattern.
+- Time-critical incidents: act on the most likely cause first (occams-razor), reserve first-principles for the post-incident redesign.
+
+## Trigger Card
+
+When a constraint is treated as fixed ("too expensive", "impossible", "always done this way"):
+
+1. **Ask: is this constraint physics or convention?** If it's a law of nature, accept it. If it's "how we've always done it," it's negotiable.
+2. **Identify the irreducible truths** — what must be true no matter what solution you pick?
+3. **Rebuild from those truths** — derive a solution that satisfies the real constraints but ignores the artificial ones. If a simpler rebuild solves it, stop.
+
+Skip if the "why" is settled (standard library, known-good pattern). In an incident, act on the most likely cause first; reserve this for post-incident redesign.
 
 ## The Process
 

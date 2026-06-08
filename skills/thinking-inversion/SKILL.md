@@ -1,9 +1,22 @@
 ---
 name: thinking-inversion
-description: Approach problems backward by identifying paths to failure, then systematically avoiding them. Use for risk identification, planning, and avoiding obvious mistakes.
+description: When planning work where optimism may be hiding risks, ask "how would I guarantee this fails?" — enumerate failure paths, then turn the top ones into explicit requirements to avoid.
 ---
 
 # Inversion Thinking
+
+> **Redirect:** For most risk-anticipation work, prefer `thinking-pre-mortem` — it produces a narrative prospective-hindsight pass that surfaces richer, more specific failure causes than a generic checklist. Use inversion only as a quick failure-mode enumeration on a scoped feature/design; for full plans, launches, or strategic decisions, pre-mortem is the stronger tool.
+
+## Trigger Card
+
+When planning a scoped feature or design where optimism may be hiding risks:
+
+1. **State the goal clearly.**
+2. **Ask: "How would I guarantee this fails?"** — list 10+ concrete failure paths.
+3. **Convert the top 3-5 into explicit avoidance requirements.** (e.g., "No plaintext passwords" → "Use bcrypt with work factor ≥ 12")
+4. **Verify the plan addresses each.**
+
+Skip if the task is small/reversible or if failure modes are already well-covered by existing checks. For full plans or launches, use `thinking-pre-mortem` instead.
 
 ## Overview
 Inversion thinking, championed by Charlie Munger and rooted in mathematician Carl Jacobi's principle "Invert, always invert," approaches problems by considering their opposite. Instead of asking "How do I succeed?", ask "How would I guarantee failure?" then avoid those paths.
@@ -24,6 +37,13 @@ Have a goal? → yes → Can you list ways to achieve it? → maybe → INVERT F
                                                       ↘ no → Definitely invert
            ↘ no → Define goal, then invert
 ```
+
+## When NOT to Use
+
+- **You're planning a full launch, project, or strategic decision.** Use `thinking-pre-mortem` instead — it produces a narrative prospective-hindsight pass that surfaces richer, more specific failure causes than a checklist enumeration. Inversion is the lighter, faster tool; pre-mortem is the deeper one.
+- The task is small/reversible and failure is cheap — just do it and fix forward.
+- You'd only produce generic boilerplate failure modes ("no tests", "poor naming") that don't apply here; skip if nothing specific surfaces.
+- The failure modes are already well-covered by existing checks (CI, lint, type system); don't re-enumerate what's enforced.
 
 ## The Process
 
@@ -159,7 +179,7 @@ Inversion + Pre-Mortem creates powerful risk identification:
 - [ ] Categorized failures by type and severity
 - [ ] Converted top failures to explicit requirements
 - [ ] Verified plan addresses the most critical inversions
-- [ ] Shared inversions with team for blind spot check
+- [ ] Re-checked the top inversions against the actual design for blind spots
 
 ## Key Questions
 - "What would guarantee failure here?"

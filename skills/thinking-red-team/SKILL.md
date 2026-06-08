@@ -1,394 +1,142 @@
 ---
 name: thinking-red-team
-description: Deliberately attack your own plans, systems, and assumptions to find weaknesses before adversaries or reality does. Use for security review, architecture validation, plan stress-testing, and pre-launch preparation.
+description: Use when reviewing code, auth, or APIs for security vulnerabilities — adopt an attacker mindset, enumerate the attack surface, report only findings with a concrete reproducible attack path.
 ---
 
 # Red Team Thinking
 
 ## Overview
 
-Red teaming, borrowed from military and security practice, involves deliberately attacking your own plans, systems, or ideas to find weaknesses. A dedicated "red team" assumes an adversarial role, trying to defeat the "blue team's" defenses. This reveals vulnerabilities that defenders' blind spots hide.
+Red teaming is **adversarial security review**: deliberately attacking a system you control to find vulnerabilities before an attacker does. This skill is scoped to security/code vulnerability detection — it is NOT for plan stress-testing or decision challenge (use `thinking-pre-mortem` or `thinking-steel-manning` for those).
 
-**Core Principle:** Attack yourself before others do. The best defense is knowing your weaknesses.
+**The anti-fabrication gate is the most important rule:** every reported finding MUST include a concrete, reproducible attack path — entry point → exact steps → realized impact. If you cannot describe how the attack actually executes against *this* code/config, it is not a finding. Drop it. A short report of real, demonstrable vulnerabilities beats a long list of speculation.
+
+**Core Principle:** Attack yourself before others do. But only report what you can actually break.
 
 ## When to Use
 
-- Security architecture review
-- Pre-launch preparation
-- Validating critical decisions
-- Stress-testing plans and assumptions
-- Disaster preparedness
-- Competitive strategy
-- Code and system review
+- Security review of code, authentication, authorization, APIs, or infrastructure you control
+- Pre-launch security hardening of a system that handles auth, data, or money
+- Evaluating whether a specific vulnerability class (injection, XSS, auth bypass, etc.) is present in your code
 
 Decision flow:
 
 ```
-Building or planning something important?
-  → Have you tried to break it? → no → RED TEAM IT
-  → Are you confident in your defenses? → yes → RED TEAM YOUR CONFIDENCE
-  → Has an adversary tested you? → no → BE YOUR OWN ADVERSARY
+Reviewing a system for security?
+  → Can you demonstrate an attack path? → No → Don't report it
+  → Is the finding reproducible against this code/config? → No → Drop it
+  → Is this plan stress-testing or decision challenge? → Yes → Use thinking-pre-mortem or thinking-steel-manning
+  → No → RED TEAM IT
 ```
 
-## The Red Team Process
+## When NOT to Use
 
-### Step 1: Define the Target
+- **Speculative claims without a reproducible attack path.** This is the anti-fabrication gate. "Best practice says X" or "this could theoretically be vulnerable" is not a finding. State the entry point, exact steps, and realized impact — or drop it.
+- **Plan, strategy, or decision stress-testing.** For "how could this plan fail," use `thinking-pre-mortem`. For "what's the strongest case against this decision," use `thinking-steel-manning`.
+- **Architecture review without security focus.** For architecture resilience, use `thinking-systems` or `thinking-pre-mortem`.
+- **Running scanners replaces thinking.** Where you can actually run a SAST tool, fuzzer, or PoC, do that. This skill structures the adversarial thinking; it doesn't replace automated verification.
+- **Padding the report to look thorough.** A short list of real vulnerabilities beats a long list of theoretical ones. Resist the incentive to add "informational" or "best-practice" items.
 
-What are you attacking?
+## Procedure
+
+### Step 1: Define the Target and Scope
 
 ```markdown
-## Red Team Target
-
-System: User authentication system
-Scope:
-- Login flow
-- Password reset
-- Session management
-- API authentication
-
-Out of scope:
-- Physical security
-- Social engineering of employees
-- Third-party services
-
-Goal: Find vulnerabilities that could lead to:
-- Unauthorized account access
-- Session hijacking
-- Privilege escalation
+Target: [System/component under review]
+Scope: [What to attack — be specific]
+Out of scope: [What to skip]
+Goal: [What constitutes a successful attack — e.g., unauthorized access, data exfiltration, privilege escalation]
 ```
 
-### Step 2: Adopt Adversary Mindset
+### Step 2: Adopt the Adversary Mindset
 
-Think like an attacker:
+Identify who would attack this system and what they want:
 
 ```markdown
-## Adversary Profile
+Adversary profiles:
+- External attacker (no access): targets public endpoints, auth bypass, injection
+- Authenticated user (basic access): targets privilege escalation, IDOR, business logic
+- Insider (elevated access): targets data exfiltration, audit bypass
 
-Who would attack this?
-- Script kiddies: Automated scanning, known exploits
-- Sophisticated attackers: Custom exploits, patience
-- Insiders: Already have some access
-- Competitors: Want data or disruption
-
-Attacker motivations:
-- Financial gain (steal data, ransom)
-- Disruption (take down service)
-- Credential harvesting (sell on dark web)
-- Competitive advantage (steal IP)
-
-What would I do if I were them?
+For each profile, ask: "If I wanted to cause maximum damage with their access level, how would I?"
 ```
 
-### Step 3: Enumerate Attack Surfaces
+### Step 3: Enumerate the Attack Surface
 
-Where can attacks happen?
+Map every entry point and trust boundary:
 
-```markdown
-## Attack Surface Enumeration
-
-Entry points:
-| Surface | Exposure | Attacker Access |
-|---------|----------|-----------------|
-| Login form | Public | Anyone |
-| API endpoints | Public | Anyone with API key |
-| Password reset | Public | Anyone with email |
-| Admin panel | Internal network | Employees |
-| Database | No direct access | Only if compromised |
-
-Trust boundaries:
-- Public internet → Web server
-- Web server → Application
-- Application → Database
-- User → Authenticated user
-- User → Admin
-```
+| Surface | Exposure | Trust Boundary |
+|---------|----------|----------------|
+| Login form | Public internet | Anonymous → Authenticated |
+| API /graphql | Public (with key) | Authenticated → Application |
+| Password reset flow | Public | Anonymous → Account owner |
+| Admin panel | Internal network | Authenticated → Admin |
+| File upload endpoint | Authenticated | User data → Server storage |
 
 ### Step 4: Execute Attack Scenarios
 
-Systematically try to break things:
+For each attack surface, attempt to break the system:
 
 ```markdown
-## Attack Scenario 1: Credential Stuffing
-
-Attack: Try known breached credentials against login
-Goal: Compromise accounts with reused passwords
-
-Execution:
-1. Obtain breach database (simulated)
-2. Run credentials against login endpoint
-3. Document rate limiting behavior
-4. Test account lockout triggers
-5. Attempt bypass techniques
-
+Attack: Credential stuffing against login
+Steps:
+1. Obtain breach database of known credentials
+2. Script requests against /login with varied credentials
+3. Observe rate limiting, account lockout, timing differences
 Findings:
-- Rate limiting triggers at 10 attempts/minute
-- No account lockout
-- No breach credential detection
-- Login response time reveals valid usernames
+- Rate limiting: 10 req/min per IP (bypassable via distribution)
+- Account lockout: none
+- Timing: response time reveals valid vs invalid usernames ← VULNERABILITY
 ```
+
+For each attack scenario, record: the entry point, exact steps taken, observed behavior, and whether a vulnerability was found.
+
+### Step 5: Attempt Defense Bypass
+
+For each defense encountered, try to bypass it:
+
+| Defense | Bypass Attempt | Result |
+|---------|---------------|--------|
+| IP-based rate limiting | Distribute requests across IPs | BYPASSED |
+| Input validation | Unicode normalization attacks | RESISTED |
+| Session timeout | Replay expired token with modified timestamp | BYPASSED |
+
+### Step 6: Document Findings — With the Anti-Fabrication Gate
+
+For EVERY finding, fill out:
 
 ```markdown
-## Attack Scenario 2: Session Hijacking
-
-Attack: Steal or forge session tokens
-Goal: Access accounts without credentials
-
-Execution:
-1. Analyze session token structure
-2. Test token entropy
-3. Attempt token prediction
-4. Test XSS vectors for token theft
-5. Check secure cookie flags
-
-Findings:
-- Session tokens use secure random
-- Cookies missing HttpOnly flag ←VULNERABILITY
-- No session binding to IP
-- Tokens don't expire on password change
+Finding: [Title]
+Severity: Critical / High / Medium / Low
+Attack path (REQUIRED):
+  Entry point: [URL, endpoint, parameter, file]
+  Steps: [1. Send X, 2. Observe Y, 3. Escalate to Z]
+  Realized impact: [What the attacker actually achieves — data access, privilege, DoS]
+Remediation: [Concrete fix]
 ```
 
-### Step 5: Attempt Bypass
+**If you cannot fill out the attack path completely, drop the finding.** Do not report "Missing HttpOnly flag" as a standalone finding without demonstrating session token theft. Do not report "No rate limiting" without demonstrating a viable brute-force attack.
 
-For each defense, try to bypass it:
+## Output Contract
 
-```markdown
-## Defense Bypass Attempts
+A completed Red Team report produces:
 
-Defense: Rate limiting on login
-Bypass attempts:
-| Attempt | Result |
-|---------|--------|
-| Distribute across IPs | BYPASSED - no IP correlation |
-| Vary username slowly | Works - only per-IP limit |
-| Use different user agents | No effect |
-| Target password reset instead | BYPASSED - no rate limit |
+1. **Target and Scope** — what was reviewed and what was excluded
+2. **Attack Surface Map** — entry points with exposure levels and trust boundaries
+3. **Attack Scenarios Executed** — each scenario with steps, observations, and outcome
+4. **Findings Report** — each with severity AND a concrete, reproducible attack path (entry point → steps → impact)
+5. **Defense Bypass Results** — which defenses held and which were circumvented
+6. **Remediation Recommendations** — prioritized by severity with concrete fixes
 
-Conclusion: Rate limiting is per-IP only, easily distributed
-            Password reset has no rate limiting
-```
+Findings without a complete attack path are excluded from the report. A report with zero findings is acceptable if no reproducible vulnerabilities were discovered.
 
-### Step 6: Document Findings
+## Anti-Patterns
 
-Create an actionable report:
-
-```markdown
-## Red Team Findings Report
-
-### Critical Vulnerabilities
-
-#### CRIT-1: Password Reset No Rate Limit
-Severity: Critical
-Attack: Brute force password reset tokens
-Impact: Mass account compromise
-Remediation: Add rate limiting to password reset
-Timeline: Immediate
-
-#### CRIT-2: Session Tokens Vulnerable to XSS
-Severity: Critical
-Attack: Inject XSS, steal session cookies
-Impact: Account takeover
-Remediation: Add HttpOnly flag to session cookies
-Timeline: Immediate
-
-### High Vulnerabilities
-
-#### HIGH-1: Rate Limiting Easily Bypassed
-Severity: High
-Attack: Distributed credential stuffing
-Impact: Account compromise at scale
-Remediation: Add account-level rate limiting
-Timeline: 1 week
-
-### Medium Vulnerabilities
-
-#### MED-1: Username Enumeration via Timing
-Severity: Medium
-Attack: Determine valid usernames
-Impact: Enables targeted attacks
-Remediation: Constant-time response for login
-Timeline: 2 weeks
-```
-
-## Red Team Patterns
-
-### Security Red Team
-
-```markdown
-## Security Red Team Checklist
-
-Authentication:
-- [ ] Credential stuffing
-- [ ] Brute force attacks
-- [ ] Session hijacking
-- [ ] Token prediction
-- [ ] Password reset flaws
-
-Authorization:
-- [ ] Privilege escalation
-- [ ] IDOR (insecure direct object reference)
-- [ ] Missing function-level access control
-- [ ] JWT manipulation
-
-Input validation:
-- [ ] SQL injection
-- [ ] XSS (stored, reflected, DOM)
-- [ ] Command injection
-- [ ] Path traversal
-
-Business logic:
-- [ ] Race conditions
-- [ ] State manipulation
-- [ ] Price manipulation
-- [ ] Workflow bypass
-```
-
-### Plan Red Team
-
-```markdown
-## Plan Red Team: Product Launch
-
-Red team the launch plan:
-
-What could go wrong?
-| Failure Mode | Attack Vector | Mitigation |
-|--------------|---------------|------------|
-| Traffic spike | Product goes viral | Auto-scaling, load test |
-| PR disaster | Journalist finds bug | Bug bash before launch |
-| Payment failure | Provider outage | Backup payment provider |
-| Support overwhelmed | Many questions | FAQ, chatbot, staff up |
-
-Assumptions to challenge:
-| Assumption | What if wrong? | How to verify? |
-|------------|----------------|----------------|
-| Users will understand new UI | Confusion, support tickets | User testing |
-| Infrastructure handles 10x | Crashes | Load testing |
-| Marketing will drive traffic | No signups | Organic channel backup |
-```
-
-### Architecture Red Team
-
-```markdown
-## Architecture Red Team: Microservices Migration
-
-Attack the architecture:
-
-Single points of failure:
-- API Gateway - if down, everything down
-- Auth service - if down, no logins
-- Message queue - if down, async breaks
-
-Cascade failures:
-- Service A times out → retries → overwhelms B → cascade
-- Database connection exhaustion → app servers stuck → timeout cascade
-
-Data consistency attacks:
-- Eventual consistency window exploits
-- Distributed transaction rollback states
-- Cache invalidation race conditions
-
-Findings:
-1. No circuit breakers between services
-2. Shared database = coupled failure domains
-3. No chaos engineering to verify resilience
-```
-
-### Decision Red Team
-
-```markdown
-## Decision Red Team: Technology Choice
-
-Decision: Adopt Kubernetes for container orchestration
-
-Red team the decision:
-
-Arguments AGAINST:
-- Operational complexity high for small team
-- Learning curve delays delivery 3-6 months
-- Could use simpler solutions (ECS, docker-compose)
-- Over-engineering for current scale
-
-Counter-arguments:
-- Scale projections justify complexity
-- Team wants to learn K8s anyway
-- Platform engineering investment pays off
-
-Red team verdict:
-The learning curve argument is strongest.
-Consider: Managed K8s (EKS/GKE) to reduce ops burden
-         Start with single namespace, expand gradually
-```
-
-## Red Team Template
-
-```markdown
-# Red Team Report: [Target]
-
-## Scope
-Target: [What's being red teamed]
-In scope: [What to attack]
-Out of scope: [What to skip]
-Goal: [What constitutes a successful attack]
-
-## Adversary Model
-Who: [Who would attack this]
-Capabilities: [What they can do]
-Motivation: [Why they'd attack]
-
-## Attack Surface
-| Surface | Exposure | Notes |
-|---------|----------|-------|
-| | | |
-
-## Attack Scenarios Executed
-| Scenario | Result | Severity |
-|----------|--------|----------|
-| | | |
-
-## Findings
-
-### Critical
-[Findings requiring immediate action]
-
-### High
-[Findings requiring near-term action]
-
-### Medium
-[Findings for backlog]
-
-### Low
-[Informational findings]
-
-## Recommendations
-| Finding | Remediation | Priority | Effort |
-|---------|-------------|----------|--------|
-| | | | |
-
-## Lessons Learned
-[What did the red team reveal about blind spots?]
-```
-
-## Verification Checklist
-
-- [ ] Defined clear scope and adversary model
-- [ ] Adopted genuine adversary mindset
-- [ ] Enumerated attack surfaces
-- [ ] Executed multiple attack scenarios
-- [ ] Attempted to bypass defenses
-- [ ] Documented findings with severity
-- [ ] Provided actionable remediation
-- [ ] Updated defenses based on findings
-
-## Key Questions
-
-- "How would an attacker approach this?"
-- "What assumptions am I making that an attacker wouldn't?"
-- "What's the weakest point in this system?"
-- "If I wanted to cause maximum damage, how would I?"
-- "What am I confident about that I haven't actually tested?"
-- "What would I find embarrassing if an attacker found it first?"
-
-## Sun Tzu's Wisdom (Applied)
-
-"If you know the enemy and know yourself, you need not fear the result of a hundred battles."
-
-Red teaming is knowing yourself as the enemy would. You find your weaknesses before they do. You attack your confidence before it betrays you. The purpose isn't pessimism—it's preparation.
+| Anti-Pattern | Symptom | Correction |
+|---|---|---|
+| **Speculative claims** | Findings that say "could be vulnerable" or "best practice says" without a demonstrated attack path | Drop them; only report what you can actually break |
+| **Padding the report** | Adding "informational" or "best-practice" items to look thorough | A short report of real vulns beats a long list of theory |
+| **Non-security red-teaming** | Using this skill for plan stress-testing or decision challenge | Use `thinking-pre-mortem` (plans) or `thinking-steel-manning` (decisions) |
+| **Skipping the adversary model** | Attacking without defining who the attacker is and what access they have | Define the adversary profile first; attacks make sense only in context |
+| **Missing the attack path** | Reporting a vulnerability without showing how to reach it | Every finding needs: entry point → steps → impact |
+| **Scanner-as-substitute** | Running a SAST tool and reporting its output without adversarial thinking | The tool finds patterns; red-teaming finds exploitable paths |
