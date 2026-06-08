@@ -1,5 +1,8 @@
 # Adversarial Synthesis — cc-thinking-skills
 
+> **⚠️ SUPERSEDED — 2026-06-07 (Elevate-or-Kill M5 outcome)**
+> This synthesis was written BEFORE the M5 powered runs and before the canonical scorecard was finalized. Several of its evaluative claims about skill lift and effectiveness are superseded by powered evidence. The canonical scorecard at `analysis/ELEVATE-OR-KILL-SCORECARD.md` is the authoritative source for current verdicts. See `analysis/STALE-CLAIM-CLEANUP.md` for the full cleanup notes. **The structural findings, reviewer insights, and recommendations R1–R9 remain useful context; specific lift/ELEVATE/significance claims inline-marked [SUPERSEDED] are historical only.**
+
 The headline deliverable: cross-model consensus, the most valuable unique ideas, genuine disagreements, and a prioritized (recommend-only) improvement list — all cross-referenced against the eval data.
 
 ## Method
@@ -65,7 +68,7 @@ Each reviewer's "most contrarian idea" landed on the **same** thesis from a diff
 
 This operationalizes R5: **ship known concepts as triggers; reserve full SKILL.md files for procedural skills that demonstrably beat the one-liner.**
 
-**Capability-curve probe (weaker `haiku` solver, 6 skills, `tier3-haiku.json`) — weak, mixed support.** Aggregate 61% (vs sonnet on the same skills); `occams-razor` strongly fits the hypothesis (haiku 100% vs sonnet 33%) and `debiasing` leans that way, but `first-principles` contradicts it (haiku 33% vs sonnet 100%). At n=3 this is suggestive, not conclusive: skills help weaker models *somewhat* more, but not monotonically. It does rule out "the skills are universally inert" — several produce real lift on the weaker model.
+**Capability-curve probe (weaker `haiku` solver, 6 skills, `tier3-haiku.json`) — weak, mixed support.** Aggregate 61% (vs sonnet on the same skills); `occams-razor` strongly fits the hypothesis (haiku 100% vs sonnet 33%) and `debiasing` leans that way, but `first-principles` contradicts it (haiku 33% vs sonnet 100%). At n=3 this is suggestive, not conclusive: skills help weaker models *somewhat* more, but not monotonically. It does rule out "the skills are universally inert" — several produce real lift on the weaker model [SUPERSEDED] [SUPERSEDED — pre-M5 finding at n=3, not replicated; canonical scorecard shows no skill achieved replicated ELEVATE].
 
 ---
 
