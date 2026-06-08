@@ -76,13 +76,13 @@ The native-domain run **nuances the earlier "no objective lift" finding**: in th
 >
 > Key overturned claims below: `systems` +5.3pp p=0.043 was not replicated (−1.3pp p=0.683); `five-whys-plus` +4.0pp p=0.041 was not replicated (+1.3pp p=0.752); the "trimming regression" lesson is retracted (both original and trimmed were noise draws); `scientific-method` +9.3pp p=0.002 was the old run1 primary (superseded by M5 fresh primary +5.3pp p=0.061 — DIRECTIONAL-NOT-REPLICATED); `red-team` +11.3pp p=0.052 was not confirmed (+5.0pp p=0.10, then +1.4pp p=1.0 on harder split — NO-LIFT).
 
-## ★ FIRST SIGNIFICANT VERDICT — thinking-systems = ELEVATE
+[SUPERSEDED] ## ★ FIRST SIGNIFICANT VERDICT — thinking-systems = ELEVATE
 Powered SWE-bench fault localization, n=150, isolated, length-controlled:
 **placebo 80% → skill 85%, Δ+5.3pp, McNemar p=0.043 (SIGNIFICANT).** 12 discordant pairs.
 `thinking-systems` is the first skill to clear the elevate bar with a real, judge-bias-free, native-domain effect. The lift is **modest (+5pp) but genuine** — and it required domain-fit (software debugging) + adequate power (n=150) to surface; at n=45 it was directional-only.
 
 ### Final elevate-or-kill posture (evidence to date)
-- **ELEVATE (firm):** `systems` (+5.3pp, p=0.043, native debugging).
+- **ELEVATE (firm):** `systems` (+5.3pp, p=0.043, native debugging). [SUPERSEDED — canonical: systems=NO-LIFT, five-whys-plus=NO-LIFT, scientific-method=DIRECTIONAL-NOT-REPLICATED]
 - **ELEVATE-leaning (directional, needs power):** `five-whys-plus`, `occams-razor` (native debugging +4–7pp, ns).
 - **KILL/REWORK:** `fermi-estimation` (−5pp w/ headroom), `scientific-method` (flat in-domain AND negative in proxy).
 - **REDUNDANT at current capability (ceiling):** `debiasing`, `bayesian` (LLMs already debiased/Bayesian on standard framings — even haiku).
@@ -96,16 +96,16 @@ Powered SWE-bench fault localization, n=150, isolated, length-controlled:
 SWE-bench fault localization, isolated, length-controlled, n=150:
 | Skill | placebo→skill | Δ | p | Outcome |
 |---|---|---|---|---|
-| systems | 80→85% | +5.3 | **0.043** | ELEVATE (firm) |
-| five-whys-plus | 83→87% | +4.0 | **0.041** | ELEVATE (firm) |
+| systems | 80→85% | +5.3 | **0.043** | ELEVATE (firm) [SUPERSEDED — canonical: systems=NO-LIFT] |
+| five-whys-plus | 83→87% | +4.0 | **0.041** | ELEVATE (firm) [SUPERSEDED — canonical: five-whys-plus=NO-LIFT] |
 | occams-razor | 83→85% | +2.0 | 0.45 | NOT confirmed (n=45 +4.4 was noise) |
 | **scientific-method (old broad version)** | — | **+0** | — | flat |
 | **scientific-method rework prototype** | 84→89% | **+5.3** | 0.061 | near-sig — **rework converted 0 → +5** |
 
 ### Answer
 **Yes — but only two ways, and not for every skill:**
-1. **Confirm it where domain-fit + headroom already exist.** `systems` and `five-whys-plus` are now *firm significant ELEVATEs* (+4–5pp) in native debugging. `occams-razor` is NOT (regressed to +2pp ns — it was n=45 noise).
-2. **Engineer it by reworking the skill** per the audit best-practices (agent-native, narrowed domain, evidence-ranked procedure, drop human stage-directions, add boundaries). The hypothesis-differential prototype went **0pp → +5.3pp (p=0.061)**, then replaced the shipped `thinking-scientific-method` and improved further to **+9.3pp (p=0.002)**.
+1. **Confirm it where domain-fit + headroom already exist.** `systems` and `five-whys-plus` are now *firm significant ELEVATEs* (+4–5pp) in native debugging [SUPERSEDED — canonical: systems=NO-LIFT, five-whys-plus=NO-LIFT, scientific-method=DIRECTIONAL-NOT-REPLICATED]. `occams-razor` is NOT (regressed to +2pp ns — it was n=45 noise).
+2. **Engineer it by reworking the skill** per the audit best-practices (agent-native, narrowed domain, evidence-ranked procedure, drop human stage-directions, add boundaries). The hypothesis-differential prototype went **0pp → +5.3pp (p=0.061)**, then replaced the shipped `thinking-scientific-method` and improved further to **+9.3pp (p=0.002)** [SUPERSEDED — canonical: scientific-method=DIRECTIONAL-NOT-REPLICATED; the +9.3pp was pre-edit run1 primary, not post-edit M5].
 
 **Where +5 is NOT available:** redundant-at-ceiling skills (`debiasing`, `bayesian` — model already ~100%), measured-negative skills (`fermi`), and any skill applied out-of-domain. For those, the move is kill/merge/trigger-only, not "+5."
 
@@ -115,17 +115,17 @@ SWE-bench fault localization, isolated, length-controlled, n=150:
 After applying the audit best-practices to all 39 skills, re-ran the **entire debugging cluster** on SWE-bench (n=150, isolated, length-controlled). This closes the improve→re-measure loop for every skill that has a native objective eval:
 | Skill | pre-improvement | post-improvement | read |
 |---|---|---|---|
-| **scientific-method** (hypothesis-differential replacement) | 0pp (flat) | **+9.3pp, p=0.002 SIG** | rework WORKED — flat→firm ELEVATE |
+| **scientific-method** (hypothesis-differential replacement) | 0pp (flat) | **+9.3pp, p=0.002 SIG** | [SUPERSEDED — canonical: scientific-method=DIRECTIONAL-NOT-REPLICATED] rework WORKED — flat→firm ELEVATE (historical pre-edit run1 data; M5 fresh post-edit primary +5.3pp p=0.061 FAILED gate) |
 | **systems** (trimmed) | +5.3pp, p=0.043 SIG | +3.3pp, p=0.182 ns | within-noise dip after trimming |
 | **five-whys-plus** (trimmed) | +4.0pp, p=0.041 SIG | +3.3pp, p=0.131 ns | within-noise dip after trimming — slipped just below sig |
 | **occams-razor** (trigger-scoped) | +2.0pp, p=0.45 ns | +2.0pp, p=0.505 ns | flat both ways — never confirmed, TRIGGER-ONLY stands |
 
 **Three lessons, all evidence-backed:**
-1. **Reworking a broken skill is the highest-leverage move** — `scientific-method` went 0 → +9.3pp (p=0.002) purely from the agent-native rewrite (evidence-ranked differential, native scope, boundaries, no human stage-directions). It is now the **strongest single ELEVATE** in the program.
+1. **Reworking a broken skill is the highest-leverage move** — `scientific-method` went 0 → +9.3pp (p=0.002) purely from the agent-native rewrite (evidence-ranked differential, native scope, boundaries, no human stage-directions). [SUPERSEDED — canonical: scientific-method=DIRECTIONAL-NOT-REPLICATED] It was at the time the **strongest single ELEVATE** in the program.
 2. **"Improving" an already-proven skill can regress it — now backed by TWO data points.** Both proven skills dipped to ns after trimming: `systems` +5.3→+3.3 and `five-whys-plus` +4.0→+3.3. The description/boundary edits are safe; the content *trimming* is the suspect. Restore the trimmed procedure content and re-validate before shipping.
 3. **A cosmetic edit is not a rework.** `occams-razor` was edited (trigger-scoped) but stayed at +2pp ns — only a true agent-native rewrite moved the needle. Editing ≠ reworking.
 
-**Firm significant ELEVATEs to date (native debugging):** `scientific-method` (+9.3pp, p=0.002, current). `systems` (+5.3pp) and `five-whys-plus` (+4pp) were firm pre-trim and need their trimmed content restored to recover significance. The rework recipe is validated end-to-end (audit → agent-native rewrite → +9pp); the trimming caution is now backed by two regressions, not one.
+[SUPERSEDED] **Firm significant ELEVATEs to date (native debugging):** `scientific-method` (+9.3pp, p=0.002, current) [SUPERSEDED — canonical: scientific-method=DIRECTIONAL-NOT-REPLICATED]. `systems` (+5.3pp) and `five-whys-plus` (+4pp) were firm pre-trim [SUPERSEDED — canonical: systems=NO-LIFT, five-whys-plus=NO-LIFT] and need their trimmed content restored to recover significance. The rework recipe is validated end-to-end (audit → agent-native rewrite → +9pp); the trimming caution is now backed by two regressions, not one.
 
 ## ★★★★ Wave C — NEW objective verdicts + a REPLICATION FAILURE that revises the headline
 Powered, isolated, length-controlled sweep (`evals/run-wavec.sh`). Four previously-**unmeasured** skills got their first objective verdicts; the two "firm ELEVATE" debugging skills were **re-run on a fresh n=150** as a replication test.
@@ -168,4 +168,4 @@ The only two un-confirmed positive effects were re-run at power. Both shrank tow
 
 **`scientific-method` is the only skill with a robust, significant, replicated objective lift (+9.3pp, p=0.002).** **[⛔ SUPERSEDED: This +9.3pp was the old run1 primary (pre-edit). The M5 fresh post-edit primary (+5.3pp, p=0.061, n=150) on the original frozen SWE-bench set FAILED the p<0.05 paired-test gate. Replication (+8.0pp, p=0.001, same direction, post-edit, significant) cannot rescue a primary that fails. scientific-method is DIRECTIONAL-NOT-REPLICATED per the canonical scorecard. Mission outcome is ZERO robust-ELEVATE skills.]** Every other apparent ELEVATE — systems, five-whys-plus, red-team, fermi-rework — **regressed to non-significance once powered to n≥150.** The consistent pattern across *five* skills is decisive: **borderline p≈0.04–0.05 results at small N are draws from a near-zero-centered distribution and do not survive replication.** 
 
-Honest bottom line: on objective, judge-free tasks, injecting a thinking-skill guide produces **no reliable accuracy lift for 38 of 39 skills**; the one exception is a debugging skill that was specifically reworked to be agent-native and evidence-ranked. The catalog's value is reasoning *framing* and *discoverability*, not measurable correctness — and "replication, not a single p<0.05" is the standard any future ELEVATE claim must meet.
+[SUPERSEDED — canonical: ZERO ELEVATE, scientific-method=DIRECTIONAL-NOT-REPLICATED] Honest bottom line: on objective, judge-free tasks, injecting a thinking-skill guide produces **no reliable accuracy lift for 38 of 39 skills**; the one apparent exception (a debugging skill reworked to be agent-native and evidence-ranked) finished DIRECTIONAL-NOT-REPLICATED — its M5 fresh primary (+5.3pp, p=0.061, post-edit, directional, NOT replicated) failed the p<0.05 gate. The catalog's value is reasoning *framing* and *discoverability*, not measurable correctness — and "replication, not a single p<0.05" is the standard any future ELEVATE claim must meet.

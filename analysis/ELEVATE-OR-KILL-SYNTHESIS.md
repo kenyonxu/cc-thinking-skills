@@ -9,7 +9,7 @@
 
 ## Headline Result
 
-**The mission produced ZERO robust-ELEVATE skills.** No skill met the full ELEVATE bar (≥5pp lift on its primary value surface, passes paired test at p<0.05, AND replicates on a fresh independent sample in the same direction). The strongest candidate — `scientific-method` — finished **DIRECTIONAL-NOT-REPLICATED**: its M5 fresh primary scored +5.3pp but p=0.061 (fails the p<0.05 gate), and while its replication was significant (+8.0pp, p=0.001), a successful replication cannot rescue a primary that fails the paired-test gate.
+**The mission produced ZERO robust-ELEVATE skills.** No skill met the full ELEVATE bar (≥5pp lift on its primary value surface, passes paired test at p<0.05, AND replicates on a fresh independent sample in the same direction). The strongest candidate — `scientific-method` — finished **DIRECTIONAL-NOT-REPLICATED**: its M5 fresh primary scored +5.3pp, p=0.061, post-edit, directional, NOT replicated (fails the p<0.05 gate), and while its replication was significant (+8.0pp, p=0.001, post-edit, significant, replication-sample that does NOT rescue the failed primary → skill-level NOT replicated), a successful replication cannot rescue a primary that fails the paired-test gate.
 
 This is an honest, evidence-backed conclusion. The mission deliberately did NOT chase significance by enlarging samples after seeing borderline p-values (per documented anti-p-hacking decision 2026-06-07 in AGENTS.md). A properly pre-registered larger-N primary study for `scientific-method` is recommended as future work.
 
@@ -118,7 +118,7 @@ The replication gate prevented false ELEVATE claims that a single-p<0.05 approac
 
 ### 2.2 Scientific-Method Is the Closest to ELEVATE — But Not There
 
-`scientific-method` (hypothesis-differential debugging) is the strongest skill in the catalog. Its M5 replication (+8.0pp, p=0.001, post-edit, significant) is a genuine signal — the effect is real and in the right direction. But the M5 fresh primary (+5.3pp, p=0.061, post-edit, directional) falls just short of the paired-test gate.
+`scientific-method` (hypothesis-differential debugging) is the strongest skill in the catalog. Its M5 replication (+8.0pp, p=0.001, post-edit, significant, replication-sample → skill-level NOT replicated) is a genuine signal — the effect is real and in the right direction. But the M5 fresh primary (+5.3pp, p=0.061, post-edit, directional, NOT replicated) falls just short of the paired-test gate.
 
 **We deliberately did NOT enlarge the primary sample to chase p<0.05** — that would be optional-stopping/p-hacking (see AGENTS.md Anti-P-Hacking decision 2026-06-07). A properly pre-registered larger-N study (~n=300–400) with a single pre-specified stopping rule is the correct next step (see `analysis/FUTURE-CONSOLIDATION-PLAN.md` and `analysis/ACTIVE-PULL-FUTURE-WORK.md`).
 
@@ -168,7 +168,7 @@ See `analysis/STALE-CLAIM-CLEANUP.md` for the full cleanup notes. Key actions:
 
 1. **`analysis/SKILL-AUDIT.md`**: A superseded banner was prepended. The audit's recommendation that `systems` be kept as a "proven debugging hub" is **superseded** (systems produced no-lift at power). The 39→26 consolidation map is **obsolete** — this mission's evidence invalidated its assumptions. The audit's best-practices rubric remains useful; its per-skill dispositions are superseded where contradicted by powered evidence.
 
-2. **`analysis/ELEVATE-OR-KILL.md`**: A superseded banner was prepended to the mid-document narrative. The "trimming regression" lesson (section ★★★) is **retracted** — the dips were NOT caused by trimming but by regression to the mean from borderline-significant draws. Only the final two sections (★ Wave C replication failure + ★★★★★ Powered confirmation collapse) and the final program verdict section are current. All earlier ELEVATE claims (systems, five-whys-plus, red-team +11.3pp, fermi rework rescue) are superseded.
+2. **`analysis/ELEVATE-OR-KILL.md`**: A superseded banner was prepended to the mid-document narrative. The "trimming regression" lesson (section ★★★) is **retracted** — the dips were NOT caused by trimming but by regression to the mean from borderline-significant draws. Only the final two sections (★ Wave C replication failure + ★★★★★ Powered confirmation collapse) and the final program verdict section are current. All earlier ELEVATE claims (systems, five-whys-plus, red-team +11.3pp (pre-edit/small-N, directional, NOT replicated — canonical verdict NO-LIFT), fermi rework rescue) are superseded.
 
 3. **`analysis/ELEVATE-OR-KILL-SCORECARD.md`**: The provenance taxonomy wording was updated to remove the implication that any skill currently achieves a "replicated" status. The `OBJ-powered-significant` tag description no longer says "replicated direction" — it now clarifies this tag may describe a standalone replication run that does NOT imply the skill-level verdict is replicated.
 
