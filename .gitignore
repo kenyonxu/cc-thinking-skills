@@ -11,6 +11,10 @@ evals/results/smoke/
 evals/results/pilot/
 evals/results/micro/
 evals/results/local/
+evals/results/smoke2/
+evals/results/latest/
+evals/results/calib/
+evals/results/calib-*/
 # third-party / NON-COMMERCIAL datasets — do NOT redistribute in this MIT repo
 # (see evals/datasets/external/NOTICE.md). Re-download via evals/datasets/ingest-hf.js
 evals/datasets/external/diversevul.jsonl
