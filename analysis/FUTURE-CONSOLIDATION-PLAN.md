@@ -15,7 +15,7 @@ The mission produced ZERO robust-ELEVATE skills and the following evidence patte
 - **5 skills showed borderline-significant primary effects that collapsed under replication/power** (systems, five-whys-plus, red-team, fermi-estimation rework, scientific-method old primary)
 - **8 skills are at objective ceiling** (placebo 90–100%) on current authored items — no headroom to measure
 - **2 skills were powered on mismatched surfaces** (kepner-tregoe, map-territory — exploratory only)
-- **19 skills remain unmeasured** — their value surface resists objective formulation or they are routing meta-skills
+- **20 skills remain unmeasured** — their value surface resists objective formulation or they are routing meta-skills
 - **1 skill is near-ELEVATE** (scientific-method, DIRECTIONAL-NOT-REPLICATED: +5.3pp p=0.061 primary, +8.0pp p=0.001 replication)
 
 Given this evidence, the catalog can be safely reduced without losing demonstrated value. The consolidations below remove duplication, retire ceiling/regression skills, and shrink trigger-replaceable skills to trigger cards.

@@ -31,7 +31,7 @@ touch skills/thinking-{your-skill-name}/SKILL.md
 
 Follow this template:
 
-```markdown
+````markdown
 ---
 name: thinking-your-skill-name
 description: Brief description (1-2 sentences) that helps Claude Code understand when to invoke this skill.
@@ -81,7 +81,7 @@ What to avoid when using this framework.
 
 ## Attribution/Quote
 Quote from the framework's creator or key thinker.
-```
+````
 
 ### Improving Existing Skills
 

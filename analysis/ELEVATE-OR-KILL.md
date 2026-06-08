@@ -1,6 +1,6 @@
 # Elevate-or-Kill — synthesis & current verdicts
 
-Ties the per-skill protocol (`PER-SKILL-EVAL-PROTOCOL.md`) to what we've actually measured this session. Most skills are **PENDING** a powered run (protocol + dataset ready); a subset has directional evidence from the isolated harness.
+Ties the per-skill protocol (`PER-SKILL-EVAL-PROTOCOL.md`) to what we've actually measured this session. At the time of writing, most skills were **PENDING** a powered run (protocol + dataset ready); a subset had directional evidence from the isolated harness.
 
 ## Current evidence (isolated, length-controlled) [SUPERSEDED — historical pre-M5 exploration log; canonical verdicts in ELEVATE-OR-KILL-SCORECARD.{json,md}]
 - [SUPERSEDED] **In-domain pooled, 10 skills** (second-order, inversion, opportunity-cost, theory-of-constraints, systems, pre-mortem, via-negativa, occams-razor, first-principles, debiasing): **63% beat placebo, n=90, p=0.015 SIGNIFICANT** → these collectively **ELEVATE**, but per-skill is directional (n≈9 each) — needs ≥20–40/skill to assign individual verdicts. [SUPERSEDED — canonical: pooled finding never replicated at per-skill level; mission outcome ZERO robust-ELEVATE]

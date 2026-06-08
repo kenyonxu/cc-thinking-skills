@@ -77,7 +77,7 @@ For a paired McNemar test with baseline accuracy ≈83% (the M5 placebo rate on 
 - At n=400 with a +6pp effect and ~19 discordant pairs: χ² = 4.26, p ≈ 0.039 (significant)
 - **Recommendation: n=500** to achieve 80% power for a +5pp effect, or accept that the effect may be smaller than 5pp and settle for a precise CI rather than significance
 
-A more nuanced approach: use the M5 primary's empirical discordant-pair rate (14 discordant out of 150, all favoring skill) as the basis. At that rate (~9.3% discordant), n=400 would yield ~37 discordant pairs. If the split is ~25 skill-wins to ~12 placebo-wins (consistent with the observed direction), continuity-corrected McNemar would give χ² = (|25−12|−1)²/37 = 3.89, p ≈ 0.049 — right at the boundary. **Recommend n=500 for a cleaner signal.**
+A more nuanced approach: use the M5 primary's empirical discordant-pair rate (14 discordant pairs out of 150, split 11 skill-wins to 3 placebo-wins (net +8 = +5.3pp)) as the basis. At that rate (~9.3% discordant), n=400 would project ~37 discordant pairs. If the projected split were ~25 skill-wins to ~12 placebo-wins (consistent with the observed direction), continuity-corrected McNemar would give χ² = (|25−12|−1)²/37 = 3.89, p ≈ 0.049 — right at the boundary. **Recommend n=500 for a cleaner signal.**
 
 ### Budget Estimate
 

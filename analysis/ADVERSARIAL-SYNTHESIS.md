@@ -54,7 +54,7 @@ All three endorsed the core premise of this work: structural lint (90%) is silen
 
 ## 2. The convergent contrarian insight (the most important non-obvious takeaway)
 
-Each reviewer's "most contrarian idea" landed on the **same** thesis from a different angle — which makes it the contrary of fringe. For a frontier model, **the verbose skill files may be net-negative; the durable value is triggers + boundaries + LLM-specific failure modes, not mental-model tutorials the model already knows.**
+Each reviewer's "most contrarian idea" landed on the **same** thesis from a different angle — which makes it anything but a fringe view. For a frontier model, **the verbose skill files may be net-negative; the durable value is triggers + boundaries + LLM-specific failure modes, not mental-model tutorials the model already knows.**
 
 - **Gemini (most extreme):** "teaching frontier models 'mental models' via 2000-word files is fundamentally backwards. The model already possesses these concepts in its weights … The most effective version wouldn't use markdown at all — it would be 39 highly-optimized, 2-sentence prompt injections."
 - **GPT:** "the best product may not be 39 auto-invoked skills … the durable value is a smaller failure-mode checklist plus a router that mostly says *don't use a mental model; gather evidence, run the test, inspect the code, make the smallest safe change.*"
@@ -68,7 +68,7 @@ Each reviewer's "most contrarian idea" landed on the **same** thesis from a diff
 
 This operationalizes R5: **ship known concepts as triggers; reserve full SKILL.md files for procedural skills that demonstrably beat the one-liner.**
 
-**Capability-curve probe (weaker `haiku` solver, 6 skills, `tier3-haiku.json`) — weak, mixed support.** Aggregate 61% (vs sonnet on the same skills); `occams-razor` strongly fits the hypothesis (haiku 100% vs sonnet 33%) and `debiasing` leans that way, but `first-principles` contradicts it (haiku 33% vs sonnet 100%). At n=3 this is suggestive, not conclusive: skills help weaker models *somewhat* more, but not monotonically. It does rule out "the skills are universally inert" — several produce real lift on the weaker model [SUPERSEDED] [SUPERSEDED — pre-M5 finding at n=3, not replicated; canonical scorecard shows no skill achieved replicated ELEVATE].
+**Capability-curve probe (weaker `haiku` solver, 6 skills, `tier3-haiku.json`) — weak, mixed support.** Aggregate 61% (vs sonnet on the same skills); `occams-razor` strongly fits the hypothesis (haiku 100% vs sonnet 33%) and `debiasing` leans that way, but `first-principles` contradicts it (haiku 33% vs sonnet 100%). At n=3 this is suggestive, not conclusive: skills help weaker models *somewhat* more, but not monotonically. It does rule out "the skills are universally inert" — several produce real lift on the weaker model [SUPERSEDED — pre-M5 finding at n=3, not replicated; canonical scorecard shows no skill achieved replicated ELEVATE].
 
 ---
 

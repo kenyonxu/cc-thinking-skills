@@ -1,6 +1,6 @@
 # ELEVATE-OR-KILL Scorecard — Canonical Single Source of Truth
 
-**Generated:** 2026-06-06  
+**Generated:** 2026-06-07  
 **Source:** `analysis/EVAL-COVERAGE.md` (cleanest snapshot) cross-checked against `evals/results/{run1,wavec,confirm,rerun}/*.json` and `evals/db/evals.db`  
 **Scope:** All 39 shipped skills (`skills/thinking-*`)
 
@@ -371,7 +371,7 @@ Dispositions are orthogonal to measured verdicts. A skill can carry both a measu
 - [x] **Collapsed leads as null/directional** — systems, five-whys-plus, red-team, fermi-estimation
 - [x] **Stale claims flagged superseded, not deleted** — run1 scorecard, mid-document ELEVATE-OR-KILL.md, SKILL-AUDIT.md
 - [x] **JSON and MD mutually consistent** — same skills, same verdicts, same numbers
-- [x] **Objective coverage 19/20** — 19 measured, 20 unmeasured
+- [x] **Objective coverage: 19 measured / 20 unmeasured (19 of 39)** — consistent with the 19/39 figure above
 - [x] **No skill directory deleted** — `skills/` still has 39 dirs
 - [x] **No scientific-method-v2** — replaced in-place, no v2 directory
 - [x] **Full-n sample completeness (M5 scrutiny round-2 fix)** — run-swe.js hardened with retry+per-item persistence; all 4 decisive-split results at n=224; scientific-method primary at n=150

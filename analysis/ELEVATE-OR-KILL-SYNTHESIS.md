@@ -9,7 +9,7 @@
 
 ## Headline Result
 
-**The mission produced ZERO robust-ELEVATE skills.** No skill met the full ELEVATE bar (≥5pp lift on its primary value surface, passes paired test at p<0.05, AND replicates on a fresh independent sample in the same direction). The strongest candidate — `scientific-method` — finished **DIRECTIONAL-NOT-REPLICATED**: its M5 fresh primary scored +5.3pp, p=0.061, post-edit, directional, NOT replicated (fails the p<0.05 gate), and while its replication was significant (+8.0pp, p=0.001, post-edit, significant, replication-sample that does NOT rescue the failed primary → skill-level NOT replicated), a successful replication cannot rescue a primary that fails the paired-test gate.
+**The mission produced ZERO robust-ELEVATE skills.** No skill met the full ELEVATE bar (≥5pp lift on its primary value surface, passes paired test at p<0.05, AND replicates on a fresh independent sample in the same direction). The strongest candidate — `scientific-method` — finished **DIRECTIONAL-NOT-REPLICATED**. Its M5 fresh primary scored +5.3pp, p=0.061, post-edit, directional, NOT replicated (fails the p<0.05 gate). Its replication was significant (+8.0pp, p=0.001, post-edit, significant, replication-sample that does NOT rescue the failed primary → skill-level NOT replicated), but a successful replication cannot rescue a primary that fails the paired-test gate.
 
 This is an honest, evidence-backed conclusion. The mission deliberately did NOT chase significance by enlarging samples after seeing borderline p-values (per documented anti-p-hacking decision 2026-06-07 in AGENTS.md). A properly pre-registered larger-N primary study for `scientific-method` is recommended as future work.
 
@@ -17,7 +17,7 @@ This is an honest, evidence-backed conclusion. The mission deliberately did NOT 
 
 ## Section 1: Verdict Categories — Complete Listing
 
-Every claim below carries the three required provenance dimensions: **pre/post-edit**, **directional/significant/null**, **replicated: false** (no skill-level ELEVATE verdict achieved replication). Each category is listed even when empty, as required by the synthesis template.
+Every claim below carries the three required provenance dimensions: **pre/post-edit**, **directional/significant/null**, **replicated: false** (no skill-level ELEVATE verdict achieved replication). Each category is listed even when empty.
 
 ### 1.1 robust-ELEVATE — EMPTY
 
@@ -186,10 +186,12 @@ Each skill carries exactly one measured verdict below. These categories are mutu
 | **DIRECTIONAL-NOT-REPLICATED** | 1 | `scientific-method` (primary +5.3pp p=0.061 post-edit directional not replicated fails gate; replication +8.0pp p=0.001 post-edit significant not replicated cannot rescue) |
 | **NO-LIFT** | 6 | `red-team`, `systems`, `five-whys-plus`, `occams-razor`, `archetypes`, `fermi-estimation` |
 | **NO-LIFT (exploratory)** | 2 | `kepner-tregoe`, `map-territory` (surface-mismatch) |
-| **CEILING-NEEDS-HARDER-DATA** | 8 | `first-principles`, `cynefin`, `theory-of-constraints`, `reversibility`, `bayesian`, `debiasing`, `socratic` (+ `map-territory` on authored) |
+| **CEILING-NEEDS-HARDER-DATA** | 7 | `first-principles`, `cynefin`, `theory-of-constraints`, `reversibility`, `bayesian`, `debiasing`, `socratic` |
 | **Other measured** | 3 | `circle-of-competence` (no calibration benefit, post-edit, null, not replicated), `second-order` (no effect, post-edit, null, not replicated), `margin-of-safety` (headroom, no benefit, post-edit, null, not replicated) |
-| **UNRESOLVED/UNMEASURED** | 19 | `model-selection`, `inversion`, `feedback-loops`, `regret-minimization`, `dual-process`, `model-router`, `model-combination`, `probabilistic`, `bounded-rationality`, `effectuation`, `jobs-to-be-done`, `leverage-points`, `lindy-effect`, `ooda`, `opportunity-cost`, `pre-mortem`, `steel-manning`, `thought-experiment`, `triz`, `via-negativa` |
+| **UNRESOLVED/UNMEASURED** | 20 | `model-selection`, `inversion`, `feedback-loops`, `regret-minimization`, `dual-process`, `model-router`, `model-combination`, `probabilistic`, `bounded-rationality`, `effectuation`, `jobs-to-be-done`, `leverage-points`, `lindy-effect`, `ooda`, `opportunity-cost`, `pre-mortem`, `steel-manning`, `thought-experiment`, `triz`, `via-negativa` |
 | **Total** | **39** | — |
+
+> Footnote: `map-territory` was at ceiling on its authored subset, but its canonical verdict is NO-LIFT (exploratory); it is counted once there.
 
 ### 7.2 Cross-Cutting Dispositions (NOT Mutually Exclusive — Overlap with Verdicts)
 

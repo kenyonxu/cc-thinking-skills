@@ -10,6 +10,7 @@ Generated against `experiments.db` + `evals/datasets/`. Layers: **T0** structura
 [SUPERSEDED — see banner above; canonical verdict = DIRECTIONAL-NOT-REPLICATED] An earlier (pre-edit run1) snapshot described **`scientific-method`** as "the only skill with a robust, significant objective lift (+9.3pp, p=0.002, SWE-bench n=150)." This is SUPERSEDED: the +9.3pp p=0.002 was a PRE-EDIT run1 primary; the M5 fresh post-edit primary scored +5.3pp p=0.061 and FAILS the p<0.05 gate; canonical verdict = DIRECTIONAL-NOT-REPLICATED. Every other apparent positive — `systems`, `five-whys-plus`, `red-team`, `fermi` — regressed to non-significance or null at n≥150. The consistent pattern across five skills: borderline p≈0.04–0.05 small-N results do **not** survive replication. Objective coverage is now **17/39 skills run**; the rest are genuinely pairwise (no objective formulation), at ceiling, or meta.
 
 ## Objectively measured (17 skills) — run with ground-truth verdicts
+[SUPERSEDED — M5: canonical is 19 measured / 20 unmeasured; archetypes and kepner-tregoe were since measured as NO-LIFT; see analysis/ELEVATE-OR-KILL-SCORECARD.md]
 | Skill | Objective dataset (N) | placebo→skill | Δ | p | Verdict |
 |---|---|---|---|---|---|
 | **scientific-method** | SWE-bench n=150 (native) | 82→91% | **+9.3** | **0.002** | **[SUPERSEDED] ELEVATE (robust, replicate-worthy)** — old run1 primary was PRE-EDIT; M5 fresh post-edit primary +5.3pp p=0.061 FAILS p<0.05 gate; replication +8.0pp p=0.001 cannot rescue; canonical verdict = DIRECTIONAL-NOT-REPLICATED; mission outcome = ZERO robust-ELEVATE |
@@ -33,6 +34,7 @@ Generated against `experiments.db` + `evals/datasets/`. Layers: **T0** structura
 **Note on ceilings:** many authored binary sets used clear-cut extremes → placebo lands at 90–100% → no headroom → "ceiling" (the model already does this; the skill is redundant on easy cases), not a firm KILL. A real headroom test needs borderline items.
 
 ## Not yet objectively measured (22 skills) — the remaining gap
+[SUPERSEDED — M5: canonical is 19 measured / 20 unmeasured; archetypes and kepner-tregoe were since measured as NO-LIFT; see analysis/ELEVATE-OR-KILL-SCORECARD.md]
 | Group | Skills | Current eval | Why no OBJ run / next step |
 |---|---|---|---|
 | **Pairwise (have 25-problem T3 sets, not run)** | inversion*, pre-mortem, triz, thought-experiment, jobs-to-be-done, effectuation, lindy-effect, leverage-points, feedback-loops, archetypes, opportunity-cost*, via-negativa*, regret-minimization, steel-manning | T3 behavioral 25 each (inversion 3) | No clean objective formulation; run `run-behavioral.js` (judge-based — accept the judge-bias caveat) or convert lindy/triz/reversibility-style to objective |
@@ -47,4 +49,4 @@ Generated against `experiments.db` + `evals/datasets/`. Layers: **T0** structura
 - **HF searched, rejected:** IBM argument-quality (renamed/gone); Anthropic global-opinions / bias polls (opinion, not correctness) — confirmed no off-the-shelf set fits the bespoke skill triggers, which is why authoring was used.
 
 ## What "rerun after evals work" produced
-The two live leads were powered (both collapsed) and 7 newly-covered skills were run objectively (all null/ceiling). Net: objective coverage 13→17 skills, and the elevate/kill conclusion is now stress-tested rather than resting on borderline small-N wins.
+The two live leads were powered (both collapsed) and 7 newly-covered skills were run objectively (all null/ceiling). Net: objective coverage 13→17 skills [SUPERSEDED — M5: canonical is 19 measured / 20 unmeasured; archetypes and kepner-tregoe were since measured as NO-LIFT; see analysis/ELEVATE-OR-KILL-SCORECARD.md], and the elevate/kill conclusion is now stress-tested rather than resting on borderline small-N wins.

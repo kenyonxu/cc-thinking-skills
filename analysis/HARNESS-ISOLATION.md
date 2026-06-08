@@ -31,7 +31,7 @@ Opt out with `EVAL_NO_ISOLATE=1`.
 
 - `droid exec --list-tools` with the disabled set → every tool shows **`blocked override`**.
 - Through the harness, instructing the solver to actually use `Read` → droid returns **"The Read tool is unavailable or blocked... invocation failed."**
-- (An LLM self-report claimed it *could* use skills — a misreport; the forced tool attempt is the real test and it fails.)
+- (An LLM self-report claimed it *could* use skills — a misreport; the forced tool attempt is the real test, and that attempt fails.)
 
 **Therefore:** the solver cannot invoke any of the 39 thinking skills and cannot read their files. The only skill content it uses is what the harness injects. **Active contamination is eliminated.**
 
