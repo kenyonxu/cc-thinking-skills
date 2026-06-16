@@ -44,30 +44,39 @@ cc-thinking-skills 目前面向 Claude Code 设计（39 个思维模型技能 + 
 
 ---
 
-## 方案
+## 方案 A 与 C 的关系
 
-### 方案 A：直接移植技能（推荐起步）
+A（插件化）和 C（eval harness）是**正交的**，可以且应该组合：
 
-将 39 个 `skills/thinking-*/SKILL.md` 复制到 `~/.hermes/skills/thinking-*/`。
+```
+方案 A（插件）
+  └─ 技能通过 plugin.yaml 注册
+  └─ 渐进式披露注入 system prompt
+  └─ Hermes 运行时使用技能 ←── 解决"怎么用"
 
-**需改动：**
-- YAML frontmatter：添加 `metadata.hermes.tags`、`metadata.hermes.related_skills`
-- 去掉 Claude Code 专用触发短语和工具调用模式
-- 适配输出格式指引（Hermes 工具名、参数风格不同）
+方案 C（eval harness）
+  └─ 读取同一批技能文件
+  └─ 调用 Hermes API（替代 droid.js 的 claude CLI）
+  └─ 跑 T0-T3 评估，输出评分卡 ←── 解决"好不好"
+  └─ 不依赖 A 的插件机制，只依赖技能文件本身
+```
 
-**无需改动：**
-- 39 个思维模型的核心概念内容
-- 7 大技能分类（决策、认知、系统、问题解决、估算、产品、元技能）
-
-**代价：** 低。技能本身就是 markdown 知识。工作量 ~2-3 小时，主要是 frontmatter 适配。
-
-**局限：** eval harness 不会移植，失去评估能力。技能成为静态参考。
+C 的 eval harness 本质是**外部验证脚本**——读 SKILL.md 源文件、调模型、跑统计。跟技能是怎么加载到 agent 的没有耦合。droid.js 替换成 Hermes API 调用即可，其余逻辑（McNemar、配对 A/B、抗 p-hacking 门）都是平台无关的统计。
 
 ---
 
-### 方案 B：插件化打包
+## 方案
 
-创建 Hermes 插件 `~/.hermes/plugins/cc-thinking-skills/`：
+### 方案 A：插件化打包（含技能移植）
+
+将 39 个技能适配为 Hermes 插件 `~/.hermes/plugins/cc-thinking-skills/`。
+
+**技能适配：**
+- YAML frontmatter：添加 `metadata.hermes.tags`、`metadata.hermes.related_skills`
+- 去掉 Claude Code 专用触发短语和工具调用模式
+- 技能核心概念内容无需改动（平台无关）
+
+**插件层：**
 
 ```yaml
 # plugin.yaml
@@ -90,14 +99,14 @@ def register(ctx):
 
 **优势：**
 - 利用 Hermes 插件钩子实现动态技能注入（相当于把 model-router 实现为插件）
-- 技能文件最大程度保持原样
 - 可通过 `metadata.hermes` 扩展字段支持 Hermes 特有功能
+- 技能文件最大程度保持原样
 
-**代价：** 中。需要写 ~200-300 行 Python 适配代码。
+**代价：** 中。技能 frontmatter 适配 ~2-3h + 插件代码 ~200-300 行 Python。
 
 ---
 
-### 方案 C：MCP 桥接
+### 方案 B：MCP 桥接
 
 启动 graphify MCP 服务器，让 Hermes 通过 MCP 客户端查询技能知识图谱。
 
@@ -128,9 +137,9 @@ mcp_servers:
 
 ---
 
-### 方案 D：全套移植（含评估框架）
+### 方案 C：评估框架移植（eval harness）
 
-将 eval harness 整体移植到 Python/Hermes 环境。
+将 eval harness 移植到 Python，调用 Hermes API，与方案 A 组合使用。
 
 | 组件 | Claude Code 现状 | Hermes 等价物 |
 |------|------|------|
@@ -140,9 +149,9 @@ mcp_servers:
 | `run-behavioral.js` (Tier 3) | paired A/B | 同上 + `scipy.stats` 替代 stats.js |
 | `stats.js` (统计) | JS 手写实现 | `scipy.stats.mcnemar` 等 |
 
-**优势：** 最完整，保留 cc-thinking-skills 的评估严谨性（McNemar 检验、抗 p-hacking 门、复制验证）。
+**优势：** 保留评估严谨性（McNemar 检验、抗 p-hacking 门、复制验证）。与方案 A 完全解耦——eval harness 直接读技能文件不依赖插件机制。
 
-**代价：** 高。droid.js 是整个项目的最高桥接度 god node——替换它涉及重写 15+ 个 eval runner 的模型调用路径。工作量估计 1-2 周。
+**代价：** 中高。droid.js 是整个项目的最高桥接度 god node——替换它涉及重写 15+ 个 eval runner 的模型调用路径。但 Hermes API 比 CLI 调用更简洁，实际工作量可压缩到 3-5 天。
 
 ---
 
@@ -151,18 +160,18 @@ mcp_servers:
 ```
 现在 ──────────────────────────────────────────────────► 未来
 
-  │ 方案 C               │ 方案 A + B              │ 方案 D
-  │ MCP 桥接             │ 技能移植 + 插件化        │ 全套移植
-  │ (零成本, 立即可用)    │ (2-3h + 半天)           │ (1-2 周, 按需)
+  │ 方案 B               │ 方案 A                  │ 方案 A + C
+  │ MCP 桥接             │ 技能移植 + 插件化        │ 插件 + eval harness
+  │ (零成本, 立即可用)    │ (2-3h + 半天)           │ (+3-5 天)
   │                      │                         │
   ▼                      ▼                         ▼
- Hermes 能查            技能成为 Hermes             完整评估框架
- 询技能图谱             原生能力                    在 Hermes 运行
+ Hermes 能查            技能成为 Hermes             可量化评估
+ 询技能图谱             原生能力                    技能质量
 ```
 
-1. **立即：方案 C** — graphify MCP 桥接，0 成本让 Hermes 能查询技能图谱
-2. **短期：方案 A + B 结合** — 移植技能文件 + 插件化动态加载
-3. **长期（按需）：方案 D** — 当需要在 Hermes 中复现技能评估管道时执行
+1. **立即：方案 B** — graphify MCP 桥接，零成本让 Hermes 能查询技能图谱
+2. **短期：方案 A** — 技能文件适配 + 插件化动态加载，技能成为 Hermes 原生能力
+3. **中期：方案 A + C** — 在插件基础上叠加 eval harness，恢复可量化评估能力。C 只依赖技能文件本身，与 A 的插件机制无耦合
 
 ---
 
