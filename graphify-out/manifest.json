@@ -1,0 +1,1617 @@
+{
+  "E:\\GitHub\\cc-thinking-skills\\.claude-plugin\\marketplace.json": {
+    "mtime": 1781407130.8254218,
+    "ast_hash": "4c93077f1575659b8d23367793357f96",
+    "semantic_hash": "4c93077f1575659b8d23367793357f96"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\.claude-plugin\\plugin.json": {
+    "mtime": 1781407130.8264227,
+    "ast_hash": "cd8a5e711bffc54af63b67c7894ffd57",
+    "semantic_hash": "cd8a5e711bffc54af63b67c7894ffd57"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\.graphify_detect.json": {
+    "mtime": 1781610685.1532393,
+    "ast_hash": "4c21c3df4c1a261d04c93db337e46053",
+    "semantic_hash": "4c21c3df4c1a261d04c93db337e46053"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\ELEVATE-OR-KILL-SCORECARD.json": {
+    "mtime": 1781407130.8284216,
+    "ast_hash": "5d25cc3255166557a4caf99ab9ed4ded",
+    "semantic_hash": "5d25cc3255166557a4caf99ab9ed4ded"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\aggregate-scorecard.js": {
+    "mtime": 1781407130.8349247,
+    "ast_hash": "1ae730914c9c2c8ce9020703d40b46c9",
+    "semantic_hash": "1ae730914c9c2c8ce9020703d40b46c9"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-archetypes.json": {
+    "mtime": 1781407130.8359292,
+    "ast_hash": "306265b31859b698547a21009084dd4e",
+    "semantic_hash": "306265b31859b698547a21009084dd4e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-bayesian.json": {
+    "mtime": 1781407130.8359292,
+    "ast_hash": "fa4c94e38dc8cbefcf622ea22e4c1f41",
+    "semantic_hash": "fa4c94e38dc8cbefcf622ea22e4c1f41"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-bounded-rationality.json": {
+    "mtime": 1781407130.8359292,
+    "ast_hash": "8571959169d08e504103975c4cdfb7b4",
+    "semantic_hash": "8571959169d08e504103975c4cdfb7b4"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-circle-of-competence.json": {
+    "mtime": 1781407130.8359292,
+    "ast_hash": "afe62fa94009cba87d4d64fade647733",
+    "semantic_hash": "afe62fa94009cba87d4d64fade647733"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-cynefin.json": {
+    "mtime": 1781407130.8359292,
+    "ast_hash": "6d4fd4565bf41ca6513ef8a75c1c574a",
+    "semantic_hash": "6d4fd4565bf41ca6513ef8a75c1c574a"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-debiasing.json": {
+    "mtime": 1781407130.8369298,
+    "ast_hash": "ad54c6403eec20f8e4c0e6a8807d3fcc",
+    "semantic_hash": "ad54c6403eec20f8e4c0e6a8807d3fcc"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-dual-process.json": {
+    "mtime": 1781407130.8369298,
+    "ast_hash": "8ae2433150c8a539e31a8a56dddfa787",
+    "semantic_hash": "8ae2433150c8a539e31a8a56dddfa787"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-effectuation.json": {
+    "mtime": 1781407130.8369298,
+    "ast_hash": "ab0fbd8a71aed65c1dff7f104b4eb310",
+    "semantic_hash": "ab0fbd8a71aed65c1dff7f104b4eb310"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-feedback-loops.json": {
+    "mtime": 1781407130.8369298,
+    "ast_hash": "5ac54f7c0f8acf9d3ef823f7d0ca20b1",
+    "semantic_hash": "5ac54f7c0f8acf9d3ef823f7d0ca20b1"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-fermi-estimation.json": {
+    "mtime": 1781407130.8369298,
+    "ast_hash": "3aa5a70fd4875fd8ae073de5d849efc8",
+    "semantic_hash": "3aa5a70fd4875fd8ae073de5d849efc8"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-first-principles.json": {
+    "mtime": 1781407130.8369298,
+    "ast_hash": "c58b96bb693769e0543401093b33146f",
+    "semantic_hash": "c58b96bb693769e0543401093b33146f"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-five-whys-plus.json": {
+    "mtime": 1781407130.837929,
+    "ast_hash": "df55d2d9c33b75663d634165d1938d1c",
+    "semantic_hash": "df55d2d9c33b75663d634165d1938d1c"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-inversion.json": {
+    "mtime": 1781407130.837929,
+    "ast_hash": "250438e77bc6a876a74f1cc55f41f3a0",
+    "semantic_hash": "250438e77bc6a876a74f1cc55f41f3a0"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-jobs-to-be-done.json": {
+    "mtime": 1781407130.837929,
+    "ast_hash": "6d590c8a00b5caf9684a73f4c4398f69",
+    "semantic_hash": "6d590c8a00b5caf9684a73f4c4398f69"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-kepner-tregoe.json": {
+    "mtime": 1781407130.837929,
+    "ast_hash": "b97899bc06b5939f0b075a22df275138",
+    "semantic_hash": "b97899bc06b5939f0b075a22df275138"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-leverage-points.json": {
+    "mtime": 1781407130.837929,
+    "ast_hash": "3b3656628a45c6096672cc8eb9d08e55",
+    "semantic_hash": "3b3656628a45c6096672cc8eb9d08e55"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-lindy-effect.json": {
+    "mtime": 1781407130.837929,
+    "ast_hash": "174b6ddd83ab8e31fd5a3a011936be66",
+    "semantic_hash": "174b6ddd83ab8e31fd5a3a011936be66"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-map-territory.json": {
+    "mtime": 1781407130.837929,
+    "ast_hash": "2326461c781bc88a2a45a26514fab508",
+    "semantic_hash": "2326461c781bc88a2a45a26514fab508"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-margin-of-safety.json": {
+    "mtime": 1781407130.8389287,
+    "ast_hash": "3ba5321d6b38d27291a7493ee51702fd",
+    "semantic_hash": "3ba5321d6b38d27291a7493ee51702fd"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-model-combination.json": {
+    "mtime": 1781407130.8389287,
+    "ast_hash": "1886dd27af895a8da5cbef773324c261",
+    "semantic_hash": "1886dd27af895a8da5cbef773324c261"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-model-router.json": {
+    "mtime": 1781407130.8389287,
+    "ast_hash": "85963473d23a120fc9f0c6be2340d48c",
+    "semantic_hash": "85963473d23a120fc9f0c6be2340d48c"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-model-selection.json": {
+    "mtime": 1781407130.8389287,
+    "ast_hash": "95fe9e532dc0922fac7da7987e59421e",
+    "semantic_hash": "95fe9e532dc0922fac7da7987e59421e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-occams-razor.json": {
+    "mtime": 1781407130.8389287,
+    "ast_hash": "c0708b4a22379a18913c186181e72ec9",
+    "semantic_hash": "c0708b4a22379a18913c186181e72ec9"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-ooda.json": {
+    "mtime": 1781407130.8389287,
+    "ast_hash": "f968b3a78f12b3129c250052c68ec0fb",
+    "semantic_hash": "f968b3a78f12b3129c250052c68ec0fb"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-opportunity-cost.json": {
+    "mtime": 1781407130.8389287,
+    "ast_hash": "3b407d44836f6c794c4ff5b7326b9e22",
+    "semantic_hash": "3b407d44836f6c794c4ff5b7326b9e22"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-pre-mortem.json": {
+    "mtime": 1781407130.8389287,
+    "ast_hash": "883c4f289a1786b7a280cd7f4c522197",
+    "semantic_hash": "883c4f289a1786b7a280cd7f4c522197"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-probabilistic.json": {
+    "mtime": 1781407130.8389287,
+    "ast_hash": "266718200b2d767b5858746438753a96",
+    "semantic_hash": "266718200b2d767b5858746438753a96"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-red-team.json": {
+    "mtime": 1781407130.8389287,
+    "ast_hash": "4bcde277cbee993bbe2540227c9bc2f1",
+    "semantic_hash": "4bcde277cbee993bbe2540227c9bc2f1"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-regret-minimization.json": {
+    "mtime": 1781407130.8404322,
+    "ast_hash": "b56ebaabb560e02000dd6a3efed006a5",
+    "semantic_hash": "b56ebaabb560e02000dd6a3efed006a5"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-reversibility.json": {
+    "mtime": 1781407130.8404322,
+    "ast_hash": "348192001b49a2ecaeacd598940db65c",
+    "semantic_hash": "348192001b49a2ecaeacd598940db65c"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-scientific-method.json": {
+    "mtime": 1781407130.8404322,
+    "ast_hash": "7d709b6b0f59568ba6c4ce604da18b4e",
+    "semantic_hash": "7d709b6b0f59568ba6c4ce604da18b4e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-second-order.json": {
+    "mtime": 1781407130.8404322,
+    "ast_hash": "5a9f34fd322278bbe3b3fe8f5ed2cd12",
+    "semantic_hash": "5a9f34fd322278bbe3b3fe8f5ed2cd12"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-socratic.json": {
+    "mtime": 1781407130.8404322,
+    "ast_hash": "66fd6e8f395c36f4ca975fe804257013",
+    "semantic_hash": "66fd6e8f395c36f4ca975fe804257013"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-steel-manning.json": {
+    "mtime": 1781407130.8414366,
+    "ast_hash": "a57684018b3caef5f9f20eb5be697409",
+    "semantic_hash": "a57684018b3caef5f9f20eb5be697409"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-systems.json": {
+    "mtime": 1781407130.8414366,
+    "ast_hash": "472d07eeabf6ca25e9b306c82398c410",
+    "semantic_hash": "472d07eeabf6ca25e9b306c82398c410"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-theory-of-constraints.json": {
+    "mtime": 1781407130.8414366,
+    "ast_hash": "6b9bfe684ee04f83ca95f3cd90cd37ad",
+    "semantic_hash": "6b9bfe684ee04f83ca95f3cd90cd37ad"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-thought-experiment.json": {
+    "mtime": 1781407130.8414366,
+    "ast_hash": "a4bc288f19f372fa445a79a97c424df3",
+    "semantic_hash": "a4bc288f19f372fa445a79a97c424df3"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-triz.json": {
+    "mtime": 1781407130.8414366,
+    "ast_hash": "f14ddf3c1dcb8b262fde9deaa544a28f",
+    "semantic_hash": "f14ddf3c1dcb8b262fde9deaa544a28f"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\contracts\\thinking-via-negativa.json": {
+    "mtime": 1781407130.8414366,
+    "ast_hash": "4b4e07b49acb1ce504714a7952522bb7",
+    "semantic_hash": "4b4e07b49acb1ce504714a7952522bb7"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-archetypes.json": {
+    "mtime": 1781407130.8449445,
+    "ast_hash": "1ca70db3229066b7020589198d99f0c9",
+    "semantic_hash": "1ca70db3229066b7020589198d99f0c9"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-bayesian.json": {
+    "mtime": 1781407130.84595,
+    "ast_hash": "86c47af50d0a7ae8118e51b05383f83b",
+    "semantic_hash": "86c47af50d0a7ae8118e51b05383f83b"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-bounded-rationality.json": {
+    "mtime": 1781407130.84595,
+    "ast_hash": "8022ace52d4e81c9ca34f3eff2c89d9a",
+    "semantic_hash": "8022ace52d4e81c9ca34f3eff2c89d9a"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-circle-of-competence.json": {
+    "mtime": 1781407130.84595,
+    "ast_hash": "8c2c29d1eb7d395f4e5026e3a852ccf5",
+    "semantic_hash": "8c2c29d1eb7d395f4e5026e3a852ccf5"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-cynefin.json": {
+    "mtime": 1781407130.84595,
+    "ast_hash": "7d2fe4e3c76da04bf823848d99ffc052",
+    "semantic_hash": "7d2fe4e3c76da04bf823848d99ffc052"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-debiasing.json": {
+    "mtime": 1781407130.84595,
+    "ast_hash": "e4e95ea480e15231cae98779bb81fb02",
+    "semantic_hash": "e4e95ea480e15231cae98779bb81fb02"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-dual-process.json": {
+    "mtime": 1781407130.8469486,
+    "ast_hash": "ae326530960bece1efc0292ceb67bd29",
+    "semantic_hash": "ae326530960bece1efc0292ceb67bd29"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-effectuation.json": {
+    "mtime": 1781407130.8469486,
+    "ast_hash": "64436712ea39827705a01acb6da18ab3",
+    "semantic_hash": "64436712ea39827705a01acb6da18ab3"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-feedback-loops.json": {
+    "mtime": 1781407130.8469486,
+    "ast_hash": "ad993c971154021cb9007ad0278b0e3c",
+    "semantic_hash": "ad993c971154021cb9007ad0278b0e3c"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-fermi-estimation.json": {
+    "mtime": 1781407130.8469486,
+    "ast_hash": "0f67baf51a452f7465676fc6a594cdef",
+    "semantic_hash": "0f67baf51a452f7465676fc6a594cdef"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-first-principles.json": {
+    "mtime": 1781407130.8479486,
+    "ast_hash": "c40d6793c83a85584f083368f3d54c16",
+    "semantic_hash": "c40d6793c83a85584f083368f3d54c16"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-five-whys-plus.json": {
+    "mtime": 1781407130.8479486,
+    "ast_hash": "d905c5701c52d56e1a295db09deeb576",
+    "semantic_hash": "d905c5701c52d56e1a295db09deeb576"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-inversion.json": {
+    "mtime": 1781407130.8479486,
+    "ast_hash": "f2322ce7fb24532c8ada185ba3f43322",
+    "semantic_hash": "f2322ce7fb24532c8ada185ba3f43322"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-jobs-to-be-done.json": {
+    "mtime": 1781407130.8479486,
+    "ast_hash": "dcbae0491cad065f1dad72d889e4f7ef",
+    "semantic_hash": "dcbae0491cad065f1dad72d889e4f7ef"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-kepner-tregoe.json": {
+    "mtime": 1781407130.8479486,
+    "ast_hash": "baeddd73dc61913dc4f090396b1b58a5",
+    "semantic_hash": "baeddd73dc61913dc4f090396b1b58a5"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-leverage-points.json": {
+    "mtime": 1781407130.8489487,
+    "ast_hash": "f539f5c3eea2a144fedf88900371b8af",
+    "semantic_hash": "f539f5c3eea2a144fedf88900371b8af"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-lindy-effect.json": {
+    "mtime": 1781407130.8489487,
+    "ast_hash": "107d46ebf606f0be927b29590ef61851",
+    "semantic_hash": "107d46ebf606f0be927b29590ef61851"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-map-territory.json": {
+    "mtime": 1781407130.8489487,
+    "ast_hash": "8ef7933ed378829f69e4ba30ed99c0e8",
+    "semantic_hash": "8ef7933ed378829f69e4ba30ed99c0e8"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-margin-of-safety.json": {
+    "mtime": 1781407130.8489487,
+    "ast_hash": "8ee32bd697f385e71ba4801a5f6b41a7",
+    "semantic_hash": "8ee32bd697f385e71ba4801a5f6b41a7"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-occams-razor.json": {
+    "mtime": 1781407130.8499482,
+    "ast_hash": "d592509b9ae46a40e70a1306a7bc08d3",
+    "semantic_hash": "d592509b9ae46a40e70a1306a7bc08d3"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-ooda.json": {
+    "mtime": 1781407130.8499482,
+    "ast_hash": "b71f0eefed7cffde1d48e9b7f6146056",
+    "semantic_hash": "b71f0eefed7cffde1d48e9b7f6146056"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-opportunity-cost.json": {
+    "mtime": 1781407130.8499482,
+    "ast_hash": "0c5ced736cf9709aee29f831243ec174",
+    "semantic_hash": "0c5ced736cf9709aee29f831243ec174"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-pre-mortem.json": {
+    "mtime": 1781407130.8499482,
+    "ast_hash": "bdfcbd4ad6a99d5a48fae69c691ba5ae",
+    "semantic_hash": "bdfcbd4ad6a99d5a48fae69c691ba5ae"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-probabilistic.json": {
+    "mtime": 1781407130.8509488,
+    "ast_hash": "736198301aae3cedfee0407168f3202b",
+    "semantic_hash": "736198301aae3cedfee0407168f3202b"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-red-team.json": {
+    "mtime": 1781407130.8509488,
+    "ast_hash": "7ef369b58c5c068bd1b6cbeb7c6de1ad",
+    "semantic_hash": "7ef369b58c5c068bd1b6cbeb7c6de1ad"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-regret-minimization.json": {
+    "mtime": 1781407130.8509488,
+    "ast_hash": "224a42ff67073c6fff572fdd99c7bbc6",
+    "semantic_hash": "224a42ff67073c6fff572fdd99c7bbc6"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-reversibility.json": {
+    "mtime": 1781407130.8509488,
+    "ast_hash": "5ac690332cbcaa38fd628f5a6d0dcb02",
+    "semantic_hash": "5ac690332cbcaa38fd628f5a6d0dcb02"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-scientific-method.json": {
+    "mtime": 1781407130.8509488,
+    "ast_hash": "8577f7cf3a61924b890000154d509323",
+    "semantic_hash": "8577f7cf3a61924b890000154d509323"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-second-order.json": {
+    "mtime": 1781407130.8519487,
+    "ast_hash": "3c7b8207eb7305c1ff375e96bdfc6bd4",
+    "semantic_hash": "3c7b8207eb7305c1ff375e96bdfc6bd4"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-socratic.json": {
+    "mtime": 1781407130.8519487,
+    "ast_hash": "d24e16363692034106e9461b0e739949",
+    "semantic_hash": "d24e16363692034106e9461b0e739949"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-steel-manning.json": {
+    "mtime": 1781407130.8519487,
+    "ast_hash": "b6b8b6d38bcb1d43e4ec75df1e651e16",
+    "semantic_hash": "b6b8b6d38bcb1d43e4ec75df1e651e16"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-systems.json": {
+    "mtime": 1781407130.8519487,
+    "ast_hash": "77f8e12fa5cbf2d72c867e7a339b03a5",
+    "semantic_hash": "77f8e12fa5cbf2d72c867e7a339b03a5"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-theory-of-constraints.json": {
+    "mtime": 1781407130.8519487,
+    "ast_hash": "e751004cee1823396f197738cd0a5bd0",
+    "semantic_hash": "e751004cee1823396f197738cd0a5bd0"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-thought-experiment.json": {
+    "mtime": 1781407130.8529487,
+    "ast_hash": "b0ebdffbc159059e9f55f44383dbfa5d",
+    "semantic_hash": "b0ebdffbc159059e9f55f44383dbfa5d"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-triz.json": {
+    "mtime": 1781407130.8529487,
+    "ast_hash": "b0489c3e7e331967906125e7ad070e8d",
+    "semantic_hash": "b0489c3e7e331967906125e7ad070e8d"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\behavioral\\thinking-via-negativa.json": {
+    "mtime": 1781407130.8529487,
+    "ast_hash": "7b121ed6400f15fc754bba633277707b",
+    "semantic_hash": "7b121ed6400f15fc754bba633277707b"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\calibrated\\build-candidate-pools.js": {
+    "mtime": 1781407130.8529487,
+    "ast_hash": "9784e5c4af084c1610e297c21aa60b77",
+    "semantic_hash": "9784e5c4af084c1610e297c21aa60b77"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\calibrated\\build-harder-conceptual-systems-pools.js": {
+    "mtime": 1781407130.8539524,
+    "ast_hash": "a2738fe1e0ab4d24451888579738463e",
+    "semantic_hash": "a2738fe1e0ab4d24451888579738463e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\calibrated\\build-harder-pools.js": {
+    "mtime": 1781407130.8539524,
+    "ast_hash": "b56eb7f58e51cdcffd77612c77b41253",
+    "semantic_hash": "b56eb7f58e51cdcffd77612c77b41253"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\calibrated\\build-harder-quantitative-pool.js": {
+    "mtime": 1781407130.8539524,
+    "ast_hash": "002d3c441034f9f6d481241db479ee52",
+    "semantic_hash": "002d3c441034f9f6d481241db479ee52"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\calibrated\\conceptual-reframes.manifest.json": {
+    "mtime": 1781407130.8564608,
+    "ast_hash": "8b9f0e0975bc508b79c931d01522ce4b",
+    "semantic_hash": "8b9f0e0975bc508b79c931d01522ce4b"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\calibrated\\debugging-fault-localization.manifest.json": {
+    "mtime": 1781407130.8584602,
+    "ast_hash": "f2054e08943c63d2e810b1e5b58954f6",
+    "semantic_hash": "f2054e08943c63d2e810b1e5b58954f6"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\calibrated\\quantitative-uncertainty.manifest.json": {
+    "mtime": 1781407130.8614607,
+    "ast_hash": "decf4b6282e051b39cc97ca43f5da64e",
+    "semantic_hash": "decf4b6282e051b39cc97ca43f5da64e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\calibrated\\routing-abstention.manifest.json": {
+    "mtime": 1781407130.862461,
+    "ast_hash": "9753047b2a478ecf66789428c275c37f",
+    "semantic_hash": "9753047b2a478ecf66789428c275c37f"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\calibrated\\security-adversarial.manifest.json": {
+    "mtime": 1781407130.8644624,
+    "ast_hash": "eded9a39e1f4c98b3e69ff43e96eb9d9",
+    "semantic_hash": "eded9a39e1f4c98b3e69ff43e96eb9d9"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\calibrated\\systems-product-strategy-pairwise.manifest.json": {
+    "mtime": 1781407130.8667142,
+    "ast_hash": "1f10b4e911dceb28aa44fb149a97067a",
+    "semantic_hash": "1f10b4e911dceb28aa44fb149a97067a"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\external\\gen-bayesian.js": {
+    "mtime": 1781407130.8677142,
+    "ast_hash": "7db98a99509940332f3024604a2fa688",
+    "semantic_hash": "7db98a99509940332f3024604a2fa688"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\external\\validate-bayesian.js": {
+    "mtime": 1781407130.8677142,
+    "ast_hash": "dd3e67d791db266b3f79cfeac3445808",
+    "semantic_hash": "dd3e67d791db266b3f79cfeac3445808"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\ingest-hf.js": {
+    "mtime": 1781407130.8677142,
+    "ast_hash": "594e322157531c2de9a257e26ce5145a",
+    "semantic_hash": "594e322157531c2de9a257e26ce5145a"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\db\\build-dashboard.js": {
+    "mtime": 1781407130.8687139,
+    "ast_hash": "fbdb8312dd93023638874801f03569d3",
+    "semantic_hash": "fbdb8312dd93023638874801f03569d3"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\db\\build-db.js": {
+    "mtime": 1781407130.8687139,
+    "ast_hash": "c414dd1ffd4d376ee07c5657644266b9",
+    "semantic_hash": "c414dd1ffd4d376ee07c5657644266b9"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\lib\\conditions.js": {
+    "mtime": 1781407130.870761,
+    "ast_hash": "7618717d911bd82907fbb02cc4005016",
+    "semantic_hash": "7618717d911bd82907fbb02cc4005016"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\lib\\droid.js": {
+    "mtime": 1781407130.870761,
+    "ast_hash": "0627beb453a82d6f1eea263b06da90f4",
+    "semantic_hash": "0627beb453a82d6f1eea263b06da90f4"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\lib\\io.js": {
+    "mtime": 1781407130.870761,
+    "ast_hash": "b5e05b21982b598c258ff2c7857914f9",
+    "semantic_hash": "b5e05b21982b598c258ff2c7857914f9"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\lib\\judge.js": {
+    "mtime": 1781407130.870761,
+    "ast_hash": "2526963ee8e332cc961439f6dd6fe80d",
+    "semantic_hash": "2526963ee8e332cc961439f6dd6fe80d"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\lib\\skills.js": {
+    "mtime": 1781407130.8717651,
+    "ast_hash": "d1e7d5873d19ea9fc380355fef00d288",
+    "semantic_hash": "d1e7d5873d19ea9fc380355fef00d288"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\lib\\stats.js": {
+    "mtime": 1781407130.8717651,
+    "ast_hash": "7695a680cf53377e38188bfead1977a0",
+    "semantic_hash": "7695a680cf53377e38188bfead1977a0"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\capability\\CAP-EFFORT-0.json": {
+    "mtime": 1781407130.8717651,
+    "ast_hash": "dd37d046c4b5b0225e9e0763127a21cc",
+    "semantic_hash": "dd37d046c4b5b0225e9e0763127a21cc"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\capability\\CAP-EFFORT-1.json": {
+    "mtime": 1781407130.8717651,
+    "ast_hash": "4165783d77b2607efe1df04952c57fe7",
+    "semantic_hash": "4165783d77b2607efe1df04952c57fe7"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\capability\\CAP-EFFORT-2.json": {
+    "mtime": 1781407130.8717651,
+    "ast_hash": "87f953a8f3297c0029bfac533d9fae96",
+    "semantic_hash": "87f953a8f3297c0029bfac533d9fae96"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\capability\\CAP-EFFORT-3.json": {
+    "mtime": 1781407130.8727653,
+    "ast_hash": "22bbe10b2bbe5f83d2ec63d4bcd4e060",
+    "semantic_hash": "22bbe10b2bbe5f83d2ec63d4bcd4e060"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\capability\\CAP-MODEL-0.json": {
+    "mtime": 1781407130.8727653,
+    "ast_hash": "d9a6b2b0d50fa362796f3410d7f77a9c",
+    "semantic_hash": "d9a6b2b0d50fa362796f3410d7f77a9c"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\capability\\CAP-MODEL-1.json": {
+    "mtime": 1781407130.8727653,
+    "ast_hash": "007c4c89b5fdd0a66ae948c10febf9be",
+    "semantic_hash": "007c4c89b5fdd0a66ae948c10febf9be"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\capability\\CAP-MODEL-2.json": {
+    "mtime": 1781407130.8727653,
+    "ast_hash": "34c408e90665c7d572f4e63cb31c554e",
+    "semantic_hash": "34c408e90665c7d572f4e63cb31c554e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\capability\\stack.json": {
+    "mtime": 1781407130.8727653,
+    "ast_hash": "765ef6ca04d6cc2489b210f9ed6b126a",
+    "semantic_hash": "765ef6ca04d6cc2489b210f9ed6b126a"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\confirm\\numeric-fermi-n150.json": {
+    "mtime": 1781407130.8737648,
+    "ast_hash": "ab19b298c7536532223cc597938637c2",
+    "semantic_hash": "ab19b298c7536532223cc597938637c2"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\confirm\\redteam-diversevul-balanced-n200.json": {
+    "mtime": 1781407130.8737648,
+    "ast_hash": "aacef6fa2af073abc3610a091370df0c",
+    "semantic_hash": "aacef6fa2af073abc3610a091370df0c"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\exp-l1-e2c034\\paired.json": {
+    "mtime": 1781407130.8737648,
+    "ast_hash": "c5df8bfc72c7dbc4d28385b72884810e",
+    "semantic_hash": "c5df8bfc72c7dbc4d28385b72884810e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\exp-l2-faa385\\paired.json": {
+    "mtime": 1781407130.8737648,
+    "ast_hash": "491197fb908671e427741930c1922506",
+    "semantic_hash": "491197fb908671e427741930c1922506"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\indomain-haiku\\tier3-behavioral.json": {
+    "mtime": 1781407130.8747644,
+    "ast_hash": "dc00d6072c55beceb1a220caed796904",
+    "semantic_hash": "dc00d6072c55beceb1a220caed796904"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\indomain-opus\\tier3-behavioral.json": {
+    "mtime": 1781407130.8747644,
+    "ast_hash": "6cd7c942c4671d27b63edadcd37af5cc",
+    "semantic_hash": "6cd7c942c4671d27b63edadcd37af5cc"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\indomain-sonnet\\tier3-behavioral.json": {
+    "mtime": 1781407130.8747644,
+    "ast_hash": "fa1a8b43e6940aaf72fbd22f844dcaca",
+    "semantic_hash": "fa1a8b43e6940aaf72fbd22f844dcaca"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\m5-primary-decisive\\swe-five-whys-plus.json": {
+    "mtime": 1781407130.8747644,
+    "ast_hash": "a003dbe832742861909c7eccbc7c3f47",
+    "semantic_hash": "a003dbe832742861909c7eccbc7c3f47"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\m5-primary-decisive\\swe-kepner-tregoe.json": {
+    "mtime": 1781407130.8762681,
+    "ast_hash": "541d52a3fbf793ccbbf5d7b7a576043f",
+    "semantic_hash": "541d52a3fbf793ccbbf5d7b7a576043f"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\m5-primary-decisive\\swe-map-territory.json": {
+    "mtime": 1781407130.8762681,
+    "ast_hash": "88f3e718ab785fcddec336f136b0a185",
+    "semantic_hash": "88f3e718ab785fcddec336f136b0a185"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\m5-primary-decisive\\swe-occams-razor.json": {
+    "mtime": 1781407130.8762681,
+    "ast_hash": "ed9670c2f831af2f52e4b43bc24820b6",
+    "semantic_hash": "ed9670c2f831af2f52e4b43bc24820b6"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\m5-primary-sci\\swe-scientific-method.json": {
+    "mtime": 1781407130.8762681,
+    "ast_hash": "001559cf2dc002423c46989866e45323",
+    "semantic_hash": "001559cf2dc002423c46989866e45323"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\m5-primary\\binary-archetypes.json": {
+    "mtime": 1781407130.8772724,
+    "ast_hash": "037a6ba8158df30046ae6dfae0c204cd",
+    "semantic_hash": "037a6ba8158df30046ae6dfae0c204cd"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\m5-primary\\redteam-security-decisive.json": {
+    "mtime": 1781407130.8772724,
+    "ast_hash": "dc3d2a26cc8a51781a2bacdb2931b7d8",
+    "semantic_hash": "dc3d2a26cc8a51781a2bacdb2931b7d8"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\m5-primary\\swe-five-whys-plus.json": {
+    "mtime": 1781407130.8772724,
+    "ast_hash": "a0f2583b62ffcceebb0a30407a7168fc",
+    "semantic_hash": "a0f2583b62ffcceebb0a30407a7168fc"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\m5-primary\\swe-kepner-tregoe.json": {
+    "mtime": 1781407130.8772724,
+    "ast_hash": "bb5fcd60b7eae658b9ccec13a50b53a3",
+    "semantic_hash": "bb5fcd60b7eae658b9ccec13a50b53a3"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\m5-primary\\swe-map-territory.json": {
+    "mtime": 1781407130.8772724,
+    "ast_hash": "754c971929b000af8f101c3a7fed729c",
+    "semantic_hash": "754c971929b000af8f101c3a7fed729c"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\m5-primary\\swe-occams-razor.json": {
+    "mtime": 1781407130.8772724,
+    "ast_hash": "58b204065093736ffe1d7b2006464241",
+    "semantic_hash": "58b204065093736ffe1d7b2006464241"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\m5-primary\\swe-systems.json": {
+    "mtime": 1781407130.8782723,
+    "ast_hash": "a495018950fa0ced5c28748d9792ffe2",
+    "semantic_hash": "a495018950fa0ced5c28748d9792ffe2"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\m5-repl\\swe-scientific-method.json": {
+    "mtime": 1781407130.8782723,
+    "ast_hash": "7c80cbe35875a0dea4842dee1a0dd81a",
+    "semantic_hash": "7c80cbe35875a0dea4842dee1a0dd81a"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\rerun\\first-principles-constraint.json": {
+    "mtime": 1781407130.8782723,
+    "ast_hash": "2697994e3ebe1ef9e077796d71297cff",
+    "semantic_hash": "2697994e3ebe1ef9e077796d71297cff"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\rerun\\map-territory-verify.json": {
+    "mtime": 1781407130.8782723,
+    "ast_hash": "2565b731963c42016c7a2fec7230ad55",
+    "semantic_hash": "2565b731963c42016c7a2fec7230ad55"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\rerun\\margin-of-safety-provision.json": {
+    "mtime": 1781407130.8792725,
+    "ast_hash": "6b6e4eded1c8fa377bf2256e65ee1363",
+    "semantic_hash": "6b6e4eded1c8fa377bf2256e65ee1363"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\rerun\\reversibility-doors.json": {
+    "mtime": 1781407130.8792725,
+    "ast_hash": "3046c944b44c4c275f29725bf5264220",
+    "semantic_hash": "3046c944b44c4c275f29725bf5264220"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\rerun\\second-order-consequence.json": {
+    "mtime": 1781407130.8792725,
+    "ast_hash": "3bc1bdafd2f4840a8e4b9b5a25dcff38",
+    "semantic_hash": "3bc1bdafd2f4840a8e4b9b5a25dcff38"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\rerun\\strategyqa-second-order.json": {
+    "mtime": 1781407130.8792725,
+    "ast_hash": "7fbc4b263102ae2e4b485fd25dfa440a",
+    "semantic_hash": "7fbc4b263102ae2e4b485fd25dfa440a"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\rerun\\theory-of-constraints-bottleneck.json": {
+    "mtime": 1781407130.8792725,
+    "ast_hash": "690222f6ecc092951c62264b47d3d82e",
+    "semantic_hash": "690222f6ecc092951c62264b47d3d82e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\correctness-bayesian-haiku.json": {
+    "mtime": 1781407130.880272,
+    "ast_hash": "bce5997843f753cfc11b00995a39f87d",
+    "semantic_hash": "bce5997843f753cfc11b00995a39f87d"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\correctness-bayesian.json": {
+    "mtime": 1781407130.880272,
+    "ast_hash": "2a1ce2453eeace0766052b0121d90c04",
+    "semantic_hash": "2a1ce2453eeace0766052b0121d90c04"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\correctness-debiasing-haiku.json": {
+    "mtime": 1781407130.880272,
+    "ast_hash": "848539ae02eb35f0701d1b5eb5fafd50",
+    "semantic_hash": "848539ae02eb35f0701d1b5eb5fafd50"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\correctness-debiasing.json": {
+    "mtime": 1781407130.880272,
+    "ast_hash": "1f1012c49534c4a5ca1d3c6f5b7090a9",
+    "semantic_hash": "1f1012c49534c4a5ca1d3c6f5b7090a9"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\correctness-occams.json": {
+    "mtime": 1781407130.880272,
+    "ast_hash": "ea96947a8c5cf6273e46718e7051930c",
+    "semantic_hash": "ea96947a8c5cf6273e46718e7051930c"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\correctness-scientific.json": {
+    "mtime": 1781407130.880272,
+    "ast_hash": "ab0525575483fb04ab05c4fcc8587f19",
+    "semantic_hash": "ab0525575483fb04ab05c4fcc8587f19"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\correctness.json": {
+    "mtime": 1781407130.8812726,
+    "ast_hash": "ba2bd533f038c019ccdac334b8b3993d",
+    "semantic_hash": "ba2bd533f038c019ccdac334b8b3993d"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\numeric-fermi-estimation.json": {
+    "mtime": 1781407130.8812726,
+    "ast_hash": "df939ceb5e1e650a55cb6a5d6cdb5d7d",
+    "semantic_hash": "df939ceb5e1e650a55cb6a5d6cdb5d7d"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\swe-five-whys-plus-improved.json": {
+    "mtime": 1781407130.8812726,
+    "ast_hash": "e410d824f3f291eadb27aeeaaf900636",
+    "semantic_hash": "e410d824f3f291eadb27aeeaaf900636"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\swe-five-whys-plus-powered.json": {
+    "mtime": 1781407130.8812726,
+    "ast_hash": "59f44fc16e0638cbcf7eb7b9aff5f76f",
+    "semantic_hash": "59f44fc16e0638cbcf7eb7b9aff5f76f"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\swe-five-whys-plus.json": {
+    "mtime": 1781407130.8822725,
+    "ast_hash": "36d3fa85bd607d2947e7d7ae2e3dbc32",
+    "semantic_hash": "36d3fa85bd607d2947e7d7ae2e3dbc32"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\swe-occams-razor-improved.json": {
+    "mtime": 1781407130.8822725,
+    "ast_hash": "f68701035196258b51f6a5845e416599",
+    "semantic_hash": "f68701035196258b51f6a5845e416599"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\swe-occams-razor-powered.json": {
+    "mtime": 1781407130.8822725,
+    "ast_hash": "52b04aee2dd79e07b244f6249288a8e6",
+    "semantic_hash": "52b04aee2dd79e07b244f6249288a8e6"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\swe-occams-razor.json": {
+    "mtime": 1781407130.8822725,
+    "ast_hash": "5f059a0a624249dd530139996405caf8",
+    "semantic_hash": "5f059a0a624249dd530139996405caf8"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\swe-scientific-method-improved.json": {
+    "mtime": 1781407130.8822725,
+    "ast_hash": "f8a794c675765a7bab87e5f292aae1ef",
+    "semantic_hash": "f8a794c675765a7bab87e5f292aae1ef"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\swe-scientific-method-v2.json": {
+    "mtime": 1781407130.8822725,
+    "ast_hash": "e329d19e160d414cfc8ab18431c98bc5",
+    "semantic_hash": "e329d19e160d414cfc8ab18431c98bc5"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\swe-scientific-method.json": {
+    "mtime": 1781407130.8822725,
+    "ast_hash": "e8dd5688894665267fae648354a53b25",
+    "semantic_hash": "e8dd5688894665267fae648354a53b25"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\swe-systems-improved.json": {
+    "mtime": 1781407130.8832724,
+    "ast_hash": "acd6ebc7dfea0bc04d613e5cb1b6b599",
+    "semantic_hash": "acd6ebc7dfea0bc04d613e5cb1b6b599"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\swe-systems-powered.json": {
+    "mtime": 1781407130.8832724,
+    "ast_hash": "4dcd3d2cc6128454cc8afd4c9cae5d76",
+    "semantic_hash": "4dcd3d2cc6128454cc8afd4c9cae5d76"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\swe-systems.json": {
+    "mtime": 1781407130.8832724,
+    "ast_hash": "d133f6c50bbb89b3bf07bf968a112e5a",
+    "semantic_hash": "d133f6c50bbb89b3bf07bf968a112e5a"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\tier0-structural.json": {
+    "mtime": 1781407130.8832724,
+    "ast_hash": "e2df40cd2662bb97cd5d58d42d3b8295",
+    "semantic_hash": "e2df40cd2662bb97cd5d58d42d3b8295"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\tier1-rubric.json": {
+    "mtime": 1781407130.8832724,
+    "ast_hash": "4de7389dee7ef8f4bdd55f3c97831fe3",
+    "semantic_hash": "4de7389dee7ef8f4bdd55f3c97831fe3"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\tier2-routing.json": {
+    "mtime": 1781407130.8832724,
+    "ast_hash": "37db4312fe07a205591ed6b59d4f2649",
+    "semantic_hash": "37db4312fe07a205591ed6b59d4f2649"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\tier3-behavioral.json": {
+    "mtime": 1781407130.8842723,
+    "ast_hash": "d4c73af4daa8db5f3b6d2966e1acb0f7",
+    "semantic_hash": "d4c73af4daa8db5f3b6d2966e1acb0f7"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\tier3-haiku.json": {
+    "mtime": 1781407130.8842723,
+    "ast_hash": "1a6d776f850fa9175006f5c3fa9fb7f3",
+    "semantic_hash": "1a6d776f850fa9175006f5c3fa9fb7f3"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\tier3-trigger-probe.json": {
+    "mtime": 1781407130.8842723,
+    "ast_hash": "18f4ae7f1a17cf77451b23a0cf2cafdd",
+    "semantic_hash": "18f4ae7f1a17cf77451b23a0cf2cafdd"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\verify-20260601\\tier0-structural.json": {
+    "mtime": 1781407130.8842723,
+    "ast_hash": "3cad2d4b5a87eda068a4b99c599a2d38",
+    "semantic_hash": "3cad2d4b5a87eda068a4b99c599a2d38"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\wavec\\abstention-circle-of-competence.json": {
+    "mtime": 1781407130.8852723,
+    "ast_hash": "f16241a81acb995e5e67581d0476b810",
+    "semantic_hash": "f16241a81acb995e5e67581d0476b810"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\wavec\\redteam-diversevul-balanced.json": {
+    "mtime": 1781407130.8852723,
+    "ast_hash": "8dcf036916831cf87e5af95abdf11a2a",
+    "semantic_hash": "8dcf036916831cf87e5af95abdf11a2a"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\wavec\\routing-cynefin.json": {
+    "mtime": 1781407130.8852723,
+    "ast_hash": "b5bff88579bb8b16f47a251e7f05b2a6",
+    "semantic_hash": "b5bff88579bb8b16f47a251e7f05b2a6"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\wavec\\routing-socratic.json": {
+    "mtime": 1781407130.8852723,
+    "ast_hash": "f77ba108ab7680251cc9bc59ac8654ae",
+    "semantic_hash": "f77ba108ab7680251cc9bc59ac8654ae"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\wavec\\swe-five-whys-plus-replication.json": {
+    "mtime": 1781407130.8852723,
+    "ast_hash": "07e089cf7f42a1a1adff7d1d3f79562c",
+    "semantic_hash": "07e089cf7f42a1a1adff7d1d3f79562c"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\wavec\\swe-systems-restored.json": {
+    "mtime": 1781407130.8852723,
+    "ast_hash": "077864dba5ff4f8fd75798248bbd929f",
+    "semantic_hash": "077864dba5ff4f8fd75798248bbd929f"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\waved\\numeric-fermi-reworked.json": {
+    "mtime": 1781407130.8852723,
+    "ast_hash": "a20463820c5405230785bc4330ae725e",
+    "semantic_hash": "a20463820c5405230785bc4330ae725e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-abstention.js": {
+    "mtime": 1781407130.8867757,
+    "ast_hash": "3f68f1d7fbc867fc3d5dda711c95e851",
+    "semantic_hash": "3f68f1d7fbc867fc3d5dda711c95e851"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-behavioral.js": {
+    "mtime": 1781407130.8867757,
+    "ast_hash": "c0ff3aac0eda23cf795a17e83c40ce0d",
+    "semantic_hash": "c0ff3aac0eda23cf795a17e83c40ce0d"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-binary-decision.js": {
+    "mtime": 1781407130.8867757,
+    "ast_hash": "3c710f82c0eb0cf20a4aac7a51d380a9",
+    "semantic_hash": "3c710f82c0eb0cf20a4aac7a51d380a9"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-calibration.js": {
+    "mtime": 1781407130.88778,
+    "ast_hash": "0c349e3a9da06fac23fb882ca9196e99",
+    "semantic_hash": "0c349e3a9da06fac23fb882ca9196e99"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-confirm.sh": {
+    "mtime": 1781407130.88778,
+    "ast_hash": "ca8eec45912ce78ce841efb4feef2203",
+    "semantic_hash": "ca8eec45912ce78ce841efb4feef2203"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-correctness.js": {
+    "mtime": 1781407130.88778,
+    "ast_hash": "7f0c6b0de157f747227b91e5da7c4aea",
+    "semantic_hash": "7f0c6b0de157f747227b91e5da7c4aea"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-distractor-scoring.js": {
+    "mtime": 1781407130.88778,
+    "ast_hash": "e9850425b9840b9c1cc3f9772a3f649d",
+    "semantic_hash": "e9850425b9840b9c1cc3f9772a3f649d"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-numeric.js": {
+    "mtime": 1781407130.88778,
+    "ast_hash": "40e8bd0437c3f17b8c9ff72ec844c876",
+    "semantic_hash": "40e8bd0437c3f17b8c9ff72ec844c876"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-replication.js": {
+    "mtime": 1781407130.88778,
+    "ast_hash": "0d657439115b33698fd308d47772d8e1",
+    "semantic_hash": "0d657439115b33698fd308d47772d8e1"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-rerun.sh": {
+    "mtime": 1781407130.8887808,
+    "ast_hash": "a0186de7f201eda7e1b728054075f553",
+    "semantic_hash": "a0186de7f201eda7e1b728054075f553"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-routing-data.js": {
+    "mtime": 1781407130.8887808,
+    "ast_hash": "fd94ff2049faa7fdb94193af809fb2fa",
+    "semantic_hash": "fd94ff2049faa7fdb94193af809fb2fa"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-routing.js": {
+    "mtime": 1781407130.8887808,
+    "ast_hash": "ec47ef24635ba1737b1dd5de93302428",
+    "semantic_hash": "ec47ef24635ba1737b1dd5de93302428"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-rubric.js": {
+    "mtime": 1781407130.8887808,
+    "ast_hash": "6a31758818416be75552415acf04294f",
+    "semantic_hash": "6a31758818416be75552415acf04294f"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-structural.js": {
+    "mtime": 1781407130.8887808,
+    "ast_hash": "57b605afd00b61c23eca991862f87bc5",
+    "semantic_hash": "57b605afd00b61c23eca991862f87bc5"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-swe.js": {
+    "mtime": 1781407130.8887808,
+    "ast_hash": "588051896377c5d64890c345d336402e",
+    "semantic_hash": "588051896377c5d64890c345d336402e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\run-wavec.sh": {
+    "mtime": 1781407130.88978,
+    "ast_hash": "ec3ab41c12763c101d72d1845608cfc4",
+    "semantic_hash": "ec3ab41c12763c101d72d1845608cfc4"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\stats\\power.js": {
+    "mtime": 1781407130.88978,
+    "ast_hash": "392140fe2eb4e16b8921ce456f774f77",
+    "semantic_hash": "392140fe2eb4e16b8921ce456f774f77"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\tests\\replication.test.js": {
+    "mtime": 1781407130.88978,
+    "ast_hash": "55edf5c64685fec71070d8e8d62f5182",
+    "semantic_hash": "55edf5c64685fec71070d8e8d62f5182"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\tests\\stats.test.js": {
+    "mtime": 1781407130.88978,
+    "ast_hash": "9632c1df49cedbba9a860f9f7f8aac38",
+    "semantic_hash": "9632c1df49cedbba9a860f9f7f8aac38"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\tests\\validate-judge.test.js": {
+    "mtime": 1781407130.88978,
+    "ast_hash": "b8fdbea367098981ede2fda2344bacd2",
+    "semantic_hash": "b8fdbea367098981ede2fda2344bacd2"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\validate-judge.js": {
+    "mtime": 1781407130.88978,
+    "ast_hash": "2cf2cc8abcad0b4fb0a97c63177121df",
+    "semantic_hash": "2cf2cc8abcad0b4fb0a97c63177121df"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\experiments\\lib.js": {
+    "mtime": 1781407130.8910913,
+    "ast_hash": "a6e263bca153afef8f45bdfa144cd57f",
+    "semantic_hash": "a6e263bca153afef8f45bdfa144cd57f"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\experiments\\run-capability-indomain.js": {
+    "mtime": 1781407130.8910913,
+    "ast_hash": "198ad70a7a5c86ad69497361a8c4461a",
+    "semantic_hash": "198ad70a7a5c86ad69497361a8c4461a"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\experiments\\run-capability.js": {
+    "mtime": 1781407130.8916173,
+    "ast_hash": "71e23aad2d15e6b5ebec7daabd4c59a2",
+    "semantic_hash": "71e23aad2d15e6b5ebec7daabd4c59a2"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\experiments\\run-experiment.js": {
+    "mtime": 1781407130.8916173,
+    "ast_hash": "c0ebe5284a9c350d5a161c87550146b6",
+    "semantic_hash": "c0ebe5284a9c350d5a161c87550146b6"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\experiments\\run-paired.js": {
+    "mtime": 1781407130.8916173,
+    "ast_hash": "070ba2c27775cbf7a619bbc4fb708c5e",
+    "semantic_hash": "070ba2c27775cbf7a619bbc4fb708c5e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\experiments\\run-stack.js": {
+    "mtime": 1781407130.8916173,
+    "ast_hash": "d9a156573c63274a712083b9b09ff1e2",
+    "semantic_hash": "d9a156573c63274a712083b9b09ff1e2"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\experiments\\specs.js": {
+    "mtime": 1781407130.8926244,
+    "ast_hash": "1fa008bee01679a9f874c8054c6fe57f",
+    "semantic_hash": "1fa008bee01679a9f874c8054c6fe57f"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\aggregate.js": {
+    "mtime": 1781407130.8926244,
+    "ast_hash": "1ea47ad2edf0e58162c837779ae53173",
+    "semantic_hash": "1ea47ad2edf0e58162c837779ae53173"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\build-packet.js": {
+    "mtime": 1781407130.8926244,
+    "ast_hash": "95d83ec7703c1e7d6b2b7b5baf7a0ffd",
+    "semantic_hash": "95d83ec7703c1e7d6b2b7b5baf7a0ffd"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\committee\\round1-deepseek-v4-pro.json": {
+    "mtime": 1781407130.8936217,
+    "ast_hash": "850d4c06cea86738505dce81d354ac22",
+    "semantic_hash": "850d4c06cea86738505dce81d354ac22"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\committee\\round1-gemini-3.1-pro-preview.json": {
+    "mtime": 1781407130.8936217,
+    "ast_hash": "9c30040bf2017152b0685792722507e1",
+    "semantic_hash": "9c30040bf2017152b0685792722507e1"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\committee\\round1-gpt-5.5-pro.json": {
+    "mtime": 1781407130.8936217,
+    "ast_hash": "b6258bd5f750547478bc9af7b7e004f7",
+    "semantic_hash": "b6258bd5f750547478bc9af7b7e004f7"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\committee\\round2-deepseek-v4-pro.json": {
+    "mtime": 1781407130.8936217,
+    "ast_hash": "75830b7b6bb7a3bae0f97c5fdf105880",
+    "semantic_hash": "75830b7b6bb7a3bae0f97c5fdf105880"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\committee\\round2-gemini-3.1-pro-preview.json": {
+    "mtime": 1781407130.8946214,
+    "ast_hash": "cf84f8287ef8986d47e9ca7a9b3e6c6f",
+    "semantic_hash": "cf84f8287ef8986d47e9ca7a9b3e6c6f"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\committee\\round2-gpt-5.5-pro.json": {
+    "mtime": 1781407130.8946214,
+    "ast_hash": "fe91c3ebeadb158c1eaed970955389f7",
+    "semantic_hash": "fe91c3ebeadb158c1eaed970955389f7"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\digest.json": {
+    "mtime": 1781407130.8946214,
+    "ast_hash": "b850569cca1f07deca6f9ca4f31a9d9d",
+    "semantic_hash": "b850569cca1f07deca6f9ca4f31a9d9d"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\holistic\\deepseek-v4-pro.json": {
+    "mtime": 1781407130.8956218,
+    "ast_hash": "b985e0b6bf8b25d3ef8a791762b29f50",
+    "semantic_hash": "b985e0b6bf8b25d3ef8a791762b29f50"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\holistic\\gemini-3.1-pro-preview.json": {
+    "mtime": 1781407130.8956218,
+    "ast_hash": "e1a11eeda40680b5c72da4aa31dbb8d5",
+    "semantic_hash": "e1a11eeda40680b5c72da4aa31dbb8d5"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\holistic\\gpt-5.5-pro.json": {
+    "mtime": 1781407130.8956218,
+    "ast_hash": "2b2036a139fb2b592a1444dd0c6db328",
+    "semantic_hash": "2b2036a139fb2b592a1444dd0c6db328"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\lift-committee.js": {
+    "mtime": 1781407130.8956218,
+    "ast_hash": "eb242b32e8bb3db6576ee64205c29fb6",
+    "semantic_hash": "eb242b32e8bb3db6576ee64205c29fb6"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-bayesian__deepseek-v4-pro.json": {
+    "mtime": 1781407130.8971238,
+    "ast_hash": "bc0efd30fbe478e6dfb462fb58348d5f",
+    "semantic_hash": "bc0efd30fbe478e6dfb462fb58348d5f"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-bayesian__gemini-3.1-pro-preview.json": {
+    "mtime": 1781407130.8971238,
+    "ast_hash": "a5d0c4e678984e33fb935b142e3cf875",
+    "semantic_hash": "a5d0c4e678984e33fb935b142e3cf875"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-bayesian__gpt-5.5-pro.json": {
+    "mtime": 1781407130.8971238,
+    "ast_hash": "1c633431e7129ecc3f5b752a6490c33e",
+    "semantic_hash": "1c633431e7129ecc3f5b752a6490c33e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-circle-of-competence__deepseek-v4-pro.json": {
+    "mtime": 1781407130.8971238,
+    "ast_hash": "b46957044cd0189a594df38cec2edce9",
+    "semantic_hash": "b46957044cd0189a594df38cec2edce9"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-circle-of-competence__gemini-3.1-pro-preview.json": {
+    "mtime": 1781407130.8971238,
+    "ast_hash": "7eaafacd27588069465f7553aac26cf7",
+    "semantic_hash": "7eaafacd27588069465f7553aac26cf7"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-circle-of-competence__gpt-5.5-pro.json": {
+    "mtime": 1781407130.8981278,
+    "ast_hash": "7ade594412c1fa7c6a0f11097ba2e035",
+    "semantic_hash": "7ade594412c1fa7c6a0f11097ba2e035"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-debiasing__deepseek-v4-pro.json": {
+    "mtime": 1781407130.8981278,
+    "ast_hash": "2c84a682ce85ac3e8d545f5536689b3f",
+    "semantic_hash": "2c84a682ce85ac3e8d545f5536689b3f"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-debiasing__gemini-3.1-pro-preview.json": {
+    "mtime": 1781407130.8981278,
+    "ast_hash": "7c475ae0df27d95934715b77be2bde40",
+    "semantic_hash": "7c475ae0df27d95934715b77be2bde40"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-debiasing__gpt-5.5-pro.json": {
+    "mtime": 1781407130.8981278,
+    "ast_hash": "1a7641fe07ca3c984abadaa4e71de580",
+    "semantic_hash": "1a7641fe07ca3c984abadaa4e71de580"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-first-principles__deepseek-v4-pro.json": {
+    "mtime": 1781407130.8981278,
+    "ast_hash": "b8e69e168716550b5300f36d010e35df",
+    "semantic_hash": "b8e69e168716550b5300f36d010e35df"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-first-principles__gemini-3.1-pro-preview.json": {
+    "mtime": 1781407130.8981278,
+    "ast_hash": "fbb085c0fa7521141e5b01d44e79426e",
+    "semantic_hash": "fbb085c0fa7521141e5b01d44e79426e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-first-principles__gpt-5.5-pro.json": {
+    "mtime": 1781407130.8991272,
+    "ast_hash": "cc21859154d62e6d24d0ffadfa90da18",
+    "semantic_hash": "cc21859154d62e6d24d0ffadfa90da18"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-model-router__deepseek-v4-pro.json": {
+    "mtime": 1781407130.8991272,
+    "ast_hash": "ae295dc509379d44b41dcd25cf345958",
+    "semantic_hash": "ae295dc509379d44b41dcd25cf345958"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-model-router__gemini-3.1-pro-preview.json": {
+    "mtime": 1781407130.8991272,
+    "ast_hash": "949ccc93b301752daf0a04cd3665231a",
+    "semantic_hash": "949ccc93b301752daf0a04cd3665231a"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-model-router__gpt-5.5-pro.json": {
+    "mtime": 1781407130.8991272,
+    "ast_hash": "86ec18febd32e642b897d4ebb6a43208",
+    "semantic_hash": "86ec18febd32e642b897d4ebb6a43208"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-pre-mortem__deepseek-v4-pro.json": {
+    "mtime": 1781407130.8991272,
+    "ast_hash": "e654fc7f3d2dc503512998006413b05a",
+    "semantic_hash": "e654fc7f3d2dc503512998006413b05a"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-pre-mortem__gemini-3.1-pro-preview.json": {
+    "mtime": 1781407130.8991272,
+    "ast_hash": "034c06674e14c23def7be6e6656d5883",
+    "semantic_hash": "034c06674e14c23def7be6e6656d5883"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-pre-mortem__gpt-5.5-pro.json": {
+    "mtime": 1781407130.8991272,
+    "ast_hash": "866924ab6e6b7d3e9d6f9d1bba5e028b",
+    "semantic_hash": "866924ab6e6b7d3e9d6f9d1bba5e028b"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-regret-minimization__deepseek-v4-pro.json": {
+    "mtime": 1781407130.9001276,
+    "ast_hash": "6d65373fed81dbe428c28757c70a31dd",
+    "semantic_hash": "6d65373fed81dbe428c28757c70a31dd"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-regret-minimization__gemini-3.1-pro-preview.json": {
+    "mtime": 1781407130.9001276,
+    "ast_hash": "87aaedbeb78bd23d422a5789181671b5",
+    "semantic_hash": "87aaedbeb78bd23d422a5789181671b5"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-regret-minimization__gpt-5.5-pro.json": {
+    "mtime": 1781407130.9001276,
+    "ast_hash": "a0e18aad8e81293c90125b43ce66eb02",
+    "semantic_hash": "a0e18aad8e81293c90125b43ce66eb02"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-systems__deepseek-v4-pro.json": {
+    "mtime": 1781407130.9001276,
+    "ast_hash": "f7e75957c63c3376c07feec17534f368",
+    "semantic_hash": "f7e75957c63c3376c07feec17534f368"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-systems__gemini-3.1-pro-preview.json": {
+    "mtime": 1781407130.9001276,
+    "ast_hash": "b0aaec7933267ae2f32ca065147461eb",
+    "semantic_hash": "b0aaec7933267ae2f32ca065147461eb"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\per-skill\\thinking-systems__gpt-5.5-pro.json": {
+    "mtime": 1781407130.9011276,
+    "ast_hash": "099fca9b8aa43c1a001cb407e23d6618",
+    "semantic_hash": "099fca9b8aa43c1a001cb407e23d6618"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\run-holistic.js": {
+    "mtime": 1781407130.9011276,
+    "ast_hash": "84de72f40ed260e0e768223abcec5a9e",
+    "semantic_hash": "84de72f40ed260e0e768223abcec5a9e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\run-perskill.js": {
+    "mtime": 1781407130.9011276,
+    "ast_hash": "8b85b70da3d79b4aafb50d51f297afdf",
+    "semantic_hash": "8b85b70da3d79b4aafb50d51f297afdf"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\scripts\\enhance-skill.js": {
+    "mtime": 1781407130.9021277,
+    "ast_hash": "a04e1d5d6a95f166ef7df96c603c9298",
+    "semantic_hash": "a04e1d5d6a95f166ef7df96c603c9298"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\scripts\\generate-improvement-prompt.js": {
+    "mtime": 1781407130.9021277,
+    "ast_hash": "566f7bc63019b636bc1f7e1ac73b0ea5",
+    "semantic_hash": "566f7bc63019b636bc1f7e1ac73b0ea5"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\scripts\\quality-report.json": {
+    "mtime": 1781407130.9031284,
+    "ast_hash": "74f9d690c57bbe7a589a5de2e8fe79db",
+    "semantic_hash": "74f9d690c57bbe7a589a5de2e8fe79db"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\scripts\\validate-skills.js": {
+    "mtime": 1781407130.9031284,
+    "ast_hash": "83fe8024da11fc08fd32eaa75385c38c",
+    "semantic_hash": "83fe8024da11fc08fd32eaa75385c38c"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\AGENTS.md": {
+    "mtime": 1781407130.8264227,
+    "ast_hash": "bc341e7b9db5a06480eb97d0e3c3f702",
+    "semantic_hash": "bc341e7b9db5a06480eb97d0e3c3f702"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\CLAUDE.md": {
+    "mtime": 1781407130.8264227,
+    "ast_hash": "fb764e75207acc9eab2f4c9d88e4a1ac",
+    "semantic_hash": "fb764e75207acc9eab2f4c9d88e4a1ac"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\CONTRIBUTING.md": {
+    "mtime": 1781407130.8264227,
+    "ast_hash": "b4a5434ebdfaf8261d550f85980da25b",
+    "semantic_hash": "b4a5434ebdfaf8261d550f85980da25b"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\FUTURE_SKILLS.md": {
+    "mtime": 1781407130.8274214,
+    "ast_hash": "3550bfe7a3b83bcdd72af14408400ebd",
+    "semantic_hash": "3550bfe7a3b83bcdd72af14408400ebd"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\README.md": {
+    "mtime": 1781407130.8274214,
+    "ast_hash": "c7bf28cb276b240ef8704683a2875db0",
+    "semantic_hash": "c7bf28cb276b240ef8704683a2875db0"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\ACTIVE-PULL-FUTURE-WORK.md": {
+    "mtime": 1781407130.8284216,
+    "ast_hash": "e06b49076f60cc6353f9cdfd3fa805ab",
+    "semantic_hash": "e06b49076f60cc6353f9cdfd3fa805ab"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\ADVERSARIAL-SYNTHESIS.md": {
+    "mtime": 1781407130.8284216,
+    "ast_hash": "28c2bdab2c2e87375e27b1f16d7b604e",
+    "semantic_hash": "28c2bdab2c2e87375e27b1f16d7b604e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\DATASET-SCAN.md": {
+    "mtime": 1781407130.8284216,
+    "ast_hash": "7e252fdbd9d9cf6b6611070e0c034f54",
+    "semantic_hash": "7e252fdbd9d9cf6b6611070e0c034f54"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\ELEVATE-OR-KILL-SCORECARD.md": {
+    "mtime": 1781407130.8294222,
+    "ast_hash": "a18e61a7525f5f9348c951d7ac4c0731",
+    "semantic_hash": "a18e61a7525f5f9348c951d7ac4c0731"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\ELEVATE-OR-KILL-SYNTHESIS.md": {
+    "mtime": 1781407130.8294222,
+    "ast_hash": "95b5c5808b6accec84020371198be01b",
+    "semantic_hash": "95b5c5808b6accec84020371198be01b"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\ELEVATE-OR-KILL.md": {
+    "mtime": 1781407130.8294222,
+    "ast_hash": "0c77a738ea15a7ef6b88ef4ef988dc8e",
+    "semantic_hash": "0c77a738ea15a7ef6b88ef4ef988dc8e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\EVAL-COVERAGE.md": {
+    "mtime": 1781407130.8304229,
+    "ast_hash": "0ce041171fe3c9207b36571e1b725ad5",
+    "semantic_hash": "0ce041171fe3c9207b36571e1b725ad5"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\EVALUATION.md": {
+    "mtime": 1781407130.8304229,
+    "ast_hash": "bb16a14948bcfde104531e61b4cde039",
+    "semantic_hash": "bb16a14948bcfde104531e61b4cde039"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\FUTURE-CONSOLIDATION-PLAN.md": {
+    "mtime": 1781407130.8304229,
+    "ast_hash": "42e01ae60d2fef1f9d87335fa9340f08",
+    "semantic_hash": "42e01ae60d2fef1f9d87335fa9340f08"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\GLOBAL-BACKUP.md": {
+    "mtime": 1781407130.8304229,
+    "ast_hash": "d6fb747e1bf9c5478af1316f8459d3d1",
+    "semantic_hash": "d6fb747e1bf9c5478af1316f8459d3d1"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\HARNESS-ISOLATION.md": {
+    "mtime": 1781407130.8314228,
+    "ast_hash": "c4836f2b04ae24f54b519e01cfda36d6",
+    "semantic_hash": "c4836f2b04ae24f54b519e01cfda36d6"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\LIFT-HYPOTHESES.md": {
+    "mtime": 1781407130.8314228,
+    "ast_hash": "44b97abf3384b21b68ceba4fd03dfe60",
+    "semantic_hash": "44b97abf3384b21b68ceba4fd03dfe60"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\PER-SKILL-EVAL-PROTOCOL.md": {
+    "mtime": 1781407130.8314228,
+    "ast_hash": "23769c6fef15694b75e8e005b69a175f",
+    "semantic_hash": "23769c6fef15694b75e8e005b69a175f"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\SKILL-AUDIT.md": {
+    "mtime": 1781407130.8314228,
+    "ast_hash": "87a0a6d3dc278777f9d1bb2df4a34d49",
+    "semantic_hash": "87a0a6d3dc278777f9d1bb2df4a34d49"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\STALE-CLAIM-CLEANUP.md": {
+    "mtime": 1781407130.8314228,
+    "ast_hash": "b81d46c8b9f9ba9a0c6563aada82ea67",
+    "semantic_hash": "b81d46c8b9f9ba9a0c6563aada82ea67"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\USE-CASES.md": {
+    "mtime": 1781407130.8324213,
+    "ast_hash": "b3d6088d03f80dd36b30aeba987dc3fb",
+    "semantic_hash": "b3d6088d03f80dd36b30aeba987dc3fb"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\rework-specs\\five-whys-plus.md": {
+    "mtime": 1781407130.8324213,
+    "ast_hash": "73620843f1709de2bf5888bf723b1225",
+    "semantic_hash": "73620843f1709de2bf5888bf723b1225"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\rework-specs\\kepner-tregoe.md": {
+    "mtime": 1781407130.8324213,
+    "ast_hash": "aaf0824e4698a1a97fe957afd71d1dad",
+    "semantic_hash": "aaf0824e4698a1a97fe957afd71d1dad"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\rework-specs\\map-territory.md": {
+    "mtime": 1781407130.8324213,
+    "ast_hash": "69982cca323a0d9fa015fd7ac05c1061",
+    "semantic_hash": "69982cca323a0d9fa015fd7ac05c1061"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\rework-specs\\occams-razor.md": {
+    "mtime": 1781407130.8334217,
+    "ast_hash": "2b1a9bd15eed56d2bbdc3ec2f097964e",
+    "semantic_hash": "2b1a9bd15eed56d2bbdc3ec2f097964e"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\rework-specs\\red-team.md": {
+    "mtime": 1781407130.8334217,
+    "ast_hash": "496e15d8a41dc7379e11e6e766a9c148",
+    "semantic_hash": "496e15d8a41dc7379e11e6e766a9c148"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\analysis\\rework-specs\\triz.md": {
+    "mtime": 1781407130.8334217,
+    "ast_hash": "d24da6ee19343be0cdfe871740e25cea",
+    "semantic_hash": "d24da6ee19343be0cdfe871740e25cea"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\README.md": {
+    "mtime": 1781407130.8349247,
+    "ast_hash": "c7ba7e31a198dfe1eb08ce4ad36fe4e7",
+    "semantic_hash": "c7ba7e31a198dfe1eb08ce4ad36fe4e7"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\dashboard.html": {
+    "mtime": 1781407130.8424368,
+    "ast_hash": "e3aef2bc718a71037b317e590a23def5",
+    "semantic_hash": "e3aef2bc718a71037b317e590a23def5"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\datasets\\external\\NOTICE.md": {
+    "mtime": 1781407130.8667142,
+    "ast_hash": "42db3dd086f09b77a2b62972dc9b3be3",
+    "semantic_hash": "42db3dd086f09b77a2b62972dc9b3be3"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\db\\dashboard.template.html": {
+    "mtime": 1781407130.8687139,
+    "ast_hash": "b737115a6b423b6878159ede829cb5f3",
+    "semantic_hash": "b737115a6b423b6878159ede829cb5f3"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\results\\run1\\scorecard.md": {
+    "mtime": 1781407130.8812726,
+    "ast_hash": "2283b495064330ae49c863f81b485f93",
+    "semantic_hash": "2283b495064330ae49c863f81b485f93"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\rubrics\\behavioral-pairwise.md": {
+    "mtime": 1781407130.8867757,
+    "ast_hash": "3d3bb5d444231424431bbb614496ec3c",
+    "semantic_hash": "3d3bb5d444231424431bbb614496ec3c"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\evals\\rubrics\\reasoning-quality.md": {
+    "mtime": 1781407130.8867757,
+    "ast_hash": "7d8ffeaa77f0b0cb7d26a31e593c33eb",
+    "semantic_hash": "7d8ffeaa77f0b0cb7d26a31e593c33eb"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\findings.md": {
+    "mtime": 1781407130.8926244,
+    "ast_hash": "fc5f59744c43069384bab37caca34d10",
+    "semantic_hash": "fc5f59744c43069384bab37caca34d10"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\progress.md": {
+    "mtime": 1781407130.8926244,
+    "ast_hash": "15d300c1dcac38ae70cd6a12b6989710",
+    "semantic_hash": "15d300c1dcac38ae70cd6a12b6989710"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\packet.md": {
+    "mtime": 1781407130.8966212,
+    "ast_hash": "f883d916141c53c9b81a728b5f6c33e2",
+    "semantic_hash": "f883d916141c53c9b81a728b5f6c33e2"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\wave-validation\\wave-a.txt": {
+    "mtime": 1781407130.9011276,
+    "ast_hash": "281a18d52eec6cb49aeb850698f41e5b",
+    "semantic_hash": "281a18d52eec6cb49aeb850698f41e5b"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\wave-validation\\wave-b.txt": {
+    "mtime": 1781407130.9011276,
+    "ast_hash": "6ebcc7b030225fb765d93cb5299ecdc5",
+    "semantic_hash": "6ebcc7b030225fb765d93cb5299ecdc5"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\reviews\\wave-validation\\wave-c.txt": {
+    "mtime": 1781407130.9021277,
+    "ast_hash": "99c9c27fa170cd7d6767e74dc62d4d0d",
+    "semantic_hash": "99c9c27fa170cd7d6767e74dc62d4d0d"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\scripts\\QUALITY_FRAMEWORK.md": {
+    "mtime": 1781407130.9021277,
+    "ast_hash": "9454165e70fbc4c4b27d536099fc8890",
+    "semantic_hash": "9454165e70fbc4c4b27d536099fc8890"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-archetypes\\SKILL.md": {
+    "mtime": 1781407130.9031284,
+    "ast_hash": "6a9fd2c1c9efa49ff8d75015e35604b2",
+    "semantic_hash": "6a9fd2c1c9efa49ff8d75015e35604b2"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-bayesian\\SKILL.md": {
+    "mtime": 1781407130.9041276,
+    "ast_hash": "301a8938fdc7eb6106860a1eed51ab69",
+    "semantic_hash": "301a8938fdc7eb6106860a1eed51ab69"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-bounded-rationality\\SKILL.md": {
+    "mtime": 1781407130.9041276,
+    "ast_hash": "49600a8fcb17d3016e9d21ad79262274",
+    "semantic_hash": "49600a8fcb17d3016e9d21ad79262274"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-circle-of-competence\\SKILL.md": {
+    "mtime": 1781407130.9041276,
+    "ast_hash": "6df9a85bcb69080092f81134b9a35cd5",
+    "semantic_hash": "6df9a85bcb69080092f81134b9a35cd5"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-cynefin\\SKILL.md": {
+    "mtime": 1781407130.9051285,
+    "ast_hash": "9211b686de3f50526b3975428dd99857",
+    "semantic_hash": "9211b686de3f50526b3975428dd99857"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-debiasing\\SKILL.md": {
+    "mtime": 1781407130.9051285,
+    "ast_hash": "4e6e5e5e7575696d15fe24fe3971de31",
+    "semantic_hash": "4e6e5e5e7575696d15fe24fe3971de31"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-dual-process\\SKILL.md": {
+    "mtime": 1781407130.9051285,
+    "ast_hash": "fa30db673b027b69051d564a2d5dd7a3",
+    "semantic_hash": "fa30db673b027b69051d564a2d5dd7a3"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-effectuation\\SKILL.md": {
+    "mtime": 1781407130.906128,
+    "ast_hash": "7147ca9b4bf0a329dcb253c216148f64",
+    "semantic_hash": "7147ca9b4bf0a329dcb253c216148f64"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-feedback-loops\\SKILL.md": {
+    "mtime": 1781407130.906128,
+    "ast_hash": "f43cff38679759c2ccf2fc5daccaa0bb",
+    "semantic_hash": "f43cff38679759c2ccf2fc5daccaa0bb"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-fermi-estimation\\SKILL.md": {
+    "mtime": 1781407130.906128,
+    "ast_hash": "a4c5ad2ddf8a3f7fab246ab58018f083",
+    "semantic_hash": "a4c5ad2ddf8a3f7fab246ab58018f083"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-first-principles\\SKILL.md": {
+    "mtime": 1781407130.906128,
+    "ast_hash": "154b6b842efe14df2d6893349a513bb5",
+    "semantic_hash": "154b6b842efe14df2d6893349a513bb5"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-five-whys-plus\\SKILL.md": {
+    "mtime": 1781407130.906128,
+    "ast_hash": "00c714cd1e7b58979e8aca2de0da73b8",
+    "semantic_hash": "00c714cd1e7b58979e8aca2de0da73b8"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-inversion\\SKILL.md": {
+    "mtime": 1781407130.9076319,
+    "ast_hash": "e255ad3da94db963991f67906ea50d19",
+    "semantic_hash": "e255ad3da94db963991f67906ea50d19"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-jobs-to-be-done\\SKILL.md": {
+    "mtime": 1781407130.9076319,
+    "ast_hash": "792e9e0c5d19996e4d6c639744260224",
+    "semantic_hash": "792e9e0c5d19996e4d6c639744260224"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-kepner-tregoe\\SKILL.md": {
+    "mtime": 1781407130.9086378,
+    "ast_hash": "1a0a0ede3f050f30fa7392f4dae2cea4",
+    "semantic_hash": "1a0a0ede3f050f30fa7392f4dae2cea4"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-leverage-points\\SKILL.md": {
+    "mtime": 1781407130.9086378,
+    "ast_hash": "e6c174b3a33dbe9949c4a34500041f4f",
+    "semantic_hash": "e6c174b3a33dbe9949c4a34500041f4f"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-lindy-effect\\SKILL.md": {
+    "mtime": 1781407130.9086378,
+    "ast_hash": "ed14c8906f7e27ee94ef165623e9f9a9",
+    "semantic_hash": "ed14c8906f7e27ee94ef165623e9f9a9"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-map-territory\\SKILL.md": {
+    "mtime": 1781407130.909637,
+    "ast_hash": "87ebbc846930c676f99922f523b3ae04",
+    "semantic_hash": "87ebbc846930c676f99922f523b3ae04"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-margin-of-safety\\SKILL.md": {
+    "mtime": 1781407130.909637,
+    "ast_hash": "6438c7f427d463cd49e3228942aee656",
+    "semantic_hash": "6438c7f427d463cd49e3228942aee656"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-model-combination\\SKILL.md": {
+    "mtime": 1781407130.9106367,
+    "ast_hash": "63bbc475e950d382e0b3eee89239b6b7",
+    "semantic_hash": "63bbc475e950d382e0b3eee89239b6b7"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-model-router\\SKILL.md": {
+    "mtime": 1781407130.9106367,
+    "ast_hash": "1668978238dca700a95754cbebfc7db8",
+    "semantic_hash": "1668978238dca700a95754cbebfc7db8"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-model-selection\\SKILL.md": {
+    "mtime": 1781407130.9106367,
+    "ast_hash": "31cc83b6b1adba665e3c464c4101ed02",
+    "semantic_hash": "31cc83b6b1adba665e3c464c4101ed02"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-occams-razor\\SKILL.md": {
+    "mtime": 1781407130.9116364,
+    "ast_hash": "ec96c095020925eab3f058bdddd17890",
+    "semantic_hash": "ec96c095020925eab3f058bdddd17890"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-ooda\\SKILL.md": {
+    "mtime": 1781407130.9116364,
+    "ast_hash": "652070baef466324893dda49df077102",
+    "semantic_hash": "652070baef466324893dda49df077102"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-opportunity-cost\\SKILL.md": {
+    "mtime": 1781407130.9116364,
+    "ast_hash": "6431bd304d4aff35f0b4f2b71ee01872",
+    "semantic_hash": "6431bd304d4aff35f0b4f2b71ee01872"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-pre-mortem\\SKILL.md": {
+    "mtime": 1781407130.9116364,
+    "ast_hash": "3e2a43e27207aa0d0319fa271f86e667",
+    "semantic_hash": "3e2a43e27207aa0d0319fa271f86e667"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-probabilistic\\SKILL.md": {
+    "mtime": 1781407130.912636,
+    "ast_hash": "9b892ef279b69f5f9cd26563f32ae553",
+    "semantic_hash": "9b892ef279b69f5f9cd26563f32ae553"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-red-team\\SKILL.md": {
+    "mtime": 1781407130.912636,
+    "ast_hash": "b5f177527fdad4b3e9a8c054baad5f9f",
+    "semantic_hash": "b5f177527fdad4b3e9a8c054baad5f9f"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-regret-minimization\\SKILL.md": {
+    "mtime": 1781407130.912636,
+    "ast_hash": "b396cdf06cc194aea0d60d3ef72438b0",
+    "semantic_hash": "b396cdf06cc194aea0d60d3ef72438b0"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-reversibility\\SKILL.md": {
+    "mtime": 1781407130.9136372,
+    "ast_hash": "551a35473d1e5e63cbf9ae4e4dd361b8",
+    "semantic_hash": "551a35473d1e5e63cbf9ae4e4dd361b8"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-scientific-method\\SKILL.md": {
+    "mtime": 1781407130.9136372,
+    "ast_hash": "0e327ebeb0118560561d1790438af314",
+    "semantic_hash": "0e327ebeb0118560561d1790438af314"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-second-order\\SKILL.md": {
+    "mtime": 1781407130.9146361,
+    "ast_hash": "65328d6d93de73f6f0352813e0571984",
+    "semantic_hash": "65328d6d93de73f6f0352813e0571984"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-socratic\\SKILL.md": {
+    "mtime": 1781407130.9146361,
+    "ast_hash": "de40482f132648c3097a5cdd33a87cf0",
+    "semantic_hash": "de40482f132648c3097a5cdd33a87cf0"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-steel-manning\\SKILL.md": {
+    "mtime": 1781407130.9146361,
+    "ast_hash": "4f4d13a8ec96ba648004a368e1552203",
+    "semantic_hash": "4f4d13a8ec96ba648004a368e1552203"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-systems\\SKILL.md": {
+    "mtime": 1781407130.9156363,
+    "ast_hash": "9bc4c250a46d00096b31a162e5e06ac7",
+    "semantic_hash": "9bc4c250a46d00096b31a162e5e06ac7"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-theory-of-constraints\\SKILL.md": {
+    "mtime": 1781407130.9156363,
+    "ast_hash": "e26dc9688c7a345eead92bb25e179482",
+    "semantic_hash": "e26dc9688c7a345eead92bb25e179482"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-thought-experiment\\SKILL.md": {
+    "mtime": 1781407130.9156363,
+    "ast_hash": "567b7600bc289f80eb37f0fd1c0fe3d0",
+    "semantic_hash": "567b7600bc289f80eb37f0fd1c0fe3d0"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-triz\\SKILL.md": {
+    "mtime": 1781407130.9166365,
+    "ast_hash": "9508a82d18e2d97e9806449dd62f36d9",
+    "semantic_hash": "9508a82d18e2d97e9806449dd62f36d9"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\skills\\thinking-via-negativa\\SKILL.md": {
+    "mtime": 1781407130.9166365,
+    "ast_hash": "f9effd64897e6a22c1392f4aa0236cae",
+    "semantic_hash": "f9effd64897e6a22c1392f4aa0236cae"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\task_plan.md": {
+    "mtime": 1781407130.9166365,
+    "ast_hash": "8fb52b1ffca2bbed8249ec3bc310a699",
+    "semantic_hash": "8fb52b1ffca2bbed8249ec3bc310a699"
+  },
+  "E:\\GitHub\\cc-thinking-skills\\assets\\readme-banner.png": {
+    "mtime": 1781407130.8349247,
+    "ast_hash": "803a22b586954bebe182d979786a090c",
+    "semantic_hash": "803a22b586954bebe182d979786a090c"
+  }
+}
